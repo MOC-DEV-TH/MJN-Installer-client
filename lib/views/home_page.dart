@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
-import 'package:flutter_geolocator_example/views/ticket_status_page.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {

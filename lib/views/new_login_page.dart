@@ -33,23 +33,25 @@ class _NewLoginPageState extends State<NewLoginPage> {
             onTap: () {
               FocusManager.instance.primaryFocus?.unfocus();
             },
-            child: Column(
-              children: [
-                Container(
-                    height: screenHeight * 0.2,
-                    child: Image(
-                      image: AssetImage('assets/splash_screen_logo.png'),
-                      width: 200,
-                      height: 100,
-                    )),
-                Center(
-                  child: Container(
-                    height: screenHeight * 0.6,
-                    alignment: Alignment.center,
-                    child: _buildWidget(),
-                  ),
-                )
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                      height: screenHeight * 0.2,
+                      child: Image(
+                        image: AssetImage('assets/splash_screen_logo.png'),
+                        width: 200,
+                        height: 100,
+                      )),
+                  Center(
+                    child: Container(
+                      height: screenHeight * 0.6,
+                      alignment: Alignment.center,
+                      child: _buildWidget(),
+                    ),
+                  )
+                ],
+              ),
             )));
   }
 

@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
+import 'package:flutter_geolocator_example/utils/routers.dart';
 import 'package:flutter_geolocator_example/views/customer_status_page.dart';
 import 'package:flutter_geolocator_example/views/home_page.dart';
 import 'package:flutter_geolocator_example/views/login_page.dart';
@@ -37,12 +38,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-       getPages: [
-         GetPage(name: LOGIN, page: () => NewLoginPage()),
-         GetPage(name: HOME, page: () => HomePage()),
-         GetPage(name: TICKET_STATUS, page: () => TicketStatusPage()),
-         GetPage(name: CUSTOMER_STATUS, page: () => CustomerStatusPage()),
-       ],
+       getPages: Routers.route,
       home: NewLoginPage());
   }
 }
