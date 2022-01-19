@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/mjn/flutter_geolocator_example/BuildConfig.java
+ com.mjn.flutter_geolocator_example.BuildConfig
