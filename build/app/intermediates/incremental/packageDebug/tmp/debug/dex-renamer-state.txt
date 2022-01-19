@@ -1,4 +1,4 @@
-#Tue Jan 18 09:41:51 MMT 2022
-base.0=/Users/admin/AndroidStudioProjects/Mjn_Geolocator/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+#Wed Jan 19 16:40:44 MMT 2022
+base.0=/Users/admin/MJN_Installer/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

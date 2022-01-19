@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
        android:name="io.flutter.app.FlutterApplication"
-        android:label="MJN_Geolocator"
+        android:label="MJN_Installer"
         android:icon="@mipmap/ic_launcher">
        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 

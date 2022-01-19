@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/admin/AndroidStudioProjects/Mjn_Geolocator/build/google_maps_flutter/intermediates/incremental/mergeDebugResources/merged.dir/values-mn/values-mn.xml",
+            "outputFile": "/Users/admin/MJN_Installer/build/google_maps_flutter/intermediates/incremental/mergeDebugResources/merged.dir/values-mn/values-mn.xml",
             "map": [
                 {
                     "source": "/Users/admin/.gradle/caches/transforms-2/files-2.1/d14ebb838c3418c16d46982ee4860a26/jetified-play-services-basement-17.0.0/res/values-mn/values.xml",
@@ -57,7 +57,7 @@
             ]
         },
         {
-            "outputFile": "/Users/admin/AndroidStudioProjects/Mjn_Geolocator/build/google_maps_flutter/intermediates/res/merged/debug/values-mn/values-mn.xml",
+            "outputFile": "/Users/admin/MJN_Installer/build/google_maps_flutter/intermediates/res/merged/debug/values-mn/values-mn.xml",
             "map": [
                 {
                     "source": "/Users/admin/.gradle/caches/transforms-2/files-2.1/d14ebb838c3418c16d46982ee4860a26/jetified-play-services-basement-17.0.0/res/values-mn/values.xml",

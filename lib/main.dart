@@ -3,11 +3,14 @@ import 'package:baseflow_plugin_template/baseflow_plugin_template.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_geolocator_example/pages/login_page.dart';
-import 'package:flutter_geolocator_example/pages/my_location_page.dart';
+import 'package:flutter_geolocator_example/utils/app_constants.dart';
+import 'package:flutter_geolocator_example/views/customer_status_page.dart';
+import 'package:flutter_geolocator_example/views/home_page.dart';
+import 'package:flutter_geolocator_example/views/login_page.dart';
+import 'package:flutter_geolocator_example/views/new_login_page.dart';
+import 'package:flutter_geolocator_example/views/ticket_status_page.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:splashscreen/splashscreen.dart';
 
 
 /// Defines the main theme color.
@@ -34,25 +37,31 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage());
+       getPages: [
+         GetPage(name: LOGIN, page: () => NewLoginPage()),
+         GetPage(name: HOME, page: () => HomePage()),
+         GetPage(name: TICKET_STATUS, page: () => TicketStatusPage()),
+         GetPage(name: CUSTOMER_STATUS, page: () => CustomerStatusPage()),
+       ],
+      home: NewLoginPage());
   }
 }
 
-class splashScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return SplashScreen(
-      backgroundColor: Color(0xff242527),
-      seconds: 4,
-      navigateAfterSeconds: new LoginPage(),
-
-      image: Image.asset('assets/splash_screen_logo.png'),
-      loadingText: Text("Loading",style: TextStyle(color: Colors.blue),),
-      photoSize: 100.0,
-      loaderColor: Colors.blue,
-    );
-  }
-}
+// class splashScreen extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return SplashScreen(
+//       backgroundColor: Color(0xff242527),
+//       seconds: 4,
+//       navigateAfterSeconds: new LoginPage(),
+//
+//       image: Image.asset('assets/splash_screen_logo.png'),
+//       loadingText: Text("Loading",style: TextStyle(color: Colors.blue),),
+//       photoSize: 100.0,
+//       loaderColor: Colors.blue,
+//     );
+//   }
+// }
 
 
 

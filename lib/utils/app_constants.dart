@@ -6,6 +6,14 @@ const BASE_URL = 'http://mojoenet.myanmaronlinecreations.com/';
 // live url
 //
 
+
+//Get page name
+const LOGIN = '/login';
+const TICKET_STATUS = '/ticket_status';
+const CUSTOMER_STATUS = '/customer_status';
+const HOME = '/home';
+
+
 const APP_VERSION = '&app_version=';
 
 //get storage key

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/admin/AndroidStudioProjects/Mjn_Geolocator/build/url_launcher_android/intermediates/res/merged/debug/values-bg/values-bg.xml",
+            "outputFile": "/Users/admin/MJN_Installer/build/url_launcher_android/intermediates/incremental/mergeDebugResources/merged.dir/values-bg/values-bg.xml",
             "map": [
                 {
                     "source": "/Users/admin/.gradle/caches/transforms-2/files-2.1/e4d826fb867e8a60650187757f5b155b/core-1.1.0/res/values-bg/values-bg.xml",
@@ -16,7 +16,7 @@
             ]
         },
         {
-            "outputFile": "/Users/admin/AndroidStudioProjects/Mjn_Geolocator/build/url_launcher_android/intermediates/incremental/mergeDebugResources/merged.dir/values-bg/values-bg.xml",
+            "outputFile": "/Users/admin/MJN_Installer/build/url_launcher_android/intermediates/res/merged/debug/values-bg/values-bg.xml",
             "map": [
                 {
                     "source": "/Users/admin/.gradle/caches/transforms-2/files-2.1/e4d826fb867e8a60650187757f5b155b/core-1.1.0/res/values-bg/values-bg.xml",
