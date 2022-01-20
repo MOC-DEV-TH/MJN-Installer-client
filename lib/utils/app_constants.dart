@@ -12,6 +12,8 @@ const LOGIN = '/login';
 const TICKET_STATUS = '/ticket_status';
 const CUSTOMER_STATUS = '/customer_status';
 const HOME = '/home';
+const CUSTOMER_DETAIL = '/customer_detail';
+const CUSTOMER_ISSUE = '/customer_issue';
 
 
 const APP_VERSION = '&app_version=';

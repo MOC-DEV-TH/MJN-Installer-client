@@ -5,12 +5,7 @@ import 'package:flutter_geolocator_example/utils/app_utils.dart';
 import 'package:flutter_geolocator_example/viewPods/bottom_nav_bar_viewPod.dart';
 import 'package:get/get.dart';
 
-class TicketStatusPage extends StatefulWidget {
-  @override
-  _TicketStatusPageState createState() => _TicketStatusPageState();
-}
-
-class _TicketStatusPageState extends State<TicketStatusPage> {
+class TicketStatusPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

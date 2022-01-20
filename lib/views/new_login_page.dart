@@ -5,24 +5,12 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 
-class NewLoginPage extends StatefulWidget {
-  static const routeName = '/new_login_view1';
-
-  @override
-  _NewLoginPageState createState() => _NewLoginPageState();
-}
-
-class _NewLoginPageState extends State<NewLoginPage> {
+// ignore: must_be_immutable
+class NewLoginPage extends StatelessWidget {
   var userIdController = TextEditingController();
   var passwordController = TextEditingController();
   final writeData = GetStorage();
   var _scaffoldKey = GlobalKey<ScaffoldState>();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;

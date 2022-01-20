@@ -3,13 +3,11 @@ import 'package:flutter_geolocator_example/res/colors.dart';
 import 'package:flutter_geolocator_example/utils/app_utils.dart';
 import 'package:flutter_geolocator_example/viewPods/bottom_nav_bar_viewPod.dart';
 import 'package:flutter_geolocator_example/viewPods/search_text_field_viewPod.dart';
+import 'package:flutter_geolocator_example/widgets/customer_status_list_items.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
-class CustomerStatusPage extends StatefulWidget {
-  @override
-  _CustomerStatusPageState createState() => _CustomerStatusPageState();
-}
-
-class _CustomerStatusPageState extends State<CustomerStatusPage> {
+// ignore: must_be_immutable
+class CustomerStatusPage extends StatelessWidget {
   var controller1 = TextEditingController();
   var controller2 = TextEditingController();
   var controller3 = TextEditingController();
@@ -115,22 +113,12 @@ class _CustomerStatusPageState extends State<CustomerStatusPage> {
             physics: ScrollPhysics(),
             scrollDirection: Axis.vertical,
             itemBuilder: (ctx, index) {
-              return _buildListView();
+              return CustomerStatusListItems();
             },
             itemCount: imageList.length,
           ),
         )
       ],
-    );
-  }
-
-  Widget _buildListView() {
-    return Container(
-      margin: EdgeInsets.only(bottom: 10),
-      height: 100,
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(8.0))),
     );
   }
 }
