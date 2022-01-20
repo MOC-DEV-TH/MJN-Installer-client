@@ -14,6 +14,8 @@ const CUSTOMER_STATUS = '/customer_status';
 const HOME = '/home';
 const CUSTOMER_DETAIL = '/customer_detail';
 const CUSTOMER_ISSUE = '/customer_issue';
+const COMPLETE_CUSTOMER = '/complete_complete';
+const COMPLETE_CUSTOMER_LIST = '/complete_complete_list';
 
 
 const APP_VERSION = '&app_version=';

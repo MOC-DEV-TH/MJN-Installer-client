@@ -1,3 +1,5 @@
+import 'package:flutter_geolocator_example/views/complete_customer_page.dart';
+import 'package:flutter_geolocator_example/views/complete_customer_page_list.dart';
 import 'package:flutter_geolocator_example/views/customer_detail_page.dart';
 import 'package:flutter_geolocator_example/views/customer_issue_page.dart';
 import 'package:flutter_geolocator_example/views/customer_status_page.dart';
@@ -16,5 +18,7 @@ class Routers{
     GetPage(name: CUSTOMER_STATUS, page: () => CustomerStatusPage()),
     GetPage(name: CUSTOMER_DETAIL, page: () => CustomerDetailPage()),
     GetPage(name: CUSTOMER_ISSUE, page: () => CustomerIssuePage()),
+    GetPage(name: COMPLETE_CUSTOMER, page: () => CompleteCustomerPage()),
+    GetPage(name: COMPLETE_CUSTOMER_LIST, page: () => CompleteCustomerListPage()),
   ];
 }

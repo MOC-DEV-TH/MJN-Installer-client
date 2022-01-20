@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_geolocator_example/components/button_component.dart';
+import 'package:flutter_geolocator_example/network/RestApi.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
+import 'package:flutter_geolocator_example/utils/app_constants.dart';
+import 'package:flutter_geolocator_example/utils/app_utils.dart';
 import 'package:flutter_geolocator_example/views/home_page.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
+
+import 'my_location_page.dart';
 
 // ignore: must_be_immutable
 class NewLoginPage extends StatelessWidget {
@@ -11,9 +17,13 @@ class NewLoginPage extends StatelessWidget {
   var passwordController = TextEditingController();
   final writeData = GetStorage();
   var _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
-    var screenHeight = MediaQuery.of(context).size.height;
+    var screenHeight = MediaQuery
+        .of(context)
+        .size
+        .height;
     return Scaffold(
         key: _scaffoldKey,
         backgroundColor: Color(int.parse(MJNColors.bgColor)),
@@ -133,54 +143,63 @@ class NewLoginPage extends StatelessWidget {
         SizedBox(
           height: 35,
         ),
-        Padding(
-          padding: EdgeInsets.only(bottom: 10),
-          child: Container(
-            child: ButtonTheme(
-              height: 40,
-              child: RaisedButton(
-                child: Text('Login',
-                    style: TextStyle(color: Colors.white, fontSize: 18)),
-                color: Color(int.parse(MJNColors.buttonColor)),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                onPressed: () {
-                  // debugPrint('click');
-                  // if (userIdController.text != '' ||
-                  //     passwordController.text != '') {
-                  //   Map<String, String> map = {
-                  //     'user_id': userIdController.value.text,
-                  //     'password': passwordController.value.text
-                  //   };
-                  //
-                  //   debugPrint('call api');
-                  //   RestApi.fetchSupportLogin(map).then((value) => {
-                  //         Future.delayed(Duration.zero, () {
-                  //           if (value.status == 'Success') {
-                  //             writeData.write(SAVE_TIME, DateTime.now().minute);
-                  //
-                  //             Get.off(() => MyLocation(value.token.toString()));
-                  //           } else {
-                  //             AppUtils.showErrorSnackBar(
-                  //                 "Fail", value.description ?? '');
-                  //           }
-                  //         })
-                  //       });
-                  // }
 
-                  Get.off(HomePage());
-                },
-              ),
-            ),
-          ),
+        ButtonComponent(text: 'Login',
+          containerWidth: 120,
+          padding: 10,
+          color: Color(int.parse(MJNColors.buttonColor)),
+          onPress
+          :()=> Get.off(HomePage()),),
+
+        // Padding(
+        //   padding: EdgeInsets.only(bottom: 10),
+        //   child: Container(
+        //     child: ButtonTheme(
+        //       height: 40,
+        //       child: RaisedButton(
+        //         child: Text('Login',
+        //             style: TextStyle(color: Colors.white, fontSize: 18)),
+        //         color: Color(int.parse(MJNColors.buttonColor)),
+        //         shape: RoundedRectangleBorder(
+        //             borderRadius: BorderRadius.circular(10)),
+        //         onPressed: () {
+        //           debugPrint('click');
+        //           if (userIdController.text != '' ||
+        //               passwordController.text != '') {
+        //             Map<String, String> map = {
+        //               'user_id': userIdController.value.text,
+        //               'password': passwordController.value.text
+        //             };
+        //
+        //             debugPrint('call api');
+        //             RestApi.fetchSupportLogin(map).then((value) => {
+        //                   Future.delayed(Duration.zero, () {
+        //                     if (value.status == 'Success') {
+        //                       writeData.write(SAVE_TIME, DateTime.now().minute);
+        //
+        //                       Get.off(() => MyLocation(value.token.toString()));
+        //                     } else {
+        //                       AppUtils.showErrorSnackBar(
+        //                           "Fail", value.description ?? '');
+        //                     }
+        //                   })
+        //                 });
+        //           }
+        //
+        //           Get.off(HomePage());
+        //         },
+        //       ),
+        //     ),
+        //   ),
+        // ),
+        SizedBox(
+          height: 10,
         ),
         Text(
           'forget password',
           style: TextStyle(decoration: TextDecoration.underline),
         ),
-        SizedBox(
-          height: 50,
-        ),
+
       ],
     );
   }

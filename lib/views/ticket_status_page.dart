@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
 import 'package:flutter_geolocator_example/utils/app_utils.dart';
-import 'package:flutter_geolocator_example/viewPods/bottom_nav_bar_viewPod.dart';
+import 'package:flutter_geolocator_example/components/bottom_nav_bar_component.dart';
 import 'package:get/get.dart';
 
 class TicketStatusPage extends StatelessWidget {
@@ -16,7 +16,7 @@ class TicketStatusPage extends StatelessWidget {
           padding: EdgeInsets.only(left: 30, right: 30, bottom: 30),
           child: _buildWidget(),
         ),
-        bottomNavigationBar: BottomNavigationBarViewPod());
+        bottomNavigationBar: BottomNavigationBarComponent());
   }
 
   _buildWidget() {
