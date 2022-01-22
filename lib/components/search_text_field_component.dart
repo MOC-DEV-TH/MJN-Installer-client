@@ -43,7 +43,13 @@ class SearchTextFieldComponent extends StatelessWidget {
               minWidth: 5
           ),
           border: InputBorder.none,
-          suffixIcon: IconButton(icon: Icon(icon), onPressed:onPress,),
+          suffixIcon: Align(
+              widthFactor: 1.0,
+              heightFactor: 1.0,
+              child: InkWell(child: Padding(
+                padding: const EdgeInsets.only(right: 4),
+                child: Icon(icon),
+              ), onTap:onPress,)),
           isDense: true,
           contentPadding: EdgeInsets.only(left: 10,bottom: 10,top: 10),
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_geolocator_example/components/label_text_component.dart';
 class BuildCustomerInfoLabel extends StatelessWidget {
 
   @override
@@ -11,319 +12,72 @@ class BuildCustomerInfoLabel extends StatelessWidget {
   final customerLabelData = Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              'xx xxx xxx xxx xxx',
-              style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 14,
-                  color: Colors.black,
-                  decoration: TextDecoration.none),
-            ),
-          ),
-        ],
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'xx xxx xxx xxx xxx',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'xx xxx xxx xxx xxx',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'xx xxx xxx xxx xxx',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'xx xxx xxx xxx xxx',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'xx xxx xxx xxx xxx',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'xx xxx xxx xxx xxx',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'xx xxx xxx xxx xxx',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'xx xxx xxx xxx xxx',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
+      LabelTextComponent(
+          text: 'xx xxx xxx xxx xxx', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'xx xxx xxx xxx xxx', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'xx xxx xxx xxx xxx', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'xx xxx xxx xxx xxx', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'xx xxx xxx xxx xxx', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'xx xxx xxx xxx xxx', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'xx xxx xxx xxx xxx', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'xx xxx xxx xxx xxx', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'xx xxx xxx xxx xxx', color: Colors.black, padding: 8.0),
     ],
   );
 
   final customerLabel = Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'UserID',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'Customer Name',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'Customer Phone',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'Address',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'Lat',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'Long',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'Type',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'Type',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          'Assigned Date',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
+      LabelTextComponent(
+          text: 'User ID', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Customer Name', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Customer Phone', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Address', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Lat', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Long', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Type', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Topic', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Assigned Date', color: Colors.black, padding: 8.0),
     ],
   );
 
   final middleLabel = Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          '- - -',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          '- - -',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          '- - -',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          '- - -',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          '- - -',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          '- - -',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          '- - -',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          '- - -',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(
-          '- - -',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 14,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
+      LabelTextComponent(
+          text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: '- - -', color: Colors.black, padding: 8.0),
     ],
   );
 }

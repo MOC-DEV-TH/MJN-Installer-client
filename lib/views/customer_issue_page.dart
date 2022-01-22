@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/components/button_component.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
 import 'package:flutter_geolocator_example/utils/app_utils.dart';
 import 'package:flutter_geolocator_example/widgets/build_customer_info_label.dart';
-import 'package:flutter_geolocator_example/widgets/build_dropdown_list.dart';
-import 'package:get/get.dart';
+import 'package:flutter_geolocator_example/widgets/build_installation_dropdown_list.dart';
+import 'package:flutter_geolocator_example/widgets/build_maintenance_dropdown_list.dart';
+
 
 class CustomerIssuePage extends StatelessWidget {
   @override
@@ -13,7 +12,14 @@ class CustomerIssuePage extends StatelessWidget {
     return Scaffold(
       appBar: AppUtils.customAppBar(),
       backgroundColor: Color(int.parse(MJNColors.bgColor)),
-      body: _buildWidget(),
+      body: GestureDetector(
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: _buildWidget(),
+          )),
     );
   }
 
@@ -37,25 +43,13 @@ class CustomerIssuePage extends StatelessWidget {
           ),
           BuildCustomerInfoLabel(),
 
-          BuildDropdownList(),
+          BuildMaintenanceDropdownList(),
 
-          SizedBox(
-            height: 60.0,
-          ),
-          ButtonComponent(
-            text: 'Complete',
-            containerWidth: 120,
-            padding: 10,
-            color: Color(int.parse(MJNColors.buttonColor)),
-            onPress: () => onPressComplete(),
-          ),
+          BuildInstallationDropdownList(),
+
         ],
       ),
     );
-  }
-
-  void onPressComplete() {
-    Get.toNamed(COMPLETE_CUSTOMER);
   }
 
 }

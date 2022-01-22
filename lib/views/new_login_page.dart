@@ -1,29 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_geolocator_example/components/button_component.dart';
-import 'package:flutter_geolocator_example/network/RestApi.dart';
+import 'package:flutter_geolocator_example/components/text_field_component.dart';
+import 'package:flutter_geolocator_example/controllers/login_controller.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
-import 'package:flutter_geolocator_example/utils/app_utils.dart';
-import 'package:flutter_geolocator_example/views/home_page.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 
-import 'my_location_page.dart';
-
-// ignore: must_be_immutable
 class NewLoginPage extends StatelessWidget {
-  var userIdController = TextEditingController();
-  var passwordController = TextEditingController();
-  final writeData = GetStorage();
-  var _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final LoginController controller = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {
-    var screenHeight = MediaQuery
-        .of(context)
-        .size
-        .height;
+    var screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         key: _scaffoldKey,
         backgroundColor: Color(int.parse(MJNColors.bgColor)),
@@ -57,141 +46,95 @@ class NewLoginPage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Row(
-          children: [
-            Container(
-              width: 130,
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+        Container(
+          height: 150,
+          width: Get.size.width * 0.8,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 27),
-                      child: Text(
-                        'User ID:',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black54),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 60,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 27),
+                Flexible(
+                  child: Text(
+                    'User ID:',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black54),
+                  ),
+                ),
+
+                SizedBox(width: 20,),
+
+                GetBuilder<LoginController>(
+                    init: LoginController(),
+                    builder: (controller) => Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 15.0),
+                            child: TextFieldComponent(
+                              controller: controller.userIdController,
+                              errorText: '',
+                              hintText: '',
+                            ),
+                          ),
+                        )),
+              ]),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Flexible(
                       child: Text(
                         'Password:',
                         style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.bold,
                             color: Colors.black54),
                       ),
                     ),
-                    SizedBox(
-                      height: 40,
-                    ),
-                  ]),
-            ),
-            Expanded(
-              child: Column(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    ),
-                    height: 40,
-                    padding: EdgeInsets.only(bottom: 6),
-                    margin: EdgeInsets.only(right: 27),
-                    child: TextField(
-                      textAlign: TextAlign.center,
-                      controller: userIdController,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(right: 27),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    ),
-                    height: 40,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 4),
-                      child: TextField(
-                        textAlign: TextAlign.center,
-                        controller: passwordController,
-                        decoration: InputDecoration(
-                          border: InputBorder.none,
+                    SizedBox(width: 14,),
+                    GetBuilder<LoginController>(
+                      init: LoginController(),
+                      builder: (controller) => Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 15.0),
+                          child: TextFieldComponent(
+                            controller: controller.passwordController,
+                            errorText: '',
+                            hintText: '',
+                            icon: controller.isVisible
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            isVisible: controller.isVisible,
+                            onPress: controller.isVisibleStatus,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         SizedBox(
           height: 35,
         ),
-
-        ButtonComponent(text: 'Login',
-          containerWidth: 120,
-          padding: 10,
-          color: Color(int.parse(MJNColors.buttonColor)),
-          onPress
-          :()=> Get.off(HomePage()),),
-
-        // Padding(
-        //   padding: EdgeInsets.only(bottom: 10),
-        //   child: Container(
-        //     child: ButtonTheme(
-        //       height: 40,
-        //       child: RaisedButton(
-        //         child: Text('Login',
-        //             style: TextStyle(color: Colors.white, fontSize: 18)),
-        //         color: Color(int.parse(MJNColors.buttonColor)),
-        //         shape: RoundedRectangleBorder(
-        //             borderRadius: BorderRadius.circular(10)),
-        //         onPressed: () {
-        //           debugPrint('click');
-        //           if (userIdController.text != '' ||
-        //               passwordController.text != '') {
-        //             Map<String, String> map = {
-        //               'user_id': userIdController.value.text,
-        //               'password': passwordController.value.text
-        //             };
-        //
-        //             debugPrint('call api');
-        //             RestApi.fetchSupportLogin(map).then((value) => {
-        //                   Future.delayed(Duration.zero, () {
-        //                     if (value.status == 'Success') {
-        //                       writeData.write(SAVE_TIME, DateTime.now().minute);
-        //
-        //                       Get.off(() => MyLocation(value.token.toString()));
-        //                     } else {
-        //                       AppUtils.showErrorSnackBar(
-        //                           "Fail", value.description ?? '');
-        //                     }
-        //                   })
-        //                 });
-        //           }
-        //
-        //           Get.off(HomePage());
-        //         },
-        //       ),
-        //     ),
-        //   ),
-        // ),
+       Obx((){
+         if(controller.isLoading.value){
+          return Center(child: CircularProgressIndicator(),);
+         }
+         else {
+          return ButtonComponent(
+             text: 'Login',
+             containerWidth: 120,
+             padding: 10,
+             color: Color(int.parse(MJNColors.buttonColor)),
+             onPress: () => Get.find<LoginController>().login(),
+           );
+         }
+       }) ,
         SizedBox(
           height: 10,
         ),
@@ -199,7 +142,6 @@ class NewLoginPage extends StatelessWidget {
           'forget password',
           style: TextStyle(decoration: TextDecoration.underline),
         ),
-
       ],
     );
   }

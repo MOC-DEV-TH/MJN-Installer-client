@@ -24,7 +24,8 @@ class TextFieldComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.only(bottom: size.height * 0.1-55, ),
+      height: 50,
+      // margin: EdgeInsets.only(bottom: size.height * 0.1-55, ),
       child: TextFormField(
         maxLines: maxLines,
         textInputAction: TextInputAction.next,
@@ -32,9 +33,10 @@ class TextFieldComponent extends StatelessWidget {
         controller: controller,
         obscureText: isVisible,
         decoration: InputDecoration(
-          suffixIcon: IconButton(icon: Icon(icon), onPressed:onPress,),
+          suffixIcon:icon!= null ? IconButton(icon: Icon(icon,size: 20,), onPressed:onPress,) : null,
           labelText:  hintText,
           labelStyle: TextStyle(
+            fontSize: 12,
             color: Colors.black.withOpacity(0.5),
           ),
           contentPadding: EdgeInsets.all(10),

@@ -1,0 +1,43 @@
+import 'package:flutter/material.dart';
+class TextFieldBoxDecorationComponent extends StatelessWidget {
+  TextFieldBoxDecorationComponent({
+    Key? key,
+    required this.hintText,
+    this.maxLines = 1,
+    required this.errorText,
+    this.textInputType = TextInputType.text,
+    this.icon,
+    this.isVisible = false,
+   required this.controller,
+    this.onPress,
+  }) : super(key: key);
+  final String hintText;
+  final int maxLines;
+  final String errorText;
+  final IconData? icon;
+  final bool isVisible;
+  final Function()? onPress;
+  final TextInputType textInputType;
+  final TextEditingController controller;
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Container(
+      height: 35,
+      child: TextFormField(
+        maxLines: maxLines,
+        textInputAction: TextInputAction.next,
+        keyboardType: textInputType,
+        controller: controller,
+        obscureText: isVisible,
+        decoration: InputDecoration(
+            hintText: '',
+            contentPadding: EdgeInsets.all(10),
+            border:
+            OutlineInputBorder(borderRadius: BorderRadius.circular(4.0))),
+        validator: (value) => value!.trim().isEmpty ? errorText : null,
+      ),
+    );
+  }
+}
