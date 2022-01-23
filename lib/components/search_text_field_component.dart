@@ -3,7 +3,7 @@ class SearchTextFieldComponent extends StatelessWidget {
   SearchTextFieldComponent({
     Key? key,
     this.hintText,
-    this.maxLines = 1,
+    this.maxLines = 3,
     this.errorText,
     this.textInputType = TextInputType.text,
     this.icon,
@@ -24,36 +24,38 @@ class SearchTextFieldComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      height: 42,
+      height: 38,
       margin: EdgeInsets.only(bottom: size.height * 0.1-60, ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(8.0))
       ),
-      child: TextFormField(
-        maxLines: maxLines,
-        textInputAction: TextInputAction.next,
-        keyboardType: textInputType,
-        controller: controller,
-        obscureText: isVisible,
-        style: TextStyle(fontSize: 14),
-        decoration: InputDecoration(
-          suffixIconConstraints: BoxConstraints(
-              minHeight: 5,
-              minWidth: 5
+      child: IgnorePointer(
+        child: TextFormField(
+          maxLines: maxLines,
+          textInputAction: TextInputAction.next,
+          keyboardType: textInputType,
+          controller: controller,
+          obscureText: isVisible,
+          style: TextStyle(fontSize: 12),
+          decoration: InputDecoration(
+            suffixIconConstraints: BoxConstraints(
+                minHeight: 5,
+                minWidth: 5
+            ),
+            border: InputBorder.none,
+            suffixIcon: Align(
+                widthFactor: 1.0,
+                heightFactor: 1.0,
+                child: InkWell(child: Padding(
+                  padding: const EdgeInsets.only(right: 4),
+                  child: Icon(icon),
+                ), onTap:onPress,)),
+            isDense: true,
+            contentPadding: EdgeInsets.only(left: 10,bottom: 14,top: 10),
           ),
-          border: InputBorder.none,
-          suffixIcon: Align(
-              widthFactor: 1.0,
-              heightFactor: 1.0,
-              child: InkWell(child: Padding(
-                padding: const EdgeInsets.only(right: 4),
-                child: Icon(icon),
-              ), onTap:onPress,)),
-          isDense: true,
-          contentPadding: EdgeInsets.only(left: 10,bottom: 10,top: 10),
+          validator: (value) => value!.trim().isEmpty ? errorText : null,
         ),
-        validator: (value) => value!.trim().isEmpty ? errorText : null,
       ),
     );
   }

@@ -9,18 +9,19 @@ import 'package:get_storage/get_storage.dart';
 class LoginController extends GetxController {
   var userIdController = TextEditingController();
   var passwordController = TextEditingController();
-  var isVisible = false;
+  var isVisible = true;
   final writeData = GetStorage();
   var isLoading = false.obs;
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
 
   @override
   void onInit() {
     super.onInit();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override

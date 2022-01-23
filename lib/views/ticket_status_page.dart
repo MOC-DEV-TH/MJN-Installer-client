@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_geolocator_example/components/flow_and_status_component.dart';
+import 'package:flutter_geolocator_example/controllers/ticket_status_controller.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
 import 'package:flutter_geolocator_example/utils/app_utils.dart';
@@ -6,6 +8,9 @@ import 'package:flutter_geolocator_example/components/bottom_nav_bar_component.d
 import 'package:get/get.dart';
 
 class TicketStatusPage extends StatelessWidget {
+  final TicketStatusController ticketStatusController =
+      Get.put(TicketStatusController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +21,27 @@ class TicketStatusPage extends StatelessWidget {
           padding: EdgeInsets.only(left: 30, right: 30, bottom: 30),
           child: _buildWidget(),
         ),
-        bottomNavigationBar: BottomNavigationBarComponent());
+        bottomNavigationBar: GetBuilder<TicketStatusController>(
+            init: TicketStatusController(),
+            initState: (_) {
+
+                WidgetsBinding.instance!.addPostFrameCallback((_) {
+                  ticketStatusController
+                      .updateArgumentData(Get.arguments.toString());
+                });
+
+            },
+            builder: (controller) => BottomNavigationBarComponent(
+                  argumentData: controller.argumentData,
+                  onChangedData: (val) {
+                    controller.updateArgumentData(val);
+                    if (val == INSTALLATION) {
+                      controller.fetchInstallationData();
+                    } else {
+                      controller.fetchServiceTicketData();
+                    }
+                  },
+                )));
   }
 
   _buildWidget() {
@@ -37,176 +62,34 @@ class TicketStatusPage extends StatelessWidget {
           SizedBox(
             height: 60.0,
           ),
+
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              InkWell(
-                onTap: () => Get.toNamed(CUSTOMER_STATUS),
-                child: Container(
-                  height: 170,
-                  width: 140,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.green,
-                    ),
-                    color: Colors.white54,
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Stack(
-                        children: [
-                          Icon(
-                            Icons.stop_circle_sharp,
-                            size: 80,
-                          ),
-                          Positioned(
-                            top: 1,
-                            right: 1,
-                            child: Container(
-                              padding: const EdgeInsets.all(6.0),
-                              decoration: const BoxDecoration(
-                                  color: Colors.red, shape: BoxShape.circle),
-                              child: const Text(
-                                "2",
-                                style: TextStyle(
-                                    fontSize: 8,
-                                    color: Colors.yellow,
-                                    decoration: TextDecoration.none),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'Pending',
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: 14,
-                            color: Colors.black,
-                            decoration: TextDecoration.none),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              InkWell(
-                onTap: () => Get.toNamed(CUSTOMER_STATUS),
-                child: Container(
-                  height: 170,
-                  width: 140,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.green,
-                    ),
-                    color: Colors.white54,
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Stack(
-                        children: [
-                          Icon(
-                            Icons.inbox,
-                            size: 80,
-                          ),
-                          Positioned(
-                            top: 1,
-                            right: 1,
-                            child: Container(
-                              padding: const EdgeInsets.all(6.0),
-                              decoration: const BoxDecoration(
-                                  color: Colors.red, shape: BoxShape.circle),
-                              child: const Text(
-                                "2",
-                                style: TextStyle(
-                                    fontSize: 8,
-                                    color: Colors.yellow,
-                                    decoration: TextDecoration.none),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'New Order',
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: 14,
-                            color: Colors.black,
-                            decoration: TextDecoration.none),
-                      )
-                    ],
-                  ),
-                ),
-              )
+              GetBuilder<TicketStatusController>(
+                  builder: (controller) => FlowAndStatusComponent(
+                      argumentData: ticketStatusController.getArgumentData(),
+                      status: 'Pending',
+                      routeName: CUSTOMER_STATUS,
+                      icon: Icons.stop_circle_sharp)),
+              GetBuilder<TicketStatusController>(
+                  builder: (controller) => FlowAndStatusComponent(
+                      argumentData: controller.getArgumentData(),
+                      status: 'New Order',
+                      routeName: CUSTOMER_STATUS,
+                      icon: Icons.stop_circle_sharp)),
             ],
           ),
           SizedBox(
             height: 20,
           ),
-          InkWell(
-            onTap: () => Get.toNamed(CUSTOMER_STATUS),
-            child: Container(
-              height: 170,
-              width: 140,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.green,
-                ),
-                color: Colors.white54,
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Stack(
-                    children: [
-                      Icon(
-                        Icons.check_circle_outline_sharp,
-                        size: 80,
-                      ),
-                      Positioned(
-                        top: 1,
-                        right: 1,
-                        child: Container(
-                          padding: const EdgeInsets.all(6.0),
-                          decoration: const BoxDecoration(
-                              color: Colors.red, shape: BoxShape.circle),
-                          child: const Text(
-                            "2",
-                            style: TextStyle(
-                                fontSize: 8,
-                                color: Colors.yellow,
-                                decoration: TextDecoration.none),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'Complete',
-                    style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 14,
-                        color: Colors.black,
-                        decoration: TextDecoration.none),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          GetBuilder<TicketStatusController>(
+            builder: (controller) => FlowAndStatusComponent(
+                argumentData: controller.getArgumentData(),
+                status: 'Complete',
+                routeName: CUSTOMER_STATUS,
+                icon: Icons.check_circle_outline_sharp),
+          )
         ],
       ),
     );

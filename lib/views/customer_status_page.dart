@@ -4,6 +4,7 @@ import 'package:flutter_geolocator_example/utils/app_utils.dart';
 import 'package:flutter_geolocator_example/components/bottom_nav_bar_component.dart';
 import 'package:flutter_geolocator_example/widgets/build_search_text_field.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:get/get.dart';
 
 class CustomerStatusPage extends StatelessWidget {
   @override
@@ -18,7 +19,10 @@ class CustomerStatusPage extends StatelessWidget {
             padding: EdgeInsets.only(left: 30, right: 30, bottom: 10),
             child: BuildSearchTextField('Pending'),
           ),
-          bottomNavigationBar: BottomNavigationBarComponent()),
+          bottomNavigationBar: BottomNavigationBarComponent(
+            argumentData: Get.arguments.toString(),
+            onChangedData: (val) {},
+          )),
     );
   }
 }

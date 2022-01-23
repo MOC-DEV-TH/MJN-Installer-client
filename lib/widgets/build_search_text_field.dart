@@ -15,11 +15,11 @@ class BuildSearchTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: _buildWidget(),
+      child: _buildWidget(context),
     );
   }
 
-  Widget _buildWidget() {
+  Widget _buildWidget(BuildContext context) {
     return Column(
       children: [
         SizedBox(
@@ -89,8 +89,14 @@ class BuildSearchTextField extends StatelessWidget {
               width: 10.0,
             ),
             Expanded(
-                child: SearchTextFieldComponent(
-                    controller: controller.customerDateController, icon: Icons.search)),
+                child: InkWell(
+                  onTap: (){
+                    controller.selectDate(context);
+                  },
+                  child: SearchTextFieldComponent(
+                      controller: controller.customerDateController, icon: Icons.search,onPress: (){
+                        },),
+                )),
           ],
         ),
         Flexible(

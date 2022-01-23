@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_geolocator_example/components/flow_and_status_component.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
-import 'package:get/get.dart';
+
 
 class HomePage extends StatelessWidget {
   @override
@@ -15,6 +16,7 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+
   _buildWidget() {
     return SingleChildScrollView(
       child: Column(
@@ -41,117 +43,19 @@ class HomePage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              InkWell(
-                onTap: () => Get.toNamed(TICKET_STATUS),
-                child: Container(
-                  height: 170,
-                  width: 140,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.green,
-                    ),
-                    color: Colors.white54,
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Stack(
-                        children: [
-                          Icon(
-                            Icons.inbox,
-                            size: 80,
-                          ),
-                          Positioned(
-                            top: 1,
-                            right: 1,
-                            child: Container(
-                              padding: const EdgeInsets.all(6.0),
-                              decoration: const BoxDecoration(
-                                  color: Colors.red, shape: BoxShape.circle),
-                              child: const Text(
-                                "2",
-                                style: TextStyle(
-                                    fontSize: 8,
-                                    color: Colors.yellow,
-                                    decoration: TextDecoration.none),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'Installation',
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: 14,
-                            color: Colors.black,
-                            decoration: TextDecoration.none),
-                      )
-                    ],
-                  ),
-                ),
+              FlowAndStatusComponent(
+                  status: 'Installation',
+                  routeName: TICKET_STATUS,
+                  argumentData: INSTALLATION,
+                  icon: Icons.inbox),
+              SizedBox(
+                width: 15,
               ),
-
-              SizedBox(width: 15,),
-
-              InkWell(
-                onTap: () => Get.toNamed(TICKET_STATUS),
-                child: Container(
-                  width: 140,
-                  height: 170,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.green,
-                    ),
-                    color: Colors.white54,
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Stack(
-                        children: [
-                          Icon(
-                            Icons.inbox,
-                            size: 80,
-                          ),
-                          Positioned(
-                            top: 1,
-                            right: 1,
-                            child: Container(
-                              padding: const EdgeInsets.all(6.0),
-                              decoration: const BoxDecoration(
-                                  color: Colors.red, shape: BoxShape.circle),
-                              child: const Text(
-                                "2",
-                                style: TextStyle(
-                                    fontSize: 8,
-                                    color: Colors.yellow,
-                                    decoration: TextDecoration.none),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        'Service Ticket',
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: 14,
-                            color: Colors.black,
-                            decoration: TextDecoration.none),
-                      )
-                    ],
-                  ),
-                ),
-              )
+              FlowAndStatusComponent(
+                  status: 'Service Ticket',
+                  routeName: TICKET_STATUS,
+                  argumentData: SERVICE_TICKET,
+                  icon: Icons.inbox),
             ],
           ),
           SizedBox(

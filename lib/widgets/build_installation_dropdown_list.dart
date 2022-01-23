@@ -29,12 +29,14 @@ class BuildInstallationDropdownList extends StatelessWidget {
             ],
           ),
         ),
-      Container(
-        margin: EdgeInsets.only(left: 24.0, right: 24.0),
-        child: Row(children: [
-          Expanded(child: choosePhotoListsWidget),
-        ],),
-      ),
+        Container(
+          margin: EdgeInsets.only(left: 24.0, right: 24.0),
+          child: Row(
+            children: [
+              Expanded(child: choosePhotoListsWidget),
+            ],
+          ),
+        ),
         SizedBox(
           height: 40.0,
         ),
@@ -53,14 +55,11 @@ class BuildInstallationDropdownList extends StatelessWidget {
     crossAxisAlignment: CrossAxisAlignment.start,
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
-      LabelTextComponent(
-          text: 'MAC ID', color: Colors.black, padding: 8.0),
-      LabelTextComponent(
-          text: 'Device ID', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: 'MAC ID', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: 'Device ID', color: Colors.black, padding: 8.0),
       LabelTextComponent(
           text: 'Fiber Usage', color: Colors.black, padding: 8.0),
-      LabelTextComponent(
-          text: 'Status', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: 'Status', color: Colors.black, padding: 8.0),
     ],
   );
 
@@ -70,7 +69,6 @@ class BuildInstallationDropdownList extends StatelessWidget {
       GetBuilder<InstallationDropDownController>(
         init: InstallationDropDownController(),
         builder: (controller) => TextFieldBoxDecorationComponent(
-
           controller: controller.macIdController,
           errorText: '',
           hintText: '',
@@ -109,14 +107,37 @@ class BuildInstallationDropdownList extends StatelessWidget {
 
   final choosePhotoListsWidget = Column(
     children: [
-      PhotoPickerComponent(text: 'ONU Photo',onPress: ()=>{},),
-      PhotoPickerComponent(text: 'ODB Photo',onPress: ()=>{},),
-      PhotoPickerComponent(text: 'Acceptance Form',onPress: ()=>{},),
-
+      GetBuilder<InstallationDropDownController>(
+        builder: (controller) => PhotoPickerComponent(
+          imagePath: controller.imageONU,
+          text: 'ONU Photo',
+          onPress: () => {
+            controller.onTapONU()
+          },
+        ),
+      ),
+      GetBuilder<InstallationDropDownController>(
+        builder: (controller) => PhotoPickerComponent(
+          imagePath: controller.imageODB,
+          text: 'ODB Photo',
+          onPress: () => {
+            controller.onTapODB()
+          },
+        ),
+      ),
+      GetBuilder<InstallationDropDownController>(
+        builder: (controller) => PhotoPickerComponent(
+          imagePath: controller.imageAcceptForm,
+          text: 'Acceptance Form',
+          onPress: () => {
+            controller.onTapAcceptForm()
+          },
+        ),
+      ),
     ],
   );
 
   void onPressComplete() {
-    Get.toNamed(COMPLETE_CUSTOMER);
+    Get.toNamed(COMPLETE_CUSTOMER_LIST);
   }
 }

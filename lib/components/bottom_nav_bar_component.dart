@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_geolocator_example/utils/app_constants.dart';
 
 class BottomNavigationBarComponent extends StatelessWidget {
+  BottomNavigationBarComponent(
+      {Key? key, required this.argumentData, required this.onChangedData})
+      : super(key: key);
+  late String argumentData;
+  final void Function(String) onChangedData;
+
   @override
   Widget build(BuildContext context) {
+    debugPrint("ArgumentData${argumentData}");
     return Container(
       margin: const EdgeInsets.only(bottom: 30),
       child: Row(
@@ -10,27 +18,34 @@ class BottomNavigationBarComponent extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Container(
-                padding: EdgeInsets.only(right: 1, top: 10),
-                height: 52,
-                width: 150,
+              InkWell(
+                onTap: () {
+                  onChangedData(INSTALLATION);
+                },
                 child: Container(
-                  padding: const EdgeInsets.all(10.0),
-                  decoration: const BoxDecoration(
-                      color: Colors.grey,
-                      borderRadius: BorderRadius.all(Radius.circular(12.0))),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Installation',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Icon(
-                        Icons.inbox,
-                        color: Colors.white,
-                      ),
-                    ],
+                  padding: EdgeInsets.only(right: 1, top: 10),
+                  height: 52,
+                  width: 150,
+                  child: Container(
+                    padding: const EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                        color: argumentData == INSTALLATION
+                            ? Color(0xffFF5F1F)
+                            : Colors.grey,
+                        borderRadius: BorderRadius.all(Radius.circular(12.0))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Installation',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Icon(
+                          Icons.inbox,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -54,27 +69,34 @@ class BottomNavigationBarComponent extends StatelessWidget {
           ),
           Stack(
             children: [
-              Container(
-                padding: EdgeInsets.only(right: 1, top: 10),
-                height: 52,
-                width: 150,
+              InkWell(
+                onTap: () {
+                  onChangedData(SERVICE_TICKET);
+                },
                 child: Container(
-                  padding: const EdgeInsets.all(10.0),
-                  decoration: const BoxDecoration(
-                      color: Color(0xffFF5F1F),
-                      borderRadius: BorderRadius.all(Radius.circular(12.0))),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Service Ticket',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      Icon(
-                        Icons.inbox,
-                        color: Colors.white,
-                      ),
-                    ],
+                  padding: EdgeInsets.only(right: 1, top: 10),
+                  height: 52,
+                  width: 150,
+                  child: Container(
+                    padding: const EdgeInsets.all(10.0),
+                    decoration: BoxDecoration(
+                        color: argumentData == SERVICE_TICKET
+                            ? Color(0xffFF5F1F)
+                            : Colors.grey,
+                        borderRadius: BorderRadius.all(Radius.circular(12.0))),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Service Ticket',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Icon(
+                          Icons.inbox,
+                          color: Colors.white,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
