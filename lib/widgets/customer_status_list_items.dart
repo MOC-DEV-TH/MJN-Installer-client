@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
 import 'package:get/get.dart';
+
 class CustomerStatusListItems extends StatelessWidget {
+  final String? customerName;
+  final String? customerAddress;
+  final String? customerPhNo;
+  final String? profileIdOrTicketID;
+  final String? pageNameArgument;
+
+  CustomerStatusListItems(this.customerName, this.customerAddress,
+      this.customerPhNo, this.profileIdOrTicketID, this.pageNameArgument);
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: _buildWidget(),
-    );
-  }
-
-  Widget _buildWidget() {
-    return Container(
+        child: Container(
       margin: EdgeInsets.only(bottom: 10),
       height: 90,
       decoration: BoxDecoration(
@@ -23,15 +28,55 @@ class CustomerStatusListItems extends StatelessWidget {
           children: [
             customerInfoLabel,
             middleLabel,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text(
+                    customerName!,
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 12,
+                        color: Colors.black,
+                        decoration: TextDecoration.none),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text(
+                    customerPhNo!,
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 12,
+                        color: Colors.black,
+                        decoration: TextDecoration.none),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text(
+                    customerAddress!,
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 12,
+                        color: Colors.black,
+                        decoration: TextDecoration.none),
+                  ),
+                ),
+              ],
+            ),
             customerInfoData,
             verticalDivider,
             InkWell(
-              onTap: ()=>Get.toNamed(CUSTOMER_DETAIL),
+                onTap: () => Get.toNamed(CUSTOMER_DETAIL,
+                    arguments: [pageNameArgument, profileIdOrTicketID]),
                 child: labelView)
           ],
         ),
       ),
-    );
+    ));
   }
 
   final customerInfoLabel = Column(
@@ -121,7 +166,7 @@ class CustomerStatusListItems extends StatelessWidget {
       Padding(
         padding: const EdgeInsets.all(2.0),
         child: Text(
-          'Mr Jame',
+          'Tester',
           style: TextStyle(
               fontWeight: FontWeight.normal,
               fontSize: 12,

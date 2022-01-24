@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/components/button_component.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
 import 'package:flutter_geolocator_example/utils/app_utils.dart';
 import 'package:flutter_geolocator_example/widgets/build_customer_info_label.dart';
 import 'package:get/get.dart';
@@ -33,23 +31,11 @@ class CustomerDetailPage extends StatelessWidget {
         SizedBox(
           height: 20.0,
         ),
+        BuildCustomerInfoLabel(
+            Get.arguments[0].toString(), Get.arguments[1].toString()),
 
-        BuildCustomerInfoLabel(),
-
-        SizedBox(
-          height: 60.0,
-        ),
-        ButtonComponent(text: 'Action Started',
-          padding: 10,
-          containerWidth: 120,
-          color: Color(int.parse(MJNColors.buttonColor)),
-          onPress
-              :()=> onPressActionStart(),),
       ],
     );
   }
 
-  void onPressActionStart() {
-    Get.toNamed(CUSTOMER_ISSUE);
-  }
 }

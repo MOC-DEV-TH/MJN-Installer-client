@@ -33,7 +33,7 @@ class CompleteCustomerPage extends StatelessWidget {
         SizedBox(
           height: 20.0,
         ),
-        BuildCustomerInfoLabel(),
+        BuildCustomerInfoLabel('',''),
 
         SizedBox(
           height: 60.0,

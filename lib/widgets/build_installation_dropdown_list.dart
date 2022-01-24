@@ -5,50 +5,134 @@ import 'package:flutter_geolocator_example/components/drop_down_button_component
 import 'package:flutter_geolocator_example/components/label_text_component.dart';
 import 'package:flutter_geolocator_example/components/photo_picker_component.dart';
 import 'package:flutter_geolocator_example/components/text_field_box_decoration_component.dart';
-import 'package:flutter_geolocator_example/controllers/installation_drop_down_controller.dart';
+import 'package:flutter_geolocator_example/controllers/installation_controller.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
 import 'package:get/get.dart';
 
-class BuildInstallationDropdownList extends StatelessWidget {
-  final InstallationDropDownController controller =
-      Get.put(InstallationDropDownController());
+class BuildInstallationDropdownList extends StatefulWidget {
+  final String profileIdOrTicketID;
+
+  BuildInstallationDropdownList(this.profileIdOrTicketID);
 
   @override
+  State<BuildInstallationDropdownList> createState() =>
+      _BuildInstallationDropdownListState();
+}
+
+class _BuildInstallationDropdownListState
+    extends State<BuildInstallationDropdownList> {
+  final InstallationController installationController = Get.put(InstallationController());
+
+  @override
+  void initState() {
+    installationController.fetchInstallationDetail(widget.profileIdOrTicketID);
+    super.initState();
+  }
+  
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: 200,
-          margin: EdgeInsets.only(left: 24.0, right: 24.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(child: issueDropDownLabel),
-              Expanded(child: issueDropDownListsWidget),
-            ],
-          ),
-        ),
-        Container(
-          margin: EdgeInsets.only(left: 24.0, right: 24.0),
-          child: Row(
-            children: [
-              Expanded(child: choosePhotoListsWidget),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 40.0,
-        ),
-        ButtonComponent(
-          text: 'Complete',
-          containerWidth: 120,
-          padding: 10,
-          color: Color(int.parse(MJNColors.buttonColor)),
-          onPress: () => onPressComplete(),
-        ),
-      ],
-    );
+    return
+    Obx((){
+      if(installationController.isLoading.value){
+        return Center(child: CircularProgressIndicator(),);
+      }
+      else {
+       return Column(
+          children: [
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                customerLabel,
+                middleLabel,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    LabelTextComponent(
+                        text:
+                        installationController.installationDetail.value.uid ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: installationController.installationDetail.value.firstname ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: installationController.installationDetail.value.phone1 ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: installationController.installationDetail.value.address ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: installationController.installationDetail.value.latitude ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: installationController.installationDetail.value.longitude ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: installationController.installationDetail.value.type ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: 'xx xxx xxx xxx xxx',
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: installationController.installationDetail.value.subconAssignedDate ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                  ],
+                )
+              ],
+            ),
+
+            Container(
+              height: 200,
+              margin: EdgeInsets.only(left: 24.0, right: 24.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(child: issueDropDownLabel),
+                  Expanded(child: issueDropDownListsWidget),
+                ],
+              ),
+            ),
+            Container(
+              margin: EdgeInsets.only(left: 24.0, right: 24.0),
+              child: Row(
+                children: [
+                  Expanded(child: choosePhotoListsWidget),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 40.0,
+            ),
+            ButtonComponent(
+              text: 'Complete',
+              containerWidth: 120,
+              padding: 10,
+              color: Color(int.parse(MJNColors.buttonColor)),
+              onPress: () => onPressComplete(),
+            ),
+          ],
+        );
+      }
+    });
+
   }
 
   final issueDropDownLabel = Column(
@@ -66,24 +150,24 @@ class BuildInstallationDropdownList extends StatelessWidget {
   final issueDropDownListsWidget = Column(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
-      GetBuilder<InstallationDropDownController>(
-        init: InstallationDropDownController(),
+      GetBuilder<InstallationController>(
+        init: InstallationController(),
         builder: (controller) => TextFieldBoxDecorationComponent(
           controller: controller.macIdController,
           errorText: '',
           hintText: '',
         ),
       ),
-      GetBuilder<InstallationDropDownController>(
-        init: InstallationDropDownController(),
+      GetBuilder<InstallationController>(
+        init: InstallationController(),
         builder: (controller) => TextFieldBoxDecorationComponent(
           controller: controller.deviceIdController,
           errorText: '',
           hintText: '',
         ),
       ),
-      GetBuilder<InstallationDropDownController>(
-        init: InstallationDropDownController(),
+      GetBuilder<InstallationController>(
+        init: InstallationController(),
         builder: (controller) => TextFieldBoxDecorationComponent(
           controller: controller.fiberUsageController,
           errorText: '',
@@ -107,33 +191,60 @@ class BuildInstallationDropdownList extends StatelessWidget {
 
   final choosePhotoListsWidget = Column(
     children: [
-      GetBuilder<InstallationDropDownController>(
+      GetBuilder<InstallationController>(
         builder: (controller) => PhotoPickerComponent(
           imagePath: controller.imageONU,
           text: 'ONU Photo',
-          onPress: () => {
-            controller.onTapONU()
-          },
+          onPress: () => {controller.onTapONU()},
         ),
       ),
-      GetBuilder<InstallationDropDownController>(
+      GetBuilder<InstallationController>(
         builder: (controller) => PhotoPickerComponent(
           imagePath: controller.imageODB,
           text: 'ODB Photo',
-          onPress: () => {
-            controller.onTapODB()
-          },
+          onPress: () => {controller.onTapODB()},
         ),
       ),
-      GetBuilder<InstallationDropDownController>(
+      GetBuilder<InstallationController>(
         builder: (controller) => PhotoPickerComponent(
           imagePath: controller.imageAcceptForm,
           text: 'Acceptance Form',
-          onPress: () => {
-            controller.onTapAcceptForm()
-          },
+          onPress: () => {controller.onTapAcceptForm()},
         ),
       ),
+    ],
+  );
+
+  final customerLabel = Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      LabelTextComponent(text: 'User ID', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Customer Name', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Customer Phone', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: 'Address', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: 'Lat', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: 'Long', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: 'Type', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: 'Topic', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Assigned Date', color: Colors.black, padding: 8.0),
+    ],
+  );
+
+  final middleLabel = Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
     ],
   );
 

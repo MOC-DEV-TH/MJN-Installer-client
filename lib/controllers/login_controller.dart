@@ -49,6 +49,8 @@ class LoginController extends GetxController {
               Future.delayed(Duration.zero, () {
                 if (value.status == 'Success') {
                   writeData.write(SAVE_TIME, DateTime.now().minute);
+                  writeData.write(TOKEN, value.token);
+                  writeData.write(UID_PARAM, value.uid);
                   isLoading(false);
                   Get.off(HomePage());
                 } else {

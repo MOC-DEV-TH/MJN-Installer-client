@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
+import 'package:flutter_geolocator_example/utils/app_constants.dart';
 import 'package:flutter_geolocator_example/utils/app_utils.dart';
-import 'package:flutter_geolocator_example/widgets/build_customer_info_label.dart';
 import 'package:flutter_geolocator_example/widgets/build_installation_dropdown_list.dart';
 import 'package:flutter_geolocator_example/widgets/build_maintenance_dropdown_list.dart';
-
+import 'package:get/get.dart';
 
 class CustomerIssuePage extends StatelessWidget {
   @override
@@ -41,15 +41,12 @@ class CustomerIssuePage extends StatelessWidget {
           SizedBox(
             height: 20.0,
           ),
-          BuildCustomerInfoLabel(),
-
-          BuildMaintenanceDropdownList(),
-
-          BuildInstallationDropdownList(),
-
+          //BuildCustomerInfoLabel(),
+          Get.arguments[0].toString() == INSTALLATION
+              ? BuildInstallationDropdownList(Get.arguments[1].toString())
+              : BuildMaintenanceDropdownList(Get.arguments[1].toString()),
         ],
       ),
     );
   }
-
 }
