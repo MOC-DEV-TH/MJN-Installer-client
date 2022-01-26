@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_geolocator_example/components/flow_and_status_component.dart';
+import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
 import 'package:flutter_geolocator_example/controllers/ticket_status_controller.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
@@ -27,7 +28,7 @@ class TicketStatusPage extends StatelessWidget {
 
                 WidgetsBinding.instance!.addPostFrameCallback((_) {
                   ticketStatusController
-                      .updateArgumentData(Get.arguments.toString());
+                      .updateArgumentData(PageArgumentController.to.getArgumentData());
                 });
 
             },
@@ -35,6 +36,7 @@ class TicketStatusPage extends StatelessWidget {
                   argumentData: controller.argumentData,
                   onChangedData: (val) {
                     controller.updateArgumentData(val);
+                    PageArgumentController.to.updateArgumentData(val);
                     if (val == INSTALLATION) {
                       controller.fetchInstallationData();
                     } else {

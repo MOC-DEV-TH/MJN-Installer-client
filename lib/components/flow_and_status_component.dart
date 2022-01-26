@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
 import 'package:get/get.dart';
 
 class FlowAndStatusComponent extends StatelessWidget {
+
   FlowAndStatusComponent({
     Key? key,
     this.text,
@@ -29,7 +31,10 @@ class FlowAndStatusComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Get.toNamed(routeName,arguments: argumentData),
+      onTap: () => {
+        PageArgumentController.to.updateArgumentData(argumentData!),
+        Get.toNamed(routeName),
+      },
       child: Container(
         height: 170,
         width: 140,

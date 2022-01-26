@@ -46,40 +46,29 @@ class InstallationVo {
 
 class InstallationDetail {
   InstallationDetail({
-    this.subconAssignedDate,
-    this.latitude,
-    this.longitude,
-    this.address,
+
     this.profileId,
     this.firstname,
     this.phone1,
+    this.township
   });
 
-  String? subconAssignedDate;
-  String? latitude;
-  String? longitude;
-  String? address;
+  String? township;
   String? profileId;
   String? firstname;
   String? phone1;
 
   factory InstallationDetail.fromJson(Map<String, dynamic> json) => InstallationDetail(
-    subconAssignedDate: json["subcon_assigned_date"],
-    latitude: json["latitude"],
-    longitude: json["longitude"],
-    address: json["address"],
     profileId: json["profile_id"],
     firstname: json["firstname"],
     phone1: json["phone_1"],
+    township: json["township"],
   );
 
   Map<String, dynamic> toJson() => {
-    "subcon_assigned_date": subconAssignedDate,
-    "latitude": latitude,
-    "longitude": longitude,
-    "address": address,
     "profile_id": profileId,
     "firstname": firstname,
     "phone_1": phone1,
+    "township": township,
   };
 }

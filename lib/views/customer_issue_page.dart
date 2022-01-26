@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
 import 'package:flutter_geolocator_example/utils/app_utils.dart';
@@ -42,9 +43,9 @@ class CustomerIssuePage extends StatelessWidget {
             height: 20.0,
           ),
           //BuildCustomerInfoLabel(),
-          Get.arguments[0].toString() == INSTALLATION
-              ? BuildInstallationDropdownList(Get.arguments[1].toString())
-              : BuildMaintenanceDropdownList(Get.arguments[1].toString()),
+          PageArgumentController.to.getArgumentData() == INSTALLATION
+              ? BuildInstallationDropdownList(Get.arguments.toString())
+              : BuildMaintenanceDropdownList(Get.arguments.toString()),
         ],
       ),
     );

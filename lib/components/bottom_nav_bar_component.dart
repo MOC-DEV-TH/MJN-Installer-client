@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
 
 class BottomNavigationBarComponent extends StatelessWidget {
@@ -20,6 +21,7 @@ class BottomNavigationBarComponent extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
+                  PageArgumentController.to.updateArgumentData(INSTALLATION);
                   onChangedData(INSTALLATION);
                 },
                 child: Container(
@@ -71,6 +73,7 @@ class BottomNavigationBarComponent extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {
+                  PageArgumentController.to.updateArgumentData(SERVICE_TICKET);
                   onChangedData(SERVICE_TICKET);
                 },
                 child: Container(

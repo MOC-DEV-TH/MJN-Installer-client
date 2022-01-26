@@ -32,7 +32,7 @@ class CustomerDetailPage extends StatelessWidget {
           height: 20.0,
         ),
         BuildCustomerInfoLabel(
-            Get.arguments[0].toString(), Get.arguments[1].toString()),
+            Get.arguments.toString()),
 
       ],
     );

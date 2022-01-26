@@ -37,7 +37,7 @@ const UID = 'uid';
 const UID_PARAM = '&uid=';
 const STATUS_PARAM = '&status=';
 const PROFILE_ID_PARAM = '&profile_id=';
-
+const TICKET_ID_PARAM = '&ticket_id=';
 
 
 const API_URL = BASE_URL+'api/';
@@ -47,3 +47,4 @@ const ALL_DDL_DATA = API_URL+"get_all_ddl_data";
 const SERVICE_TICKET_LIST_URL = API_URL+"get_service_tickets_lists_by_uid?";
 const INSTALLATION_LIST_URL = API_URL+"get_installation_lists_by_uid?";
 const GET_INSTALLATION_DETAIL_URL = API_URL+"get_installation_details?";
+const GET_SERVICE_TICKET_DETAIL_URL = API_URL+"get_service_tickets_details?";

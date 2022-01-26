@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/components/button_component.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
 import 'package:flutter_geolocator_example/utils/app_utils.dart';
-import 'package:flutter_geolocator_example/widgets/build_customer_info_label.dart';
+import 'package:flutter_geolocator_example/widgets/build_customer_complete_label.dart';
 import 'package:get/get.dart';
 
 class CompleteCustomerPage extends StatelessWidget {
@@ -33,23 +31,10 @@ class CompleteCustomerPage extends StatelessWidget {
         SizedBox(
           height: 20.0,
         ),
-        BuildCustomerInfoLabel('',''),
+        BuildCustomerCompleteLabel(Get.arguments.toString()),
 
-        SizedBox(
-          height: 60.0,
-        ),
-
-        ButtonComponent(text: 'Customer Complete',
-          padding: 10,
-          containerWidth: 150,
-          color: Colors.grey,
-          onPress
-              :()=> onPressCustomerComplete(),),
       ],
     );
   }
 
-  void onPressCustomerComplete() {
-    Get.toNamed(COMPLETE_CUSTOMER_LIST);
-  }
 }

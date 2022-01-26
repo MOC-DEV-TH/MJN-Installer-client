@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_geolocator_example/components/flow_and_status_component.dart';
+import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
-
+import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
+  final PageArgumentController pageArgumentController = Get.put(PageArgumentController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-ServiceTicketDetailVO installationDetailVoFromJson(String str) => ServiceTicketDetailVO.fromJson(json.decode(str));
+ServiceTicketDetailVo serviceTicketDetailVoFromJson(String str) => ServiceTicketDetailVo.fromJson(json.decode(str));
 
-String installationDetailVoToJson(ServiceTicketDetailVO data) => json.encode(data.toJson());
+String serviceTicketDetailVoToJson(ServiceTicketDetailVo data) => json.encode(data.toJson());
 
-class ServiceTicketDetailVO {
-  ServiceTicketDetailVO({
+class ServiceTicketDetailVo {
+  ServiceTicketDetailVo({
     this.status,
     this.responseCode,
     this.description,
@@ -23,7 +23,7 @@ class ServiceTicketDetailVO {
   String? updatedStatus;
   ServiceTicketDetails? details;
 
-  factory ServiceTicketDetailVO.fromJson(Map<String, dynamic> json) => ServiceTicketDetailVO(
+  factory ServiceTicketDetailVo.fromJson(Map<String, dynamic> json) => ServiceTicketDetailVo(
     status: json["status"],
     responseCode: json["response_code"],
     description: json["description"],
@@ -46,44 +46,52 @@ class ServiceTicketDetailVO {
 
 class ServiceTicketDetails {
   ServiceTicketDetails({
-    this.firstname,
-    this.phone1,
     this.subconAssignedDate,
     this.latitude,
     this.longitude,
     this.address,
+    this.userName,
+    this.firstname,
+    this.phone1,
+    this.topic,
     this.type,
-    this.uid,
+    this.installerId,
   });
 
-  String? firstname;
-  String? phone1;
   String? subconAssignedDate;
   String? latitude;
   String? longitude;
   String? address;
+  String? userName;
+  String? firstname;
+  String? phone1;
+  String? topic;
   String? type;
-  String? uid;
+  String? installerId;
 
   factory ServiceTicketDetails.fromJson(Map<String, dynamic> json) => ServiceTicketDetails(
-    firstname: json["firstname"],
-    phone1: json["phone_1"],
     subconAssignedDate: json["subcon_assigned_date"],
     latitude: json["latitude"],
     longitude: json["longitude"],
     address: json["address"],
+    userName: json["user_name"],
+    firstname: json["firstname"],
+    phone1: json["phone_1"],
+    topic: json["topic"],
     type: json["type"],
-    uid: json["uid"],
+    installerId: json["installer_id"],
   );
 
   Map<String, dynamic> toJson() => {
-    "firstname": firstname,
-    "phone_1": phone1,
     "subcon_assigned_date": subconAssignedDate,
     "latitude": latitude,
     "longitude": longitude,
     "address": address,
+    "user_name": userName,
+    "firstname": firstname,
+    "phone_1": phone1,
+    "topic": topic,
     "type": type,
-    "uid": uid,
+    "installer_id": installerId,
   };
 }

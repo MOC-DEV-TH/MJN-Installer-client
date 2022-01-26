@@ -46,31 +46,27 @@ class ServiceTicketVo {
 
 class ServiceTicketDetail {
   ServiceTicketDetail({
-    this.userName,
+    this.firstname,
     this.township,
-    this.subconAssignedDate,
     this.ticketId,
     this.phone1,
   });
 
-  String? userName;
+  String? firstname;
   String? township;
-  String? subconAssignedDate;
   String? ticketId;
   String? phone1;
 
   factory ServiceTicketDetail.fromJson(Map<String, dynamic> json) => ServiceTicketDetail(
-    userName: json["user_name"],
+    firstname: json["firstname"],
     township: json["township"],
-    subconAssignedDate: json["subcon_assigned_date"],
     ticketId: json["ticket_id"],
     phone1: json["phone_1"],
   );
 
   Map<String, dynamic> toJson() => {
-    "user_name": userName,
+    "user_name": firstname,
     "township": township,
-    "subcon_assigned_date": subconAssignedDate,
     "ticket_id": ticketId,
     "phone_1": phone1,
   };

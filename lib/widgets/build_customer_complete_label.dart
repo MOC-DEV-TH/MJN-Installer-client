@@ -1,0 +1,153 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_geolocator_example/components/button_component.dart';
+import 'package:flutter_geolocator_example/components/label_text_component.dart';
+import 'package:flutter_geolocator_example/controllers/customer_detail_controller.dart';
+import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
+import 'package:flutter_geolocator_example/res/colors.dart';
+import 'package:flutter_geolocator_example/utils/app_constants.dart';
+import 'package:get/get.dart';
+
+class BuildCustomerCompleteLabel extends StatefulWidget {
+  final String ticketID;
+
+  BuildCustomerCompleteLabel(this.ticketID);
+
+  @override
+  State<BuildCustomerCompleteLabel> createState() =>
+      _BuildCustomerCompleteLabelState();
+}
+
+class _BuildCustomerCompleteLabelState
+    extends State<BuildCustomerCompleteLabel> {
+  CustomerDetailController customerDetailController =
+      Get.put(CustomerDetailController());
+
+  @override
+  void initState() {
+    Future.delayed(Duration.zero,(){
+      customerDetailController.fetchServiceTicketDetail(widget.ticketID);
+    });
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Obx(() {
+      if (customerDetailController.isLoading.value) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      } else
+        return Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                customerLabel,
+                middleLabel,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    LabelTextComponent(
+                        text: customerDetailController
+                                .serviceTicketDetail.value.firstname ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: customerDetailController
+                                .serviceTicketDetail.value.phone1 ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: customerDetailController
+                                .serviceTicketDetail.value.address ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: customerDetailController
+                                .serviceTicketDetail.value.latitude ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: customerDetailController
+                                .serviceTicketDetail.value.longitude ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: customerDetailController
+                                .serviceTicketDetail.value.type ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: 'xx xxx xxx xxx xxx',
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: customerDetailController
+                                .serviceTicketDetail.value.subconAssignedDate ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                  ],
+                )
+              ],
+            ),
+            SizedBox(
+              height: 40,
+            ),
+            ButtonComponent(
+              text: 'Customer Complete',
+              padding: 10,
+              containerWidth: 150,
+              color: Colors.grey,
+              onPress: () => onPressCustomerComplete(),
+            ),
+          ],
+        );
+    });
+  }
+
+  void onPressCustomerComplete() {
+    Get.toNamed(COMPLETE_CUSTOMER_LIST);
+  }
+
+  final customerLabel = Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      LabelTextComponent(text: 'User ID', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Customer Name', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Customer Phone', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: 'Address', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: 'Lat', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: 'Long', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: 'Type', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: 'Topic', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Assigned Date', color: Colors.black, padding: 8.0),
+    ],
+  );
+
+  final middleLabel = Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+    ],
+  );
+}

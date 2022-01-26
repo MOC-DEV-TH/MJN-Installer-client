@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
 import 'package:flutter_geolocator_example/utils/app_utils.dart';
-import 'package:flutter_geolocator_example/widgets/build_search_text_field.dart';
+import 'package:flutter_geolocator_example/widgets/build_complete_search_text_field.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:get/get.dart';
+
 
 class CompleteCustomerListPage extends StatelessWidget {
   @override
@@ -16,7 +16,7 @@ class CompleteCustomerListPage extends StatelessWidget {
           body: Container(
             height: MediaQuery.of(context).size.height,
             padding: EdgeInsets.only(left: 15, right: 15, bottom: 10),
-            child: BuildSearchTextField('Complete',Get.arguments.toString()),
+            child: BuildCompleteSearchTextField()
           ),
           ),
     );

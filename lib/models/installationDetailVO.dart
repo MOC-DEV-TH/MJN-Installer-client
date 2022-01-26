@@ -54,9 +54,12 @@ class InstallationDetails {
     this.address,
     this.type,
     this.uid,
+    this.installer_id,
+    this.user_name
   });
 
   String? firstname;
+  String? user_name;
   String? phone1;
   String? subconAssignedDate;
   String? latitude;
@@ -64,6 +67,7 @@ class InstallationDetails {
   String? address;
   String? type;
   String? uid;
+  String? installer_id;
 
   factory InstallationDetails.fromJson(Map<String, dynamic> json) => InstallationDetails(
     firstname: json["firstname"],
@@ -74,6 +78,8 @@ class InstallationDetails {
     address: json["address"],
     type: json["type"],
     uid: json["uid"],
+    installer_id: json["installer_id"],
+    user_name: json["user_name"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -85,5 +91,8 @@ class InstallationDetails {
     "address": address,
     "type": type,
     "uid": uid,
+    "installer_id": installer_id,
+    "user_name": user_name,
+
   };
 }

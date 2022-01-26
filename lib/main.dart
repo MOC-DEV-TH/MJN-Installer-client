@@ -43,21 +43,5 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// class splashScreen extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return SplashScreen(
-//       backgroundColor: Color(0xff242527),
-//       seconds: 4,
-//       navigateAfterSeconds: new LoginPage(),
-//
-//       image: Image.asset('assets/splash_screen_logo.png'),
-//       loadingText: Text("Loading",style: TextStyle(color: Colors.blue),),
-//       photoSize: 100.0,
-//       loaderColor: Colors.blue,
-//     );
-//   }
-// }
-
 
 

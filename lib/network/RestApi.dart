@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_geolocator_example/models/installationVO.dart';
 import 'package:flutter_geolocator_example/models/installationDetailVO.dart';
+import 'package:flutter_geolocator_example/models/serviceTicketDetailVO.dart';
 import 'package:flutter_geolocator_example/models/serviceTicketVO.dart';
 import 'package:flutter_geolocator_example/models/supportLoginVO.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
@@ -138,6 +139,32 @@ class RestApi {
       // then throw an exception.
       print(response.statusCode);
       throw Exception('Failed to get installation detail');
+    }
+  }
+
+  static Future<ServiceTicketDetailVo> getServiceTicketDetail(
+      String token, String uid, String ticketID) async {
+    var response = await client.get(
+
+      Uri.parse(GET_SERVICE_TICKET_DETAIL_URL +
+          UID_PARAM + uid +
+          TICKET_ID_PARAM + ticketID +
+          APP_VERSION + app_version),
+      headers: {
+        'content-type': 'application/json',
+        'token': token
+      },
+    );
+    if (response.statusCode == 200) {
+      debugPrint(response.body);
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      return serviceTicketDetailVoFromJson(response.body);
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      print(response.statusCode);
+      throw Exception('Failed to get service ticket detail');
     }
   }
 

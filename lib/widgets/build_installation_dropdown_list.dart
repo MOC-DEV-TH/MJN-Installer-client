@@ -6,6 +6,7 @@ import 'package:flutter_geolocator_example/components/label_text_component.dart'
 import 'package:flutter_geolocator_example/components/photo_picker_component.dart';
 import 'package:flutter_geolocator_example/components/text_field_box_decoration_component.dart';
 import 'package:flutter_geolocator_example/controllers/installation_controller.dart';
+import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
 import 'package:get/get.dart';

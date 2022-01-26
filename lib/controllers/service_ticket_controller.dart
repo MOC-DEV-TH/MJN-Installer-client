@@ -11,18 +11,18 @@ class ServiceTicketController extends GetxController{
   var isLoading = false.obs;
 
   void fetchServiceTicketDetail(String ticketID){
-// isLoading(true);
-    // RestApi.getInstallationDetail(readData.read(TOKEN),
-    //     readData.read(UID_PARAM),profileID).then((value) => {
-    //       if(value.status == 'Success'){
-    //         serviceTicketDetail.value = value.details!,
-    //         isLoading(false)
-    //       }
-    //       else {
-    //         isLoading(false)
-    //       }
-    //
-    // });
+    isLoading(true);
+    RestApi.getServiceTicketDetail(readData.read(TOKEN),
+        readData.read(UID_PARAM),ticketID).then((value) => {
+      if(value.status == 'Success'){
+        serviceTicketDetail.value = value.details!,
+        isLoading(false)
+      }
+      else {
+        isLoading(false)
+      }
+
+    });
   }
 
 }

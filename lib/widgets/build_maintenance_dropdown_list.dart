@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_geolocator_example/components/button_component.dart';
 import 'package:flutter_geolocator_example/components/drop_down_button_component.dart';
 import 'package:flutter_geolocator_example/components/label_text_component.dart';
+import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
 import 'package:flutter_geolocator_example/controllers/service_ticket_controller.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
@@ -43,15 +44,10 @@ class _BuildMaintenanceDropdownListState extends State<BuildMaintenanceDropdownL
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 LabelTextComponent(
-                    text:
-                    serviceTicketController.serviceTicketDetail.value.uid ??
-                        "xx xxx xxx xxx xxx",
-                    color: Colors.black,
-                    padding: 8.0),
-                LabelTextComponent(
                     text: serviceTicketController
-                        .serviceTicketDetail.value.firstname ??
-                        "xx xxx xxx xxx xxx",
+                        .serviceTicketDetail.value.firstname == '' ?
+                        "xx xxx xxx xxx xxx" : serviceTicketController
+                        .serviceTicketDetail.value.firstname!,
                     color: Colors.black,
                     padding: 8.0),
                 LabelTextComponent(
@@ -101,7 +97,7 @@ class _BuildMaintenanceDropdownListState extends State<BuildMaintenanceDropdownL
 
       Container(
         height: 200,
-        margin: EdgeInsets.only(left: 24.0, right: 24.0),
+        margin: EdgeInsets.only(left: 15.0, right: 24.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -209,7 +205,6 @@ class _BuildMaintenanceDropdownListState extends State<BuildMaintenanceDropdownL
   final customerLabel = Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      LabelTextComponent(text: 'User ID', color: Colors.black, padding: 8.0),
       LabelTextComponent(
           text: 'Customer Name', color: Colors.black, padding: 8.0),
       LabelTextComponent(
@@ -235,11 +230,10 @@ class _BuildMaintenanceDropdownListState extends State<BuildMaintenanceDropdownL
       LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
       LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
       LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
     ],
   );
 
   void onPressComplete() {
-    Get.toNamed(COMPLETE_CUSTOMER);
+    Get.toNamed(COMPLETE_CUSTOMER,arguments: widget.profileIdOrTicketID);
   }
 }

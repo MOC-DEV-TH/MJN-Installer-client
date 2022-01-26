@@ -13,14 +13,32 @@ class CustomerController extends GetxController {
   var customerDateController = TextEditingController();
   final installationPendingCustomerList = <InstallationDetail>[].obs;
   final serviceTicketPendingCustomerList = <ServiceTicketDetail>[].obs;
+
+  final installationCompleteCustomerList = <InstallationDetail>[].obs;
+  final serviceTicketCompleteCustomerList = <ServiceTicketDetail>[].obs;
+
   final readData = GetStorage();
   var isLoading = false.obs;
   String argumentData = '';
-
+  static CustomerController get to => Get.find();
 
   void complete() {}
 
   void pending() {}
+
+  @override
+  void onClose() {
+    installationPendingCustomerList.clear();
+    serviceTicketPendingCustomerList.clear();
+    super.onClose();
+  }
+
+  @override
+  void dispose() {
+    installationPendingCustomerList.clear();
+    serviceTicketPendingCustomerList.clear();
+    super.dispose();
+  }
 
 
 
@@ -48,10 +66,10 @@ class CustomerController extends GetxController {
     }
   }
 
-  void fetchServiceTicketPendingCustomer() {
+  void fetchServiceTicketPendingCustomer(String status) {
     isLoading(true);
     RestApi.fetchServiceTicketPendingLists(readData.read(TOKEN),
-        readData.read(UID_PARAM), 'complete').then((value) =>
+        readData.read(UID_PARAM), status).then((value) =>
         {
           if(value.status == 'Success'){
             debugPrint("ServiceTicketLists ${value.details}"),
@@ -65,10 +83,42 @@ class CustomerController extends GetxController {
     );
   }
 
-  void fetchInstallationPendingCustomer() {
+  void fetchServiceTicketCompleteCustomer(String status) {
+    isLoading(true);
+    RestApi.fetchServiceTicketPendingLists(readData.read(TOKEN),
+        readData.read(UID_PARAM), status).then((value) =>
+    {
+      if(value.status == 'Success'){
+        debugPrint("ServiceTicketLists ${value.details}"),
+        serviceTicketCompleteCustomerList.value = value.details!,
+        isLoading(false)
+      }
+      else {
+        isLoading(false)
+      }
+    }
+    );
+  }
+
+  void fetchInstallationCompleteCustomer(String status) {
     isLoading(true);
     RestApi.fetchInstallationPendingLists(readData.read(TOKEN),
-        readData.read(UID_PARAM), 'complete').then((value) => {
+        readData.read(UID_PARAM), status).then((value) => {
+      if(value.status == 'Success'){
+        debugPrint("InstallationLists ${value.details}"),
+        installationCompleteCustomerList.value = value.details!,
+        isLoading(false)
+      }
+      else {
+        isLoading(false)
+      }
+    });
+  }
+
+  void fetchInstallationPendingCustomer(String status) {
+    isLoading(true);
+    RestApi.fetchInstallationPendingLists(readData.read(TOKEN),
+        readData.read(UID_PARAM), status).then((value) => {
       if(value.status == 'Success'){
         debugPrint("InstallationLists ${value.details}"),
         installationPendingCustomerList.value = value.details!,
@@ -79,6 +129,7 @@ class CustomerController extends GetxController {
       }
     });
   }
+
 
   Widget showLoading(){
     return Center(child: CircularProgressIndicator(),);

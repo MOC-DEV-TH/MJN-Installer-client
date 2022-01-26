@@ -7,10 +7,11 @@ class CustomerStatusListItems extends StatelessWidget {
   final String? customerAddress;
   final String? customerPhNo;
   final String? profileIdOrTicketID;
-  final String? pageNameArgument;
+  final String? pageStatus;
 
   CustomerStatusListItems(this.customerName, this.customerAddress,
-      this.customerPhNo, this.profileIdOrTicketID, this.pageNameArgument);
+      this.customerPhNo, this.profileIdOrTicketID,
+      {@required this.pageStatus});
 
   @override
   Widget build(BuildContext context) {
@@ -67,11 +68,10 @@ class CustomerStatusListItems extends StatelessWidget {
                 ),
               ],
             ),
-            customerInfoData,
             verticalDivider,
             InkWell(
-                onTap: () => Get.toNamed(CUSTOMER_DETAIL,
-                    arguments: [pageNameArgument, profileIdOrTicketID]),
+                onTap: () => pageStatus == 'complete' ? null : Get.toNamed(CUSTOMER_DETAIL,
+                    arguments: profileIdOrTicketID),
                 child: labelView)
           ],
         ),
@@ -159,45 +159,6 @@ class CustomerStatusListItems extends StatelessWidget {
     ],
   );
 
-  final customerInfoData = Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Text(
-          'Tester',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Text(
-          '09-99999999',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Text(
-          'Hlaing',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-    ],
-  );
 
   final verticalDivider = Container(
     height: 40,
