@@ -73,13 +73,13 @@ class TicketStatusPage extends StatelessWidget {
                       argumentData: ticketStatusController.getArgumentData(),
                       status: 'Pending',
                       routeName: CUSTOMER_STATUS,
-                      icon: Icons.stop_circle_sharp)),
+                      assertImage: 'assets/pending_img.png')),
               GetBuilder<TicketStatusController>(
                   builder: (controller) => FlowAndStatusComponent(
                       argumentData: controller.getArgumentData(),
                       status: 'New Order',
                       routeName: CUSTOMER_STATUS,
-                      icon: Icons.stop_circle_sharp)),
+                      assertImage: 'assets/installation_img.png')),
             ],
           ),
           SizedBox(
@@ -90,7 +90,7 @@ class TicketStatusPage extends StatelessWidget {
                 argumentData: controller.getArgumentData(),
                 status: 'Complete',
                 routeName: CUSTOMER_STATUS,
-                icon: Icons.check_circle_outline_sharp),
+                assertImage: 'assets/complete_img.png'),
           )
         ],
       ),

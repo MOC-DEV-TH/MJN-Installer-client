@@ -49,7 +49,7 @@ class HomePage extends StatelessWidget {
                   status: 'Installation',
                   routeName: TICKET_STATUS,
                   argumentData: INSTALLATION,
-                  icon: Icons.inbox),
+                  assertImage: 'assets/installation_img.png',),
               SizedBox(
                 width: 15,
               ),
@@ -57,7 +57,7 @@ class HomePage extends StatelessWidget {
                   status: 'Service Ticket',
                   routeName: TICKET_STATUS,
                   argumentData: SERVICE_TICKET,
-                  icon: Icons.inbox),
+                assertImage: 'assets/service_ticket_img.png',),
             ],
           ),
           SizedBox(

@@ -32,6 +32,8 @@ const PAGE_ARGUMENT = '';
 const TOKEN = 'token';
 const SAVE_TIME = 'save_time';
 const UID = 'uid';
+const ALL_DROP_DOWN_LISTS = 'all_drop_down_lists';
+
 
 // param api
 const UID_PARAM = '&uid=';
@@ -48,3 +50,5 @@ const SERVICE_TICKET_LIST_URL = API_URL+"get_service_tickets_lists_by_uid?";
 const INSTALLATION_LIST_URL = API_URL+"get_installation_lists_by_uid?";
 const GET_INSTALLATION_DETAIL_URL = API_URL+"get_installation_details?";
 const GET_SERVICE_TICKET_DETAIL_URL = API_URL+"get_service_tickets_details?";
+const POST_INSTALLATION_DATA_URL = API_URL+"post_installation_data";
+const POST_SERVICE_TICKET_DATA_URL = API_URL+"post_service_tickets_data";

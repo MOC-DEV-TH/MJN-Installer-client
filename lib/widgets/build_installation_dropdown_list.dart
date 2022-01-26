@@ -6,7 +6,8 @@ import 'package:flutter_geolocator_example/components/label_text_component.dart'
 import 'package:flutter_geolocator_example/components/photo_picker_component.dart';
 import 'package:flutter_geolocator_example/components/text_field_box_decoration_component.dart';
 import 'package:flutter_geolocator_example/controllers/installation_controller.dart';
-import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
+import 'package:flutter_geolocator_example/controllers/login_controller.dart';
+import 'package:flutter_geolocator_example/models/allDropDownListVO.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
 import 'package:get/get.dart';
@@ -24,7 +25,7 @@ class BuildInstallationDropdownList extends StatefulWidget {
 class _BuildInstallationDropdownListState
     extends State<BuildInstallationDropdownList> {
   final InstallationController installationController = Get.put(InstallationController());
-
+  List<InstallationStatus>? installationStatusLists;
   @override
   void initState() {
     installationController.fetchInstallationDetail(widget.profileIdOrTicketID);
@@ -33,6 +34,7 @@ class _BuildInstallationDropdownListState
   
   @override
   Widget build(BuildContext context) {
+    installationStatusLists =  LoginController.to.maintenanceDropDownListsData.details!.installationStatus!;
     return
     Obx((){
       if(installationController.isLoading.value){
@@ -107,7 +109,42 @@ class _BuildInstallationDropdownListState
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(child: issueDropDownLabel),
-                  Expanded(child: issueDropDownListsWidget),
+                  Expanded(child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      GetBuilder<InstallationController>(
+                        init: InstallationController(),
+                        builder: (controller) => TextFieldBoxDecorationComponent(
+                          controller: controller.macIdController,
+                          errorText: '',
+                          hintText: '',
+                        ),
+                      ),
+                      GetBuilder<InstallationController>(
+                        init: InstallationController(),
+                        builder: (controller) => TextFieldBoxDecorationComponent(
+                          controller: controller.deviceIdController,
+                          errorText: '',
+                          hintText: '',
+                        ),
+                      ),
+                      GetBuilder<InstallationController>(
+                        init: InstallationController(),
+                        builder: (controller) => TextFieldBoxDecorationComponent(
+                          controller: controller.fiberUsageController,
+                          errorText: '',
+                          hintText: '',
+                        ),
+                      ),
+                      DropDownButtonComponent(
+                        itemsList: installationStatusLists,
+                        onChangedData: (String value) {
+                          debugPrint('DropdownValue${value}');
+                        },
+                        hintText: '--Select Status--',
+                      ),
+                    ],
+                  )),
                 ],
               ),
             ),
@@ -145,48 +182,6 @@ class _BuildInstallationDropdownListState
       LabelTextComponent(
           text: 'Fiber Usage', color: Colors.black, padding: 8.0),
       LabelTextComponent(text: 'Status', color: Colors.black, padding: 8.0),
-    ],
-  );
-
-  final issueDropDownListsWidget = Column(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-      GetBuilder<InstallationController>(
-        init: InstallationController(),
-        builder: (controller) => TextFieldBoxDecorationComponent(
-          controller: controller.macIdController,
-          errorText: '',
-          hintText: '',
-        ),
-      ),
-      GetBuilder<InstallationController>(
-        init: InstallationController(),
-        builder: (controller) => TextFieldBoxDecorationComponent(
-          controller: controller.deviceIdController,
-          errorText: '',
-          hintText: '',
-        ),
-      ),
-      GetBuilder<InstallationController>(
-        init: InstallationController(),
-        builder: (controller) => TextFieldBoxDecorationComponent(
-          controller: controller.fiberUsageController,
-          errorText: '',
-          hintText: '',
-        ),
-      ),
-      DropDownButtonComponent(
-        itemsList: [
-          'Status13',
-          'Status14',
-          'Status15',
-          'Status16',
-        ],
-        onChangedData: (String value) {
-          debugPrint('DropdownValue${value}');
-        },
-        hintText: '--Select Status--',
-      ),
     ],
   );
 

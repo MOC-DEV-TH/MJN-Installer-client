@@ -1,22 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_geolocator_example/models/allDropDownListVO.dart';
 import 'package:flutter_geolocator_example/network/RestApi.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
 import 'package:flutter_geolocator_example/utils/app_utils.dart';
 import 'package:flutter_geolocator_example/views/home_page.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'dart:convert';
 
 class LoginController extends GetxController {
   var userIdController = TextEditingController();
   var passwordController = TextEditingController();
   var isVisible = true;
+  dynamic maintenanceDropDownListsData;
   final writeData = GetStorage();
   var isLoading = false.obs;
+
+  static LoginController get to => Get.find();
 
 
   @override
   void onInit() {
     super.onInit();
+    fetchAllDropDownListsAndSaveToSharePref();
   }
 
   @override
@@ -33,6 +39,7 @@ class LoginController extends GetxController {
   void onReady() {
     super.onReady();
   }
+
 
   void login() {
     {
@@ -64,6 +71,16 @@ class LoginController extends GetxController {
         isLoading(false);
       }
     }
+  }
+
+  void fetchAllDropDownListsAndSaveToSharePref(){
+    RestApi.fetchAllDropDownLists().then((value){
+      if(value.status == 'Success'){
+        debugPrint("DDLLists${allDropDownListVoFromJson(json.decode(writeData.read(ALL_DROP_DOWN_LISTS))).details}");
+        maintenanceDropDownListsData = allDropDownListVoFromJson(json.decode(writeData.read(ALL_DROP_DOWN_LISTS)));
+        update();
+      }
+    });
   }
 
   void isVisibleStatus() {

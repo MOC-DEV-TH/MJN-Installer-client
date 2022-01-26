@@ -96,6 +96,10 @@ flutter:
     - packages/baseflow_plugin_template/logo.png
     - packages/baseflow_plugin_template/poweredByBaseflow.png
     - assets/splash_screen_logo.png
+    - assets/complete_img.png
+    - assets/pending_img.png
+    - assets/service_ticket_img.png
+    - assets/installation_img.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

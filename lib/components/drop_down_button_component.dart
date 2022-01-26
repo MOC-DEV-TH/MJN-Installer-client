@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class DropDownButtonComponent<T> extends StatelessWidget {
-  final List<T> itemsList;
+  final List<dynamic>? itemsList;
+  final List<dynamic>? installItemsList;
   final IconData? icon;
-  final dynamic value;
+  final String? value;
   final String? hintText;
   final void Function(T) onChangedData;
 
   const DropDownButtonComponent(
       {Key? key,
       this.itemsList = const [],
+      this.installItemsList = const [],
       this.icon,
       this.value,
       required this.hintText,
@@ -25,7 +27,7 @@ class DropDownButtonComponent<T> extends StatelessWidget {
         maxHeight: 35,
         maxWidth: MediaQuery.of(context).size.width,
       ),
-      child: DropdownButtonFormField2<T>(
+      child: DropdownButtonFormField2<dynamic>(
         isExpanded: true,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.only(bottom: 1),
@@ -42,25 +44,20 @@ class DropDownButtonComponent<T> extends StatelessWidget {
         dropdownDecoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
         ),
-        items: itemsList
-            .map((label) => DropdownMenuItem(
+        items:  itemsList
+            !.map((label) => DropdownMenuItem(
                   child: Center(
-                      child: Text(
-                    label.toString(),
-                    textAlign: TextAlign.end,
-                    style: TextStyle(color: Colors.black54, fontSize: 12),
+                    child: Text(
+                      label.name.toString(),
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.black54, fontSize: 10),
+                    ),
                   ),
-                  ),
-                  value: label,
+                  value: label.name,
                 ))
             .toList(),
-        // validator: (value) {
-        //   if (value == null) {
-        //     return 'Please select issue.';
-        //   }
-        // },
         onChanged: (value) {
-          onChangedData(value!);
+          onChangedData(value);
         },
         hint: Padding(
           padding: const EdgeInsets.only(left: 20),

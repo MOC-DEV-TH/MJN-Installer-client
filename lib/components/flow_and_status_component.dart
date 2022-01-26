@@ -11,11 +11,12 @@ class FlowAndStatusComponent extends StatelessWidget {
     this.padding,
     required this.status,
     required this.routeName,
-    required this.icon,
+    this.icon,
     this.containerWidth,
     this.onPress,
     this.count,
     this.argumentData,
+    this.assertImage
   }) : super(key: key);
   final String? text;
   final Function()? onPress;
@@ -24,9 +25,10 @@ class FlowAndStatusComponent extends StatelessWidget {
   final double? containerWidth;
   final String status;
   final String routeName;
-  final IconData icon;
+  final IconData? icon;
   final String? count;
   final String? argumentData;
+  final String? assertImage;
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +52,9 @@ class FlowAndStatusComponent extends StatelessWidget {
           children: [
             Stack(
               children: [
-                Icon(
-                  icon,
-                  size: 80,
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Image.asset(assertImage!,height: 80,),
                 ),
                 Positioned(
                   top: 1,
@@ -64,7 +66,7 @@ class FlowAndStatusComponent extends StatelessWidget {
                     child: const Text(
                       "2",
                       style: TextStyle(
-                          fontSize: 8,
+                          fontSize: 14,
                           color: Colors.yellow,
                           decoration: TextDecoration.none),
                     ),
