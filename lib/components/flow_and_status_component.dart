@@ -35,6 +35,7 @@ class FlowAndStatusComponent extends StatelessWidget {
     return InkWell(
       onTap: () => {
         PageArgumentController.to.updateArgumentData(argumentData!),
+
         Get.toNamed(routeName),
       },
       child: Container(
@@ -63,8 +64,8 @@ class FlowAndStatusComponent extends StatelessWidget {
                     padding: const EdgeInsets.all(6.0),
                     decoration: const BoxDecoration(
                         color: Colors.red, shape: BoxShape.circle),
-                    child: const Text(
-                      "2",
+                    child:  Text(
+                      count != null ? count! : '0',
                       style: TextStyle(
                           fontSize: 14,
                           color: Colors.yellow,

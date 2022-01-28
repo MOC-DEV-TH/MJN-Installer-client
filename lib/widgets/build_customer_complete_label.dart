@@ -25,7 +25,7 @@ class _BuildCustomerCompleteLabelState
   @override
   void initState() {
     Future.delayed(Duration.zero,(){
-      customerDetailController.fetchServiceTicketDetail(widget.ticketID);
+      customerDetailController.fetchServiceTicketDetail(widget.ticketID,context);
     });
 
     super.initState();
@@ -49,6 +49,12 @@ class _BuildCustomerCompleteLabelState
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+
+                    LabelTextComponent(
+                        text: "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+
                     LabelTextComponent(
                         text: customerDetailController
                                 .serviceTicketDetail.value.firstname ??

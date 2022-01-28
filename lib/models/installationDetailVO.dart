@@ -30,7 +30,7 @@ class InstallationDetailVo {
     isRequieredUpdate: json["is_requiered_update"],
     isforceUpdate: json["isforce_update"],
     updatedStatus: json["updated_status"],
-    details: InstallationDetails.fromJson(json["details"]),
+    details:json['details']!=null ? InstallationDetails?.fromJson(json["details"]) : null,
   );
 
   Map<String, dynamic> toJson() => {

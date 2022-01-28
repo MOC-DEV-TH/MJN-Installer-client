@@ -13,7 +13,7 @@ class ServiceTicketController extends GetxController{
   void fetchServiceTicketDetail(String ticketID){
     isLoading(true);
     RestApi.getServiceTicketDetail(readData.read(TOKEN),
-        readData.read(UID_PARAM),ticketID).then((value)  {
+        readData.read(UID),ticketID).then((value)  {
       if(value.status == 'Success'){
         serviceTicketDetail.value = value.details!;
         isLoading(false);

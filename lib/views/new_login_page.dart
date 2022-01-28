@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 class NewLoginPage extends StatelessWidget {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final LoginController controller = Get.put(LoginController());
-
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;

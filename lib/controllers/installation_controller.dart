@@ -26,7 +26,7 @@ class InstallationController extends GetxController {
   void fetchInstallationDetail(String profileID){
     isLoading(true);
     RestApi.getInstallationDetail(readData.read(TOKEN),
-        readData.read(UID_PARAM),profileID).then((value) => {
+        readData.read(UID),profileID).then((value) => {
       if(value.status == 'Success'){
         installationDetail.value = value.details!,
         isLoading(false)

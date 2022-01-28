@@ -19,8 +19,9 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 final MaterialColor themeMaterialColor =
 BaseflowPluginExample.createMaterialColor(
     const Color.fromRGBO(48, 49, 60, 1));
-
+final readData = GetStorage();
 Future  main() async{
+  await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
 
   if (defaultTargetPlatform == TargetPlatform.android) {
@@ -37,10 +38,11 @@ Future  main() async{
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
        getPages: Routers.route,
-      home: NewLoginPage());
+      home: readData.read(TOKEN) == null ? NewLoginPage() : HomePage());
   }
 }
 

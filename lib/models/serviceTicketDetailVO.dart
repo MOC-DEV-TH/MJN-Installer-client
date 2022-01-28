@@ -30,7 +30,7 @@ class ServiceTicketDetailVo {
     isRequieredUpdate: json["is_requiered_update"],
     isforceUpdate: json["isforce_update"],
     updatedStatus: json["updated_status"],
-    details: ServiceTicketDetails.fromJson(json["details"]),
+    details:json['details']!=null ? ServiceTicketDetails?.fromJson(json["details"]) : null,
   );
 
   Map<String, dynamic> toJson() => {

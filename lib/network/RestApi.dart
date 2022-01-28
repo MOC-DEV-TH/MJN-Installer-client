@@ -7,6 +7,7 @@ import 'package:flutter_geolocator_example/models/installationVO.dart';
 import 'package:flutter_geolocator_example/models/installationDetailVO.dart';
 import 'package:flutter_geolocator_example/models/serviceTicketDetailVO.dart';
 import 'package:flutter_geolocator_example/models/serviceTicketVO.dart';
+import 'package:flutter_geolocator_example/models/serviceTicket_and_installation_countsVO.dart';
 import 'package:flutter_geolocator_example/models/supportLoginVO.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
 import 'package:get_storage/get_storage.dart';
@@ -205,6 +206,26 @@ class RestApi {
     } else {
       print(response.statusCode);
       throw Exception('Failed to post service ticket data');
+    }
+  }
+
+  static Future<ServiceTicketAdnInstallationCountsVO> fetchAllCountsForInstallationAndService(
+      String uid, String token) async {
+    var response = await client.get(
+      Uri.parse(GET_ALL_COUNT_URL +
+          UID_PARAM +
+          uid +
+          APP_VERSION +
+          app_version),
+      headers: {'content-type': 'application/json', 'token': token},
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint(response.body);
+      return serviceTicketAdnInstallationCountsFromJson(response.body);
+    } else {
+      print(response.statusCode);
+      throw Exception('Failed to get all counts');
     }
   }
 }

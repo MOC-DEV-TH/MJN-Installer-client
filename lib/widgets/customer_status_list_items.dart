@@ -70,8 +70,10 @@ class CustomerStatusListItems extends StatelessWidget {
             ),
             verticalDivider,
             InkWell(
-                onTap: () => pageStatus == 'complete' ? null : Get.toNamed(CUSTOMER_DETAIL,
-                    arguments: profileIdOrTicketID),
+                onTap: () => pageStatus == 'complete'
+                    ? Get.toNamed(COMPLETE_CUSTOMER_DETAIL_PAGE,arguments: profileIdOrTicketID)
+                    : Get.toNamed(CUSTOMER_DETAIL,
+                        arguments: profileIdOrTicketID),
                 child: labelView)
           ],
         ),
@@ -158,7 +160,6 @@ class CustomerStatusListItems extends StatelessWidget {
       ),
     ],
   );
-
 
   final verticalDivider = Container(
     height: 40,

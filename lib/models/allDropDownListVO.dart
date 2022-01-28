@@ -21,7 +21,7 @@ class AllDropDownListVo {
     status: json["status"],
     responseCode: json["response_code"],
     description: json["description"],
-    details: Details.fromJson(json["details"]),
+    details:json['details']!=null ? Details?.fromJson(json["details"]) : null,
   );
 
   Map<String, dynamic> toJson() => {

@@ -9,9 +9,9 @@ import 'package:get/get.dart';
 
 class BuildCustomerInfoLabel extends StatefulWidget {
   final String profileIdOrTicketID;
-
-  BuildCustomerInfoLabel( this.profileIdOrTicketID);
-
+  String? status;
+  BuildCustomerInfoLabel( this.profileIdOrTicketID,{this.status});
+  
   @override
   State<BuildCustomerInfoLabel> createState() => _BuildCustomerInfoLabelState();
 }
@@ -22,18 +22,22 @@ class _BuildCustomerInfoLabelState extends State<BuildCustomerInfoLabel> {
 
   @override
   void initState() {
-    if (PageArgumentController.to.getArgumentData()== INSTALLATION) {
-      customerDetailController
-          .fetchInstallationDetail(widget.profileIdOrTicketID);
-    } else {
-      customerDetailController
-          .fetchServiceTicketDetail(widget.profileIdOrTicketID);
-    }
+    Future.delayed(Duration.zero,(){
+      if (PageArgumentController.to.getArgumentData()== INSTALLATION) {
+        customerDetailController
+            .fetchInstallationDetail(widget.profileIdOrTicketID,context);
+      } else {
+        customerDetailController
+            .fetchServiceTicketDetail(widget.profileIdOrTicketID,context);
+      }
+    });
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Obx(() {
       if (customerDetailController.isLoading.value) {
         return Center(
@@ -52,7 +56,7 @@ class _BuildCustomerInfoLabelState extends State<BuildCustomerInfoLabel> {
                   children: [
                     LabelTextComponent(
                         text: customerDetailController
-                                .installationDetail.value.user_name ??
+                                .installationDetail.value.firstname ??
                             "xx xxx xxx xxx xxx",
                         color: Colors.black,
                         padding: 8.0),
@@ -101,8 +105,8 @@ class _BuildCustomerInfoLabelState extends State<BuildCustomerInfoLabel> {
                 )
               ],
             ),
-          SizedBox(height: 40,),
-          ButtonComponent(
+          SizedBox(height: 60,),
+         widget.status == 'complete' ? Container() : ButtonComponent(
             text: PageArgumentController.to.getArgumentData() == SERVICE_TICKET
                 ? 'Action Started'
                 : 'Installation Started',
@@ -126,9 +130,9 @@ class _BuildCustomerInfoLabelState extends State<BuildCustomerInfoLabel> {
                 children: [
                   LabelTextComponent(
                       text: customerDetailController
-                          .serviceTicketDetail.value.userName == '' ?
+                          .serviceTicketDetail.value.firstname == '' ?
                           "xx xxx xxx xxx xxx" : customerDetailController
-                          .serviceTicketDetail.value.userName!,
+                          .serviceTicketDetail.value.firstname!,
                       color: Colors.black,
                       padding: 8.0),
                   LabelTextComponent(
@@ -177,7 +181,7 @@ class _BuildCustomerInfoLabelState extends State<BuildCustomerInfoLabel> {
             ],
           ),
           SizedBox(height: 60,),
-          ButtonComponent(
+          widget.status == 'complete' ? Container() : ButtonComponent(
             text: PageArgumentController.to.getArgumentData() == SERVICE_TICKET
                 ? 'Action Started'
                 : 'Installation Started',

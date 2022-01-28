@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_geolocator_example/controllers/home_controller.dart';
 import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
 
@@ -58,8 +59,10 @@ class BottomNavigationBarComponent extends StatelessWidget {
                   padding: const EdgeInsets.all(6.0),
                   decoration: const BoxDecoration(
                       color: Colors.red, shape: BoxShape.circle),
-                  child: const Text(
-                    "2",
+                  child: Text(
+                    HomeController.to.serviceTicketAndInstallationCounts.value
+                        .allInstallationCounts
+                        .toString(),
                     style: TextStyle(
                         fontSize: 8,
                         color: Colors.yellow,
@@ -110,8 +113,10 @@ class BottomNavigationBarComponent extends StatelessWidget {
                   padding: const EdgeInsets.all(6.0),
                   decoration: const BoxDecoration(
                       color: Colors.red, shape: BoxShape.circle),
-                  child: const Text(
-                    "2",
+                  child:  Text(
+                    HomeController.to
+                        .serviceTicketAndInstallationCounts.value
+                        .allServiceTicketsCounts.toString() ,
                     style: TextStyle(
                         fontSize: 8,
                         color: Colors.yellow,

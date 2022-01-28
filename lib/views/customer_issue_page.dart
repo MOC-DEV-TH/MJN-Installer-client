@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_geolocator_example/controllers/login_controller.dart';
 import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
@@ -10,6 +11,9 @@ import 'package:get/get.dart';
 class CustomerIssuePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    if(LoginController.to.maintenanceDropDownListsData == null){
+      LoginController.to.fetchAllDropDownListsAndSaveToSharePref();
+    }
     return Scaffold(
       appBar: AppUtils.customAppBar(),
       backgroundColor: Color(int.parse(MJNColors.bgColor)),

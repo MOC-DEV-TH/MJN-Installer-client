@@ -1,7 +1,9 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_geolocator_example/models/installationDetailVO.dart';
 import 'package:flutter_geolocator_example/models/serviceTicketDetailVO.dart';
 import 'package:flutter_geolocator_example/network/RestApi.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
+import 'package:flutter_geolocator_example/utils/app_utils.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
@@ -13,13 +15,17 @@ class CustomerDetailController extends GetxController{
 
   static CustomerDetailController get to => Get.find();
 
-  void fetchInstallationDetail(String profileID){
+  void fetchInstallationDetail(String profileID,BuildContext context){
     isLoading(true);
     RestApi.getInstallationDetail(readData.read(TOKEN),
-        readData.read(UID_PARAM),profileID).then((value) => {
+        readData.read(UID),profileID).then((value) => {
           if(value.status == 'Success'){
             installationDetail.value = value.details!,
             isLoading(false)
+          }
+          else if(value.responseCode == '005'){
+            isLoading(false),
+            AppUtils.showSessionExpireDialog('Fail', 'Session Expired', context)
           }
           else {
             isLoading(false)
@@ -28,13 +34,17 @@ class CustomerDetailController extends GetxController{
     });
   }
 
-  void fetchServiceTicketDetail(String ticketID){
+  void fetchServiceTicketDetail(String ticketID,BuildContext context){
     isLoading(true);
     RestApi.getServiceTicketDetail(readData.read(TOKEN),
-        readData.read(UID_PARAM),ticketID).then((value) => {
+        readData.read(UID),ticketID).then((value) => {
       if(value.status == 'Success'){
         serviceTicketDetail.value = value.details!,
         isLoading(false)
+      }
+      else if(value.responseCode == '005'){
+        isLoading(false),
+        AppUtils.showSessionExpireDialog('Fail', 'Session Expired', context)
       }
       else {
         isLoading(false)

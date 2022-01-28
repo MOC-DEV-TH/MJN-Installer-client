@@ -18,7 +18,6 @@ class LoginController extends GetxController {
 
   static LoginController get to => Get.find();
 
-
   @override
   void onInit() {
     super.onInit();
@@ -35,11 +34,18 @@ class LoginController extends GetxController {
     super.onClose();
   }
 
+
+
   @override
   void onReady() {
     super.onReady();
   }
 
+  void clearText(){
+    userIdController.text = '';
+    passwordController.text = '';
+    update();
+  }
 
   void login() {
     {
@@ -55,9 +61,10 @@ class LoginController extends GetxController {
         RestApi.fetchSupportLogin(map).then((value) => {
               Future.delayed(Duration.zero, () {
                 if (value.status == 'Success') {
+                  clearText();
                   writeData.write(SAVE_TIME, DateTime.now().minute);
                   writeData.write(TOKEN, value.token);
-                  writeData.write(UID_PARAM, value.uid);
+                  writeData.write(UID, value.uid);
                   isLoading(false);
                   Get.off(HomePage());
                 } else {
@@ -66,20 +73,21 @@ class LoginController extends GetxController {
                 }
               })
             });
-      }
-      else {
+      } else {
         isLoading(false);
       }
     }
   }
 
-  void fetchAllDropDownListsAndSaveToSharePref(){
-    RestApi.fetchAllDropDownLists().then((value){
-      if(value.status == 'Success'){
-        debugPrint("DDLLists${allDropDownListVoFromJson(json.decode(writeData.read(ALL_DROP_DOWN_LISTS))).details}");
-        maintenanceDropDownListsData = allDropDownListVoFromJson(json.decode(writeData.read(ALL_DROP_DOWN_LISTS)));
+  void fetchAllDropDownListsAndSaveToSharePref() {
+    RestApi.fetchAllDropDownLists().then((value) {
+
+        debugPrint(
+            "DDLLists${allDropDownListVoFromJson(json.decode(writeData.read(ALL_DROP_DOWN_LISTS))).details}");
+        maintenanceDropDownListsData = allDropDownListVoFromJson(
+            json.decode(writeData.read(ALL_DROP_DOWN_LISTS)));
         update();
-      }
+
     });
   }
 

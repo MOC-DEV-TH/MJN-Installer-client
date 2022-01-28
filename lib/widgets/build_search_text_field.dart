@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_geolocator_example/components/search_text_field_component.dart';
-import 'package:flutter_geolocator_example/controllers/customer_controller.dart';
+import 'package:flutter_geolocator_example/controllers/home_controller.dart';
 import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
 import 'package:flutter_geolocator_example/utils/app_constants.dart';
 import 'customer_status_list_items.dart';
@@ -12,14 +12,15 @@ class BuildSearchTextField extends StatefulWidget {
 }
 
 class _BuildSearchTextFieldState extends State<BuildSearchTextField> {
-  final CustomerController controller = Get.put(CustomerController());
+  final HomeController controller = Get.put(HomeController());
 
   @override
   void initState() {
-    debugPrint("FlowStatus${PageArgumentController.to.getArgumentData()}");
-    PageArgumentController.to.getArgumentData() == INSTALLATION
-        ? controller.fetchInstallationPendingCustomer('pending')
-        : controller.fetchServiceTicketPendingCustomer('pending');
+    Future.delayed(Duration.zero, () {
+      PageArgumentController.to.getArgumentData() == INSTALLATION
+          ? controller.fetchInstallationPendingCustomer('pending', context)
+          : controller.fetchServiceTicketPendingCustomer('pending', context);
+    });
     super.initState();
   }
 
@@ -31,9 +32,6 @@ class _BuildSearchTextFieldState extends State<BuildSearchTextField> {
   }
 
   Widget _buildWidget(BuildContext context) {
-    PageArgumentController.to.getArgumentData()== INSTALLATION
-        ? controller.fetchInstallationPendingCustomer('pending')
-        : controller.fetchServiceTicketPendingCustomer('pending');
     return Column(
       children: [
         SizedBox(
@@ -85,8 +83,8 @@ class _BuildSearchTextFieldState extends State<BuildSearchTextField> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            GetBuilder<CustomerController>(
-              init: CustomerController(),
+            GetBuilder<HomeController>(
+              init: HomeController(),
               builder: (controller) => Expanded(
                   child: SearchTextFieldComponent(
                 controller: controller.customerNameTextController,
@@ -122,38 +120,41 @@ class _BuildSearchTextFieldState extends State<BuildSearchTextField> {
               child: CircularProgressIndicator(),
             );
           } else
-            return Flexible(
-              child: ListView.builder(
-                shrinkWrap: true,
-                physics: ScrollPhysics(),
-                scrollDirection: Axis.vertical,
-                itemBuilder: (ctx, index) {
-                  return PageArgumentController.to.getArgumentData() == INSTALLATION
-                      ? CustomerStatusListItems(
-                          controller
-                              .installationPendingCustomerList[index].firstname,
-                          controller
-                              .installationPendingCustomerList[index].township,
-                          controller
-                              .installationPendingCustomerList[index].phone1,
-                          controller
-                              .installationPendingCustomerList[index].profileId,
-                          )
-                      : CustomerStatusListItems(
-                          controller
-                              .serviceTicketPendingCustomerList[index].firstname,
-                          controller
-                              .serviceTicketPendingCustomerList[index].township,
-                          controller
-                              .serviceTicketPendingCustomerList[index].phone1,
-                          controller
-                              .serviceTicketPendingCustomerList[index].ticketId,
-                          );
-                },
-                itemCount: PageArgumentController.to.getArgumentData() == INSTALLATION
-                    ? controller.installationPendingCustomerList.length
-                    : controller.serviceTicketPendingCustomerList.length,
-              ),
+            return
+            GetBuilder<HomeController>(builder:(controller)=>
+                Flexible(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    physics: ScrollPhysics(),
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (ctx, index) {
+                      return controller.getArgumentData() == INSTALLATION
+                          ? CustomerStatusListItems(
+                        controller
+                            .installationPendingCustomerList[index].firstname,
+                        controller
+                            .installationPendingCustomerList[index].township,
+                        controller
+                            .installationPendingCustomerList[index].phone1,
+                        controller
+                            .installationPendingCustomerList[index].profileId,
+                      )
+                          : CustomerStatusListItems(
+                        controller
+                            .serviceTicketPendingCustomerList[index].firstname,
+                        controller
+                            .serviceTicketPendingCustomerList[index].township,
+                        controller
+                            .serviceTicketPendingCustomerList[index].phone1,
+                        controller
+                            .serviceTicketPendingCustomerList[index].ticketId,
+                      );
+                    },
+                    itemCount: controller.getArgumentData() == INSTALLATION
+                        ? controller.installationPendingCustomerList.length
+                        : controller.serviceTicketPendingCustomerList.length,
+                  ),
+                )
             );
         })
       ],
