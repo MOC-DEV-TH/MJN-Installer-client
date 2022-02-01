@@ -89,6 +89,20 @@ class _BuildSearchTextFieldState extends State<BuildSearchTextField> {
                   child: SearchTextFieldComponent(
                 controller: controller.customerNameTextController,
                 icon: Icons.search,
+                onPressIcon: () {
+                  PageArgumentController.to.getArgumentData() == SERVICE_TICKET ?
+                  controller.fetchServiceTicketListsByStatus(
+                      'pending',
+                      context,
+                      USERNAME_PARAM +
+                          controller.customerNameTextController.value.text)
+                      :
+                  controller.fetchInstallationListsByStatus(
+                      'pending',
+                      context,
+                      USERNAME_PARAM +
+                          controller.customerNameTextController.value.text);
+                },
               )),
             ),
             SizedBox(
@@ -96,21 +110,48 @@ class _BuildSearchTextFieldState extends State<BuildSearchTextField> {
             ),
             Expanded(
                 child: SearchTextFieldComponent(
-                    controller: controller.customerTownshipController,
-                    icon: Icons.search)),
+              controller: controller.customerTownshipController,
+              icon: Icons.search,
+              onPressIcon: () {
+                PageArgumentController.to.getArgumentData() == SERVICE_TICKET ?
+                controller.fetchServiceTicketListsByStatus(
+                    'pending',
+                    context,
+                    TOWNSHIP_PARAM +
+                        controller.customerTownshipController.value.text)
+                    :
+                controller.fetchInstallationListsByStatus(
+                    'pending',
+                    context,
+                    TOWNSHIP_PARAM +
+                        controller.customerTownshipController.value.text);
+              },
+            )),
             SizedBox(
               width: 10.0,
             ),
             Expanded(
-                child: InkWell(
+                child: SearchTextFieldComponent(
               onTap: () {
+                FocusScope.of(context).requestFocus(new FocusNode());
                 controller.selectDate(context);
               },
-              child: SearchTextFieldComponent(
-                controller: controller.customerDateController,
-                icon: Icons.search,
-                onPress: () {},
-              ),
+              controller: controller.customerDateController,
+              icon: Icons.search,
+              onPressIcon: () {
+                PageArgumentController.to.getArgumentData() == SERVICE_TICKET ?
+                controller.fetchServiceTicketListsByStatus(
+                    'pending',
+                    context,
+                    ASSIGNED_DATE_PARAM +
+                        controller.customerDateController.value.text)
+                    :
+                controller.fetchInstallationListsByStatus(
+                    'pending',
+                    context,
+                    ASSIGNED_DATE_PARAM +
+                        controller.customerDateController.value.text);
+              },
             )),
           ],
         ),
@@ -120,42 +161,49 @@ class _BuildSearchTextFieldState extends State<BuildSearchTextField> {
               child: CircularProgressIndicator(),
             );
           } else
-            return
-            GetBuilder<HomeController>(builder:(controller)=>
-                Flexible(
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    physics: ScrollPhysics(),
-                    scrollDirection: Axis.vertical,
-                    itemBuilder: (ctx, index) {
-                      return controller.getArgumentData() == INSTALLATION
-                          ? CustomerStatusListItems(
-                        controller
-                            .installationPendingCustomerList[index].firstname,
-                        controller
-                            .installationPendingCustomerList[index].township,
-                        controller
-                            .installationPendingCustomerList[index].phone1,
-                        controller
-                            .installationPendingCustomerList[index].profileId,
-                      )
-                          : CustomerStatusListItems(
-                        controller
-                            .serviceTicketPendingCustomerList[index].firstname,
-                        controller
-                            .serviceTicketPendingCustomerList[index].township,
-                        controller
-                            .serviceTicketPendingCustomerList[index].phone1,
-                        controller
-                            .serviceTicketPendingCustomerList[index].ticketId,
-                      );
-                    },
-                    itemCount: controller.getArgumentData() == INSTALLATION
-                        ? controller.installationPendingCustomerList.length
-                        : controller.serviceTicketPendingCustomerList.length,
-                  ),
-                )
-            );
+            return GetBuilder<HomeController>(
+                builder: (controller) => Flexible(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: ScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (ctx, index) {
+                          return controller.getArgumentData() == INSTALLATION
+                              ? CustomerStatusListItems(
+                                  controller
+                                      .installationPendingCustomerList[index]
+                                      .firstname,
+                                  controller
+                                      .installationPendingCustomerList[index]
+                                      .township,
+                                  controller
+                                      .installationPendingCustomerList[index]
+                                      .phone1,
+                                  controller
+                                      .installationPendingCustomerList[index]
+                                      .profileId,
+                                )
+                              : CustomerStatusListItems(
+                                  controller
+                                      .serviceTicketPendingCustomerList[index]
+                                      .firstname,
+                                  controller
+                                      .serviceTicketPendingCustomerList[index]
+                                      .township,
+                                  controller
+                                      .serviceTicketPendingCustomerList[index]
+                                      .phone1,
+                                  controller
+                                      .serviceTicketPendingCustomerList[index]
+                                      .ticketId,
+                                );
+                        },
+                        itemCount: controller.getArgumentData() == INSTALLATION
+                            ? controller.installationPendingCustomerList.length
+                            : controller
+                                .serviceTicketPendingCustomerList.length,
+                      ),
+                    ));
         })
       ],
     );

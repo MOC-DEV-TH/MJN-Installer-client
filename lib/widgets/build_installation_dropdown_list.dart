@@ -9,13 +9,12 @@ import 'package:flutter_geolocator_example/controllers/installation_controller.d
 import 'package:flutter_geolocator_example/controllers/login_controller.dart';
 import 'package:flutter_geolocator_example/models/allDropDownListVO.dart';
 import 'package:flutter_geolocator_example/res/colors.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
 import 'package:get/get.dart';
 
 class BuildInstallationDropdownList extends StatefulWidget {
-  final String profileIdOrTicketID;
+  final String profileID;
 
-  BuildInstallationDropdownList(this.profileIdOrTicketID);
+  BuildInstallationDropdownList(this.profileID);
 
   @override
   State<BuildInstallationDropdownList> createState() =>
@@ -28,7 +27,7 @@ class _BuildInstallationDropdownListState
   List<InstallationStatus>? installationStatusLists;
   @override
   void initState() {
-    installationController.fetchInstallationDetail(widget.profileIdOrTicketID);
+    installationController.fetchInstallationDetail(widget.profileID);
     super.initState();
   }
   
@@ -138,8 +137,9 @@ class _BuildInstallationDropdownListState
                       ),
                       DropDownButtonComponent(
                         itemsList: installationStatusLists,
-                        onChangedData: (String value) {
-                          debugPrint('DropdownValue${value}');
+                        onChangedData: (InstallationStatus value) {
+                          debugPrint('DropdownValue${value.id}');
+                          installationController.updateStatusValueID(value.id!);
                         },
                         hintText: '--Select Status--',
                       ),
@@ -159,13 +159,20 @@ class _BuildInstallationDropdownListState
             SizedBox(
               height: 40.0,
             ),
-            ButtonComponent(
-              text: 'Complete',
-              containerWidth: 120,
-              padding: 10,
-              color: Color(int.parse(MJNColors.buttonColor)),
-              onPress: () => onPressComplete(),
-            ),
+            Obx((){
+              if(installationController.loadingForButton.value){
+                return Center(child: CircularProgressIndicator(),);
+              }
+              else
+                return ButtonComponent(
+                  text: 'Complete',
+                  containerWidth: 120,
+                  padding: 10,
+                  color: Color(int.parse(MJNColors.buttonColor)),
+                  onPress: () => onPressComplete(),
+                );
+            })
+
           ],
         );
       }
@@ -245,6 +252,6 @@ class _BuildInstallationDropdownListState
   );
 
   void onPressComplete() {
-    Get.toNamed(COMPLETE_CUSTOMER_LIST);
+    installationController.postInstallationDataOnServer();
   }
 }

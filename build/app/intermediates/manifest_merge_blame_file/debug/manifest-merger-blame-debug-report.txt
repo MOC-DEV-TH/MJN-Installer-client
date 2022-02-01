@@ -1,6 +1,6 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="com.mjn.flutter_geolocator_example"
+3    package="com.moc.mjninstaller"
 4    android:versionCode="1"
 5    android:versionName="1.0.0" >
 6
@@ -64,7 +64,7 @@
 38
 39        <activity
 39-->/Users/admin/MJN_Installer/android/app/src/main/AndroidManifest.xml:18:9-47:20
-40            android:name="com.mjn.flutter_geolocator_example.MainActivity"
+40            android:name="com.moc.mjninstaller.MainActivity"
 40-->/Users/admin/MJN_Installer/android/app/src/main/AndroidManifest.xml:19:13-41
 41            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
 41-->/Users/admin/MJN_Installer/android/app/src/main/AndroidManifest.xml:22:13-163
@@ -125,58 +125,59 @@
 79            android:value="2" />
 79-->/Users/admin/MJN_Installer/android/app/src/main/AndroidManifest.xml:52:13-30
 80
-81        <service
-81-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:11:9-15:56
-82            android:name="com.lyokone.location.FlutterLocationService"
-82-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-71
-83            android:enabled="true"
-83-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-35
+81        <provider
+81-->[:image_picker] /Users/admin/MJN_Installer/build/image_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:8:9-16:20
+82            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+82-->[:image_picker] /Users/admin/MJN_Installer/build/image_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:9:13-82
+83            android:authorities="com.moc.mjninstaller.flutter.image_provider"
+83-->[:image_picker] /Users/admin/MJN_Installer/build/image_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:10:13-74
 84            android:exported="false"
-84-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-37
-85            android:foregroundServiceType="location" />
-85-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-53
-86
-87        <provider
-87-->[:image_picker] /Users/admin/MJN_Installer/build/image_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:8:9-16:20
-88            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-88-->[:image_picker] /Users/admin/MJN_Installer/build/image_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:9:13-82
-89            android:authorities="com.mjn.flutter_geolocator_example.flutter.image_provider"
-89-->[:image_picker] /Users/admin/MJN_Installer/build/image_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:10:13-74
-90            android:exported="false"
-90-->[:image_picker] /Users/admin/MJN_Installer/build/image_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-37
-91            android:grantUriPermissions="true" >
-91-->[:image_picker] /Users/admin/MJN_Installer/build/image_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-47
-92            <meta-data
-92-->[:image_picker] /Users/admin/MJN_Installer/build/image_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-15:75
-93                android:name="android.support.FILE_PROVIDER_PATHS"
-93-->[:image_picker] /Users/admin/MJN_Installer/build/image_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:14:17-67
-94                android:resource="@xml/flutter_image_picker_file_paths" />
-94-->[:image_picker] /Users/admin/MJN_Installer/build/image_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:15:17-72
-95        </provider>
-96
-97        <activity
-97-->[:url_launcher_android] /Users/admin/MJN_Installer/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:8:9-11:74
-98            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-98-->[:url_launcher_android] /Users/admin/MJN_Installer/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:13-74
+84-->[:image_picker] /Users/admin/MJN_Installer/build/image_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-37
+85            android:grantUriPermissions="true" >
+85-->[:image_picker] /Users/admin/MJN_Installer/build/image_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-47
+86            <meta-data
+86-->[:image_picker] /Users/admin/MJN_Installer/build/image_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-15:75
+87                android:name="android.support.FILE_PROVIDER_PATHS"
+87-->[:image_picker] /Users/admin/MJN_Installer/build/image_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:14:17-67
+88                android:resource="@xml/flutter_image_picker_file_paths" />
+88-->[:image_picker] /Users/admin/MJN_Installer/build/image_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:15:17-72
+89        </provider>
+90
+91        <activity
+91-->[:url_launcher_android] /Users/admin/MJN_Installer/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:8:9-11:74
+92            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+92-->[:url_launcher_android] /Users/admin/MJN_Installer/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:13-74
+93            android:exported="false"
+93-->[:url_launcher_android] /Users/admin/MJN_Installer/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:13-37
+94            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+94-->[:url_launcher_android] /Users/admin/MJN_Installer/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-71
+95
+96        <service
+96-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:11:9-15:56
+97            android:name="com.lyokone.location.FlutterLocationService"
+97-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-71
+98            android:enabled="true"
+98-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-35
 99            android:exported="false"
-99-->[:url_launcher_android] /Users/admin/MJN_Installer/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:13-37
-100            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-100-->[:url_launcher_android] /Users/admin/MJN_Installer/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-71
-101        <activity
-101-->[com.google.android.gms:play-services-base:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/79a386b545cc2f3a9101f84c43470ac4/jetified-play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
-102            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-102-->[com.google.android.gms:play-services-base:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/79a386b545cc2f3a9101f84c43470ac4/jetified-play-services-base-17.0.0/AndroidManifest.xml:24:13-79
-103            android:exported="false"
-103-->[com.google.android.gms:play-services-base:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/79a386b545cc2f3a9101f84c43470ac4/jetified-play-services-base-17.0.0/AndroidManifest.xml:25:13-37
-104            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-104-->[com.google.android.gms:play-services-base:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/79a386b545cc2f3a9101f84c43470ac4/jetified-play-services-base-17.0.0/AndroidManifest.xml:26:13-72
-105
-106        <meta-data
-106-->[com.google.android.gms:play-services-basement:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/d14ebb838c3418c16d46982ee4860a26/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
-107            android:name="com.google.android.gms.version"
-107-->[com.google.android.gms:play-services-basement:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/d14ebb838c3418c16d46982ee4860a26/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
-108            android:value="@integer/google_play_services_version" />
-108-->[com.google.android.gms:play-services-basement:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/d14ebb838c3418c16d46982ee4860a26/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
-109    </application>
-110
-111</manifest>
+99-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-37
+100            android:foregroundServiceType="location" />
+100-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-53
+101
+102        <activity
+102-->[com.google.android.gms:play-services-base:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/79a386b545cc2f3a9101f84c43470ac4/jetified-play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
+103            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+103-->[com.google.android.gms:play-services-base:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/79a386b545cc2f3a9101f84c43470ac4/jetified-play-services-base-17.0.0/AndroidManifest.xml:24:13-79
+104            android:exported="false"
+104-->[com.google.android.gms:play-services-base:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/79a386b545cc2f3a9101f84c43470ac4/jetified-play-services-base-17.0.0/AndroidManifest.xml:25:13-37
+105            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+105-->[com.google.android.gms:play-services-base:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/79a386b545cc2f3a9101f84c43470ac4/jetified-play-services-base-17.0.0/AndroidManifest.xml:26:13-72
+106
+107        <meta-data
+107-->[com.google.android.gms:play-services-basement:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/d14ebb838c3418c16d46982ee4860a26/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
+108            android:name="com.google.android.gms.version"
+108-->[com.google.android.gms:play-services-basement:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/d14ebb838c3418c16d46982ee4860a26/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
+109            android:value="@integer/google_play_services_version" />
+109-->[com.google.android.gms:play-services-basement:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/d14ebb838c3418c16d46982ee4860a26/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
+110    </application>
+111
+112</manifest>

@@ -52,6 +52,7 @@ class ServiceTicketDetails {
     this.address,
     this.userName,
     this.firstname,
+    this.profileID,
     this.phone1,
     this.topic,
     this.type,
@@ -64,6 +65,7 @@ class ServiceTicketDetails {
   String? address;
   String? userName;
   String? firstname;
+  String? profileID;
   String? phone1;
   String? topic;
   String? type;
@@ -76,6 +78,7 @@ class ServiceTicketDetails {
     address: json["address"],
     userName: json["user_name"],
     firstname: json["firstname"],
+    profileID: json["profile_id"],
     phone1: json["phone_1"],
     topic: json["topic"],
     type: json["type"],
@@ -89,6 +92,7 @@ class ServiceTicketDetails {
     "address": address,
     "user_name": userName,
     "firstname": firstname,
+    "profile_id": profileID,
     "phone_1": phone1,
     "topic": topic,
     "type": type,

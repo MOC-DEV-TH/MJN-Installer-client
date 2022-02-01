@@ -92,6 +92,20 @@ class _BuildCompleteSearchTextFieldState
                   child: SearchTextFieldComponent(
                 controller: controller.customerNameTextController,
                 icon: Icons.search,
+                    onPressIcon: (){
+                      PageArgumentController.to.getArgumentData() == SERVICE_TICKET ?
+                      controller.fetchServiceTicketListsByStatus(
+                          'complete',
+                          context,
+                          USERNAME_PARAM +
+                              controller.customerTownshipController.value.text)
+                          :
+                      controller.fetchInstallationListsByStatus(
+                          'complete',
+                          context,
+                          USERNAME_PARAM +
+                              controller.customerTownshipController.value.text);
+                    },
               )),
             ),
             SizedBox(
@@ -100,7 +114,21 @@ class _BuildCompleteSearchTextFieldState
             Expanded(
                 child: SearchTextFieldComponent(
                     controller: HomeController.to.customerTownshipController,
-                    icon: Icons.search)),
+                    icon: Icons.search,
+                onPressIcon: (){
+                  PageArgumentController.to.getArgumentData() == SERVICE_TICKET ?
+                  HomeController.to.fetchServiceTicketListsByStatus(
+                      'complete',
+                      context,
+                      TOWNSHIP_PARAM +
+                          HomeController.to.customerTownshipController.value.text)
+                      :
+                  HomeController.to.fetchInstallationListsByStatus(
+                      'complete',
+                      context,
+                      TOWNSHIP_PARAM +
+                          HomeController.to.customerTownshipController.value.text);
+                },)),
             SizedBox(
               width: 10.0,
             ),
@@ -110,9 +138,26 @@ class _BuildCompleteSearchTextFieldState
                 HomeController.to.selectDate(context);
               },
               child: SearchTextFieldComponent(
+                onTap: (){
+                    FocusScope.of(context).requestFocus(new FocusNode());
+                    HomeController.to..selectDate(context);
+                },
                 controller: HomeController.to.customerDateController,
                 icon: Icons.search,
-                onPress: () {},
+                onPressIcon: () {
+                  PageArgumentController.to.getArgumentData() == SERVICE_TICKET ?
+                  HomeController.to.fetchServiceTicketListsByStatus(
+                      'complete',
+                      context,
+                      ASSIGNED_DATE_PARAM +
+                          HomeController.to.customerDateController.value.text)
+                      :
+                  HomeController.to.fetchInstallationListsByStatus(
+                      'complete',
+                      context,
+                      ASSIGNED_DATE_PARAM +
+                          HomeController.to.customerDateController.value.text);
+                },
               ),
             )),
           ],

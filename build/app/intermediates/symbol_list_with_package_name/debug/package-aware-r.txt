@@ -1,4 +1,4 @@
-com.mjn.flutter_geolocator_example
+com.moc.mjninstaller
 attr alpha
 attr ambientEnabled
 attr buttonSize

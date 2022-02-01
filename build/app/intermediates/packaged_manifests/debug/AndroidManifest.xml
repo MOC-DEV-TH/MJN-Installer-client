@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mjn.flutter_geolocator_example"
+    package="com.moc.mjninstaller"
     android:versionCode="1"
     android:versionName="1.0.0" >
 
@@ -37,7 +37,7 @@
             android:value="AIzaSyBI0BNsaDuX91yfVQ02KXQH8qV6p9AZrNY" />
 
         <activity
-            android:name="com.mjn.flutter_geolocator_example.MainActivity"
+            android:name="com.moc.mjninstaller.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"
@@ -78,15 +78,9 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
-        <service
-            android:name="com.lyokone.location.FlutterLocationService"
-            android:enabled="true"
-            android:exported="false"
-            android:foregroundServiceType="location" />
-
         <provider
             android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-            android:authorities="com.mjn.flutter_geolocator_example.flutter.image_provider"
+            android:authorities="com.moc.mjninstaller.flutter.image_provider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data
@@ -98,6 +92,13 @@
             android:name="io.flutter.plugins.urllauncher.WebViewActivity"
             android:exported="false"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
+        <service
+            android:name="com.lyokone.location.FlutterLocationService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="location" />
+
         <activity
             android:name="com.google.android.gms.common.api.GoogleApiActivity"
             android:exported="false"

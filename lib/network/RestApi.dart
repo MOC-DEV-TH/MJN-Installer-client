@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_geolocator_example/models/allDropDownListVO.dart';
 import 'package:flutter_geolocator_example/models/installationVO.dart';
 import 'package:flutter_geolocator_example/models/installationDetailVO.dart';
+import 'package:flutter_geolocator_example/models/networkResultVO.dart';
 import 'package:flutter_geolocator_example/models/serviceTicketDetailVO.dart';
 import 'package:flutter_geolocator_example/models/serviceTicketVO.dart';
 import 'package:flutter_geolocator_example/models/serviceTicket_and_installation_countsVO.dart';
@@ -177,32 +178,34 @@ class RestApi {
     }
   }
 
-  static Future<void> postInstallationData(Map<String, String> params) async {
+  static Future<NetworkResultVO> postInstallationData(Map<String, String> params,String token) async {
     debugPrint(params.toString());
     var response = await client.post(
       Uri.parse(POST_INSTALLATION_DATA_URL),
       body: json.encode(params),
-      headers: {'content-type': 'application/json'},
+      headers: {'content-type': 'application/json','token': token},
     );
 
     if (response.statusCode == 200) {
       debugPrint(response.body);
+      return networkResultVoFromJson(response.body);
     } else {
       print(response.statusCode);
       throw Exception('Failed to post installation data');
     }
   }
 
-  static Future<void> postServiceTicketData(Map<String, String> params) async {
+  static Future<NetworkResultVO> postServiceTicketData(Map<String, String> params,String token) async {
     debugPrint(params.toString());
     var response = await client.post(
       Uri.parse(POST_SERVICE_TICKET_DATA_URL),
       body: json.encode(params),
-      headers: {'content-type': 'application/json'},
+      headers: {'content-type': 'application/json','token': token},
     );
 
     if (response.statusCode == 200) {
       debugPrint(response.body);
+     return networkResultVoFromJson(response.body);
     } else {
       print(response.statusCode);
       throw Exception('Failed to post service ticket data');
@@ -228,4 +231,73 @@ class RestApi {
       throw Exception('Failed to get all counts');
     }
   }
+
+  static Future<ServiceTicketVo> fetchServiceTicketListsByStatus(
+      String token, String uid, String status,String paramAndStatus) async {
+    debugPrint("TicketListByStatus${SERVICE_TICKET_LIST_URL +
+        UID_PARAM +
+        uid +
+        APP_VERSION +
+        app_version +
+        STATUS_PARAM +
+        status +
+        paramAndStatus}");
+    var response = await client.get(
+      Uri.parse(SERVICE_TICKET_LIST_URL +
+          UID_PARAM +
+          uid +
+          APP_VERSION +
+          app_version +
+          STATUS_PARAM +
+          status +
+          paramAndStatus),
+      headers: {'content-type': 'application/json', 'token': token},
+    );
+    if (response.statusCode == 200) {
+      debugPrint(response.body);
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      return serviceTicketVoFromJson(response.body);
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      print(response.statusCode);
+      throw Exception('Failed to get service ticket lists');
+    }
+  }
+
+  static Future<InstallationVo> fetchInstallationListsByStatus(
+      String token, String uid, String status,String paramAndStatus) async {
+    debugPrint("InstallationListByStatus${SERVICE_TICKET_LIST_URL +
+        UID_PARAM +
+        uid +
+        APP_VERSION +
+        app_version +
+        STATUS_PARAM +
+        status +
+        paramAndStatus}");
+    var response = await client.get(
+      Uri.parse(INSTALLATION_LIST_URL +
+          UID_PARAM +
+          uid +
+          APP_VERSION +
+          app_version +
+          STATUS_PARAM +
+          status +
+          paramAndStatus),
+      headers: {'content-type': 'application/json', 'token': token},
+    );
+    if (response.statusCode == 200) {
+      debugPrint(response.body);
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      return installationVoFromJson(response.body);
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      print(response.statusCode);
+      throw Exception('Failed to get pending  lists');
+    }
+  }
+
 }

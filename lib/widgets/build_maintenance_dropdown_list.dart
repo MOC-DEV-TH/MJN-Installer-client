@@ -11,9 +11,9 @@ import 'package:flutter_geolocator_example/utils/app_constants.dart';
 import 'package:get/get.dart';
 
 class BuildMaintenanceDropdownList extends StatefulWidget {
-  final String profileIdOrTicketID;
+  final String ticketID;
 
-  BuildMaintenanceDropdownList(this.profileIdOrTicketID);
+  BuildMaintenanceDropdownList(this.ticketID);
 
   @override
   State<BuildMaintenanceDropdownList> createState() =>
@@ -32,7 +32,7 @@ class _BuildMaintenanceDropdownListState
   @override
   void initState() {
     serviceTicketController
-        .fetchServiceTicketDetail(widget.profileIdOrTicketID);
+        .fetchServiceTicketDetail(widget.ticketID);
 
     super.initState();
   }
@@ -41,9 +41,10 @@ class _BuildMaintenanceDropdownListState
   Widget build(BuildContext context) {
     issueLists =
         LoginController.to.maintenanceDropDownListsData.details!.issueData!;
-
-    resolutionLists =  LoginController.to.maintenanceDropDownListsData.details!.technicalResolution!;
-    statusLists =  LoginController.to.maintenanceDropDownListsData.details!.serviceTicketData!;
+    resolutionLists = LoginController
+        .to.maintenanceDropDownListsData.details!.technicalResolution!;
+    statusLists = LoginController
+        .to.maintenanceDropDownListsData.details!.serviceTicketData!;
 
     debugPrint("IssueListSize ${issueLists!.length}");
     return Obx(() {
@@ -65,7 +66,7 @@ class _BuildMaintenanceDropdownListState
                     LabelTextComponent(
                         text: serviceTicketController
                                     .serviceTicketDetail.value.firstname ==
-                            ''
+                                ''
                             ? "xx xxx xxx xxx xxx"
                             : serviceTicketController
                                 .serviceTicketDetail.value.firstname!,
@@ -128,15 +129,17 @@ class _BuildMaintenanceDropdownListState
                     children: [
                       DropDownButtonComponent(
                         itemsList: issueLists,
-                        onChangedData: (String value) {
-                          debugPrint('DropdownValue${value}');
+                        onChangedData: (IssueDatum value) {
+                          debugPrint('DropdownValue${value.id}');
+                          serviceTicketController.updateTechnicalIssueValueID(value.id!);
                         },
                         hintText: '--Select Issue--',
                       ),
                       DropDownButtonComponent(
                         itemsList: resolutionLists,
-                        onChangedData: (String value) {
-                          debugPrint('DropdownValue${value}');
+                        onChangedData: (IssueDatum value) {
+                          debugPrint('DropdownValue${value.id}');
+                          serviceTicketController.updateTechnicalResolutionValueID(value.id!);
                         },
                         hintText: '--Select Resolution--',
                       ),
@@ -156,8 +159,9 @@ class _BuildMaintenanceDropdownListState
 
                       DropDownButtonComponent(
                         itemsList: statusLists,
-                        onChangedData: (String value) {
-                          debugPrint('DropdownValue${value}');
+                        onChangedData: (IssueDatum value) {
+                          debugPrint('DropdownValue${value.id}');
+                          serviceTicketController.updateStatusValueID(value.id!);
                         },
                         hintText: '--Select Status--',
                       ),
@@ -169,13 +173,20 @@ class _BuildMaintenanceDropdownListState
             SizedBox(
               height: 40.0,
             ),
-            ButtonComponent(
-              text: 'Complete',
-              containerWidth: 120,
-              padding: 10,
-              color: Color(int.parse(MJNColors.buttonColor)),
-              onPress: () => onPressComplete(),
-            ),
+            Obx((){
+              if(serviceTicketController.loadingForButton.value){
+                return Center(child: CircularProgressIndicator(),);
+              }
+              else
+              return  ButtonComponent(
+                  text: 'Complete',
+                  containerWidth: 120,
+                  padding: 10,
+                  color: Color(int.parse(MJNColors.buttonColor)),
+                  onPress: () => onPressComplete(),
+                );
+            })
+
           ],
         );
     });
@@ -227,6 +238,6 @@ class _BuildMaintenanceDropdownListState
   );
 
   void onPressComplete() {
-    Get.toNamed(COMPLETE_CUSTOMER, arguments: widget.profileIdOrTicketID);
+    serviceTicketController.postServiceTicketDataOnServer(widget.ticketID);
   }
 }

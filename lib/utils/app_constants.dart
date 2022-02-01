@@ -43,7 +43,9 @@ const UID_PARAM = '&uid=';
 const STATUS_PARAM = '&status=';
 const PROFILE_ID_PARAM = '&profile_id=';
 const TICKET_ID_PARAM = '&ticket_id=';
-
+const TOWNSHIP_PARAM = '&township=';
+const ASSIGNED_DATE_PARAM = '&assigned_date=';
+const USERNAME_PARAM = '&username=';
 
 const API_URL = BASE_URL+'api/';
 const SUPPORT_LOGIN_URL = API_URL+"support_login";

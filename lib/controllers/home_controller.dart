@@ -20,7 +20,8 @@ class HomeController extends GetxController {
   final installationCompleteCustomerList = <InstallationDetail>[].obs;
   final serviceTicketCompleteCustomerList = <ServiceTicketDetail>[].obs;
 
-  final serviceTicketAndInstallationCounts = ServiceTicketAdnInstallationCountsVO().obs;
+  final serviceTicketAndInstallationCounts =
+      ServiceTicketAdnInstallationCountsVO().obs;
 
   var installationPendingCount = 0.obs;
   var installationCompleteCount = 0.obs;
@@ -38,6 +39,13 @@ class HomeController extends GetxController {
   void onInit() {
     Get.put(LoginController());
     super.onInit();
+  }
+
+  void clearTextFieldData(){
+    customerNameTextController.text = '';
+    customerTownshipController.text = '';
+    customerDateController.text = '';
+    update();
   }
 
   @override
@@ -182,16 +190,61 @@ class HomeController extends GetxController {
                   AppUtils.showSessionExpireDialog(
                       'Fail', 'Session Expired', context)
                 }
-              else {
-                isLoading(false)
+              else if (value.isRequieredUpdate!)
+                {
+                  AppUtils.showRequireUpdateDialog(
+                      'Update Require', 'A new update is available', context)
                 }
-
+              else
+                {isLoading(false)}
             });
   }
 
-  Widget showLoading() {
-    return Center(
-      child: CircularProgressIndicator(),
-    );
+  void fetchServiceTicketListsByStatus(String status, BuildContext context,String paramAndStatus) {
+    clearTextFieldData();
+    isLoading(true);
+    RestApi.fetchServiceTicketListsByStatus(
+        readData.read(TOKEN), readData.read(UID), status,paramAndStatus)
+        .then((value) => {
+      if (value.status == 'Success')
+        {
+          debugPrint("Installation ${value.details}"),
+          serviceTicketPendingCustomerList.value = value.details!,
+          isLoading(false)
+        }
+      else if (value.responseCode == '005')
+        {
+          isLoading(false),
+          AppUtils.showSessionExpireDialog(
+              'Fail', 'Session Expired', context)
+        }
+      else
+        {isLoading(false)}
+    });
   }
+
+  void fetchInstallationListsByStatus(String status, BuildContext context,String paramAndStatus) {
+    clearTextFieldData();
+    isLoading(true);
+    RestApi.fetchInstallationListsByStatus(
+        readData.read(TOKEN), readData.read(UID), status,paramAndStatus)
+        .then((value) => {
+      if (value.status == 'Success')
+        {
+          debugPrint("InstallationLists ${value.details}"),
+          installationPendingCustomerList.value = value.details!,
+          isLoading(false)
+        }
+      else if (value.responseCode == '005')
+        {
+          isLoading(false),
+          AppUtils.showSessionExpireDialog(
+              'Fail', 'Session Expired', context)
+        }
+      else
+        {isLoading(false)}
+    });
+  }
+
+
 }

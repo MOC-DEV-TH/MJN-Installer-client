@@ -31,7 +31,7 @@ class DropDownButtonComponent<T> extends StatelessWidget {
         child: DropdownButtonFormField2<dynamic>(
           isExpanded: true,
           isDense: false,
-          itemHeight: 60,
+          itemHeight: 30,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.only(bottom: 1),
             border: OutlineInputBorder(
@@ -42,21 +42,24 @@ class DropDownButtonComponent<T> extends StatelessWidget {
             Icons.arrow_drop_down,
             color: Colors.black45,
           ),
-          iconSize: 30,
+          iconSize: 33,
           buttonHeight: 40,
+          dropdownMaxHeight: 190,
+          scrollbarAlwaysShow: true,
           dropdownDecoration: BoxDecoration(
             borderRadius: BorderRadius.circular(4),
           ),
           items:  itemsList
-              !.map((label) => DropdownMenuItem(
+              !.map((items) => DropdownMenuItem(
                     child: Center(
                       child: Text(
-                        label.name.toString(),
+                        items.name.toString(),
+                        maxLines: 2,
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.black54, fontSize: 10),
                       ),
                     ),
-                    value: label.name,
+                    value: items,
                   ))
               .toList(),
           onChanged: (value) {

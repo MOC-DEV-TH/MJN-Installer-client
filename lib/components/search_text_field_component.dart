@@ -8,18 +8,20 @@ class SearchTextFieldComponent extends StatelessWidget {
     this.textInputType = TextInputType.text,
     this.icon,
     this.isVisible = false,
+    this.onTap,
    required this.controller,
-    this.onPress,
+    this.onPressIcon,
   }) : super(key: key);
   final String? hintText;
   final int? maxLines;
   final String? errorText;
   final IconData? icon;
   final bool isVisible;
-  final Function()? onPress;
+  final Function()? onPressIcon;
+  final Function()? onTap;
   final TextInputType textInputType;
   final TextEditingController controller;
-
+  
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -30,33 +32,34 @@ class SearchTextFieldComponent extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(8.0))
       ),
-      child: IgnorePointer(
-        child: TextFormField(
-          maxLines: maxLines,
-          textInputAction: TextInputAction.next,
-          keyboardType: textInputType,
-          controller: controller,
-          obscureText: isVisible,
-          style: TextStyle(fontSize: 12),
-          decoration: InputDecoration(
-            suffixIconConstraints: BoxConstraints(
-                minHeight: 5,
-                minWidth: 5
-            ),
-            border: InputBorder.none,
-            suffixIcon: Align(
-                widthFactor: 1.0,
-                heightFactor: 1.0,
-                child: InkWell(child: Padding(
-                  padding: const EdgeInsets.only(right: 4),
-                  child: Icon(icon),
-                ), onTap:onPress,)),
-            isDense: true,
-            contentPadding: EdgeInsets.only(left: 10,bottom: 14,top: 10),
+      child: TextFormField(
+        onTap: onTap,
+        maxLines: maxLines,
+        textInputAction: TextInputAction.next,
+        keyboardType: textInputType,
+        controller: controller,
+        obscureText: isVisible,
+        style: TextStyle(fontSize: 12),
+        decoration: InputDecoration(
+          suffixIconConstraints: BoxConstraints(
+              minHeight: 5,
+              minWidth: 5
           ),
-          validator: (value) => value!.trim().isEmpty ? errorText : null,
+          border: InputBorder.none,
+          suffixIcon: Align(
+              widthFactor: 1.0,
+              heightFactor: 1.0,
+              child: InkWell(child: Padding(
+                padding: const EdgeInsets.only(right: 4),
+                child: Icon(icon),
+              ), onTap:onPressIcon,)),
+          isDense: true,
+          contentPadding: EdgeInsets.only(left: 10,bottom: 14,top: 10),
         ),
+        validator: (value) => value!.trim().isEmpty ? errorText : null,
       ),
     );
   }
+
+
 }

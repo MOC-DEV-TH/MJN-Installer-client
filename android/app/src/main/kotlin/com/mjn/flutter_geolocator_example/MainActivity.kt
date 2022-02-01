@@ -1,4 +1,4 @@
-package com.mjn.flutter_geolocator_example
+package com.moc.mjninstaller
 
 import io.flutter.embedding.android.FlutterActivity
 

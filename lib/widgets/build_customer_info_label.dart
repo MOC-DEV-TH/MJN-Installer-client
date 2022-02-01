@@ -56,8 +56,9 @@ class _BuildCustomerInfoLabelState extends State<BuildCustomerInfoLabel> {
                   children: [
                     LabelTextComponent(
                         text: customerDetailController
-                                .installationDetail.value.firstname ??
-                            "xx xxx xxx xxx xxx",
+                            .serviceTicketDetail.value.firstname == null ?
+                        "xx xxx xxx xxx xxx" : customerDetailController
+                            .serviceTicketDetail.value.firstname!,
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
@@ -130,7 +131,7 @@ class _BuildCustomerInfoLabelState extends State<BuildCustomerInfoLabel> {
                 children: [
                   LabelTextComponent(
                       text: customerDetailController
-                          .serviceTicketDetail.value.firstname == '' ?
+                          .serviceTicketDetail.value.firstname ==null ?
                           "xx xxx xxx xxx xxx" : customerDetailController
                           .serviceTicketDetail.value.firstname!,
                       color: Colors.black,
