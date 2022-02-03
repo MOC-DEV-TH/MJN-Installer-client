@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/components/flow_and_status_component.dart';
-import 'package:flutter_geolocator_example/controllers/home_controller.dart';
-import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
-import 'package:flutter_geolocator_example/res/colors.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
+import 'package:mjn_installer_app/components/flow_and_status_component.dart';
+import 'package:mjn_installer_app/controllers/home_controller.dart';
+import 'package:mjn_installer_app/controllers/page_argument_controller.dart';
+import 'package:mjn_installer_app/res/colors.dart';
+import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
+
 
 class _HomePageState extends State<HomePage> {
   final PageArgumentController pageArgumentController =
@@ -28,7 +29,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Color(int.parse(MJNColors.bgColor)),
       body: Obx(() {
-        if (homeController.isLoading.value) {
+        if (HomeController.to.homeLoading.value) {
           return Center(
             child: CircularProgressIndicator(),
           );
@@ -63,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     FlowAndStatusComponent(
                       status: 'Installation',
-                      routeName: TICKET_STATUS,
+                      routeName: TICKET_STATUS_PAGE,
                       argumentData: INSTALLATION,
                       count: homeController.serviceTicketAndInstallationCounts
                           .value.allInstallationCounts
@@ -75,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     FlowAndStatusComponent(
                       status: 'Service Ticket',
-                      routeName: TICKET_STATUS,
+                      routeName: TICKET_STATUS_PAGE,
                       argumentData: SERVICE_TICKET,
                       count: homeController.serviceTicketAndInstallationCounts
                           .value.allServiceTicketsCounts

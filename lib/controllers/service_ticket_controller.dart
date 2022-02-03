@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_geolocator_example/models/allDropDownListVO.dart';
-import 'package:flutter_geolocator_example/models/serviceTicketDetailVO.dart';
-import 'package:flutter_geolocator_example/network/RestApi.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
-import 'package:flutter_geolocator_example/utils/app_utils.dart';
+import 'package:mjn_installer_app/models/allDropDownListVO.dart';
+import 'package:mjn_installer_app/models/serviceTicketDetailVO.dart';
+import 'package:mjn_installer_app/network/RestApi.dart';
+import 'package:mjn_installer_app/utils/app_constants.dart';
+import 'package:mjn_installer_app/utils/app_utils.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 class ServiceTicketController extends GetxController{
@@ -62,7 +62,7 @@ class ServiceTicketController extends GetxController{
       RestApi.postServiceTicketData(map,readData.read(TOKEN)).then((value) => {
         if(value.status == 'Success'){
           loadingForButton(false),
-          Get.toNamed(COMPLETE_CUSTOMER, arguments: ticketID)
+          Get.toNamed(COMPLETE_CUSTOMER_PAGE, arguments: ticketID)
         }
         else {
           loadingForButton(false)

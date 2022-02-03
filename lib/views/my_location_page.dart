@@ -1,8 +1,8 @@
 // import 'dart:async';
 //
 // import 'package:flutter/material.dart';
-// import 'package:flutter_geolocator_example/network/RestApi.dart';
-// import 'package:flutter_geolocator_example/utils/app_constants.dart';
+// import 'package:mjn_installer_app/network/RestApi.dart';
+// import 'package:mjn_installer_app/utils/app_constants.dart';
 // import 'package:get_storage/get_storage.dart';
 // import 'package:location/location.dart';
 //
@@ -121,8 +121,8 @@
 //   }
 // }
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/network/RestApi.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
+import 'package:mjn_installer_app/network/RestApi.dart';
+import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';

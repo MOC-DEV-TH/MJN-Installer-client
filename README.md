@@ -1,4 +1,4 @@
-# flutter_geolocator_example
+# mjn_installer_app
 
 A new Flutter application.
 

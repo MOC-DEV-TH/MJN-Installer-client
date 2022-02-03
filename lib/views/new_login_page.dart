@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/components/button_component.dart';
-import 'package:flutter_geolocator_example/components/text_field_component.dart';
-import 'package:flutter_geolocator_example/controllers/login_controller.dart';
-import 'package:flutter_geolocator_example/res/colors.dart';
+import 'package:mjn_installer_app/components/button_component.dart';
+import 'package:mjn_installer_app/components/text_field_component.dart';
+import 'package:mjn_installer_app/controllers/home_controller.dart';
+import 'package:mjn_installer_app/controllers/login_controller.dart';
+import 'package:mjn_installer_app/res/colors.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get.dart';
 

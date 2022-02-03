@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/components/search_text_field_component.dart';
-import 'package:flutter_geolocator_example/controllers/home_controller.dart';
-import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
+import 'package:mjn_installer_app/components/search_text_field_component.dart';
+import 'package:mjn_installer_app/controllers/home_controller.dart';
+import 'package:mjn_installer_app/controllers/page_argument_controller.dart';
+import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'customer_status_list_items.dart';
 import 'package:get/get.dart';
 
@@ -14,21 +14,20 @@ class BuildCompleteSearchTextField extends StatefulWidget {
 
 class _BuildCompleteSearchTextFieldState
     extends State<BuildCompleteSearchTextField> {
-
-
   @override
   void initState() {
-    Future.delayed(Duration.zero, () {
-      PageArgumentController.to.getArgumentData() == INSTALLATION
-          ? HomeController.to.fetchInstallationCompleteCustomer('complete', context)
-          : HomeController.to.fetchServiceTicketCompleteCustomer('complete', context);
-    });
-
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration.zero, () {
+      PageArgumentController.to.getArgumentData() == INSTALLATION
+          ? HomeController.to
+          .fetchInstallationCompleteCustomer('completed', context)
+          : HomeController.to
+          .fetchServiceTicketCompleteCustomer('completed', context);
+    });
     return Container(
       child: _buildWidget(context),
     );
@@ -86,49 +85,50 @@ class _BuildCompleteSearchTextFieldState
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            GetBuilder<HomeController>(
-              init: HomeController(),
-              builder: (controller) => Expanded(
-                  child: SearchTextFieldComponent(
-                controller: controller.customerNameTextController,
+            Expanded(
+              child: SearchTextFieldComponent(
+                controller: HomeController.to.customerNameTextController,
                 icon: Icons.search,
-                    onPressIcon: (){
-                      PageArgumentController.to.getArgumentData() == SERVICE_TICKET ?
-                      controller.fetchServiceTicketListsByStatus(
-                          'complete',
+                onPressIcon: () {
+                  PageArgumentController.to.getArgumentData() == SERVICE_TICKET
+                      ? HomeController.to.fetchServiceTicketListsByStatus(
+                          'completed',
                           context,
                           USERNAME_PARAM +
-                              controller.customerTownshipController.value.text)
-                          :
-                      controller.fetchInstallationListsByStatus(
-                          'complete',
+                              HomeController
+                                  .to.customerTownshipController.value.text)
+                      : HomeController.to.fetchInstallationListsByStatus(
+                          'completed',
                           context,
                           USERNAME_PARAM +
-                              controller.customerTownshipController.value.text);
-                    },
-              )),
+                              HomeController
+                                  .to.customerTownshipController.value.text);
+                },
+              ),
             ),
             SizedBox(
               width: 10.0,
             ),
             Expanded(
                 child: SearchTextFieldComponent(
-                    controller: HomeController.to.customerTownshipController,
-                    icon: Icons.search,
-                onPressIcon: (){
-                  PageArgumentController.to.getArgumentData() == SERVICE_TICKET ?
-                  HomeController.to.fetchServiceTicketListsByStatus(
-                      'complete',
-                      context,
-                      TOWNSHIP_PARAM +
-                          HomeController.to.customerTownshipController.value.text)
-                      :
-                  HomeController.to.fetchInstallationListsByStatus(
-                      'complete',
-                      context,
-                      TOWNSHIP_PARAM +
-                          HomeController.to.customerTownshipController.value.text);
-                },)),
+              controller: HomeController.to.customerTownshipController,
+              icon: Icons.search,
+              onPressIcon: () {
+                PageArgumentController.to.getArgumentData() == SERVICE_TICKET
+                    ? HomeController.to.fetchServiceTicketListsByStatus(
+                        'completed',
+                        context,
+                        TOWNSHIP_PARAM +
+                            HomeController
+                                .to.customerTownshipController.value.text)
+                    : HomeController.to.fetchInstallationListsByStatus(
+                        'completed',
+                        context,
+                        TOWNSHIP_PARAM +
+                            HomeController
+                                .to.customerTownshipController.value.text);
+              },
+            )),
             SizedBox(
               width: 10.0,
             ),
@@ -138,25 +138,26 @@ class _BuildCompleteSearchTextFieldState
                 HomeController.to.selectDate(context);
               },
               child: SearchTextFieldComponent(
-                onTap: (){
-                    FocusScope.of(context).requestFocus(new FocusNode());
-                    HomeController.to..selectDate(context);
+                onTap: () {
+                  FocusScope.of(context).requestFocus(new FocusNode());
+                  HomeController.to..selectDate(context);
                 },
                 controller: HomeController.to.customerDateController,
                 icon: Icons.search,
                 onPressIcon: () {
-                  PageArgumentController.to.getArgumentData() == SERVICE_TICKET ?
-                  HomeController.to.fetchServiceTicketListsByStatus(
-                      'complete',
-                      context,
-                      ASSIGNED_DATE_PARAM +
-                          HomeController.to.customerDateController.value.text)
-                      :
-                  HomeController.to.fetchInstallationListsByStatus(
-                      'complete',
-                      context,
-                      ASSIGNED_DATE_PARAM +
-                          HomeController.to.customerDateController.value.text);
+                  PageArgumentController.to.getArgumentData() == SERVICE_TICKET
+                      ? HomeController.to.fetchServiceTicketListsByStatus(
+                          'completed',
+                          context,
+                          ASSIGNED_DATE_PARAM +
+                              HomeController
+                                  .to.customerDateController.value.text)
+                      : HomeController.to.fetchInstallationListsByStatus(
+                          'completed',
+                          context,
+                          ASSIGNED_DATE_PARAM +
+                              HomeController
+                                  .to.customerDateController.value.text);
                 },
               ),
             )),
@@ -177,32 +178,43 @@ class _BuildCompleteSearchTextFieldState
                   return PageArgumentController.to.getArgumentData() ==
                           INSTALLATION
                       ? CustomerStatusListItems(
-                    HomeController.to.installationCompleteCustomerList[index]
+                          HomeController
+                              .to
+                              .installationCompleteCustomerList[index]
                               .firstname,
-                    HomeController.to
+                          HomeController.to
                               .installationCompleteCustomerList[index].township,
-                    HomeController.to
+                          HomeController.to
                               .installationCompleteCustomerList[index].phone1,
-                    HomeController.to.installationCompleteCustomerList[index]
+                          HomeController
+                              .to
+                              .installationCompleteCustomerList[index]
                               .profileId,
                           pageStatus: 'complete',
                         )
                       : CustomerStatusListItems(
-                    HomeController.to.serviceTicketCompleteCustomerList[index]
+                          HomeController
+                              .to
+                              .serviceTicketCompleteCustomerList[index]
                               .firstname,
-                    HomeController.to.serviceTicketCompleteCustomerList[index]
+                          HomeController
+                              .to
+                              .serviceTicketCompleteCustomerList[index]
                               .township,
-                    HomeController.to
+                          HomeController.to
                               .serviceTicketCompleteCustomerList[index].phone1,
-                    HomeController.to.serviceTicketCompleteCustomerList[index]
+                          HomeController
+                              .to
+                              .serviceTicketCompleteCustomerList[index]
                               .ticketId,
                           pageStatus: 'complete',
                         );
                 },
-                itemCount:
-                    PageArgumentController.to.getArgumentData() == INSTALLATION
-                        ? HomeController.to.installationCompleteCustomerList.length
-                        : HomeController.to.serviceTicketCompleteCustomerList.length,
+                itemCount: PageArgumentController.to.getArgumentData() ==
+                        INSTALLATION
+                    ? HomeController.to.installationCompleteCustomerList.length
+                    : HomeController
+                        .to.serviceTicketCompleteCustomerList.length,
               ),
             );
         })

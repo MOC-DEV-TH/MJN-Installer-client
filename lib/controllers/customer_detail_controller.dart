@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_geolocator_example/models/installationDetailVO.dart';
-import 'package:flutter_geolocator_example/models/serviceTicketDetailVO.dart';
-import 'package:flutter_geolocator_example/network/RestApi.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
-import 'package:flutter_geolocator_example/utils/app_utils.dart';
+import 'package:mjn_installer_app/models/installationDetailVO.dart';
+import 'package:mjn_installer_app/models/serviceTicketDetailVO.dart';
+import 'package:mjn_installer_app/network/RestApi.dart';
+import 'package:mjn_installer_app/utils/app_constants.dart';
+import 'package:mjn_installer_app/utils/app_utils.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 

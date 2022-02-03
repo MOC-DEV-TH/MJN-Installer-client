@@ -1,4 +1,4 @@
-#Tue Feb 01 10:55:24 MMT 2022
+#Thu Feb 03 15:42:56 MMT 2022
 base.0=/Users/admin/MJN_Installer/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

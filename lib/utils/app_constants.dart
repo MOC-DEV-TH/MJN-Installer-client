@@ -8,22 +8,23 @@ const BASE_URL = 'http://mojoenet.myanmaronlinecreations.com/';
 
 //Get page name
 const LOGIN = '/login';
-const TICKET_STATUS = '/ticket_status';
-const CUSTOMER_STATUS = '/customer_status';
+const TICKET_STATUS_PAGE = '/ticket_status';
+const CUSTOMER_STATUS_PAGE = '/customer_status';
 const HOME = '/home';
-const CUSTOMER_DETAIL = '/customer_detail';
-const CUSTOMER_ISSUE = '/customer_issue';
-const COMPLETE_CUSTOMER = '/complete_customer';
-const COMPLETE_CUSTOMER_LIST = '/complete_complete_list';
+const CUSTOMER_DETAIL_PAGE = '/customer_detail';
+const CUSTOMER_ISSUE_PAGE = '/customer_issue';
+const COMPLETE_CUSTOMER_PAGE = '/complete_customer';
+const COMPLETE_CUSTOMER_LIST_PAGE = '/complete_complete_list';
 const COMPLETE_CUSTOMER_DETAIL_PAGE = '/complete_complete_detail_page';
 const MY_APP = '/my_app';
+const NEW_ORDER_CUSTOMER_PAGE = '/new_order_customer_page';
 
 
 const INSTALLATION = 'installation';
 const SERVICE_TICKET = 'service_ticket';
-const PENDING = 'pending';
-const COMPLETE = 'complete';
-const NEW_ORDER = 'new_order';
+const PENDING = 'Pending';
+const COMPLETE = 'Complete';
+const NEW_ORDER = 'New Order';
 
 //app_version
 const APP_VERSION = '&app_version=';
@@ -58,3 +59,4 @@ const GET_SERVICE_TICKET_DETAIL_URL = API_URL+"get_service_tickets_details?";
 const POST_INSTALLATION_DATA_URL = API_URL+"post_installation_data";
 const POST_SERVICE_TICKET_DATA_URL = API_URL+"post_service_tickets_data";
 const GET_ALL_COUNT_URL = API_URL+"get_counts?";
+const SERVICE_TICKET_ORDER_ACCEPT = API_URL+"order_accept";

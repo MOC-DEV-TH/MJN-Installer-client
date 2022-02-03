@@ -1,10 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/models/installationDetailVO.dart';
-import 'package:flutter_geolocator_example/network/RestApi.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
-import 'package:flutter_geolocator_example/utils/app_utils.dart';
+import 'package:mjn_installer_app/models/installationDetailVO.dart';
+import 'package:mjn_installer_app/network/RestApi.dart';
+import 'package:mjn_installer_app/utils/app_constants.dart';
+import 'package:mjn_installer_app/utils/app_utils.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:image_picker/image_picker.dart';
@@ -108,7 +108,7 @@ class InstallationController extends GetxController {
     if (statusValueID != null) {
       RestApi.postInstallationData(map, readData.read(TOKEN)).then((value) => {
             if (value.status == 'Success')
-              {loadingForButton(false), Get.toNamed(COMPLETE_CUSTOMER_LIST)}
+              {loadingForButton(false), Get.toNamed(COMPLETE_CUSTOMER_LIST_PAGE)}
             else
               {loadingForButton(false)}
           });

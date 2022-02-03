@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
+import 'package:mjn_installer_app/controllers/page_argument_controller.dart';
+import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'package:get/get.dart';
 
 class FlowAndStatusComponent extends StatelessWidget {
-
-  FlowAndStatusComponent({
-    Key? key,
-    this.text,
-    this.color,
-    this.padding,
-    required this.status,
-    required this.routeName,
-    this.icon,
-    this.containerWidth,
-    this.onPress,
-    this.count,
-    this.argumentData,
-    this.assertImage
-  }) : super(key: key);
+  FlowAndStatusComponent(
+      {Key? key,
+      this.text,
+      this.color,
+      this.padding,
+      required this.status,
+      required this.routeName,
+      this.icon,
+      this.containerWidth,
+      this.onPress,
+      this.count,
+      this.argumentData,
+      this.assertImage})
+      : super(key: key);
   final String? text;
   final Function()? onPress;
   final Color? color;
@@ -35,7 +35,9 @@ class FlowAndStatusComponent extends StatelessWidget {
     return InkWell(
       onTap: () => {
         PageArgumentController.to.updateArgumentData(argumentData!),
-
+        status == NEW_ORDER
+            ? PageArgumentController.to.updateStatus(NEW_ORDER)
+            : PageArgumentController.to.updateStatus(PENDING),
         Get.toNamed(routeName),
       },
       child: Container(
@@ -55,7 +57,10 @@ class FlowAndStatusComponent extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(12.0),
-                  child: Image.asset(assertImage!,height: 80,),
+                  child: Image.asset(
+                    assertImage!,
+                    height: 80,
+                  ),
                 ),
                 Positioned(
                   top: 1,
@@ -64,7 +69,7 @@ class FlowAndStatusComponent extends StatelessWidget {
                     padding: const EdgeInsets.all(6.0),
                     decoration: const BoxDecoration(
                         color: Colors.red, shape: BoxShape.circle),
-                    child:  Text(
+                    child: Text(
                       count != null ? count! : '0',
                       style: TextStyle(
                           fontSize: 14,

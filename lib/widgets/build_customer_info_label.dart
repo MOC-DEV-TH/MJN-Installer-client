@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/components/button_component.dart';
-import 'package:flutter_geolocator_example/components/label_text_component.dart';
-import 'package:flutter_geolocator_example/controllers/customer_detail_controller.dart';
-import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
-import 'package:flutter_geolocator_example/res/colors.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
+import 'package:mjn_installer_app/components/button_component.dart';
+import 'package:mjn_installer_app/components/label_text_component.dart';
+import 'package:mjn_installer_app/controllers/customer_detail_controller.dart';
+import 'package:mjn_installer_app/controllers/page_argument_controller.dart';
+import 'package:mjn_installer_app/res/colors.dart';
+import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'package:get/get.dart';
 
 class BuildCustomerInfoLabel extends StatefulWidget {
@@ -199,7 +199,7 @@ class _BuildCustomerInfoLabelState extends State<BuildCustomerInfoLabel> {
   }
 
   void onPressActionStart() {
-    Get.toNamed(CUSTOMER_ISSUE, arguments:
+    Get.toNamed(CUSTOMER_ISSUE_PAGE, arguments:
       widget.profileIdOrTicketID
     );
   }

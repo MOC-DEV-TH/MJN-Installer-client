@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/network/RestApi.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
-import 'package:flutter_geolocator_example/utils/app_utils.dart';
+import 'package:mjn_installer_app/controllers/home_controller.dart';
+import 'package:mjn_installer_app/network/RestApi.dart';
+import 'package:mjn_installer_app/utils/app_constants.dart';
+import 'package:mjn_installer_app/utils/app_utils.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +17,6 @@ class _LoginPageState extends State<LoginPage> {
   var userIdController = TextEditingController();
   var passwordController = TextEditingController();
   final writeData = GetStorage();
-
   @override
   void initState() {
     super.initState();

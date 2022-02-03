@@ -2,15 +2,15 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_geolocator_example/models/allDropDownListVO.dart';
-import 'package:flutter_geolocator_example/models/installationVO.dart';
-import 'package:flutter_geolocator_example/models/installationDetailVO.dart';
-import 'package:flutter_geolocator_example/models/networkResultVO.dart';
-import 'package:flutter_geolocator_example/models/serviceTicketDetailVO.dart';
-import 'package:flutter_geolocator_example/models/serviceTicketVO.dart';
-import 'package:flutter_geolocator_example/models/serviceTicket_and_installation_countsVO.dart';
-import 'package:flutter_geolocator_example/models/supportLoginVO.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
+import 'package:mjn_installer_app/models/allDropDownListVO.dart';
+import 'package:mjn_installer_app/models/installationVO.dart';
+import 'package:mjn_installer_app/models/installationDetailVO.dart';
+import 'package:mjn_installer_app/models/networkResultVO.dart';
+import 'package:mjn_installer_app/models/serviceTicketDetailVO.dart';
+import 'package:mjn_installer_app/models/serviceTicketVO.dart';
+import 'package:mjn_installer_app/models/serviceTicket_and_installation_countsVO.dart';
+import 'package:mjn_installer_app/models/supportLoginVO.dart';
+import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
@@ -297,6 +297,23 @@ class RestApi {
       // then throw an exception.
       print(response.statusCode);
       throw Exception('Failed to get pending  lists');
+    }
+  }
+
+  static Future<NetworkResultVO> serviceTicketOrderAccept(Map<String, String> params,String token) async {
+    debugPrint(params.toString());
+    var response = await client.post(
+      Uri.parse(SERVICE_TICKET_ORDER_ACCEPT),
+      body: json.encode(params),
+      headers: {'content-type': 'application/json','token': token},
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint(response.body);
+      return networkResultVoFromJson(response.body);
+    } else {
+      print(response.statusCode);
+      throw Exception('Failed to accept order later');
     }
   }
 

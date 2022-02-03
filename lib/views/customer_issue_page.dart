@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/controllers/login_controller.dart';
-import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
-import 'package:flutter_geolocator_example/res/colors.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
-import 'package:flutter_geolocator_example/utils/app_utils.dart';
-import 'package:flutter_geolocator_example/widgets/build_installation_dropdown_list.dart';
-import 'package:flutter_geolocator_example/widgets/build_maintenance_dropdown_list.dart';
+import 'package:mjn_installer_app/controllers/login_controller.dart';
+import 'package:mjn_installer_app/controllers/page_argument_controller.dart';
+import 'package:mjn_installer_app/res/colors.dart';
+import 'package:mjn_installer_app/utils/app_constants.dart';
+import 'package:mjn_installer_app/utils/app_utils.dart';
+import 'package:mjn_installer_app/widgets/build_installation_dropdown_list.dart';
+import 'package:mjn_installer_app/widgets/build_maintenance_dropdown_list.dart';
 import 'package:get/get.dart';
 
 class CustomerIssuePage extends StatelessWidget {

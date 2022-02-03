@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/components/search_text_field_component.dart';
-import 'package:flutter_geolocator_example/controllers/home_controller.dart';
-import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
+import 'package:mjn_installer_app/components/search_text_field_component.dart';
+import 'package:mjn_installer_app/controllers/home_controller.dart';
+import 'package:mjn_installer_app/controllers/page_argument_controller.dart';
+import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'customer_status_list_items.dart';
 import 'package:get/get.dart';
 
@@ -12,20 +12,30 @@ class BuildSearchTextField extends StatefulWidget {
 }
 
 class _BuildSearchTextFieldState extends State<BuildSearchTextField> {
-  final HomeController controller = Get.put(HomeController());
 
   @override
   void initState() {
-    Future.delayed(Duration.zero, () {
-      PageArgumentController.to.getArgumentData() == INSTALLATION
-          ? controller.fetchInstallationPendingCustomer('pending', context)
-          : controller.fetchServiceTicketPendingCustomer('pending', context);
-    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration.zero, () {
+      if (PageArgumentController.to.getArgumentData() == INSTALLATION) {
+        if (PageArgumentController.to.getStatus() == NEW_ORDER) {
+          HomeController.to.fetchInstallationPendingCustomer('newOrder', context);
+        } else if (PageArgumentController.to.getStatus() == PENDING) {
+          HomeController.to.fetchInstallationPendingCustomer('pending', context);
+        }
+      } else if (PageArgumentController.to.getArgumentData() ==
+          SERVICE_TICKET) {
+        if (PageArgumentController.to.getStatus() == NEW_ORDER) {
+          HomeController.to.fetchServiceTicketPendingCustomer('newOrder', context);
+        } else if (PageArgumentController.to.getStatus() == PENDING) {
+          HomeController.to.fetchServiceTicketPendingCustomer('pending', context);
+        }
+      }
+    });
     return Container(
       child: _buildWidget(context),
     );
@@ -38,7 +48,9 @@ class _BuildSearchTextFieldState extends State<BuildSearchTextField> {
           height: 20.0,
         ),
         Text(
-          'Pending Customer List',
+          PageArgumentController.to.getStatus() == NEW_ORDER
+              ? 'New Order Customer List'
+              : 'Pending Customer List',
           style: TextStyle(
               fontWeight: FontWeight.normal,
               fontSize: 20,
@@ -84,24 +96,22 @@ class _BuildSearchTextFieldState extends State<BuildSearchTextField> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GetBuilder<HomeController>(
-              init: HomeController(),
               builder: (controller) => Expanded(
                   child: SearchTextFieldComponent(
                 controller: controller.customerNameTextController,
                 icon: Icons.search,
                 onPressIcon: () {
-                  PageArgumentController.to.getArgumentData() == SERVICE_TICKET ?
-                  controller.fetchServiceTicketListsByStatus(
-                      'pending',
-                      context,
-                      USERNAME_PARAM +
-                          controller.customerNameTextController.value.text)
-                      :
-                  controller.fetchInstallationListsByStatus(
-                      'pending',
-                      context,
-                      USERNAME_PARAM +
-                          controller.customerNameTextController.value.text);
+                  PageArgumentController.to.getArgumentData() == SERVICE_TICKET
+                      ? controller.fetchServiceTicketListsByStatus(
+                          'pending',
+                          context,
+                          USERNAME_PARAM +
+                              controller.customerNameTextController.value.text)
+                      : controller.fetchInstallationListsByStatus(
+                          'pending',
+                          context,
+                          USERNAME_PARAM +
+                              controller.customerNameTextController.value.text);
                 },
               )),
             ),
@@ -110,21 +120,20 @@ class _BuildSearchTextFieldState extends State<BuildSearchTextField> {
             ),
             Expanded(
                 child: SearchTextFieldComponent(
-              controller: controller.customerTownshipController,
+              controller: HomeController.to.customerTownshipController,
               icon: Icons.search,
               onPressIcon: () {
-                PageArgumentController.to.getArgumentData() == SERVICE_TICKET ?
-                controller.fetchServiceTicketListsByStatus(
-                    'pending',
-                    context,
-                    TOWNSHIP_PARAM +
-                        controller.customerTownshipController.value.text)
-                    :
-                controller.fetchInstallationListsByStatus(
-                    'pending',
-                    context,
-                    TOWNSHIP_PARAM +
-                        controller.customerTownshipController.value.text);
+                PageArgumentController.to.getArgumentData() == SERVICE_TICKET
+                    ? HomeController.to.fetchServiceTicketListsByStatus(
+                        'pending',
+                        context,
+                        TOWNSHIP_PARAM +
+                            HomeController.to.customerTownshipController.value.text)
+                    : HomeController.to.fetchInstallationListsByStatus(
+                        'pending',
+                        context,
+                        TOWNSHIP_PARAM +
+                            HomeController.to.customerTownshipController.value.text);
               },
             )),
             SizedBox(
@@ -134,29 +143,28 @@ class _BuildSearchTextFieldState extends State<BuildSearchTextField> {
                 child: SearchTextFieldComponent(
               onTap: () {
                 FocusScope.of(context).requestFocus(new FocusNode());
-                controller.selectDate(context);
+                HomeController.to.selectDate(context);
               },
-              controller: controller.customerDateController,
+              controller: HomeController.to.customerDateController,
               icon: Icons.search,
               onPressIcon: () {
-                PageArgumentController.to.getArgumentData() == SERVICE_TICKET ?
-                controller.fetchServiceTicketListsByStatus(
-                    'pending',
-                    context,
-                    ASSIGNED_DATE_PARAM +
-                        controller.customerDateController.value.text)
-                    :
-                controller.fetchInstallationListsByStatus(
-                    'pending',
-                    context,
-                    ASSIGNED_DATE_PARAM +
-                        controller.customerDateController.value.text);
+                PageArgumentController.to.getArgumentData() == SERVICE_TICKET
+                    ? HomeController.to.fetchServiceTicketListsByStatus(
+                        'pending',
+                        context,
+                        ASSIGNED_DATE_PARAM +
+                            HomeController.to.customerDateController.value.text)
+                    : HomeController.to.fetchInstallationListsByStatus(
+                        'pending',
+                        context,
+                        ASSIGNED_DATE_PARAM +
+                            HomeController.to.customerDateController.value.text);
               },
             )),
           ],
         ),
         Obx(() {
-          if (controller.isLoading.value) {
+          if (HomeController.to.isLoading.value) {
             return Center(
               child: CircularProgressIndicator(),
             );
@@ -182,6 +190,14 @@ class _BuildSearchTextFieldState extends State<BuildSearchTextField> {
                                   controller
                                       .installationPendingCustomerList[index]
                                       .profileId,
+                                  pageStatus:
+                                      PageArgumentController.to.getStatus() ==
+                                              NEW_ORDER
+                                          ? NEW_ORDER
+                                          : PENDING,
+                                  township: controller
+                                      .installationPendingCustomerList[index]
+                                      .township,
                                 )
                               : CustomerStatusListItems(
                                   controller
@@ -196,6 +212,14 @@ class _BuildSearchTextFieldState extends State<BuildSearchTextField> {
                                   controller
                                       .serviceTicketPendingCustomerList[index]
                                       .ticketId,
+                                  pageStatus:
+                                      PageArgumentController.to.getStatus() ==
+                                              NEW_ORDER
+                                          ? NEW_ORDER
+                                          : PENDING,
+                                  township: controller
+                                      .serviceTicketPendingCustomerList[index]
+                                      .township,
                                 );
                         },
                         itemCount: controller.getArgumentData() == INSTALLATION

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/res/colors.dart';
-import 'package:flutter_geolocator_example/utils/app_utils.dart';
-import 'package:flutter_geolocator_example/widgets/build_customer_complete_label.dart';
+import 'package:mjn_installer_app/res/colors.dart';
+import 'package:mjn_installer_app/utils/app_utils.dart';
+import 'package:mjn_installer_app/widgets/build_customer_complete_label.dart';
 import 'package:get/get.dart';
 
 class CompleteCustomerPage extends StatelessWidget {

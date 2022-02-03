@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_geolocator_example/components/button_component.dart';
-import 'package:flutter_geolocator_example/components/drop_down_button_component.dart';
-import 'package:flutter_geolocator_example/components/label_text_component.dart';
-import 'package:flutter_geolocator_example/components/photo_picker_component.dart';
-import 'package:flutter_geolocator_example/components/text_field_box_decoration_component.dart';
-import 'package:flutter_geolocator_example/controllers/installation_controller.dart';
-import 'package:flutter_geolocator_example/controllers/login_controller.dart';
-import 'package:flutter_geolocator_example/models/allDropDownListVO.dart';
-import 'package:flutter_geolocator_example/res/colors.dart';
+import 'package:mjn_installer_app/components/button_component.dart';
+import 'package:mjn_installer_app/components/drop_down_button_component.dart';
+import 'package:mjn_installer_app/components/label_text_component.dart';
+import 'package:mjn_installer_app/components/photo_picker_component.dart';
+import 'package:mjn_installer_app/components/text_field_box_decoration_component.dart';
+import 'package:mjn_installer_app/controllers/installation_controller.dart';
+import 'package:mjn_installer_app/controllers/login_controller.dart';
+import 'package:mjn_installer_app/models/allDropDownListVO.dart';
+import 'package:mjn_installer_app/res/colors.dart';
 import 'package:get/get.dart';
 
 class BuildInstallationDropdownList extends StatefulWidget {

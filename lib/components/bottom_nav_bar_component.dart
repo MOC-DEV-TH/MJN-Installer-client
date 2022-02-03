@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/controllers/home_controller.dart';
-import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
+import 'package:mjn_installer_app/controllers/home_controller.dart';
+import 'package:mjn_installer_app/controllers/page_argument_controller.dart';
+import 'package:mjn_installer_app/utils/app_constants.dart';
 
 class BottomNavigationBarComponent extends StatelessWidget {
   BottomNavigationBarComponent(

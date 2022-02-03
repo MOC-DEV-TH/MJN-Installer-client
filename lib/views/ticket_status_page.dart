@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/components/flow_and_status_component.dart';
-import 'package:flutter_geolocator_example/controllers/home_controller.dart';
-import 'package:flutter_geolocator_example/controllers/page_argument_controller.dart';
-import 'package:flutter_geolocator_example/controllers/ticket_status_controller.dart';
-import 'package:flutter_geolocator_example/res/colors.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
-import 'package:flutter_geolocator_example/utils/app_utils.dart';
-import 'package:flutter_geolocator_example/components/bottom_nav_bar_component.dart';
+import 'package:mjn_installer_app/components/flow_and_status_component.dart';
+import 'package:mjn_installer_app/controllers/home_controller.dart';
+import 'package:mjn_installer_app/controllers/page_argument_controller.dart';
+import 'package:mjn_installer_app/controllers/ticket_status_controller.dart';
+import 'package:mjn_installer_app/res/colors.dart';
+import 'package:mjn_installer_app/utils/app_constants.dart';
+import 'package:mjn_installer_app/utils/app_utils.dart';
+import 'package:mjn_installer_app/components/bottom_nav_bar_component.dart';
 import 'package:get/get.dart';
 
 class TicketStatusPage extends StatelessWidget {
   final TicketStatusController ticketStatusController =
       Get.put(TicketStatusController());
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,8 +74,8 @@ class TicketStatusPage extends StatelessWidget {
               GetBuilder<TicketStatusController>(
                   builder: (controller) => FlowAndStatusComponent(
                       argumentData: ticketStatusController.getArgumentData(),
-                      status: 'Pending',
-                      routeName: CUSTOMER_STATUS,
+                      status: PENDING,
+                      routeName: CUSTOMER_STATUS_PAGE,
                       count: ticketStatusController.getArgumentData() ==
                               INSTALLATION
                           ? HomeController.to.serviceTicketAndInstallationCounts
@@ -87,8 +88,8 @@ class TicketStatusPage extends StatelessWidget {
               GetBuilder<TicketStatusController>(
                   builder: (controller) => FlowAndStatusComponent(
                       argumentData: controller.getArgumentData(),
-                      status: 'New Order',
-                      routeName: CUSTOMER_STATUS,
+                      status: NEW_ORDER,
+                      routeName: CUSTOMER_STATUS_PAGE,
                       count: ticketStatusController.getArgumentData() ==
                               INSTALLATION
                           ? HomeController.to.serviceTicketAndInstallationCounts
@@ -106,8 +107,8 @@ class TicketStatusPage extends StatelessWidget {
           GetBuilder<TicketStatusController>(
             builder: (controller) => FlowAndStatusComponent(
                 argumentData: controller.getArgumentData(),
-                status: 'Complete',
-                routeName: COMPLETE_CUSTOMER_LIST,
+                status: COMPLETE,
+                routeName: COMPLETE_CUSTOMER_LIST_PAGE,
                 count: ticketStatusController.getArgumentData() == INSTALLATION
                     ? HomeController.to.serviceTicketAndInstallationCounts.value
                         .completedInstallationCount

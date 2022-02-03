@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/res/colors.dart';
+import 'package:mjn_installer_app/res/colors.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:store_redirect/store_redirect.dart';

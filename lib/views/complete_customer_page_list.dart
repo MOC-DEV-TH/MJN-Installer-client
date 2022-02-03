@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/res/colors.dart';
-import 'package:flutter_geolocator_example/utils/app_utils.dart';
-import 'package:flutter_geolocator_example/widgets/build_complete_search_text_field.dart';
+import 'package:mjn_installer_app/res/colors.dart';
+import 'package:mjn_installer_app/utils/app_utils.dart';
+import 'package:mjn_installer_app/widgets/build_complete_search_text_field.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 

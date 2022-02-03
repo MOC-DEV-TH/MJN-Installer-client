@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/components/label_text_component.dart';
+import 'package:mjn_installer_app/components/label_text_component.dart';
 
 class PhotoPickerComponent extends StatelessWidget {
   PhotoPickerComponent(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_geolocator_example/utils/app_constants.dart';
+import 'package:mjn_installer_app/controllers/home_controller.dart';
+import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'package:get/get.dart';
 
 class CustomerStatusListItems extends StatelessWidget {
@@ -8,10 +9,11 @@ class CustomerStatusListItems extends StatelessWidget {
   final String? customerPhNo;
   final String? profileIdOrTicketID;
   final String? pageStatus;
+  final String? township;
 
   CustomerStatusListItems(this.customerName, this.customerAddress,
       this.customerPhNo, this.profileIdOrTicketID,
-      {@required this.pageStatus});
+      {@required this.pageStatus, @required this.township});
 
   @override
   Widget build(BuildContext context) {
@@ -70,10 +72,24 @@ class CustomerStatusListItems extends StatelessWidget {
             ),
             verticalDivider,
             InkWell(
-                onTap: () => pageStatus == 'complete'
-                    ? Get.toNamed(COMPLETE_CUSTOMER_DETAIL_PAGE,arguments: profileIdOrTicketID)
-                    : Get.toNamed(CUSTOMER_DETAIL,
-                        arguments: profileIdOrTicketID),
+                onTap: () {
+                  if (pageStatus == NEW_ORDER) {
+                    HomeController.to.updateNewOrderData(
+                        customerName ?? '',
+                        customerAddress ?? '',
+                        customerPhNo ?? '',
+                        township ?? '');
+                  }
+                  ;
+
+                  pageStatus == 'complete'
+                      ? Get.toNamed(COMPLETE_CUSTOMER_DETAIL_PAGE,
+                          arguments: profileIdOrTicketID)
+                      : pageStatus == NEW_ORDER
+                          ? Get.toNamed(NEW_ORDER_CUSTOMER_PAGE)
+                          : Get.toNamed(CUSTOMER_DETAIL_PAGE,
+                              arguments: profileIdOrTicketID);
+                },
                 child: labelView)
           ],
         ),
