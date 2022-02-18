@@ -252,6 +252,6 @@ class _BuildInstallationDropdownListState
   );
 
   void onPressComplete() {
-    installationController.postInstallationDataOnServer();
+    installationController.postInstallationDataOnServer(widget.profileID);
   }
 }

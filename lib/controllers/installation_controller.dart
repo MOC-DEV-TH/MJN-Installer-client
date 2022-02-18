@@ -92,11 +92,11 @@ class InstallationController extends GetxController {
     }
   }
 
-  void postInstallationDataOnServer() {
+  void postInstallationDataOnServer(String profileID) {
     loadingForButton(true);
     Map<String, String> map = {
       'uid': readData.read(UID),
-      'profile_id': '',
+      'profile_id': profileID,
       'app_version': APP_VERSION,
       'sr_no': macIdController.value.text.toString(),
       'spliter_no': deviceIdController.value.text.toString(),
