@@ -7,18 +7,18 @@ import 'package:mjn_installer_app/res/colors.dart';
 import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'package:get/get.dart';
 
-class BuildCustomerCompleteLabel extends StatefulWidget {
+class BuildPendingCustomerCompleteInfo extends StatefulWidget {
   final String ticketID;
 
-  BuildCustomerCompleteLabel(this.ticketID);
+  BuildPendingCustomerCompleteInfo(this.ticketID);
 
   @override
-  State<BuildCustomerCompleteLabel> createState() =>
-      _BuildCustomerCompleteLabelState();
+  State<BuildPendingCustomerCompleteInfo> createState() =>
+      _BuildPendingCustomerCompleteInfoState();
 }
 
-class _BuildCustomerCompleteLabelState
-    extends State<BuildCustomerCompleteLabel> {
+class _BuildPendingCustomerCompleteInfoState
+    extends State<BuildPendingCustomerCompleteInfo> {
   CustomerDetailController customerDetailController =
       Get.put(CustomerDetailController());
 
@@ -121,7 +121,7 @@ class _BuildCustomerCompleteLabelState
   }
 
   void onPressCustomerComplete() {
-    Get.toNamed(COMPLETE_CUSTOMER_LIST_PAGE);
+    Get.toNamed(COMPLETE_CUSTOMER_PAGE);
   }
 
   final customerLabel = Column(

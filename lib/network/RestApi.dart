@@ -300,7 +300,7 @@ class RestApi {
     }
   }
 
-  static Future<NetworkResultVO> serviceTicketOrderAccept(Map<String, String> params,String token) async {
+  static Future<NetworkResultVO> serviceTicketOrderAcceptAndLater(Map<String, String> params,String token) async {
     debugPrint(params.toString());
     var response = await client.post(
       Uri.parse(SERVICE_TICKET_ORDER_ACCEPT),
@@ -313,7 +313,24 @@ class RestApi {
       return networkResultVoFromJson(response.body);
     } else {
       print(response.statusCode);
-      throw Exception('Failed to accept order later');
+      throw Exception('Service ticket failed to accept order later');
+    }
+  }
+
+  static Future<NetworkResultVO> installationOrderAcceptAndLater(Map<String, String> params,String token) async {
+    debugPrint(params.toString());
+    var response = await client.post(
+      Uri.parse(INSTALLATION_ORDER_ACCEPT),
+      body: json.encode(params),
+      headers: {'content-type': 'application/json','token': token},
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint(response.body);
+      return networkResultVoFromJson(response.body);
+    } else {
+      print(response.statusCode);
+      throw Exception('Installation failed to accept  order later');
     }
   }
 

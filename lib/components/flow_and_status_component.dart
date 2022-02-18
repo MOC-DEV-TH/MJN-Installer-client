@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mjn_installer_app/controllers/home_controller.dart';
 import 'package:mjn_installer_app/controllers/page_argument_controller.dart';
 import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'package:get/get.dart';
@@ -38,7 +39,11 @@ class FlowAndStatusComponent extends StatelessWidget {
         status == NEW_ORDER
             ? PageArgumentController.to.updateStatus(NEW_ORDER)
             : PageArgumentController.to.updateStatus(PENDING),
-        Get.toNamed(routeName),
+        Get.toNamed(routeName)!.then((value) {
+          HomeController.to
+              .fetchAllCountsForServiceTicketAndInstallation(context);
+          debugPrint('fetch all counts');
+        }),
       },
       child: Container(
         height: 170,

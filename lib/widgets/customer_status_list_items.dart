@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mjn_installer_app/controllers/home_controller.dart';
+import 'package:mjn_installer_app/controllers/page_argument_controller.dart';
 import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'package:get/get.dart';
 
@@ -7,13 +8,18 @@ class CustomerStatusListItems extends StatelessWidget {
   final String? customerName;
   final String? customerAddress;
   final String? customerPhNo;
-  final String? profileIdOrTicketID;
+  final String? profileId;
+  final String? ticketId;
   final String? pageStatus;
   final String? township;
+  final String? customerUID;
 
   CustomerStatusListItems(this.customerName, this.customerAddress,
-      this.customerPhNo, this.profileIdOrTicketID,
-      {@required this.pageStatus, @required this.township});
+      this.customerPhNo, this.profileId,
+      {@required this.pageStatus,
+      @required this.township,
+      @required this.ticketId,
+      @required this.customerUID});
 
   @override
   Widget build(BuildContext context) {
@@ -78,17 +84,49 @@ class CustomerStatusListItems extends StatelessWidget {
                         customerName ?? '',
                         customerAddress ?? '',
                         customerPhNo ?? '',
-                        township ?? '');
+                        township ?? '',
+                        ticketId ?? '',
+                        profileId ?? '',
+                        customerUID ?? '');
                   }
                   ;
 
                   pageStatus == 'complete'
                       ? Get.toNamed(COMPLETE_CUSTOMER_DETAIL_PAGE,
-                          arguments: profileIdOrTicketID)
+                          arguments:
+                              PageArgumentController.to.getArgumentData() ==
+                                      INSTALLATION
+                                  ? profileId
+                                  : ticketId)
                       : pageStatus == NEW_ORDER
-                          ? Get.toNamed(NEW_ORDER_CUSTOMER_PAGE)
+                          ? Get.toNamed(NEW_ORDER_CUSTOMER_PAGE)!.then(
+
+                              (value) => Future.delayed(Duration.zero, () {
+                                if (PageArgumentController.to.getArgumentData() == INSTALLATION) {
+                                  if (PageArgumentController.to.getStatus() == NEW_ORDER) {
+                                    HomeController.to
+                                        .fetchInstallationPendingCustomer('newOrder', context);
+                                  } else if (PageArgumentController.to.getStatus() == PENDING) {
+                                    HomeController.to
+                                        .fetchInstallationPendingCustomer('pending', context);
+                                  }
+                                } else if (PageArgumentController.to.getArgumentData() ==
+                                    SERVICE_TICKET) {
+                                  if (PageArgumentController.to.getStatus() == NEW_ORDER) {
+                                    HomeController.to
+                                        .fetchServiceTicketPendingCustomer('newOrder', context);
+                                  } else if (PageArgumentController.to.getStatus() == PENDING) {
+                                    HomeController.to
+                                        .fetchServiceTicketPendingCustomer('pending', context);
+                                  }
+                                }
+                              }))
                           : Get.toNamed(CUSTOMER_DETAIL_PAGE,
-                              arguments: profileIdOrTicketID);
+                              arguments:
+                                  PageArgumentController.to.getArgumentData() ==
+                                          INSTALLATION
+                                      ? profileId
+                                      : ticketId);
                 },
                 child: labelView)
           ],

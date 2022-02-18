@@ -18,6 +18,17 @@ class AppUtils {
     );
   }
 
+  static void showSuccessSnackBar(String title, String message) {
+    Get.snackbar(
+      title,
+      message,
+      icon: Icon(Icons.error, color: Colors.black),
+      backgroundColor: Colors.green,
+      snackPosition: SnackPosition.BOTTOM,
+      duration: Duration(seconds: 2),
+    );
+  }
+
   static AppBar customAppBar() {
     return AppBar(
         toolbarHeight: 100,

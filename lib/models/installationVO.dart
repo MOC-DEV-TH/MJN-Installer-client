@@ -50,19 +50,22 @@ class InstallationDetail {
     this.profileId,
     this.firstname,
     this.phone1,
-    this.township
+    this.township,
+    this.uid
   });
 
   String? township;
   String? profileId;
   String? firstname;
   String? phone1;
+  String? uid;
 
   factory InstallationDetail.fromJson(Map<String, dynamic> json) => InstallationDetail(
     profileId: json["profile_id"],
     firstname: json["firstname"],
     phone1: json["phone_1"],
     township: json["township"],
+    uid: json["uid"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -70,5 +73,6 @@ class InstallationDetail {
     "firstname": firstname,
     "phone_1": phone1,
     "township": township,
+    "uid": uid,
   };
 }

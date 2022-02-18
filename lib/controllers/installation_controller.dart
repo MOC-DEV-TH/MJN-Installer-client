@@ -108,7 +108,7 @@ class InstallationController extends GetxController {
     if (statusValueID != null) {
       RestApi.postInstallationData(map, readData.read(TOKEN)).then((value) => {
             if (value.status == 'Success')
-              {loadingForButton(false), Get.toNamed(COMPLETE_CUSTOMER_LIST_PAGE)}
+              {loadingForButton(false), Get.toNamed(COMPLETE_CUSTOMER_PAGE)}
             else
               {loadingForButton(false)}
           });

@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   final PageArgumentController pageArgumentController =
       Get.put(PageArgumentController());
 
@@ -20,8 +20,26 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    fetchAllCountsForServiceTicketAndInstallation(context);
     super.initState();
+    WidgetsBinding.instance!.addObserver(this);
+    fetchAllCountsForServiceTicketAndInstallation(context);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+
+    debugPrint(state.toString());
+    if(state == AppLifecycleState.resumed){
+      print('onResume');
+      fetchAllCountsForServiceTicketAndInstallation(context);
+    }
+
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
   }
 
   @override

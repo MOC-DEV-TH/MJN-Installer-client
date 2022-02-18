@@ -62,7 +62,7 @@ class ServiceTicketController extends GetxController{
       RestApi.postServiceTicketData(map,readData.read(TOKEN)).then((value) => {
         if(value.status == 'Success'){
           loadingForButton(false),
-          Get.toNamed(COMPLETE_CUSTOMER_PAGE, arguments: ticketID)
+          Get.toNamed(PENDING_CUSTOMER_COMPLETE_PAGE, arguments: ticketID)
         }
         else {
           loadingForButton(false)

@@ -8,7 +8,9 @@ import 'package:mjn_installer_app/utils/app_utils.dart';
 import 'package:get/get.dart';
 
 class NewOrderCustomerPage extends StatelessWidget {
- final NewOrderCustomerController controller = Get.put(NewOrderCustomerController());
+  final NewOrderCustomerController controller =
+      Get.put(NewOrderCustomerController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,8 +32,9 @@ class NewOrderCustomerPage extends StatelessWidget {
           ),
           Container(
             padding: EdgeInsets.all(10.0),
-            decoration: BoxDecoration(color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(8.0))),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(8.0))),
             child: Column(
               children: [
                 Text(
@@ -42,11 +45,9 @@ class NewOrderCustomerPage extends StatelessWidget {
                       color: Colors.black,
                       decoration: TextDecoration.none),
                 ),
-
                 SizedBox(
                   height: 10.0,
                 ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [customerLabel, middleLabel, customerData],
@@ -54,7 +55,6 @@ class NewOrderCustomerPage extends StatelessWidget {
                 SizedBox(
                   height: 20.0,
                 ),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -64,7 +64,8 @@ class NewOrderCustomerPage extends StatelessWidget {
                       padding: 10,
                       color: Color(int.parse(MJNColors.buttonColor)),
                       onPress: () => {
-                        controller.onTapAcceptNow('', '')
+                        controller.onTapAcceptNow(HomeController.to.ticketID,
+                            HomeController.to.profileID,HomeController.to.customerUID)
                       },
                     ),
                     ButtonComponent(
@@ -73,7 +74,11 @@ class NewOrderCustomerPage extends StatelessWidget {
                       padding: 10,
                       color: Color(int.parse(MJNColors.buttonColor)),
                       onPress: () => {
-                        controller.onTapLater(context,'','','')
+                        controller.onTapLater(
+                            context,
+                            HomeController.to.profileID,
+                            HomeController.to.ticketID,
+                            HomeController.to.customerUID)
                       },
                     )
                   ],
