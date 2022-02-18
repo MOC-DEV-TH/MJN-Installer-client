@@ -13,6 +13,12 @@ class InstallationController extends GetxController {
   var macIdController = TextEditingController();
   var deviceIdController = TextEditingController();
   var fiberUsageController = TextEditingController();
+  var coreCableController = TextEditingController();
+  var jointClosureController = TextEditingController();
+  var ONUController = TextEditingController();
+  var patchCordController = TextEditingController();
+  var sleeveController = TextEditingController();
+  var scConnectorController = TextEditingController();
   var imageONU;
   var imageODB;
   var imageAcceptForm;
@@ -23,6 +29,10 @@ class InstallationController extends GetxController {
   var isLoading = false.obs;
   var loadingForButton = false.obs;
   var statusValueID;
+
+  void onUIReady(String profileID){
+    fetchInstallationDetail(profileID);
+  }
 
   void fetchInstallationDetail(String profileID) {
     isLoading(true);

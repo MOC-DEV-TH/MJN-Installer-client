@@ -37,16 +37,13 @@ class BottomNavigationBarComponent extends StatelessWidget {
                             : Colors.grey,
                         borderRadius: BorderRadius.all(Radius.circular(12.0))),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
                           'Installation',
                           style: TextStyle(color: Colors.white),
                         ),
-                        Icon(
-                          Icons.inbox,
-                          color: Colors.white,
-                        ),
+                        Image.asset("assets/installation_img.png",color: Colors.white,height: 50,)
                       ],
                     ),
                   ),
@@ -91,16 +88,13 @@ class BottomNavigationBarComponent extends StatelessWidget {
                             : Colors.grey,
                         borderRadius: BorderRadius.all(Radius.circular(12.0))),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
                           'Service Ticket',
                           style: TextStyle(color: Colors.white),
                         ),
-                        Icon(
-                          Icons.inbox,
-                          color: Colors.white,
-                        ),
+                        Image.asset("assets/service_ticket_img.png",color: Colors.white,height: 50,)
                       ],
                     ),
                   ),

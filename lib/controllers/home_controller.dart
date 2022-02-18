@@ -10,7 +10,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
 
-class HomeController extends GetxController {
+class HomeController extends GetxController{
   final customerNameTextController = TextEditingController();
   final customerTownshipController = TextEditingController();
   var customerDateController = TextEditingController();
@@ -49,6 +49,10 @@ class HomeController extends GetxController {
   void onInit() {
     Get.put(LoginController());
     super.onInit();
+  }
+
+  void onUIReady(BuildContext context){
+    fetchAllCountsForServiceTicketAndInstallation(context);
   }
 
   void clearTextFieldData() {

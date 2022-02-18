@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addObserver(this);
-    fetchAllCountsForServiceTicketAndInstallation(context);
+    homeController.onUIReady(context);
   }
 
   @override
@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     debugPrint(state.toString());
     if(state == AppLifecycleState.resumed){
       print('onResume');
-      fetchAllCountsForServiceTicketAndInstallation(context);
+      homeController.onUIReady(context);
     }
 
   }
@@ -122,7 +122,4 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     );
   }
 
-  void fetchAllCountsForServiceTicketAndInstallation(BuildContext context) {
-    homeController.fetchAllCountsForServiceTicketAndInstallation(context);
-  }
 }

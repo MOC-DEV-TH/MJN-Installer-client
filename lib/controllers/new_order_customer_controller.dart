@@ -11,6 +11,7 @@ class NewOrderCustomerController extends GetxController {
   static NewOrderCustomerController get to => Get.find();
   DateTime? _chosenDateTime;
   final readData = GetStorage();
+  var isLoading = false.obs;
 
   @override
   void onInit() {
@@ -22,6 +23,7 @@ class NewOrderCustomerController extends GetxController {
   }
 
   void onTapAcceptNow(String ticketID, String profileID,String customerUID) {
+    isLoading(true);
     PageArgumentController.to.getArgumentData() == INSTALLATION
         ? installationOrderAccept(profileID,customerUID)
         : serviceTicketOrderAccept(ticketID, profileID);
@@ -104,11 +106,15 @@ class NewOrderCustomerController extends GetxController {
         .then((value) => {
       if (value.status == 'Success')
         {
+          isLoading(false),
           PageArgumentController.to.updateStatus(PENDING),
           Get.back()
         }
       else
-        {AppUtils.showErrorSnackBar('Fail', 'Something wrong')}
+        {
+          isLoading(false),
+          AppUtils.showErrorSnackBar('Fail', 'Something wrong')
+        }
     });
   }
 
@@ -148,11 +154,15 @@ class NewOrderCustomerController extends GetxController {
         .then((value) => {
               if (value.status == 'Success')
                 {
+                  isLoading(false),
                   PageArgumentController.to.updateStatus(PENDING),
                   Get.back()
                 }
               else
-                {AppUtils.showErrorSnackBar('Fail', 'Something Wrong')}
+                {
+                  isLoading(false),
+                  AppUtils.showErrorSnackBar('Fail', 'Something Wrong')
+                }
             });
   }
 }

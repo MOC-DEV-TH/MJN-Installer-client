@@ -33,7 +33,7 @@ class CustomerIssuePage extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(
-            height: 20.0,
+            height: 10.0,
           ),
           Text(
             'Pending Customer',

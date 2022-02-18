@@ -23,26 +23,28 @@ class BuildInstallationDropdownList extends StatefulWidget {
 
 class _BuildInstallationDropdownListState
     extends State<BuildInstallationDropdownList> {
-  final InstallationController installationController = Get.put(InstallationController());
+  final InstallationController installationController =
+      Get.put(InstallationController());
   List<InstallationStatus>? installationStatusLists;
+
   @override
   void initState() {
-    installationController.fetchInstallationDetail(widget.profileID);
+    installationController.onUIReady(widget.profileID);
     super.initState();
   }
-  
+
   @override
   Widget build(BuildContext context) {
-    installationStatusLists =  LoginController.to.maintenanceDropDownListsData.details!.installationStatus!;
-    return
-    Obx((){
-      if(installationController.isLoading.value){
-        return Center(child: CircularProgressIndicator(),);
-      }
-      else {
-       return Column(
+    installationStatusLists = LoginController
+        .to.maintenanceDropDownListsData.details!.installationStatus!;
+    return Obx(() {
+      if (installationController.isLoading.value) {
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      } else {
+        return Column(
           children: [
-
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -52,38 +54,44 @@ class _BuildInstallationDropdownListState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     LabelTextComponent(
-                        text:
-                        installationController.installationDetail.value.uid ??
+                        text: installationController
+                                .installationDetail.value.uid ??
                             "xx xxx xxx xxx xxx",
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
-                        text: installationController.installationDetail.value.firstname ??
+                        text: installationController
+                                .installationDetail.value.firstname ??
                             "xx xxx xxx xxx xxx",
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
-                        text: installationController.installationDetail.value.phone1 ??
+                        text: installationController
+                                .installationDetail.value.phone1 ??
                             "xx xxx xxx xxx xxx",
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
-                        text: installationController.installationDetail.value.address ??
+                        text: installationController
+                                .installationDetail.value.address ??
                             "xx xxx xxx xxx xxx",
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
-                        text: installationController.installationDetail.value.latitude ??
+                        text: installationController
+                                .installationDetail.value.latitude ??
                             "xx xxx xxx xxx xxx",
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
-                        text: installationController.installationDetail.value.longitude ??
+                        text: installationController
+                                .installationDetail.value.longitude ??
                             "xx xxx xxx xxx xxx",
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
-                        text: installationController.installationDetail.value.type ??
+                        text: installationController
+                                .installationDetail.value.type ??
                             "xx xxx xxx xxx xxx",
                         color: Colors.black,
                         padding: 8.0),
@@ -92,7 +100,8 @@ class _BuildInstallationDropdownListState
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
-                        text: installationController.installationDetail.value.subconAssignedDate ??
+                        text: installationController
+                                .installationDetail.value.subconAssignedDate ??
                             "xx xxx xxx xxx xxx",
                         color: Colors.black,
                         padding: 8.0),
@@ -100,20 +109,21 @@ class _BuildInstallationDropdownListState
                 )
               ],
             ),
-
             Container(
-              height: 200,
+              height: 400,
               margin: EdgeInsets.only(left: 24.0, right: 24.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(child: issueDropDownLabel),
-                  Expanded(child: Column(
+                  Expanded(
+                      child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       GetBuilder<InstallationController>(
                         init: InstallationController(),
-                        builder: (controller) => TextFieldBoxDecorationComponent(
+                        builder: (controller) =>
+                            TextFieldBoxDecorationComponent(
                           controller: controller.macIdController,
                           errorText: '',
                           hintText: '',
@@ -121,7 +131,8 @@ class _BuildInstallationDropdownListState
                       ),
                       GetBuilder<InstallationController>(
                         init: InstallationController(),
-                        builder: (controller) => TextFieldBoxDecorationComponent(
+                        builder: (controller) =>
+                            TextFieldBoxDecorationComponent(
                           controller: controller.deviceIdController,
                           errorText: '',
                           hintText: '',
@@ -129,11 +140,66 @@ class _BuildInstallationDropdownListState
                       ),
                       GetBuilder<InstallationController>(
                         init: InstallationController(),
-                        builder: (controller) => TextFieldBoxDecorationComponent(
+                        builder: (controller) =>
+                            TextFieldBoxDecorationComponent(
                           controller: controller.fiberUsageController,
                           errorText: '',
                           hintText: '',
                         ),
+                      ),
+                      GetBuilder<InstallationController>(
+                        init: InstallationController(),
+                        builder: (controller) =>
+                            TextFieldBoxDecorationComponent(
+                              controller: controller.coreCableController,
+                              errorText: '',
+                              hintText: '',
+                            ),
+                      ),
+                      GetBuilder<InstallationController>(
+                        init: InstallationController(),
+                        builder: (controller) =>
+                            TextFieldBoxDecorationComponent(
+                              controller: controller.jointClosureController,
+                              errorText: '',
+                              hintText: '',
+                            ),
+                      ),
+                      GetBuilder<InstallationController>(
+                        init: InstallationController(),
+                        builder: (controller) =>
+                            TextFieldBoxDecorationComponent(
+                              controller: controller.ONUController,
+                              errorText: '',
+                              hintText: '',
+                            ),
+                      ),
+                      GetBuilder<InstallationController>(
+                        init: InstallationController(),
+                        builder: (controller) =>
+                            TextFieldBoxDecorationComponent(
+                              controller: controller.patchCordController,
+                              errorText: '',
+                              hintText: '',
+                            ),
+                      ),
+                      GetBuilder<InstallationController>(
+                        init: InstallationController(),
+                        builder: (controller) =>
+                            TextFieldBoxDecorationComponent(
+                              controller: controller.sleeveController,
+                              errorText: '',
+                              hintText: '',
+                            ),
+                      ),
+                      GetBuilder<InstallationController>(
+                        init: InstallationController(),
+                        builder: (controller) =>
+                            TextFieldBoxDecorationComponent(
+                              controller: controller.scConnectorController,
+                              errorText: '',
+                              hintText: '',
+                            ),
                       ),
                       DropDownButtonComponent(
                         itemsList: installationStatusLists,
@@ -159,11 +225,12 @@ class _BuildInstallationDropdownListState
             SizedBox(
               height: 40.0,
             ),
-            Obx((){
-              if(installationController.loadingForButton.value){
-                return Center(child: CircularProgressIndicator(),);
-              }
-              else
+            Obx(() {
+              if (installationController.loadingForButton.value) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else
                 return ButtonComponent(
                   text: 'Complete',
                   containerWidth: 120,
@@ -172,12 +239,10 @@ class _BuildInstallationDropdownListState
                   onPress: () => onPressComplete(),
                 );
             })
-
           ],
         );
       }
     });
-
   }
 
   final issueDropDownLabel = Column(
@@ -188,6 +253,20 @@ class _BuildInstallationDropdownListState
       LabelTextComponent(text: 'Device ID', color: Colors.black, padding: 8.0),
       LabelTextComponent(
           text: 'Fiber Usage', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: '1 Core Cable', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: '1C Joint Closure', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'ONU', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Patch cord', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Sleeves', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'SC Connector', color: Colors.black, padding: 8.0),
+
+
       LabelTextComponent(text: 'Status', color: Colors.black, padding: 8.0),
     ],
   );

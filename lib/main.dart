@@ -16,6 +16,8 @@ final MaterialColor themeMaterialColor =
 BaseflowPluginExample.createMaterialColor(
     const Color.fromRGBO(48, 49, 60, 1));
 final readData = GetStorage();
+
+
 Future  main() async{
   await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +30,7 @@ Future  main() async{
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
   runApp( MyApp());
 }
 

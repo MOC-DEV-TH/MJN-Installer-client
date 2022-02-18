@@ -20,78 +20,88 @@ class NewOrderCustomerPage extends StatelessWidget {
   }
 
   _buildWidget(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20.0,
-          ),
-          SizedBox(
-            height: 30.0,
-          ),
-          Container(
-            padding: EdgeInsets.all(10.0),
-            decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(8.0))),
+    return
+    Obx((){
+      if(controller.isLoading.value){
+        return Container(
+            child: Center(child: CircularProgressIndicator(),));
+      }
+      else
+        return
+          Padding(
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
-                Text(
-                  'New Order',
-                  style: TextStyle(
-                      fontWeight: FontWeight.normal,
-                      fontSize: 20,
-                      color: Colors.black,
-                      decoration: TextDecoration.none),
-                ),
-                SizedBox(
-                  height: 10.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [customerLabel, middleLabel, customerData],
-                ),
                 SizedBox(
                   height: 20.0,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ButtonComponent(
-                      text: 'Accept Now',
-                      containerWidth: 120,
-                      padding: 10,
-                      color: Color(int.parse(MJNColors.buttonColor)),
-                      onPress: () => {
-                        controller.onTapAcceptNow(HomeController.to.ticketID,
-                            HomeController.to.profileID,HomeController.to.customerUID)
-                      },
-                    ),
-                    ButtonComponent(
-                      text: 'Later',
-                      containerWidth: 120,
-                      padding: 10,
-                      color: Color(int.parse(MJNColors.buttonColor)),
-                      onPress: () => {
-                        controller.onTapLater(
-                            context,
-                            HomeController.to.profileID,
-                            HomeController.to.ticketID,
-                            HomeController.to.customerUID)
-                      },
-                    )
-                  ],
-                ),
                 SizedBox(
-                  height: 10.0,
+                  height: 30.0,
+                ),
+                Container(
+                  padding: EdgeInsets.all(10.0),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(8.0))),
+                  child: Column(
+                    children: [
+                      Text(
+                        'New Order',
+                        style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 20,
+                            color: Colors.black,
+                            decoration: TextDecoration.none),
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [customerLabel, middleLabel, customerData],
+                      ),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ButtonComponent(
+                            text: 'Accept Now',
+                            containerWidth: 120,
+                            padding: 10,
+                            color: Color(int.parse(MJNColors.buttonColor)),
+                            onPress: () => {
+                              controller.onTapAcceptNow(HomeController.to.ticketID,
+                                  HomeController.to.profileID,HomeController.to.customerUID)
+                            },
+                          ),
+                          ButtonComponent(
+                            text: 'Later',
+                            containerWidth: 120,
+                            padding: 10,
+                            color: Color(int.parse(MJNColors.buttonColor)),
+                            onPress: () => {
+                              controller.onTapLater(
+                                  context,
+                                  HomeController.to.profileID,
+                                  HomeController.to.ticketID,
+                                  HomeController.to.customerUID)
+                            },
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
-          ),
-        ],
-      ),
-    );
+          );
+    });
+
   }
 
   final customerData = Column(

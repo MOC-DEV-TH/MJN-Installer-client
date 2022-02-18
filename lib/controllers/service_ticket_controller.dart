@@ -15,6 +15,22 @@ class ServiceTicketController extends GetxController{
   var technicalResolutionValueId;
   var statusValueId;
 
+  //manual text controller
+  var macIdController = TextEditingController();
+  var deviceIdController = TextEditingController();
+  var cableTypeController = TextEditingController();
+  var jointClosureController = TextEditingController();
+  var ODBController = TextEditingController();
+  var ONUController = TextEditingController();
+  var cat6CableController = TextEditingController();
+  var rj45ConnectorController = TextEditingController();
+  var patchCordController = TextEditingController();
+  var mediaConverterController = TextEditingController();
+  var spfModuleController = TextEditingController();
+  var scConnectorController = TextEditingController();
+  var routerController = TextEditingController();
+
+
   void updateTechnicalIssueValueID(int id){
     technicalResolutionValueId = id;
     update();
@@ -28,6 +44,10 @@ class ServiceTicketController extends GetxController{
   void updateStatusValueID(int id){
     statusValueId = id;
     update();
+  }
+
+  void onUIReady(String ticketID){
+    fetchServiceTicketDetail(ticketID);
   }
 
   void fetchServiceTicketDetail(String ticketID){
