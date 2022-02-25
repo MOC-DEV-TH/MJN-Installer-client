@@ -131,13 +131,13 @@ class _BuildPendingAndNewOrderCustomerListState
                 ),
 
                 Container(
-                  height: 37,
+                  height: 38,
                   width: 115,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.all(Radius.circular(4))
                   ),
-                  margin: EdgeInsets.only(bottom: 18),
+                  margin: EdgeInsets.only(bottom: 24),
                   child: DropDownButtonComponent(
                     itemsList: townshipLists,
                     onChangedData: (TownshipDatum value) {
