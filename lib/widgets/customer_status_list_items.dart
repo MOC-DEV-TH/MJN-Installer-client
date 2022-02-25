@@ -13,16 +13,19 @@ class CustomerStatusListItems extends StatelessWidget {
   final String? pageStatus;
   final String? township;
   final String? customerUID;
+  final String? status;
 
   CustomerStatusListItems(this.customerName, this.customerAddress,
       this.customerPhNo, this.profileId,
       {@required this.pageStatus,
       @required this.township,
       @required this.ticketId,
-      @required this.customerUID});
+      @required this.customerUID,
+      @required this.status});
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(status);
     return Container(
         child: Container(
       margin: EdgeInsets.only(bottom: 10),
@@ -100,33 +103,57 @@ class CustomerStatusListItems extends StatelessWidget {
                                   : ticketId)
                       : pageStatus == NEW_ORDER
                           ? Get.toNamed(NEW_ORDER_CUSTOMER_PAGE)!.then(
-
                               (value) => Future.delayed(Duration.zero, () {
-                                if (PageArgumentController.to.getArgumentData() == INSTALLATION) {
-                                  if (PageArgumentController.to.getStatus() == NEW_ORDER) {
-                                    HomeController.to
-                                        .fetchInstallationPendingCustomer('newOrder', context);
-                                  } else if (PageArgumentController.to.getStatus() == PENDING) {
-                                    HomeController.to
-                                        .fetchInstallationPendingCustomer('pending', context);
-                                  }
-                                } else if (PageArgumentController.to.getArgumentData() ==
-                                    SERVICE_TICKET) {
-                                  if (PageArgumentController.to.getStatus() == NEW_ORDER) {
-                                    HomeController.to
-                                        .fetchServiceTicketPendingCustomer('newOrder', context);
-                                  } else if (PageArgumentController.to.getStatus() == PENDING) {
-                                    HomeController.to
-                                        .fetchServiceTicketPendingCustomer('pending', context);
-                                  }
-                                }
-                              }))
-                          : Get.toNamed(CUSTOMER_DETAIL_PAGE,
-                              arguments:
-                                  PageArgumentController.to.getArgumentData() ==
-                                          INSTALLATION
-                                      ? profileId
-                                      : ticketId);
+                                    if (PageArgumentController.to
+                                            .getArgumentData() ==
+                                        INSTALLATION) {
+                                      if (PageArgumentController.to
+                                              .getStatus() ==
+                                          NEW_ORDER) {
+                                        HomeController.to
+                                            .fetchInstallationPendingCustomer(
+                                                'newOrder', context);
+                                      } else if (PageArgumentController.to
+                                              .getStatus() ==
+                                          PENDING) {
+                                        HomeController.to
+                                            .fetchInstallationPendingCustomer(
+                                                'pending', context);
+                                      }
+                                    } else if (PageArgumentController.to
+                                            .getArgumentData() ==
+                                        SERVICE_TICKET) {
+                                      if (PageArgumentController.to
+                                              .getStatus() ==
+                                          NEW_ORDER) {
+                                        HomeController.to
+                                            .fetchServiceTicketPendingCustomer(
+                                                'newOrder', context);
+                                      } else if (PageArgumentController.to
+                                              .getStatus() ==
+                                          PENDING) {
+                                        HomeController.to
+                                            .fetchServiceTicketPendingCustomer(
+                                                'pending', context);
+                                      }
+                                    }
+                                  }))
+                           // pending ticket flow
+                          //installation flow
+                          : PageArgumentController.to.getArgumentData() ==
+                                  INSTALLATION
+                              ? status == '2'
+                                  ? Get.toNamed(CUSTOMER_DETAIL_PAGE,
+                                      arguments: profileId)
+                                  : Get.toNamed(CUSTOMER_STATUS_PAGE,
+                                      arguments: profileId)
+
+                              // service ticket flow
+                              : status == '2'
+                                  ? Get.toNamed(CUSTOMER_DETAIL_PAGE,
+                                      arguments: ticketId)
+                                  : Get.toNamed(CUSTOMER_STATUS_PAGE,
+                                      arguments: ticketId);
                 },
                 child: labelView)
           ],

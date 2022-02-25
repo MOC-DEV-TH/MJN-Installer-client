@@ -50,7 +50,8 @@ class ServiceTicketDetail {
     this.township,
     this.ticketId,
     this.phone1,
-    this.profileId
+    this.profileId,
+    this.status
   });
 
   String? firstname;
@@ -58,6 +59,7 @@ class ServiceTicketDetail {
   String? ticketId;
   String? phone1;
   String? profileId;
+  String? status;
 
   factory ServiceTicketDetail.fromJson(Map<String, dynamic> json) => ServiceTicketDetail(
     firstname: json["firstname"],
@@ -65,6 +67,7 @@ class ServiceTicketDetail {
     ticketId: json["ticket_id"],
     phone1: json["phone_1"],
     profileId: json["profile_id"],
+    status: json["status"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -73,5 +76,6 @@ class ServiceTicketDetail {
     "ticket_id": ticketId,
     "phone_1": phone1,
     "profile_id": profileId,
+    "status": status,
   };
 }

@@ -39,6 +39,7 @@ class Details {
     this.serviceTicketData,
     this.technicalResolution,
     this.usageData,
+    this.townshipData,
   });
 
   List<InstallationStatus>? installationStatus;
@@ -46,6 +47,7 @@ class Details {
   List<IssueDatum>? serviceTicketData;
   List<IssueDatum>? technicalResolution;
   List<IssueDatum>? usageData;
+  List<TownshipDatum>? townshipData;
 
   factory Details.fromJson(Map<String, dynamic> json) => Details(
     installationStatus: List<InstallationStatus>.from(json["installation_status"].map((x) => InstallationStatus.fromJson(x))),
@@ -53,6 +55,7 @@ class Details {
     serviceTicketData: List<IssueDatum>.from(json["service_ticket_data"].map((x) => IssueDatum.fromJson(x))),
     technicalResolution: List<IssueDatum>.from(json["technical_resolution"].map((x) => IssueDatum.fromJson(x))),
     usageData: List<IssueDatum>.from(json["usage_data"].map((x) => IssueDatum.fromJson(x))),
+    townshipData: List<TownshipDatum>.from(json["township_data"].map((x) => TownshipDatum.fromJson(x))),
   );
 
   Map<String, dynamic> toJson() => {
@@ -61,8 +64,34 @@ class Details {
     "service_ticket_data": List<dynamic>.from(serviceTicketData!.map((x) => x.toJson())),
     "technical_resolution": List<dynamic>.from(technicalResolution!.map((x) => x.toJson())),
     "usage_data": List<dynamic>.from(usageData!.map((x) => x.toJson())),
+    "township_data": List<dynamic>.from(townshipData!.map((x) => x.toJson())),
   };
 }
+
+class TownshipDatum {
+  TownshipDatum({
+    this.id,
+    this.name,
+    this.key,
+  });
+
+  dynamic id;
+  String? name;
+  int? key;
+
+  factory TownshipDatum.fromJson(Map<String, dynamic> json) => TownshipDatum(
+    id: json["id"],
+    name: json["name"],
+    key: json["key"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "name": name,
+    "key": key,
+  };
+}
+
 
 class InstallationStatus {
   InstallationStatus({

@@ -1,5 +1,5 @@
+import 'dart:convert';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:mjn_installer_app/models/installationDetailVO.dart';
 import 'package:mjn_installer_app/network/RestApi.dart';
@@ -19,7 +19,7 @@ class InstallationController extends GetxController {
   var patchCordController = TextEditingController();
   var sleeveController = TextEditingController();
   var scConnectorController = TextEditingController();
-  var imageONU;
+  File? imageONU;
   var imageODB;
   var imageAcceptForm;
   var source = ImageSource.camera;
@@ -89,15 +89,21 @@ class InstallationController extends GetxController {
       if (tapStatus == 'onu') {
         imageONU = File(image.path);
         update();
-        debugPrint('onuImagePath${imageONU.toString()}');
+        if (imageONU == null) return;
+        String fileName = imageONU!.path.split("/").last;
+        debugPrint('onuImagePath:::${fileName}');
       } else if (tapStatus == 'odb') {
         imageODB = File(image.path);
         update();
-        debugPrint('odbImagePath${imageODB.toString()}');
+        if (imageODB == null) return;
+        String fileName = imageODB.path.split("/").last;
+        debugPrint('odbImagePath:::${fileName}');
       } else {
         imageAcceptForm = File(image.path);
         update();
-        debugPrint('acceptImagePath${imageAcceptForm.toString()}');
+        if (imageAcceptForm == null) return;
+        String fileName = imageAcceptForm.path.split("/").last;
+        debugPrint('acceptImagePath:::${fileName}');
       }
     }
   }
@@ -107,16 +113,17 @@ class InstallationController extends GetxController {
     Map<String, String> map = {
       'uid': readData.read(UID),
       'profile_id': profileID,
-      'app_version': APP_VERSION,
+      'app_version': app_version,
       'sr_no': macIdController.value.text.toString(),
       'spliter_no': deviceIdController.value.text.toString(),
       'fiber_usage': fiberUsageController.value.text.toString(),
-      'status': APP_VERSION,
+      'status': '3',
+      "onuImageFile": base64Encode(imageONU!.readAsBytesSync()),
       'alert_time': DateTime.now().toString(),
     };
 
     if (statusValueID != null) {
-      RestApi.postInstallationData(map, readData.read(TOKEN)).then((value) => {
+      RestApi.postInstallationData(readData.read(TOKEN),imageONU!,map).then((value) => {
             if (value.status == 'Success')
               {loadingForButton(false), Get.toNamed(COMPLETE_CUSTOMER_PAGE)}
             else

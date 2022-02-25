@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mjn_installer_app/components/drop_down_button_component.dart';
 import 'package:mjn_installer_app/components/search_text_field_component.dart';
 import 'package:mjn_installer_app/controllers/home_controller.dart';
+import 'package:mjn_installer_app/controllers/login_controller.dart';
 import 'package:mjn_installer_app/controllers/page_argument_controller.dart';
+import 'package:mjn_installer_app/models/allDropDownListVO.dart';
 import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'customer_status_list_items.dart';
 import 'package:get/get.dart';
@@ -13,54 +16,34 @@ class BuildPendingAndNewOrderCustomerList extends StatefulWidget {
 }
 
 class _BuildPendingAndNewOrderCustomerListState
-    extends State<BuildPendingAndNewOrderCustomerList>
-{
+    extends State<BuildPendingAndNewOrderCustomerList> {
+
+  List<TownshipDatum>? townshipLists;
 
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration.zero, () {
-      if (PageArgumentController.to.getArgumentData() == INSTALLATION) {
-        if (PageArgumentController.to.getStatus() == NEW_ORDER) {
-          HomeController.to
-              .fetchInstallationPendingCustomer('newOrder', context);
-        } else if (PageArgumentController.to.getStatus() == PENDING) {
-          HomeController.to
-              .fetchInstallationPendingCustomer('pending', context);
-        }
-      } else if (PageArgumentController.to.getArgumentData() ==
-          SERVICE_TICKET) {
-        if (PageArgumentController.to.getStatus() == NEW_ORDER) {
-          HomeController.to
-              .fetchServiceTicketPendingCustomer('newOrder', context);
-        } else if (PageArgumentController.to.getStatus() == PENDING) {
-          HomeController.to
-              .fetchServiceTicketPendingCustomer('pending', context);
-        }
-      }
-    });
+    firstTimeFetchDataFromNetwork();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
-
+    townshipLists =
+        LoginController.to.maintenanceDropDownListsData.details!.townshipData;
     return Container(
       child: _buildWidget(context),
     );
   }
 
   Widget _buildWidget(BuildContext context) {
-    return
-    Obx((){
+    return Obx(() {
       if (HomeController.to.isLoading.value) {
         return Center(
           child: CircularProgressIndicator(),
         );
       } else
-        return  Column(
+        return Column(
           children: [
             SizedBox(
               height: 20.0,
@@ -116,76 +99,100 @@ class _BuildPendingAndNewOrderCustomerListState
                 GetBuilder<HomeController>(
                   builder: (controller) => Expanded(
                       child: SearchTextFieldComponent(
-                        controller: controller.customerNameTextController,
-                        icon: Icons.search,
-                        onPressIcon: () {
-                          PageArgumentController.to.getArgumentData() == SERVICE_TICKET
-                              ? controller.fetchServiceTicketListsByStatus(
-                              'pending',
-                              context,
-                              USERNAME_PARAM +
-                                  controller.customerNameTextController.value.text)
-                              : controller.fetchInstallationListsByStatus(
-                              'pending',
-                              context,
-                              USERNAME_PARAM +
-                                  controller.customerNameTextController.value.text);
+
+                        onTextDataChange: (String value){
+                          if(value == ''){
+                            debugPrint('Empty text');
+                            firstTimeFetchDataFromNetwork();
+                          }
                         },
-                      )),
+                    controller: controller.customerNameTextController,
+                    icon: Icons.search,
+                    onPressIcon: () {
+                      PageArgumentController.to.getArgumentData() ==
+                              SERVICE_TICKET
+                          ? controller.fetchServiceTicketListsByStatus(
+                              'pending',
+                              context,
+                              USERNAME_PARAM +
+                                  controller
+                                      .customerNameTextController.value.text)
+                          : controller.fetchInstallationListsByStatus(
+                              'pending',
+                              context,
+                              USERNAME_PARAM +
+                                  controller
+                                      .customerNameTextController.value.text);
+                    },
+                  )),
                 ),
+                SizedBox(
+                  width: 10.0,
+                ),
+
+                Container(
+                  height: 37,
+                  width: 115,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(4))
+                  ),
+                  margin: EdgeInsets.only(bottom: 18),
+                  child: DropDownButtonComponent(
+                    itemsList: townshipLists,
+                    onChangedData: (TownshipDatum value) {
+                      debugPrint('DropdownValue${value.key}');
+
+                      PageArgumentController.to.getArgumentData() ==
+                          SERVICE_TICKET
+                          ? HomeController.to.fetchServiceTicketListsByStatus(
+                          'pending',
+                          context,
+                          TOWNSHIP_PARAM +
+                              value.id.toString())
+                          : HomeController.to.fetchInstallationListsByStatus(
+                          'pending',
+                          context,
+                          TOWNSHIP_PARAM +
+                              value.id.toString());
+
+                    },
+                    hintText: '--Select Township--',
+                  ),
+                ),
+
                 SizedBox(
                   width: 10.0,
                 ),
                 Expanded(
                     child: SearchTextFieldComponent(
-                      controller: HomeController.to.customerTownshipController,
-                      icon: Icons.search,
-                      onPressIcon: () {
-                        PageArgumentController.to.getArgumentData() == SERVICE_TICKET
-                            ? HomeController.to.fetchServiceTicketListsByStatus(
-                            'pending',
-                            context,
-                            TOWNSHIP_PARAM +
-                                HomeController
-                                    .to.customerTownshipController.value.text)
-                            : HomeController.to.fetchInstallationListsByStatus(
-                            'pending',
-                            context,
-                            TOWNSHIP_PARAM +
-                                HomeController
-                                    .to.customerTownshipController.value.text);
-                      },
-                    )),
-                SizedBox(
-                  width: 10.0,
-                ),
-                Expanded(
-                    child: SearchTextFieldComponent(
-                      onTap: () {
-                        FocusScope.of(context).requestFocus(new FocusNode());
-                        HomeController.to.selectDate(context);
-                      },
-                      controller: HomeController.to.customerDateController,
-                      icon: Icons.search,
-                      onPressIcon: () {
-                        PageArgumentController.to.getArgumentData() == SERVICE_TICKET
-                            ? HomeController.to.fetchServiceTicketListsByStatus(
+                  onTap: () {
+                    FocusScope.of(context).requestFocus(new FocusNode());
+                    HomeController.to.selectDate(context);
+                  },
+                  controller: HomeController.to.customerDateController,
+                  icon: Icons.search,
+                  onPressIcon: () {
+                    PageArgumentController.to.getArgumentData() ==
+                            SERVICE_TICKET
+                        ? HomeController.to.fetchServiceTicketListsByStatus(
                             'pending',
                             context,
                             ASSIGNED_DATE_PARAM +
-                                HomeController.to.customerDateController.value.text)
-                            : HomeController.to.fetchInstallationListsByStatus(
+                                HomeController
+                                    .to.customerDateController.value.text)
+                        : HomeController.to.fetchInstallationListsByStatus(
                             'pending',
                             context,
                             ASSIGNED_DATE_PARAM +
                                 HomeController
                                     .to.customerDateController.value.text);
-                      },
-                    )),
+                  },
+                )),
               ],
             ),
-             GetBuilder<HomeController>(
-                    builder: (controller) => Flexible(
+            GetBuilder<HomeController>(
+                builder: (controller) => Flexible(
                       child: ListView.builder(
                         shrinkWrap: true,
                         physics: ScrollPhysics(),
@@ -193,66 +200,96 @@ class _BuildPendingAndNewOrderCustomerListState
                         itemBuilder: (ctx, index) {
                           return controller.getArgumentData() == INSTALLATION
                               ? CustomerStatusListItems(
-                            controller
-                                .installationPendingCustomerList[index]
-                                .firstname,
-                            controller
-                                .installationPendingCustomerList[index]
-                                .township,
-                            controller
-                                .installationPendingCustomerList[index]
-                                .phone1,
-                            controller
-                                .installationPendingCustomerList[index]
-                                .profileId,
-                            pageStatus:
-                            PageArgumentController.to.getStatus() ==
-                                NEW_ORDER
-                                ? NEW_ORDER
-                                : PENDING,
-                            township: controller
-                                .installationPendingCustomerList[index]
-                                .township,
-                            customerUID: controller
-                                .installationPendingCustomerList[index]
-                                .uid,
-                          )
+                                  controller
+                                      .installationPendingCustomerList[index]
+                                      .firstname,
+                                  controller
+                                      .installationPendingCustomerList[index]
+                                      .township,
+                                  controller
+                                      .installationPendingCustomerList[index]
+                                      .phone1,
+                                  controller
+                                      .installationPendingCustomerList[index]
+                                      .profileId,
+                                  pageStatus:
+                                      PageArgumentController.to.getStatus() ==
+                                              NEW_ORDER
+                                          ? NEW_ORDER
+                                          : PENDING,
+                                  township: controller
+                                      .installationPendingCustomerList[index]
+                                      .township,
+                                  customerUID: controller
+                                      .installationPendingCustomerList[index]
+                                      .uid,
+                                  status: controller
+                                      .installationPendingCustomerList[index]
+                                      .status,
+                                )
                               : CustomerStatusListItems(
-                            controller
-                                .serviceTicketPendingCustomerList[index]
-                                .firstname,
-                            controller
-                                .serviceTicketPendingCustomerList[index]
-                                .township,
-                            controller
-                                .serviceTicketPendingCustomerList[index]
-                                .phone1,
-                            controller
-                                .serviceTicketPendingCustomerList[index]
-                                .profileId,
-                            ticketId: controller
-                                .serviceTicketPendingCustomerList[index]
-                                .ticketId,
-                            pageStatus:
-                            PageArgumentController.to.getStatus() ==
-                                NEW_ORDER
-                                ? NEW_ORDER
-                                : PENDING,
-                            township: controller
-                                .serviceTicketPendingCustomerList[index]
-                                .township,
-                          );
+                                  controller
+                                      .serviceTicketPendingCustomerList[index]
+                                      .firstname,
+                                  controller
+                                      .serviceTicketPendingCustomerList[index]
+                                      .township,
+                                  controller
+                                      .serviceTicketPendingCustomerList[index]
+                                      .phone1,
+                                  controller
+                                      .serviceTicketPendingCustomerList[index]
+                                      .profileId,
+                                  ticketId: controller
+                                      .serviceTicketPendingCustomerList[index]
+                                      .ticketId,
+                                  pageStatus:
+                                      PageArgumentController.to.getStatus() ==
+                                              NEW_ORDER
+                                          ? NEW_ORDER
+                                          : PENDING,
+                                  township: controller
+                                      .serviceTicketPendingCustomerList[index]
+                                      .township,
+                                  status: controller
+                                      .serviceTicketPendingCustomerList[index]
+                                      .status,
+                                );
                         },
                         itemCount: controller.getArgumentData() == INSTALLATION
                             ? controller.installationPendingCustomerList.length
                             : controller
-                            .serviceTicketPendingCustomerList.length,
+                                .serviceTicketPendingCustomerList.length,
                       ),
                     ))
           ],
         );
     });
-
-
   }
+
+
+  void firstTimeFetchDataFromNetwork(){
+    Future.delayed(Duration.zero, () {
+      if (PageArgumentController.to.getArgumentData() == INSTALLATION) {
+        if (PageArgumentController.to.getStatus() == NEW_ORDER) {
+          HomeController.to
+              .fetchInstallationPendingCustomer('newOrder', context);
+        } else if (PageArgumentController.to.getStatus() == PENDING) {
+          HomeController.to
+              .fetchInstallationPendingCustomer('pending', context);
+        }
+      } else if (PageArgumentController.to.getArgumentData() ==
+          SERVICE_TICKET) {
+        if (PageArgumentController.to.getStatus() == NEW_ORDER) {
+          HomeController.to
+              .fetchServiceTicketPendingCustomer('newOrder', context);
+        } else if (PageArgumentController.to.getStatus() == PENDING) {
+          HomeController.to
+              .fetchServiceTicketPendingCustomer('pending', context);
+        }
+      }
+    });
+  }
+
+
 }

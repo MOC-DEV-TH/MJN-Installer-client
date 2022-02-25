@@ -9,13 +9,14 @@ class DropDownButtonComponent<T> extends StatelessWidget {
   final String? value;
   final String? hintText;
   final void Function(T) onChangedData;
-
+  final String? status;
   const DropDownButtonComponent(
       {Key? key,
       this.itemsList = const [],
       this.installItemsList = const [],
       this.icon,
       this.value,
+        this.status,
       required this.hintText,
       required this.onChangedData})
       : super(key: key);
@@ -36,6 +37,7 @@ class DropDownButtonComponent<T> extends StatelessWidget {
             contentPadding: EdgeInsets.only(bottom: 1),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(4),
+
             ),
           ),
           icon: const Icon(
@@ -69,7 +71,7 @@ class DropDownButtonComponent<T> extends StatelessWidget {
             padding: const EdgeInsets.only(left: 20),
             child: Text(
               hintText.toString(),
-              style: TextStyle(fontSize: 12, color: Colors.black54),
+              style: TextStyle(fontSize: 10, color: Colors.black54),
             ),
           ),
         ),

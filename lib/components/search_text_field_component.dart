@@ -9,6 +9,7 @@ class SearchTextFieldComponent extends StatelessWidget {
     this.icon,
     this.isVisible = false,
     this.onTap,
+    this.onTextDataChange,
    required this.controller,
     this.onPressIcon,
   }) : super(key: key);
@@ -19,6 +20,7 @@ class SearchTextFieldComponent extends StatelessWidget {
   final bool isVisible;
   final Function()? onPressIcon;
   final Function()? onTap;
+  final  Function(String)? onTextDataChange;
   final TextInputType textInputType;
   final TextEditingController controller;
   
@@ -30,9 +32,13 @@ class SearchTextFieldComponent extends StatelessWidget {
       margin: EdgeInsets.only(bottom: size.height * 0.1-60, ),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(8.0))
+        borderRadius: BorderRadius.all(Radius.circular(4.0)),
+          border: Border.all(color: Colors.grey)
       ),
       child: TextFormField(
+        onChanged: (String value){
+           onTextDataChange!(value);
+        },
         onTap: onTap,
         maxLines: maxLines,
         textInputAction: TextInputAction.next,

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:mjn_installer_app/models/allDropDownListVO.dart';
 import 'package:mjn_installer_app/models/installationVO.dart';
@@ -12,6 +11,9 @@ import 'package:mjn_installer_app/models/serviceTicket_and_installation_countsVO
 import 'package:mjn_installer_app/models/supportLoginVO.dart';
 import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:path/path.dart';
+import 'package:async/async.dart';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class RestApi {
@@ -178,8 +180,11 @@ class RestApi {
     }
   }
 
-  static Future<NetworkResultVO> postInstallationData(Map<String, String> params,String token) async {
-    debugPrint(params.toString());
+  static Future<NetworkResultVO> postInstallationData(
+      String token,
+      File imageFile,
+      Map<String, String> params
+      ) async {
     var response = await client.post(
       Uri.parse(POST_INSTALLATION_DATA_URL),
       body: json.encode(params),
@@ -193,33 +198,63 @@ class RestApi {
       print(response.statusCode);
       throw Exception('Failed to post installation data');
     }
+    // var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
+    // var length = await imageFile.length();
+    //
+    // var uri = Uri.parse(POST_INSTALLATION_DATA_URL);
+    //
+    // Map<String, String> headers = {
+    //   "content-type": "application/json",
+    //   "token": "Bearer " + token
+    // };
+    // var request = new http.MultipartRequest("POST", uri);
+    // request.fields['uid'] = '2948';
+    // request.fields['profile_id'] = 'O61d55b6ac2f9f6.78990813';
+    // request.fields['app_version'] = app_version;
+    // request.fields['sr_no'] = '';
+    // request.fields['spliter_no'] = '';
+    // request.fields['fiber_usage'] = '';
+    // request.fields['status'] = '';
+    // request.fields['alert_time'] = DateTime.now().toString();
+    //
+    // var multipartFile = new http.MultipartFile('onuImageFile', stream, length,
+    //     filename: basename(imageFile.path));
+    // //contentType: new MediaType('image', 'png'));
+    //
+    // //request.files.add(multipartFile);
+    // request.headers.addAll(headers);
+    // var response = await request.send();
+    // print(response.statusCode);
+    // response.stream.transform(utf8.decoder).listen((value) {
+    //   print(value);
+    // });
+    //
+    // return NetworkResultVO();
   }
 
-  static Future<NetworkResultVO> postServiceTicketData(Map<String, String> params,String token) async {
+  static Future<NetworkResultVO> postServiceTicketData(
+      Map<String, String> params, String token) async {
     debugPrint(params.toString());
     var response = await client.post(
       Uri.parse(POST_SERVICE_TICKET_DATA_URL),
       body: json.encode(params),
-      headers: {'content-type': 'application/json','token': token},
+      headers: {'content-type': 'application/json', 'token': token},
     );
 
     if (response.statusCode == 200) {
       debugPrint(response.body);
-     return networkResultVoFromJson(response.body);
+      return networkResultVoFromJson(response.body);
     } else {
       print(response.statusCode);
       throw Exception('Failed to post service ticket data');
     }
   }
 
-  static Future<ServiceTicketAdnInstallationCountsVO> fetchAllCountsForInstallationAndService(
-      String uid, String token) async {
+  static Future<ServiceTicketAdnInstallationCountsVO>
+      fetchAllCountsForInstallationAndService(String uid, String token) async {
     var response = await client.get(
-      Uri.parse(GET_ALL_COUNT_URL +
-          UID_PARAM +
-          uid +
-          APP_VERSION +
-          app_version),
+      Uri.parse(
+          GET_ALL_COUNT_URL + UID_PARAM + uid + APP_VERSION + app_version),
       headers: {'content-type': 'application/json', 'token': token},
     );
 
@@ -233,15 +268,9 @@ class RestApi {
   }
 
   static Future<ServiceTicketVo> fetchServiceTicketListsByStatus(
-      String token, String uid, String status,String paramAndStatus) async {
-    debugPrint("TicketListByStatus${SERVICE_TICKET_LIST_URL +
-        UID_PARAM +
-        uid +
-        APP_VERSION +
-        app_version +
-        STATUS_PARAM +
-        status +
-        paramAndStatus}");
+      String token, String uid, String status, String paramAndStatus) async {
+    debugPrint(
+        "TicketListByStatus${SERVICE_TICKET_LIST_URL + UID_PARAM + uid + APP_VERSION + app_version + STATUS_PARAM + status + paramAndStatus}");
     var response = await client.get(
       Uri.parse(SERVICE_TICKET_LIST_URL +
           UID_PARAM +
@@ -267,15 +296,9 @@ class RestApi {
   }
 
   static Future<InstallationVo> fetchInstallationListsByStatus(
-      String token, String uid, String status,String paramAndStatus) async {
-    debugPrint("InstallationListByStatus${SERVICE_TICKET_LIST_URL +
-        UID_PARAM +
-        uid +
-        APP_VERSION +
-        app_version +
-        STATUS_PARAM +
-        status +
-        paramAndStatus}");
+      String token, String uid, String status, String paramAndStatus) async {
+    debugPrint(
+        "InstallationListByStatus${SERVICE_TICKET_LIST_URL + UID_PARAM + uid + APP_VERSION + app_version + STATUS_PARAM + status + paramAndStatus}");
     var response = await client.get(
       Uri.parse(INSTALLATION_LIST_URL +
           UID_PARAM +
@@ -300,12 +323,13 @@ class RestApi {
     }
   }
 
-  static Future<NetworkResultVO> serviceTicketOrderAcceptAndLater(Map<String, String> params,String token) async {
+  static Future<NetworkResultVO> serviceTicketOrderAcceptAndLater(
+      Map<String, String> params, String token) async {
     debugPrint(params.toString());
     var response = await client.post(
       Uri.parse(SERVICE_TICKET_ORDER_ACCEPT),
       body: json.encode(params),
-      headers: {'content-type': 'application/json','token': token},
+      headers: {'content-type': 'application/json', 'token': token},
     );
 
     if (response.statusCode == 200) {
@@ -317,12 +341,13 @@ class RestApi {
     }
   }
 
-  static Future<NetworkResultVO> installationOrderAcceptAndLater(Map<String, String> params,String token) async {
+  static Future<NetworkResultVO> installationOrderAcceptAndLater(
+      Map<String, String> params, String token) async {
     debugPrint(params.toString());
     var response = await client.post(
       Uri.parse(INSTALLATION_ORDER_ACCEPT),
       body: json.encode(params),
-      headers: {'content-type': 'application/json','token': token},
+      headers: {'content-type': 'application/json', 'token': token},
     );
 
     if (response.statusCode == 200) {
@@ -333,5 +358,4 @@ class RestApi {
       throw Exception('Installation failed to accept  order later');
     }
   }
-
 }
