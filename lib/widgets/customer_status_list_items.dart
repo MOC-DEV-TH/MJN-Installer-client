@@ -110,6 +110,7 @@ class CustomerStatusListItems extends StatelessWidget {
                                       if (PageArgumentController.to
                                               .getStatus() ==
                                           NEW_ORDER) {
+
                                         HomeController.to
                                             .fetchInstallationPendingCustomer(
                                                 'newOrder', context);

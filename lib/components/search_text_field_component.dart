@@ -67,5 +67,4 @@ class SearchTextFieldComponent extends StatelessWidget {
     );
   }
 
-
 }

@@ -13,7 +13,7 @@ import 'package:intl/intl.dart';
 
 class HomeController extends GetxController {
   var customerNameTextController = TextEditingController();
-  var customerTownshipController = TextEditingController();
+
   var customerDateController = TextEditingController();
   final installationPendingCustomerList = <InstallationDetail>[].obs;
   final serviceTicketPendingCustomerList = <ServiceTicketDetail>[].obs;
@@ -35,6 +35,7 @@ class HomeController extends GetxController {
   final readData = GetStorage();
   var isLoading = false.obs;
   var homeLoading = false.obs;
+
   String argumentData = '';
 
   //for new order page
@@ -60,7 +61,7 @@ class HomeController extends GetxController {
 
   void clearTextFieldData() {
     customerNameTextController.text = '';
-    customerTownshipController.text = '';
+
     customerDateController.text = '';
     update();
   }

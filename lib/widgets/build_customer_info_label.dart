@@ -44,9 +44,87 @@ class _BuildCustomerInfoLabelState extends State<BuildCustomerInfoLabel> {
           child: CircularProgressIndicator(),
         );
       } else
-      return  PageArgumentController.to.getArgumentData() == INSTALLATION ? Column(
-        children: [
-          Row(
+      return  PageArgumentController.to.getArgumentData() == INSTALLATION ? Expanded(
+        child: Column(
+          children: [
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  customerLabel,
+                  middleLabel,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      LabelTextComponent(
+                          text: customerDetailController
+                              .serviceTicketDetail.value.firstname == null ?
+                          "xx xxx xxx xxx xxx" : customerDetailController
+                              .serviceTicketDetail.value.firstname!,
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: customerDetailController
+                                  .installationDetail.value.phone1 ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: customerDetailController
+                                  .installationDetail.value.address ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: customerDetailController
+                                  .installationDetail.value.latitude ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: customerDetailController
+                                  .installationDetail.value.longitude ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: customerDetailController
+                                  .installationDetail.value.type ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: 'xx xxx xxx xxx xxx',
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: customerDetailController
+                                  .installationDetail.value.subconAssignedDate ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+
+                    ],
+                  )
+                ],
+              ),
+            SizedBox(height: 60,),
+           widget.status == 'complete' ? Container() : ButtonComponent(
+              text: PageArgumentController.to.getArgumentData() == SERVICE_TICKET
+                  ? 'Action Started'
+                  : 'Installation Started',
+              padding: 10,
+              containerWidth:
+              PageArgumentController.to.getArgumentData() == SERVICE_TICKET ? 120 : 140,
+              color: Color(int.parse(MJNColors.buttonColor)),
+              onPress: () => onPressActionStart(),
+            ),
+          ],
+        ),
+      ) :
+      Expanded(
+        child: Column(
+          children: [
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 customerLabel,
@@ -56,38 +134,38 @@ class _BuildCustomerInfoLabelState extends State<BuildCustomerInfoLabel> {
                   children: [
                     LabelTextComponent(
                         text: customerDetailController
-                            .serviceTicketDetail.value.firstname == null ?
-                        "xx xxx xxx xxx xxx" : customerDetailController
+                            .serviceTicketDetail.value.firstname ==null ?
+                            "xx xxx xxx xxx xxx" : customerDetailController
                             .serviceTicketDetail.value.firstname!,
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
                         text: customerDetailController
-                                .installationDetail.value.phone1 ??
+                            .serviceTicketDetail.value.phone1 ??
                             "xx xxx xxx xxx xxx",
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
                         text: customerDetailController
-                                .installationDetail.value.address ??
+                            .serviceTicketDetail.value.address ??
                             "xx xxx xxx xxx xxx",
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
                         text: customerDetailController
-                                .installationDetail.value.latitude ??
+                            .serviceTicketDetail.value.latitude ??
                             "xx xxx xxx xxx xxx",
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
                         text: customerDetailController
-                                .installationDetail.value.longitude ??
+                            .serviceTicketDetail.value.longitude ??
                             "xx xxx xxx xxx xxx",
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
                         text: customerDetailController
-                                .installationDetail.value.type ??
+                            .serviceTicketDetail.value.type ??
                             "xx xxx xxx xxx xxx",
                         color: Colors.black,
                         padding: 8.0),
@@ -97,7 +175,7 @@ class _BuildCustomerInfoLabelState extends State<BuildCustomerInfoLabel> {
                         padding: 8.0),
                     LabelTextComponent(
                         text: customerDetailController
-                                .installationDetail.value.subconAssignedDate ??
+                            .serviceTicketDetail.value.subconAssignedDate ??
                             "xx xxx xxx xxx xxx",
                         color: Colors.black,
                         padding: 8.0),
@@ -106,93 +184,19 @@ class _BuildCustomerInfoLabelState extends State<BuildCustomerInfoLabel> {
                 )
               ],
             ),
-          SizedBox(height: 60,),
-         widget.status == 'complete' ? Container() : ButtonComponent(
-            text: PageArgumentController.to.getArgumentData() == SERVICE_TICKET
-                ? 'Action Started'
-                : 'Installation Started',
-            padding: 10,
-            containerWidth:
-            PageArgumentController.to.getArgumentData() == SERVICE_TICKET ? 120 : 140,
-            color: Color(int.parse(MJNColors.buttonColor)),
-            onPress: () => onPressActionStart(),
-          ),
-        ],
-      ) :
-      Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              customerLabel,
-              middleLabel,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  LabelTextComponent(
-                      text: customerDetailController
-                          .serviceTicketDetail.value.firstname ==null ?
-                          "xx xxx xxx xxx xxx" : customerDetailController
-                          .serviceTicketDetail.value.firstname!,
-                      color: Colors.black,
-                      padding: 8.0),
-                  LabelTextComponent(
-                      text: customerDetailController
-                          .serviceTicketDetail.value.phone1 ??
-                          "xx xxx xxx xxx xxx",
-                      color: Colors.black,
-                      padding: 8.0),
-                  LabelTextComponent(
-                      text: customerDetailController
-                          .serviceTicketDetail.value.address ??
-                          "xx xxx xxx xxx xxx",
-                      color: Colors.black,
-                      padding: 8.0),
-                  LabelTextComponent(
-                      text: customerDetailController
-                          .serviceTicketDetail.value.latitude ??
-                          "xx xxx xxx xxx xxx",
-                      color: Colors.black,
-                      padding: 8.0),
-                  LabelTextComponent(
-                      text: customerDetailController
-                          .serviceTicketDetail.value.longitude ??
-                          "xx xxx xxx xxx xxx",
-                      color: Colors.black,
-                      padding: 8.0),
-                  LabelTextComponent(
-                      text: customerDetailController
-                          .serviceTicketDetail.value.type ??
-                          "xx xxx xxx xxx xxx",
-                      color: Colors.black,
-                      padding: 8.0),
-                  LabelTextComponent(
-                      text: 'xx xxx xxx xxx xxx',
-                      color: Colors.black,
-                      padding: 8.0),
-                  LabelTextComponent(
-                      text: customerDetailController
-                          .serviceTicketDetail.value.subconAssignedDate ??
-                          "xx xxx xxx xxx xxx",
-                      color: Colors.black,
-                      padding: 8.0),
-
-                ],
-              )
-            ],
-          ),
-          SizedBox(height: 60,),
-          widget.status == 'complete' ? Container() : ButtonComponent(
-            text: PageArgumentController.to.getArgumentData() == SERVICE_TICKET
-                ? 'Action Started'
-                : 'Installation Started',
-            padding: 10,
-            containerWidth:
-            PageArgumentController.to.getArgumentData() == SERVICE_TICKET ? 120 : 140,
-            color: Color(int.parse(MJNColors.buttonColor)),
-            onPress: () => onPressActionStart(),
-          ),
-        ],
+            SizedBox(height: 60,),
+            widget.status == 'complete' ? Container() : ButtonComponent(
+              text: PageArgumentController.to.getArgumentData() == SERVICE_TICKET
+                  ? 'Action Started'
+                  : 'Installation Started',
+              padding: 10,
+              containerWidth:
+              PageArgumentController.to.getArgumentData() == SERVICE_TICKET ? 120 : 140,
+              color: Color(int.parse(MJNColors.buttonColor)),
+              onPress: () => onPressActionStart(),
+            ),
+          ],
+        ),
       );
 
     });

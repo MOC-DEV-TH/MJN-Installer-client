@@ -18,7 +18,7 @@ class AppUtils {
     );
   }
 
-  static void showSuccessSnackBar(String title, String message) {
+  static  showSuccessSnackBar(String title, String message)  {
     Get.snackbar(
       title,
       message,

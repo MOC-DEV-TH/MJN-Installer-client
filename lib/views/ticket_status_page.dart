@@ -15,6 +15,7 @@ class TicketStatusPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HomeController.to.onUIReady(context);
     return Scaffold(
         appBar: AppUtils.customAppBar(),
         backgroundColor: Color(int.parse(MJNColors.bgColor)),
@@ -47,7 +48,7 @@ class TicketStatusPage extends StatelessWidget {
 
   _buildWidget() {
     return Obx(() {
-      if (HomeController.to.isLoading.value) {
+      if (HomeController.to.homeLoading.value) {
         return Center(
           child: CircularProgressIndicator(),
         );

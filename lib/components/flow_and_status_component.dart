@@ -44,6 +44,11 @@ class FlowAndStatusComponent extends StatelessWidget {
               .fetchAllCountsForServiceTicketAndInstallation(context);
           debugPrint('fetch all counts');
         }),
+
+        status == NEW_ORDER
+        ? PageArgumentController.to.updateStatusTitle(NEW_ORDER)
+            : PageArgumentController.to.updateStatusTitle(PENDING)
+
       },
       child: Container(
         height: 170,
