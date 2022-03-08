@@ -1,5 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:mjn_installer_app/components/flow_and_status_component.dart';
+import 'package:mjn_installer_app/components/ticket_status_component.dart';
 import 'package:mjn_installer_app/controllers/home_controller.dart';
 import 'package:mjn_installer_app/controllers/page_argument_controller.dart';
 import 'package:mjn_installer_app/controllers/ticket_status_controller.dart';
@@ -8,14 +10,51 @@ import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'package:mjn_installer_app/utils/app_utils.dart';
 import 'package:mjn_installer_app/components/bottom_nav_bar_component.dart';
 import 'package:get/get.dart';
+import 'package:mjn_installer_app/utils/eventbus_util.dart';
 
-class TicketStatusPage extends StatelessWidget {
+class TicketStatusPage extends StatefulWidget {
+  @override
+  State<TicketStatusPage> createState() => _TicketStatusPageState();
+}
+
+class _TicketStatusPageState extends State<TicketStatusPage>  with WidgetsBindingObserver{
   final TicketStatusController ticketStatusController =
       Get.put(TicketStatusController());
 
+  late StreamSubscription resumeSub;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addObserver(this);
+    HomeController.to.onUIReady(context);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    debugPrint(state.toString());
+    if(state == AppLifecycleState.resumed){
+      debugPrint('onResumeState');
+    }
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    HomeController.to.onUIReady(context);
+
+    resumeSub = EventBusUtils.getInstance().on().listen((event) {
+      if (event.toString() == 'resume') {
+        HomeController.to.onUIReady(context);
+      }
+
+    });
+
     return Scaffold(
         appBar: AppUtils.customAppBar(),
         backgroundColor: Color(int.parse(MJNColors.bgColor)),
@@ -74,57 +113,59 @@ class TicketStatusPage extends StatelessWidget {
               SizedBox(
                 height: 60.0,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  GetBuilder<TicketStatusController>(
-                      builder: (controller) => FlowAndStatusComponent(
-                          argumentData:
-                              ticketStatusController.getArgumentData(),
-                          status: PENDING,
-                          routeName: CUSTOMER_STATUS_PAGE,
-                          count: ticketStatusController.getArgumentData() ==
-                                  INSTALLATION
-                              ? HomeController
-                                  .to
-                                  .serviceTicketAndInstallationCounts
-                                  .value
-                                  .pendingInstallationCount
-                                  .toString()
-                              : HomeController
-                                  .to
-                                  .serviceTicketAndInstallationCounts
-                                  .value
-                                  .pendingCount
-                                  .toString(),
-                          assertImage: 'assets/pending_img.png')),
-                  GetBuilder<TicketStatusController>(
-                      builder: (controller) => FlowAndStatusComponent(
-                          argumentData: controller.getArgumentData(),
-                          status: NEW_ORDER,
-                          routeName: CUSTOMER_STATUS_PAGE,
-                          count: ticketStatusController.getArgumentData() ==
-                                  INSTALLATION
-                              ? HomeController
-                                  .to
-                                  .serviceTicketAndInstallationCounts
-                                  .value
-                                  .newInstallationCount
-                                  .toString()
-                              : HomeController
-                                  .to
-                                  .serviceTicketAndInstallationCounts
-                                  .value
-                                  .newOrderCount
-                                  .toString(),
-                          assertImage: 'assets/installation_img.png')),
-                ],
-              ),
+
+              GetBuilder<TicketStatusController>(
+                  builder: (controller) => TicketStatusComponent(
+                      argumentData: controller.getArgumentData(),
+                      status: NEW_ORDER,
+                      routeName: CUSTOMER_STATUS_PAGE,
+                      count: ticketStatusController.getArgumentData() ==
+                          INSTALLATION
+                          ? HomeController
+                          .to
+                          .serviceTicketAndInstallationCounts
+                          .value
+                          .newInstallationCount
+                          .toString()
+                          : HomeController
+                          .to
+                          .serviceTicketAndInstallationCounts
+                          .value
+                          .newOrderCount
+                          .toString(),
+                      assertImage: 'assets/installation_img.png')),
               SizedBox(
                 height: 20,
               ),
+
               GetBuilder<TicketStatusController>(
-                builder: (controller) => FlowAndStatusComponent(
+                  builder: (controller) => TicketStatusComponent(
+                      argumentData:
+                          ticketStatusController.getArgumentData(),
+                      status: PENDING,
+                      routeName: CUSTOMER_STATUS_PAGE,
+                      count: ticketStatusController.getArgumentData() ==
+                              INSTALLATION
+                          ? HomeController
+                              .to
+                              .serviceTicketAndInstallationCounts
+                              .value
+                              .pendingInstallationCount
+                              .toString()
+                          : HomeController
+                              .to
+                              .serviceTicketAndInstallationCounts
+                              .value
+                              .pendingCount
+                              .toString(),
+                      assertImage: 'assets/pending_img.png')),
+
+              SizedBox(
+                height: 20.0,
+              ),
+
+              GetBuilder<TicketStatusController>(
+                builder: (controller) => TicketStatusComponent(
                     argumentData: controller.getArgumentData(),
                     status: COMPLETE,
                     routeName: COMPLETE_CUSTOMER_PAGE,

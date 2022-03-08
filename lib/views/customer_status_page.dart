@@ -52,8 +52,6 @@ class CustomerStatusPage extends StatelessWidget {
                          }
                        });
 
-
-
                       },
                     ))));
   }

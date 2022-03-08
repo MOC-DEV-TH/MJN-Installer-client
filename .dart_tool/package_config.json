@@ -104,6 +104,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "expandable",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/expandable-5.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "fake_async",
       "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.2.0",
       "packageUri": "lib/",
@@ -554,7 +560,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-02-28T10:00:59.822819Z",
+  "generated": "2022-03-08T14:56:56.932136Z",
   "generator": "pub",
   "generatorVersion": "2.14.3"
 }

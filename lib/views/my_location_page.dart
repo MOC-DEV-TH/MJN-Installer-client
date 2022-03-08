@@ -120,24 +120,27 @@
 //     });
 //   }
 // }
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:mjn_installer_app/components/button_component.dart';
 import 'package:mjn_installer_app/network/RestApi.dart';
+import 'package:mjn_installer_app/res/colors.dart';
 import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:get/get.dart';
 
-class MyLocation extends StatefulWidget {
-  String token;
-
-  MyLocation(this.token);
-
+class MyLocationPage extends StatefulWidget {
   @override
-  _MyLocationState createState() => _MyLocationState();
+  _MyLocationPageState createState() => _MyLocationPageState();
 }
 
-class _MyLocationState extends State<MyLocation> {
-  var  saveTime ;
+class _MyLocationPageState extends State<MyLocationPage> {
+  var saveTime;
+  StreamSubscription<LocationData>? locationSubscription;
+
   LatLng _initialcameraposition = LatLng(20.5937, 78.9629);
   late GoogleMapController _controller;
   Location _location = Location();
@@ -147,7 +150,6 @@ class _MyLocationState extends State<MyLocation> {
   void _onMapCreated(GoogleMapController _cntlr) {
     _controller = _cntlr;
     _location.onLocationChanged.listen((l) {
-
       _controller.animateCamera(
         CameraUpdate.newCameraPosition(
           CameraPosition(target: LatLng(l.latitude!, l.longitude!), zoom: 15),
@@ -164,46 +166,78 @@ class _MyLocationState extends State<MyLocation> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    locationSubscription!.cancel();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
 
     if (_currentPosition != null) {
-       if(saveTime < DateTime.now().minute){
-         Map<String, String> map = {
-           'lat': _currentPosition!.latitude.toString(),
-           'lon': _currentPosition!.longitude.toString()
-         };
-         RestApi.sendLatAndLongHitToServer(map, widget.token);
+      debugPrint("SaveTime::${saveTime}");
+      if (saveTime <= DateTime.now().minute) {
+        Map<String, String> map = {
+          'lat': _currentPosition!.latitude.toString(),
+          'lon': _currentPosition!.longitude.toString()
+        };
+        RestApi.sendLatAndLongHitToServer(map, readData.read(TOKEN));
 
-         saveTime = DateTime.now().minute;
-
-       }
-
+        saveTime = DateTime.now().add(Duration(minutes: 3)).minute;
+      }
     }
 
     return Scaffold(
       body: Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child:_currentPosition!= null ? Stack(
-          children: [
-            GoogleMap(
-              initialCameraPosition:
-                  CameraPosition(target: _initialcameraposition),
-              mapType: MapType.normal,
-              onMapCreated:  _onMapCreated ,
-              myLocationEnabled: true,
-              myLocationButtonEnabled: true,
-            ),
-          ],
-        ) : Container(),
+        child: _currentPosition != null
+            ? Stack(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(bottom: 40.0, top: 30.0),
+                    child: GoogleMap(
+                      initialCameraPosition:
+                          CameraPosition(target: _initialcameraposition),
+                      mapType: MapType.normal,
+                      onMapCreated: _onMapCreated,
+                      myLocationEnabled: true,
+                      myLocationButtonEnabled: true,
+                    ),
+                  ),
+                  Positioned.fill(
+                      bottom: 1,
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          height: 40,
+                          margin:
+                              EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                          child: ButtonComponent(
+                              padding: 8.0,
+                              text: 'Arrive',
+                              containerWidth: 160,
+                              onPress: onPressArrive,
+                              color: Color(
+                                int.parse(MJNColors.buttonColor),
+                              )),
+                        ),
+                      ))
+                ],
+              )
+            : Container(),
       ),
     );
+  }
+
+  onPressArrive() {
+    Get.back();
   }
 
   getLoc() async {
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
-
 
     _serviceEnabled = await _location.serviceEnabled();
     if (!_serviceEnabled) {
@@ -223,14 +257,20 @@ class _MyLocationState extends State<MyLocation> {
 
     _currentPosition = await _location.getLocation();
 
-    _location.onLocationChanged.listen((LocationData currentLocation) {
 
+    locationSubscription = _location.onLocationChanged.listen((LocationData currentLocation){
       print("${currentLocation.longitude} : ${currentLocation.longitude}");
-      setState(() {
-        _currentPosition = currentLocation;
-        _initialcameraposition =
-            LatLng(_currentPosition!.latitude!, _currentPosition!.longitude!);
+
+      Future.delayed(Duration.zero, () {
+        setState(() {
+          _currentPosition = currentLocation;
+          _initialcameraposition =
+              LatLng(_currentPosition!.latitude!, _currentPosition!.longitude!);
+        });
       });
     });
+
+    // _location.onLocationChanged.listen((LocationData currentLocation) {
+    // });
   }
 }

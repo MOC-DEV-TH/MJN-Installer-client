@@ -55,7 +55,14 @@ class InstallationDetails {
     this.type,
     this.uid,
     this.installer_id,
-    this.user_name
+    this.user_name,
+    this.front_onu_img,
+    this.back_onu_img,
+    this.before_odb_img,
+    this.after_odb_img,
+    this.before_spliter_img,
+    this.after_spliter_img,
+    this.service_acceptance_img,
   });
 
   String? firstname;
@@ -68,6 +75,14 @@ class InstallationDetails {
   String? type;
   String? uid;
   String? installer_id;
+  String? front_onu_img;
+  String? back_onu_img;
+  String? before_odb_img;
+  String? after_odb_img;
+  String? before_spliter_img;
+  String? after_spliter_img;
+  String? service_acceptance_img;
+
 
   factory InstallationDetails.fromJson(Map<String, dynamic> json) => InstallationDetails(
     firstname: json["firstname"],
@@ -80,6 +95,13 @@ class InstallationDetails {
     uid: json["uid"],
     installer_id: json["installer_id"],
     user_name: json["user_name"],
+    front_onu_img: json["front_onu_img"],
+    back_onu_img: json["back_onu_img"],
+    before_odb_img: json["before_odb_img"],
+    after_odb_img: json["after_odb_img"],
+    before_spliter_img: json["before_spliter_img"],
+    after_spliter_img: json["after_spliter_img"],
+    service_acceptance_img: json["service_acceptance_img"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -91,8 +113,14 @@ class InstallationDetails {
     "address": address,
     "type": type,
     "uid": uid,
-    "installer_id": installer_id,
     "user_name": user_name,
-
+    "installer_id": installer_id,
+    "front_onu_img": front_onu_img,
+    "back_onu_img": back_onu_img,
+    "before_odb_img": before_odb_img,
+    "after_odb_img": after_odb_img,
+    "before_spliter_img": before_spliter_img,
+    "after_spliter_img": after_spliter_img,
+    "service_acceptance_img": service_acceptance_img,
   };
 }

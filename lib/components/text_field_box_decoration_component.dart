@@ -23,8 +23,11 @@ class TextFieldBoxDecorationComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Container(
-      height: 35,
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: 35,
+        maxWidth: MediaQuery.of(context).size.width,
+      ),
       child: TextFormField(
         maxLines: maxLines,
         textInputAction: TextInputAction.next,

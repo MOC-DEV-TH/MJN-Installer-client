@@ -87,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                           {
                             writeData.write(SAVE_TIME,DateTime.now().minute);
 
-                            Get.off(() => MyLocation(value.token.toString()));
+                           // Get.off(() => MyLocationPage(value.token.toString()));
                           }
 
                           else {

@@ -282,6 +282,7 @@ class _BuildPendingAndNewOrderCustomerListState
                           status: controller
                               .installationPendingCustomerList[index]
                               .status,
+                          installationDetail: controller.installationPendingCustomerList[index],
                         )
                             : CustomerStatusListItems(
                           controller
@@ -310,6 +311,9 @@ class _BuildPendingAndNewOrderCustomerListState
                           status: controller
                               .serviceTicketPendingCustomerList[index]
                               .status,
+
+                          serviceTicketDetail: controller
+                              .serviceTicketPendingCustomerList[index],
                         );
                       },
                       itemCount: controller.getArgumentData() == INSTALLATION

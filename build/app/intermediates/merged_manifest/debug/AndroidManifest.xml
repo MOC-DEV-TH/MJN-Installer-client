@@ -34,7 +34,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBI0BNsaDuX91yfVQ02KXQH8qV6p9AZrNY" />
+            android:value="AIzaSyCxcjRCcRb_0us8ARIPDz63ZIQRXHE-_uU" />
 
         <activity
             android:name="com.moc.mjninstaller.MainActivity"

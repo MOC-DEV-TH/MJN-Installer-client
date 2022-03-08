@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:mjn_installer_app/controllers/home_controller.dart';
 import 'package:mjn_installer_app/controllers/page_argument_controller.dart';
 import 'package:mjn_installer_app/utils/app_constants.dart';
@@ -62,7 +63,7 @@ class BottomNavigationBarComponent extends StatelessWidget {
                         .toString(),
                     style: TextStyle(
                         fontSize: 8,
-                        color: Colors.yellow,
+                        color: Colors.white,
                         decoration: TextDecoration.none),
                   ),
                 ),
@@ -107,15 +108,16 @@ class BottomNavigationBarComponent extends StatelessWidget {
                   padding: const EdgeInsets.all(6.0),
                   decoration: const BoxDecoration(
                       color: Colors.red, shape: BoxShape.circle),
-                  child:  Text(
-                    HomeController.to
-                        .serviceTicketAndInstallationCounts.value
-                        .allServiceTicketsCounts.toString() ,
-                    style: TextStyle(
-                        fontSize: 8,
-                        color: Colors.yellow,
-                        decoration: TextDecoration.none),
-                  ),
+                  child: Obx((){
+                    return Text(
+                      HomeController.to
+                          .serviceTicketAndInstallationCounts.value
+                          .allServiceTicketsCounts.toString() ,
+                      style: TextStyle(
+                          fontSize: 8,
+                          color: Colors.white,
+                          decoration: TextDecoration.none),
+                    );})
                 ),
               ),
             ],

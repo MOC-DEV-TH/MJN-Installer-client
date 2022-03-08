@@ -18,6 +18,7 @@ const COMPLETE_CUSTOMER_PAGE = '/complete_complete_list';
 const COMPLETE_CUSTOMER_DETAIL_PAGE = '/complete_complete_detail_page';
 const MY_APP = '/my_app';
 const NEW_ORDER_CUSTOMER_PAGE = '/new_order_customer_page';
+const MY_LOCATION_PAGE = '/my_location_page';
 
 
 const INSTALLATION = 'installation';
@@ -41,6 +42,7 @@ const ALL_DROP_DOWN_LISTS = 'all_drop_down_lists';
 
 // param api
 const UID_PARAM = '&uid=';
+const TYPE_PARAM = 'type=';
 const STATUS_PARAM = '&status=';
 const PROFILE_ID_PARAM = '&profile_id=';
 const TICKET_ID_PARAM = '&ticket_id=';
@@ -61,3 +63,4 @@ const POST_SERVICE_TICKET_DATA_URL = API_URL+"post_service_tickets_data";
 const GET_ALL_COUNT_URL = API_URL+"get_counts?";
 const SERVICE_TICKET_ORDER_ACCEPT = API_URL+"order_accept";
 const INSTALLATION_ORDER_ACCEPT = API_URL+"installation_order_accept";
+const GET_INSTALLATION_USAGES = API_URL+"get_usages?";

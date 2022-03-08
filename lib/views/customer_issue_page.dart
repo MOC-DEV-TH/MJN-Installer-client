@@ -48,8 +48,8 @@ class CustomerIssuePage extends StatelessWidget {
           ),
           //BuildCustomerInfoLabel(),
           PageArgumentController.to.getArgumentData() == INSTALLATION
-              ? BuildInstallationDropdownList(Get.arguments.toString())
-              : BuildMaintenanceDropdownList(Get.arguments.toString()),
+              ? BuildInstallationDropdownList()
+              : BuildMaintenanceDropdownList(),
         ],
       ),
     );

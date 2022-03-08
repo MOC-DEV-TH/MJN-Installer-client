@@ -1,4 +1,5 @@
 import 'package:mjn_installer_app/views/complete_customer_detail_page.dart';
+import 'package:mjn_installer_app/views/my_location_page.dart';
 import 'package:mjn_installer_app/views/pending_customer_complete_page.dart';
 import 'package:mjn_installer_app/views/complete_customer_page.dart';
 import 'package:mjn_installer_app/views/customer_detail_page.dart';
@@ -24,5 +25,6 @@ class Routers{
     GetPage(name: COMPLETE_CUSTOMER_PAGE, page: () => CompleteCustomerPage()),
     GetPage(name: COMPLETE_CUSTOMER_DETAIL_PAGE, page: () => CompleteCustomerDetailPage()),
     GetPage(name: NEW_ORDER_CUSTOMER_PAGE, page: () => NewOrderCustomerPage()),
+    GetPage(name: MY_LOCATION_PAGE, page: () => MyLocationPage()),
   ];
 }

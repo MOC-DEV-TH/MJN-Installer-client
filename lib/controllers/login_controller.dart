@@ -62,7 +62,6 @@ class LoginController extends GetxController {
               Future.delayed(Duration.zero, () {
                 if (value.status == 'Success') {
                   clearText();
-                  writeData.write(SAVE_TIME, DateTime.now().minute);
                   writeData.write(TOKEN, value.token);
                   writeData.write(UID, value.uid);
                   isLoading(false);
@@ -87,6 +86,7 @@ class LoginController extends GetxController {
         maintenanceDropDownListsData = allDropDownListVoFromJson(
             json.decode(writeData.read(ALL_DROP_DOWN_LISTS)));
         update();
+
 
     });
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:mjn_installer_app/components/button_component.dart';
 import 'package:mjn_installer_app/components/label_text_component.dart';
 import 'package:mjn_installer_app/controllers/customer_detail_controller.dart';
@@ -11,7 +12,7 @@ class BuildCustomerInfoLabel extends StatefulWidget {
   final String profileIdOrTicketID;
   String? status;
   BuildCustomerInfoLabel( this.profileIdOrTicketID,{this.status});
-  
+
   @override
   State<BuildCustomerInfoLabel> createState() => _BuildCustomerInfoLabelState();
 }
@@ -19,6 +20,8 @@ class BuildCustomerInfoLabel extends StatefulWidget {
 class _BuildCustomerInfoLabelState extends State<BuildCustomerInfoLabel> {
   CustomerDetailController customerDetailController =
       Get.put(CustomerDetailController());
+
+  final writeData = GetStorage();
 
   @override
   void initState() {
@@ -203,9 +206,11 @@ class _BuildCustomerInfoLabelState extends State<BuildCustomerInfoLabel> {
   }
 
   void onPressActionStart() {
-    Get.toNamed(CUSTOMER_ISSUE_PAGE, arguments:
-      widget.profileIdOrTicketID
-    );
+    // Get.offNamed(CUSTOMER_ISSUE_PAGE, arguments:
+    //   widget.profileIdOrTicketID
+    // );
+    writeData.write(SAVE_TIME, DateTime.now().minute);
+    Get.offNamed(MY_LOCATION_PAGE);
   }
   final customerLabel = Column(
     crossAxisAlignment: CrossAxisAlignment.start,

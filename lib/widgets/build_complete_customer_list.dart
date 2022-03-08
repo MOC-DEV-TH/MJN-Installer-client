@@ -6,6 +6,7 @@ import 'package:mjn_installer_app/controllers/login_controller.dart';
 import 'package:mjn_installer_app/controllers/page_argument_controller.dart';
 import 'package:mjn_installer_app/models/allDropDownListVO.dart';
 import 'package:mjn_installer_app/utils/app_constants.dart';
+import 'package:mjn_installer_app/utils/eventbus_util.dart';
 import 'customer_status_list_items.dart';
 import 'package:get/get.dart';
 
@@ -22,6 +23,7 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
   void initState() {
     super.initState();
     firstTimeFetchDataFromNetwork();
+    EventBusUtils.getInstance().fire('resume');
   }
 
   @override

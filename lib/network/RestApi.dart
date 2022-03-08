@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:mjn_installer_app/models/allDropDownListVO.dart';
+import 'package:mjn_installer_app/models/b2bAndb2cUsagesVO.dart';
 import 'package:mjn_installer_app/models/installationVO.dart';
 import 'package:mjn_installer_app/models/installationDetailVO.dart';
 import 'package:mjn_installer_app/models/networkResultVO.dart';
@@ -11,8 +12,6 @@ import 'package:mjn_installer_app/models/serviceTicket_and_installation_countsVO
 import 'package:mjn_installer_app/models/supportLoginVO.dart';
 import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:path/path.dart';
-import 'package:async/async.dart';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
@@ -44,7 +43,7 @@ class RestApi {
 
   static void sendLatAndLongHitToServer(
       Map<String, String> params, String token) async {
-    debugPrint(params.toString());
+    debugPrint("Lat And Long::${params.toString()}");
     var response = await client.post(
       Uri.parse(LATITUDE_LONGITUDE_URL),
       body: json.encode(params),
@@ -182,8 +181,7 @@ class RestApi {
 
   static Future<NetworkResultVO> postInstallationData(
       String token,
-      File imageFile,
-      Map<String, String> params
+      Map<dynamic, dynamic> params
       ) async {
     var response = await client.post(
       Uri.parse(POST_INSTALLATION_DATA_URL),
@@ -233,7 +231,7 @@ class RestApi {
   }
 
   static Future<NetworkResultVO> postServiceTicketData(
-      Map<String, String> params, String token) async {
+      Map<dynamic, dynamic> params, String token) async {
     debugPrint(params.toString());
     var response = await client.post(
       Uri.parse(POST_SERVICE_TICKET_DATA_URL),
@@ -260,6 +258,11 @@ class RestApi {
 
     if (response.statusCode == 200) {
       debugPrint(response.body);
+      json.decode(response.body).forEach((key, value){
+        print('key is $key');
+        print('value is $value ');
+      });
+
       return serviceTicketAdnInstallationCountsFromJson(response.body);
     } else {
       print(response.statusCode);
@@ -356,6 +359,28 @@ class RestApi {
     } else {
       print(response.statusCode);
       throw Exception('Installation failed to accept  order later');
+    }
+  }
+
+  static Future<B2BAndB2CUsagesVo> fetchInstallationUsages(String token,String uid,String type) async {
+    var response = await client.get(
+      Uri.parse(
+          GET_INSTALLATION_USAGES + TYPE_PARAM + type + APP_VERSION + app_version + UID_PARAM + uid),
+      headers: {'content-type': 'application/json', 'token': token},
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint(response.body);
+      json.decode(response.body).forEach((key, value) {
+        print('key is $key');
+        print('value is $value ');
+      });
+
+      return B2BAndB2CUsagesVo.fromJson(json.decode(response.body));
+
+    } else {
+      print(response.statusCode);
+      throw Exception('Failed to get all installation usages');
     }
   }
 }

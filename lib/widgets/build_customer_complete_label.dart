@@ -121,7 +121,7 @@ class _BuildPendingCustomerCompleteInfoState
   }
 
   void onPressCustomerComplete() {
-    Get.toNamed(COMPLETE_CUSTOMER_PAGE);
+    Get.offNamed(COMPLETE_CUSTOMER_PAGE);
   }
 
   final customerLabel = Column(

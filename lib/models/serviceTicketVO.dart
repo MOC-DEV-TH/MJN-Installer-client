@@ -51,7 +51,10 @@ class ServiceTicketDetail {
     this.ticketId,
     this.phone1,
     this.profileId,
-    this.status
+    this.status,
+    this.plan,
+    this.subcon_assigned_date,
+    this.uid
   });
 
   String? firstname;
@@ -60,6 +63,9 @@ class ServiceTicketDetail {
   String? phone1;
   String? profileId;
   String? status;
+  String? subcon_assigned_date;
+  String? plan;
+  String? uid;
 
   factory ServiceTicketDetail.fromJson(Map<String, dynamic> json) => ServiceTicketDetail(
     firstname: json["firstname"],
@@ -68,6 +74,9 @@ class ServiceTicketDetail {
     phone1: json["phone_1"],
     profileId: json["profile_id"],
     status: json["status"],
+    subcon_assigned_date: json["subcon_assigned_date"],
+    plan: json["plan"],
+    uid: json["uid"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -77,5 +86,8 @@ class ServiceTicketDetail {
     "phone_1": phone1,
     "profile_id": profileId,
     "status": status,
+    "subcon_assigned_date": subcon_assigned_date,
+    "plan": plan,
+    "uid": uid,
   };
 }
