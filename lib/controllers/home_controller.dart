@@ -38,6 +38,10 @@ class HomeController extends GetxController {
 
   String argumentData = '';
 
+  //user data for location page
+  var customerProfileID;
+  var customerPhoneNo;
+
   //for new order page
   var customerName;
   var customerAddress;
@@ -78,20 +82,23 @@ class HomeController extends GetxController {
   }
 
   void updateServiceTicketData(String ticketId, String profileId,
-      String customerType, String customerUid) {
+      String customerType, String customerUid,String customerPhone) {
     serviceTicketID = ticketId;
     serviceProfileID = profileId;
     serviceCustomerType = customerType;
     serviceCustomerUid = customerUid;
-
+    customerPhoneNo = customerPhone;
+    customerProfileID = profileId;
     update();
   }
 
   void updateInstallationData(String profileId,
-      String customerType, String customerUid) {
+      String customerType, String customerUid,String customerPhone) {
     installationProfileID = profileId;
     installationCustomerType = customerType;
     installationCustomerUid = customerUid;
+    customerPhoneNo = customerPhone;
+    customerProfileID = profileId;
 
     update();
   }

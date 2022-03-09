@@ -121,9 +121,9 @@
 //   }
 // }
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:mjn_installer_app/components/button_component.dart';
+import 'package:mjn_installer_app/controllers/home_controller.dart';
 import 'package:mjn_installer_app/network/RestApi.dart';
 import 'package:mjn_installer_app/res/colors.dart';
 import 'package:mjn_installer_app/utils/app_constants.dart';
@@ -147,6 +147,8 @@ class _MyLocationPageState extends State<MyLocationPage> {
   LocationData? _currentPosition;
   final readData = GetStorage();
 
+  String firstTime = 'true';
+
   void _onMapCreated(GoogleMapController _cntlr) {
     _controller = _cntlr;
     _location.onLocationChanged.listen((l) {
@@ -163,6 +165,7 @@ class _MyLocationPageState extends State<MyLocationPage> {
     saveTime = readData.read(SAVE_TIME);
     super.initState();
     getLoc();
+    firstTime = 'true';
   }
 
   @override
@@ -175,18 +178,7 @@ class _MyLocationPageState extends State<MyLocationPage> {
   @override
   Widget build(BuildContext context) {
 
-    if (_currentPosition != null) {
-      debugPrint("SaveTime::${saveTime}");
-      if (saveTime <= DateTime.now().minute) {
-        Map<String, String> map = {
-          'lat': _currentPosition!.latitude.toString(),
-          'lon': _currentPosition!.longitude.toString()
-        };
-        RestApi.sendLatAndLongHitToServer(map, readData.read(TOKEN));
-
-        saveTime = DateTime.now().add(Duration(minutes: 3)).minute;
-      }
-    }
+    postLatLongToServer();
 
     return Scaffold(
       body: Container(
@@ -231,7 +223,58 @@ class _MyLocationPageState extends State<MyLocationPage> {
     );
   }
 
+  void postLatLongToServer() {
+
+    if (_currentPosition != null) {
+      debugPrint("SaveTime::${saveTime}");
+      if (saveTime <= DateTime.now().minute) {
+        debugPrint("PostLatLong");
+
+        Map<String, String> map = {
+          'uid': readData.read(UID),
+          'customer_profile_id': HomeController.to.customerProfileID,
+          'lat': _currentPosition!.latitude.toString(),
+          'long': _currentPosition!.longitude.toString(),
+          'app_version': app_version,
+          "isArrived":"0"
+        };
+        RestApi.postInstallerLatitudeAndLongitude(map, readData.read(TOKEN)).then((value) =>
+        firstTime == 'true' ? firstTimeSendSmSToServer() : null
+        );
+        saveTime = DateTime.now().add(Duration(minutes: 3)).minute;
+      }
+    }
+  }
+
+  void firstTimeSendSmSToServer() {
+    Map<String, String> map = {
+      'uid': readData.read(UID),
+      'phone' : HomeController.to.customerPhoneNo,
+      'profile_id': HomeController.to.customerProfileID,
+      'app_version': app_version,
+    };
+    RestApi.firstTimeSendSMSToServer(map, readData.read(TOKEN)).then((value) => {
+      if(value.status == 'Success'){
+        setState(() {
+          firstTime = 'false';
+        })
+      }
+    });
+  }
+
+
   onPressArrive() {
+    Map<String, String> map = {
+      'uid': readData.read(UID),
+      'customer_profile_id': HomeController.to.customerProfileID,
+      'lat': _currentPosition!.latitude.toString(),
+      'long': _currentPosition!.longitude.toString(),
+      'app_version': app_version,
+      "isArrived":"1"
+    };
+
+    RestApi.postInstallerLatitudeAndLongitude(map, readData.read(TOKEN));
+
     Get.back();
   }
 
@@ -273,4 +316,6 @@ class _MyLocationPageState extends State<MyLocationPage> {
     // _location.onLocationChanged.listen((LocationData currentLocation) {
     // });
   }
+
+
 }

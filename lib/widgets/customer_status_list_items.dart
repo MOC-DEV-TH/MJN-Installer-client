@@ -27,12 +27,12 @@ class CustomerStatusListItems extends StatelessWidget {
   CustomerStatusListItems(this.customerName, this.customerAddress,
       this.customerPhNo, this.profileId,
       {@required this.installationDetail,
-        @required this.serviceTicketDetail,
-        @required this.pageStatus,
-        @required this.township,
-        @required this.ticketId,
-        @required this.customerUID,
-        @required this.status});
+      @required this.serviceTicketDetail,
+      @required this.pageStatus,
+      @required this.township,
+      @required this.ticketId,
+      @required this.customerUID,
+      @required this.status});
 
   @override
   Widget build(BuildContext context) {
@@ -41,168 +41,163 @@ class CustomerStatusListItems extends StatelessWidget {
     townshipLists =
         LoginController.to.maintenanceDropDownListsData.details!.townshipData;
 
-    for(var i in townshipLists!){
+    for (var i in townshipLists!) {
       debugPrint("${i.id} ${i.name}");
-      if(i.id.toString() == customerAddress){
+      if (i.id.toString() == customerAddress) {
         townshipName.value = i.name!;
       }
-
     }
 
     return Container(
         child: Container(
-          margin: EdgeInsets.only(bottom: 10),
-          height: 90,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(8.0))),
-          child: Padding(
-            padding: const EdgeInsets.all(14.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      margin: EdgeInsets.only(bottom: 10),
+      height: 90,
+      decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(8.0))),
+      child: Padding(
+        padding: const EdgeInsets.all(14.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            customerInfoLabel,
+            middleLabel,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                customerInfoLabel,
-                middleLabel,
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: Text(
-                        customerName!,
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: 12,
-                            color: Colors.black,
-                            decoration: TextDecoration.none),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: Text(
-                        customerPhNo!,
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: 12,
-                            color: Colors.black,
-                            decoration: TextDecoration.none),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child:Obx((){
-                        return
-                          Text(
-                            townshipName.value,
-                            style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 12,
-                                color: Colors.black,
-                                decoration: TextDecoration.none),
-                          );
-                      })
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text(
+                    customerName!,
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 12,
+                        color: Colors.black,
+                        decoration: TextDecoration.none),
+                  ),
                 ),
-                verticalDivider,
-                InkWell(
-                    onTap: () {
-                      if (pageStatus == NEW_ORDER) {
-                        HomeController.to.updateNewOrderData(
-                            customerName ?? '',
-                            customerAddress ?? '',
-                            customerPhNo ?? '',
-                            township ?? '',
-                            ticketId ?? '',
-                            profileId ?? '',
-                            customerUID ?? '');
-                      }
-                      else if (pageStatus == PENDING) {
-                        if (PageArgumentController.to.getArgumentData() ==
-                            INSTALLATION) {
-                          HomeController.to.updateInstallationData(
-                              installationDetail!.profileId!,
-                              installationDetail!.plan!,
-                              installationDetail!.uid!);
-                        }
-                        else {
-                          HomeController.to.updateServiceTicketData(
-                              serviceTicketDetail!.ticketId!,
-                              serviceTicketDetail!.profileId!,
-                              serviceTicketDetail!.plan!,
-                              serviceTicketDetail!.uid!);
-                        }
-                      }
-
-
-                      pageStatus == 'complete'
-                          ? Get.toNamed(COMPLETE_CUSTOMER_DETAIL_PAGE,
-                          arguments:
-                          PageArgumentController.to.getArgumentData() ==
-                              INSTALLATION
-                              ? profileId
-                              : ticketId)
-                          : pageStatus == NEW_ORDER
-                          ? Get.toNamed(NEW_ORDER_CUSTOMER_PAGE)!.then(
-                              (value) =>
-                              Future.delayed(Duration.zero, () {
-                                if (PageArgumentController.to
-                                    .getArgumentData() ==
-                                    INSTALLATION) {
-                                  if (PageArgumentController.to
-                                      .getStatus() ==
-                                      NEW_ORDER) {
-                                    HomeController.to
-                                        .fetchInstallationPendingCustomer(
-                                        'newOrder', context);
-                                  } else if (PageArgumentController.to
-                                      .getStatus() ==
-                                      PENDING) {
-                                    HomeController.to
-                                        .fetchInstallationPendingCustomer(
-                                        'pending', context);
-                                  }
-                                } else if (PageArgumentController.to
-                                    .getArgumentData() ==
-                                    SERVICE_TICKET) {
-                                  if (PageArgumentController.to
-                                      .getStatus() ==
-                                      NEW_ORDER) {
-                                    HomeController.to
-                                        .fetchServiceTicketPendingCustomer(
-                                        'newOrder', context);
-                                  } else if (PageArgumentController.to
-                                      .getStatus() ==
-                                      PENDING) {
-                                    HomeController.to
-                                        .fetchServiceTicketPendingCustomer(
-                                        'pending', context);
-                                  }
-                                }
-                              }))
-                      // pending ticket flow
-                      //installation flow
-                          : PageArgumentController.to.getArgumentData() ==
-                          INSTALLATION
-                          ? status == '2'
-                          ? Get.offNamed(CUSTOMER_DETAIL_PAGE,
-                          arguments: profileId)
-                          : Get.offNamed(CUSTOMER_ISSUE_PAGE,
-                          arguments: profileId)
-
-                      // service ticket flow
-                          : status == '2'
-                          ? Get.offNamed(CUSTOMER_DETAIL_PAGE,
-                          arguments: ticketId)
-                          : Get.offNamed(CUSTOMER_ISSUE_PAGE,
-                          arguments: ticketId);
-                    },
-                    child: labelView)
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text(
+                    customerPhNo!,
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 12,
+                        color: Colors.black,
+                        decoration: TextDecoration.none),
+                  ),
+                ),
+                Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Obx(() {
+                      return Text(
+                        townshipName.value,
+                        style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 12,
+                            color: Colors.black,
+                            decoration: TextDecoration.none),
+                      );
+                    })),
               ],
             ),
-          ),
-        ));
+            verticalDivider,
+            InkWell(
+                onTap: () {
+                  if (pageStatus == NEW_ORDER) {
+                    HomeController.to.updateNewOrderData(
+                        customerName ?? '',
+                        customerAddress ?? '',
+                        customerPhNo ?? '',
+                        township ?? '',
+                        ticketId ?? '',
+                        profileId ?? '',
+                        customerUID ?? '');
+                  } else if (pageStatus == PENDING) {
+                    if (PageArgumentController.to.getArgumentData() ==
+                        INSTALLATION) {
+                      HomeController.to.updateInstallationData(
+                          installationDetail!.profileId!,
+                          installationDetail!.plan!,
+                          installationDetail!.uid!,
+                          installationDetail!.phone1!);
+                    } else {
+                      HomeController.to.updateServiceTicketData(
+                          serviceTicketDetail!.ticketId!,
+                          serviceTicketDetail!.profileId!,
+                          serviceTicketDetail!.plan!,
+                          serviceTicketDetail!.uid!,
+                          serviceTicketDetail!.phone1!);
+                    }
+                  }
+
+                  pageStatus == 'complete'
+                      ? Get.toNamed(COMPLETE_CUSTOMER_DETAIL_PAGE,
+                          arguments:
+                              PageArgumentController.to.getArgumentData() ==
+                                      INSTALLATION
+                                  ? profileId
+                                  : ticketId)
+                      : pageStatus == NEW_ORDER
+                          ? Get.toNamed(NEW_ORDER_CUSTOMER_PAGE)!.then(
+                              (value) => Future.delayed(Duration.zero, () {
+                                    if (PageArgumentController.to
+                                            .getArgumentData() ==
+                                        INSTALLATION) {
+                                      if (PageArgumentController.to
+                                              .getStatus() ==
+                                          NEW_ORDER) {
+                                        HomeController.to
+                                            .fetchInstallationPendingCustomer(
+                                                'newOrder', context);
+                                      } else if (PageArgumentController.to
+                                              .getStatus() ==
+                                          PENDING) {
+                                        HomeController.to
+                                            .fetchInstallationPendingCustomer(
+                                                'pending', context);
+                                      }
+                                    } else if (PageArgumentController.to
+                                            .getArgumentData() ==
+                                        SERVICE_TICKET) {
+                                      if (PageArgumentController.to
+                                              .getStatus() ==
+                                          NEW_ORDER) {
+                                        HomeController.to
+                                            .fetchServiceTicketPendingCustomer(
+                                                'newOrder', context);
+                                      } else if (PageArgumentController.to
+                                              .getStatus() ==
+                                          PENDING) {
+                                        HomeController.to
+                                            .fetchServiceTicketPendingCustomer(
+                                                'pending', context);
+                                      }
+                                    }
+                                  }))
+                          // pending ticket flow
+                          //installation flow
+                          : PageArgumentController.to.getArgumentData() ==
+                                  INSTALLATION
+                              ? status == '2'
+                                  ? Get.toNamed(CUSTOMER_DETAIL_PAGE,
+                                      arguments: profileId)
+                                  : Get.offNamed(CUSTOMER_ISSUE_PAGE,
+                                      arguments: profileId)
+
+                              // service ticket flow
+                              : status == '2'
+                                  ? Get.toNamed(CUSTOMER_DETAIL_PAGE,
+                                      arguments: ticketId)
+                                  : Get.offNamed(CUSTOMER_ISSUE_PAGE,
+                                      arguments: ticketId);
+                },
+                child: labelView)
+          ],
+        ),
+      ),
+    ));
   }
 
   final customerInfoLabel = Column(

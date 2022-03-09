@@ -3,7 +3,7 @@
   "packages": [
     {
       "name": "archive",
-      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/archive-3.1.8",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/archive-3.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -93,7 +93,7 @@
     },
     {
       "name": "dropdown_button2",
-      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/dropdown_button2-1.1.1",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/dropdown_button2-1.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -177,13 +177,13 @@
     },
     {
       "name": "geolocator_android",
-      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_android-3.0.2",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_android-3.1.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "geolocator_platform_interface",
-      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_platform_interface-4.0.1",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/geolocator_platform_interface-4.0.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -207,7 +207,7 @@
     },
     {
       "name": "google_maps_flutter",
-      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter-2.1.1",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/google_maps_flutter-2.1.2",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -243,25 +243,25 @@
     },
     {
       "name": "image",
-      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/image-3.1.1",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/image-3.1.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "image_picker",
-      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.8.4+4",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker-0.8.4+10",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
     {
       "name": "image_picker_for_web",
-      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_for_web-2.1.5",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_for_web-2.1.6",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "image_picker_platform_interface",
-      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_platform_interface-2.4.3",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/image_picker_platform_interface-2.4.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -321,7 +321,7 @@
     },
     {
       "name": "path_provider",
-      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.8",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.9",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -369,7 +369,7 @@
     },
     {
       "name": "permission_handler",
-      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-8.3.0",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-9.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -429,7 +429,7 @@
     },
     {
       "name": "store_redirect",
-      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/store_redirect-2.0.0",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/store_redirect-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -477,7 +477,7 @@
     },
     {
       "name": "url_launcher",
-      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher-6.0.18",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher-6.0.20",
       "packageUri": "lib/",
       "languageVersion": "2.14"
     },
@@ -495,13 +495,13 @@
     },
     {
       "name": "url_launcher_linux",
-      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_linux-2.0.3",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_linux-3.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "url_launcher_macos",
-      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_macos-2.0.2",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_macos-3.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -513,13 +513,13 @@
     },
     {
       "name": "url_launcher_web",
-      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_web-2.0.6",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_web-2.0.7",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "url_launcher_windows",
-      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_windows-2.0.2",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_windows-3.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -537,7 +537,7 @@
     },
     {
       "name": "xdg_directories",
-      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/xdg_directories-0.2.0",
+      "rootUri": "file:///Users/admin/Developer/flutter/.pub-cache/hosted/pub.dartlang.org/xdg_directories-0.2.0+1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -560,7 +560,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-03-08T14:56:56.932136Z",
+  "generated": "2022-03-09T06:59:57.145862Z",
   "generator": "pub",
   "generatorVersion": "2.14.3"
 }

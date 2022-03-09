@@ -9,10 +9,10 @@ import 'package:mjn_installer_app/models/networkResultVO.dart';
 import 'package:mjn_installer_app/models/serviceTicketDetailVO.dart';
 import 'package:mjn_installer_app/models/serviceTicketVO.dart';
 import 'package:mjn_installer_app/models/serviceTicket_and_installation_countsVO.dart';
+import 'package:mjn_installer_app/models/smsResponseVO.dart';
 import 'package:mjn_installer_app/models/supportLoginVO.dart';
 import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'package:get_storage/get_storage.dart';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class RestApi {
@@ -40,6 +40,52 @@ class RestApi {
       throw Exception('Failed to login');
     }
   }
+
+  static Future<void> postInstallerLatitudeAndLongitude(
+      Map<String, String> params,String token) async {
+
+    debugPrint("Lat And Long::${params.toString()}");
+    var response = await client.post(
+      Uri.parse(POST_INSTALLER_LAT_LONG_URL),
+      body: json.encode(params),
+      headers: {
+        'content-type': 'application/json',
+        "token": token
+      },
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint(response.body);
+
+    } else {
+      print(response.statusCode);
+      throw Exception('Failed to post data');
+    }
+  }
+
+  static Future<SmsResponseVo> firstTimeSendSMSToServer(
+      Map<String, String> params,String token) async {
+    debugPrint("Send SmS${params.toString()}");
+    debugPrint(params.toString());
+    var response = await client.post(
+      Uri.parse(SEND_SMS_BRIX_URL),
+      body: json.encode(params),
+      headers: {
+        'content-type': 'application/json',
+        "token": token
+      },
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint(response.body);
+      return smsResponseVoFromJson(response.body);
+    } else {
+      print(response.statusCode);
+      throw Exception('Failed to post data');
+    }
+  }
+
+
 
   static void sendLatAndLongHitToServer(
       Map<String, String> params, String token) async {
@@ -330,7 +376,7 @@ class RestApi {
       Map<String, String> params, String token) async {
     debugPrint(params.toString());
     var response = await client.post(
-      Uri.parse(SERVICE_TICKET_ORDER_ACCEPT),
+      Uri.parse(SERVICE_TICKET_ORDER_ACCEPT_URL),
       body: json.encode(params),
       headers: {'content-type': 'application/json', 'token': token},
     );
@@ -348,7 +394,7 @@ class RestApi {
       Map<String, String> params, String token) async {
     debugPrint(params.toString());
     var response = await client.post(
-      Uri.parse(INSTALLATION_ORDER_ACCEPT),
+      Uri.parse(INSTALLATION_ORDER_ACCEPT_URL),
       body: json.encode(params),
       headers: {'content-type': 'application/json', 'token': token},
     );
@@ -365,7 +411,7 @@ class RestApi {
   static Future<B2BAndB2CUsagesVo> fetchInstallationUsages(String token,String uid,String type) async {
     var response = await client.get(
       Uri.parse(
-          GET_INSTALLATION_USAGES + TYPE_PARAM + type + APP_VERSION + app_version + UID_PARAM + uid),
+          GET_INSTALLATION_USAGES_URL + TYPE_PARAM + type + APP_VERSION + app_version + UID_PARAM + uid),
       headers: {'content-type': 'application/json', 'token': token},
     );
 

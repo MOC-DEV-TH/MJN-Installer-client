@@ -153,31 +153,41 @@
 94-->[:url_launcher_android] /Users/admin/MJN_Installer/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-71
 95
 96        <service
-96-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:11:9-15:56
-97            android:name="com.lyokone.location.FlutterLocationService"
-97-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-71
+96-->[:geolocator_android] /Users/admin/MJN_Installer/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:56
+97            android:name="com.baseflow.geolocator.GeolocatorLocationService"
+97-->[:geolocator_android] /Users/admin/MJN_Installer/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-77
 98            android:enabled="true"
-98-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-35
+98-->[:geolocator_android] /Users/admin/MJN_Installer/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-35
 99            android:exported="false"
-99-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-37
+99-->[:geolocator_android] /Users/admin/MJN_Installer/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
 100            android:foregroundServiceType="location" />
-100-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-53
-101
-102        <activity
-102-->[com.google.android.gms:play-services-base:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/79a386b545cc2f3a9101f84c43470ac4/jetified-play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
-103            android:name="com.google.android.gms.common.api.GoogleApiActivity"
-103-->[com.google.android.gms:play-services-base:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/79a386b545cc2f3a9101f84c43470ac4/jetified-play-services-base-17.0.0/AndroidManifest.xml:24:13-79
+100-->[:geolocator_android] /Users/admin/MJN_Installer/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-53
+101        <service
+101-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:11:9-15:56
+102            android:name="com.lyokone.location.FlutterLocationService"
+102-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-71
+103            android:enabled="true"
+103-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-35
 104            android:exported="false"
-104-->[com.google.android.gms:play-services-base:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/79a386b545cc2f3a9101f84c43470ac4/jetified-play-services-base-17.0.0/AndroidManifest.xml:25:13-37
-105            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-105-->[com.google.android.gms:play-services-base:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/79a386b545cc2f3a9101f84c43470ac4/jetified-play-services-base-17.0.0/AndroidManifest.xml:26:13-72
+104-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-37
+105            android:foregroundServiceType="location" />
+105-->[:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:15:13-53
 106
-107        <meta-data
-107-->[com.google.android.gms:play-services-basement:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/d14ebb838c3418c16d46982ee4860a26/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
-108            android:name="com.google.android.gms.version"
-108-->[com.google.android.gms:play-services-basement:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/d14ebb838c3418c16d46982ee4860a26/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
-109            android:value="@integer/google_play_services_version" />
-109-->[com.google.android.gms:play-services-basement:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/d14ebb838c3418c16d46982ee4860a26/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
-110    </application>
+107        <activity
+107-->[com.google.android.gms:play-services-base:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/79a386b545cc2f3a9101f84c43470ac4/jetified-play-services-base-17.0.0/AndroidManifest.xml:23:9-26:75
+108            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+108-->[com.google.android.gms:play-services-base:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/79a386b545cc2f3a9101f84c43470ac4/jetified-play-services-base-17.0.0/AndroidManifest.xml:24:13-79
+109            android:exported="false"
+109-->[com.google.android.gms:play-services-base:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/79a386b545cc2f3a9101f84c43470ac4/jetified-play-services-base-17.0.0/AndroidManifest.xml:25:13-37
+110            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+110-->[com.google.android.gms:play-services-base:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/79a386b545cc2f3a9101f84c43470ac4/jetified-play-services-base-17.0.0/AndroidManifest.xml:26:13-72
 111
-112</manifest>
+112        <meta-data
+112-->[com.google.android.gms:play-services-basement:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/d14ebb838c3418c16d46982ee4860a26/jetified-play-services-basement-17.0.0/AndroidManifest.xml:23:9-25:69
+113            android:name="com.google.android.gms.version"
+113-->[com.google.android.gms:play-services-basement:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/d14ebb838c3418c16d46982ee4860a26/jetified-play-services-basement-17.0.0/AndroidManifest.xml:24:13-58
+114            android:value="@integer/google_play_services_version" />
+114-->[com.google.android.gms:play-services-basement:17.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/d14ebb838c3418c16d46982ee4860a26/jetified-play-services-basement-17.0.0/AndroidManifest.xml:25:13-66
+115    </application>
+116
+117</manifest>

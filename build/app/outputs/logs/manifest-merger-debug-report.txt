@@ -10,7 +10,7 @@ MERGED from [:image_picker] /Users/admin/MJN_Installer/build/image_picker/interm
 MERGED from [:flutter_plugin_android_lifecycle] /Users/admin/MJN_Installer/build/flutter_plugin_android_lifecycle/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:url_launcher_android] /Users/admin/MJN_Installer/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-14:12
 MERGED from [:permission_handler] /Users/admin/MJN_Installer/build/permission_handler/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
-MERGED from [:geolocator_android] /Users/admin/MJN_Installer/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:geolocator_android] /Users/admin/MJN_Installer/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-17:12
 MERGED from [:store_redirect] /Users/admin/MJN_Installer/build/store_redirect/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-18:12
 MERGED from [:path_provider_android] /Users/admin/MJN_Installer/build/path_provider_android/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-7:12
@@ -66,6 +66,8 @@ MERGED from [:location] /Users/admin/MJN_Installer/build/location/intermediates/
 		ADDED from /Users/admin/MJN_Installer/android/app/src/main/AndroidManifest.xml:5:22-78
 uses-permission#android.permission.FOREGROUND_SERVICE
 ADDED from /Users/admin/MJN_Installer/android/app/src/main/AndroidManifest.xml:6:5-77
+MERGED from [:geolocator_android] /Users/admin/MJN_Installer/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-77
+MERGED from [:geolocator_android] /Users/admin/MJN_Installer/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-77
 	android:name
 		ADDED from /Users/admin/MJN_Installer/android/app/src/main/AndroidManifest.xml:6:22-74
 uses-permission#android.permission.ACCESS_BACKGROUND_LOCATION
@@ -86,6 +88,8 @@ MERGED from [:image_picker] /Users/admin/MJN_Installer/build/image_picker/interm
 MERGED from [:image_picker] /Users/admin/MJN_Installer/build/image_picker/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-17:19
 MERGED from [:url_launcher_android] /Users/admin/MJN_Installer/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-12:19
 MERGED from [:url_launcher_android] /Users/admin/MJN_Installer/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:7:5-12:19
+MERGED from [:geolocator_android] /Users/admin/MJN_Installer/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
+MERGED from [:geolocator_android] /Users/admin/MJN_Installer/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
 MERGED from [:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:10:5-16:19
 MERGED from [:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:10:5-16:19
 MERGED from [com.google.android.gms:play-services-location:16.0.0] /Users/admin/.gradle/caches/transforms-2/files-2.1/d482bee51e4736a5c2acdf14b151ceb0/jetified-play-services-location-16.0.0/AndroidManifest.xml:7:5-20
@@ -264,6 +268,16 @@ ADDED from [:url_launcher_android] /Users/admin/MJN_Installer/build/url_launcher
 		ADDED from [:url_launcher_android] /Users/admin/MJN_Installer/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-71
 	android:name
 		ADDED from [:url_launcher_android] /Users/admin/MJN_Installer/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:13-74
+service#com.baseflow.geolocator.GeolocatorLocationService
+ADDED from [:geolocator_android] /Users/admin/MJN_Installer/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:9-14:56
+	android:enabled
+		ADDED from [:geolocator_android] /Users/admin/MJN_Installer/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-35
+	android:exported
+		ADDED from [:geolocator_android] /Users/admin/MJN_Installer/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-37
+	android:foregroundServiceType
+		ADDED from [:geolocator_android] /Users/admin/MJN_Installer/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:14:13-53
+	android:name
+		ADDED from [:geolocator_android] /Users/admin/MJN_Installer/build/geolocator_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-77
 service#com.lyokone.location.FlutterLocationService
 ADDED from [:location] /Users/admin/MJN_Installer/build/location/intermediates/merged_manifest/debug/AndroidManifest.xml:11:9-15:56
 	android:enabled

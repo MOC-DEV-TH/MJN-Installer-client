@@ -154,8 +154,17 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
                   },
                   child: SearchTextFieldComponent(
                     onTap: () {
-                      FocusScope.of(context).requestFocus(new FocusNode());
-                      HomeController.to..selectDate(context);
+                      //FocusScope.of(context).requestFocus(new FocusNode());
+                      if(HomeController.to.customerDateController.text==""){
+                        HomeController.to..selectDate(context);
+                      }
+
+                    },
+                    onTextDataChange: (String value) {
+                      if (value == '') {
+                        debugPrint('Empty text');
+                        firstTimeFetchDataFromNetwork();
+                      }
                     },
                     controller: HomeController.to.customerDateController,
                     icon: Icons.search,
@@ -184,62 +193,51 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
                 return Center(
                   child: CircularProgressIndicator(),
                 );
-              } else
-                return ListView.builder(
-                  shrinkWrap: true,
-                  physics: ScrollPhysics(),
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (ctx, index) {
-                    return PageArgumentController.to.getArgumentData() ==
-                            INSTALLATION
-                        ? CustomerStatusListItems(
-                            HomeController
-                                .to
-                                .installationCompleteCustomerList[index]
-                                .firstname,
-                            HomeController
-                                .to
-                                .installationCompleteCustomerList[index]
-                                .township,
-                            HomeController.to
-                                .installationCompleteCustomerList[index].phone1,
-                            HomeController
-                                .to
-                                .installationCompleteCustomerList[index]
-                                .profileId,
-                            pageStatus: 'complete',
-                          )
-                        : CustomerStatusListItems(
-                            HomeController
-                                .to
-                                .serviceTicketCompleteCustomerList[index]
-                                .firstname,
-                            HomeController
-                                .to
-                                .serviceTicketCompleteCustomerList[index]
-                                .township,
-                            HomeController
-                                .to
-                                .serviceTicketCompleteCustomerList[index]
-                                .phone1,
-                            HomeController
-                                .to
-                                .serviceTicketCompleteCustomerList[index]
-                                .profileId,
-                            ticketId: HomeController
-                                .to
-                                .serviceTicketCompleteCustomerList[index]
-                                .ticketId,
-                            pageStatus: 'complete',
-                          );
-                  },
-                  itemCount: PageArgumentController.to.getArgumentData() ==
-                          INSTALLATION
-                      ? HomeController
-                          .to.installationCompleteCustomerList.length
-                      : HomeController
-                          .to.serviceTicketCompleteCustomerList.length,
-                );
+              }
+
+              else if (PageArgumentController.to.getArgumentData() ==
+                  INSTALLATION) {
+                if(HomeController.to.installationCompleteCustomerList.length == 0)
+                  {
+                    return Center(
+                        child: Container(
+                          child: Text(
+                            'No matches found',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
+                          ),
+                        ));
+                  }
+                else
+                  return _buildListView();
+              }
+
+
+              else if (PageArgumentController.to.getArgumentData() ==
+                  SERVICE_TICKET) {
+                if(HomeController.to.serviceTicketCompleteCustomerList.length == 0)
+                {
+                  return Center(
+                      child: Container(
+                        child: Text(
+                          'No matches found',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        ),
+                      ));
+                }
+                else
+                  return _buildListView();
+
+              }
+
+
+              else
+                return _buildListView();
             }))
           ],
         );
@@ -254,4 +252,63 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
               .fetchServiceTicketCompleteCustomer('completed', context);
     });
   }
+
+  _buildListView(){
+   return ListView.builder(
+      shrinkWrap: true,
+      physics: ScrollPhysics(),
+      scrollDirection: Axis.vertical,
+      itemBuilder: (ctx, index) {
+        return PageArgumentController.to.getArgumentData() ==
+            INSTALLATION
+            ? CustomerStatusListItems(
+          HomeController
+              .to
+              .installationCompleteCustomerList[index]
+              .firstname,
+          HomeController
+              .to
+              .installationCompleteCustomerList[index]
+              .township,
+          HomeController.to
+              .installationCompleteCustomerList[index].phone1,
+          HomeController
+              .to
+              .installationCompleteCustomerList[index]
+              .profileId,
+          pageStatus: 'complete',
+        )
+            : CustomerStatusListItems(
+          HomeController
+              .to
+              .serviceTicketCompleteCustomerList[index]
+              .firstname,
+          HomeController
+              .to
+              .serviceTicketCompleteCustomerList[index]
+              .township,
+          HomeController
+              .to
+              .serviceTicketCompleteCustomerList[index]
+              .phone1,
+          HomeController
+              .to
+              .serviceTicketCompleteCustomerList[index]
+              .profileId,
+          ticketId: HomeController
+              .to
+              .serviceTicketCompleteCustomerList[index]
+              .ticketId,
+          pageStatus: 'complete',
+        );
+      },
+      itemCount: PageArgumentController.to.getArgumentData() ==
+          INSTALLATION
+          ? HomeController
+          .to.installationCompleteCustomerList.length
+          : HomeController
+          .to.serviceTicketCompleteCustomerList.length,
+    );
+  }
+
 }

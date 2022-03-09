@@ -61,6 +61,9 @@ const GET_SERVICE_TICKET_DETAIL_URL = API_URL+"get_service_tickets_details?";
 const POST_INSTALLATION_DATA_URL = API_URL+"post_installation_data";
 const POST_SERVICE_TICKET_DATA_URL = API_URL+"post_service_tickets_data";
 const GET_ALL_COUNT_URL = API_URL+"get_counts?";
-const SERVICE_TICKET_ORDER_ACCEPT = API_URL+"order_accept";
-const INSTALLATION_ORDER_ACCEPT = API_URL+"installation_order_accept";
-const GET_INSTALLATION_USAGES = API_URL+"get_usages?";
+const SERVICE_TICKET_ORDER_ACCEPT_URL = API_URL+"order_accept";
+const INSTALLATION_ORDER_ACCEPT_URL = API_URL+"installation_order_accept";
+const GET_INSTALLATION_USAGES_URL = API_URL+"get_usages?";
+const POST_INSTALLER_LAT_LONG_URL = API_URL+"post_installer_lat_long";
+const SEND_SMS_BRIX_URL = API_URL+"send_sms_brix";
+
