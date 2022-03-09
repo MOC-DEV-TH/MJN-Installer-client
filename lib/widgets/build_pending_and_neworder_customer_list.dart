@@ -318,7 +318,7 @@ class _BuildPendingAndNewOrderCustomerListState
                 return Center(
                     child: Container(
                       child: Text(
-                        'No matches found',
+                        'No data',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -337,7 +337,7 @@ class _BuildPendingAndNewOrderCustomerListState
                 return Center(
                     child: Container(
                       child: Text(
-                        'No matches found',
+                        'No data',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
