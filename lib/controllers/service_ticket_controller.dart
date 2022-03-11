@@ -74,7 +74,6 @@ class ServiceTicketController extends GetxController {
   }
 
   void postServiceTicketDataOnServer(String ticketID, String profileID) {
-
     loadingForButton(true);
 
     var firstMap = {
@@ -105,15 +104,24 @@ class ServiceTicketController extends GetxController {
 
     debugPrint("Usage map collection::${thirdMap}", wrapWidth: 1024);
 
-      RestApi.postServiceTicketData(thirdMap,readData.read(TOKEN)).then((value) => {
-        if(value.status == 'Success'){
-          loadingForButton(false),
-          Get.offNamed(PENDING_CUSTOMER_COMPLETE_PAGE, arguments: ticketID)
-        }
-        else {
-          loadingForButton(false)
-        }
-      });
+    if (macIdController.text == "" ||
+        deviceIdController.text == "" ||
+        portNoController.text == "" ||
+        statusValueId == null) {
+      loadingForButton(false);
+      AppUtils.showErrorSnackBar('Fail', 'Data must not empty!');
+    } else {
+      RestApi.postServiceTicketData(thirdMap, readData.read(TOKEN))
+          .then((value) => {
+                if (value.status == 'Success')
+                  {
+                    loadingForButton(false),
+                    Get.offNamed(PENDING_CUSTOMER_COMPLETE_PAGE,
+                        arguments: ticketID)
+                  }
+                else
+                  {loadingForButton(false)}
+              });
     }
   }
-
+}

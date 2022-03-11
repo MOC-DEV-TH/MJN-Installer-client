@@ -62,12 +62,13 @@ class _BuildMaintenanceDropdownListState
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     LabelTextComponent(
-                        text: serviceTicketController
-                                    .serviceTicketDetail.value.firstname ==
-                                ''
+                        text: (serviceTicketController
+                                    .serviceTicketDetail.value.userName ==
+                                null || serviceTicketController
+                            .serviceTicketDetail.value.userName == "")
                             ? "xx xxx xxx xxx xxx"
                             : serviceTicketController
-                                .serviceTicketDetail.value.firstname!,
+                                .serviceTicketDetail.value.userName!,
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(

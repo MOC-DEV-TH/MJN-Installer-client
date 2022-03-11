@@ -171,7 +171,10 @@ class _MyLocationPageState extends State<MyLocationPage> {
   @override
   void dispose() {
     super.dispose();
-    locationSubscription!.cancel();
+    if(locationSubscription != null){
+      locationSubscription!.cancel();
+    }
+
   }
 
 
@@ -313,8 +316,6 @@ class _MyLocationPageState extends State<MyLocationPage> {
       });
     });
 
-    // _location.onLocationChanged.listen((LocationData currentLocation) {
-    // });
   }
 
 

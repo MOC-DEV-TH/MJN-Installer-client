@@ -63,6 +63,14 @@ class InstallationDetails {
     this.before_spliter_img,
     this.after_spliter_img,
     this.service_acceptance_img,
+    this.odb_name,
+    this.odb_latitude,
+    this.odb_longitude,
+    this.gateway_ip,
+    this.customer_ip,
+    this.network_address,
+    this.user_cvlan,
+    this.user_svlan,
   });
 
   String? firstname;
@@ -83,6 +91,15 @@ class InstallationDetails {
   String? after_spliter_img;
   String? service_acceptance_img;
 
+  String? odb_name;
+  String? odb_latitude;
+  String? odb_longitude;
+  String? gateway_ip;
+  String? customer_ip;
+  String? network_address;
+  String? user_cvlan;
+  String? user_svlan;
+
 
   factory InstallationDetails.fromJson(Map<String, dynamic> json) => InstallationDetails(
     firstname: json["firstname"],
@@ -102,6 +119,14 @@ class InstallationDetails {
     before_spliter_img: json["before_spliter_img"],
     after_spliter_img: json["after_spliter_img"],
     service_acceptance_img: json["service_acceptance_img"],
+    odb_name: json["odb_name"],
+    odb_latitude: json["odb_latitude"],
+    odb_longitude: json["odb_longitude"],
+    gateway_ip: json["gateway_ip"],
+    customer_ip: json["customer_ip"],
+    network_address: json["network_address"],
+    user_cvlan: json["user_cvlan"],
+    user_svlan: json["user_svlan"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -122,5 +147,13 @@ class InstallationDetails {
     "before_spliter_img": before_spliter_img,
     "after_spliter_img": after_spliter_img,
     "service_acceptance_img": service_acceptance_img,
+    "odb_name": odb_name,
+    "odb_latitude": odb_latitude,
+    "odb_longitude": odb_longitude,
+    "gateway_ip": gateway_ip,
+    "customer_ip": customer_ip,
+    "network_address": network_address,
+    "user_cvlan": user_cvlan,
+    "user_svlan": user_svlan,
   };
 }

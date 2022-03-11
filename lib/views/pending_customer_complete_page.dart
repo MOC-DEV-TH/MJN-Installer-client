@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mjn_installer_app/res/colors.dart';
 import 'package:mjn_installer_app/utils/app_utils.dart';
-import 'package:mjn_installer_app/widgets/build_customer_complete_label.dart';
+import 'package:mjn_installer_app/widgets/build_pending_customer_complete_info.dart';
 import 'package:get/get.dart';
 
 class PendingCustomerCompletePage extends StatelessWidget {

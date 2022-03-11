@@ -16,6 +16,8 @@ class InstallationController extends GetxController {
   var deviceIdController = TextEditingController();
   var portNoController = TextEditingController();
 
+  bool checkBoxValue = false;
+
   Map<String, TextEditingController> textEditingControllers_list = {};
   List<String> field_list = [];
 
@@ -56,6 +58,12 @@ class InstallationController extends GetxController {
 
   Map<String, String> map_from_usage = {};
   Map<String, String> map = {};
+
+  void updateCheckBoxValue(bool cbValue){
+    debugPrint(cbValue.toString());
+    checkBoxValue = cbValue;
+    update();
+  }
 
   void onUIReady() {
     fetchInstallationDetail(HomeController.to.installationProfileID);
@@ -189,13 +197,10 @@ class InstallationController extends GetxController {
       imageAcceptForm = File(image!.path);
       str_imageAcceptForm = base64Encode(File(image.path).readAsBytesSync());
       update();
-
-
     }
   }
 
   void postInstallationDataOnServer() {
-
     loadingForButton(true);
 
     var firstMap = {
@@ -230,11 +235,25 @@ class InstallationController extends GetxController {
 
     debugPrint("Usage map collection::${thirdMap}", wrapWidth: 1024);
 
-        RestApi.postInstallationData(readData.read(TOKEN),thirdMap).then((value) => {
-              if (value.status == 'Success')
-                {loadingForButton(false), Get.offNamed(COMPLETE_CUSTOMER_PAGE)}
-              else
-                {loadingForButton(false)}
-            });
+    debugPrint("Usage status::${statusValueID}");
+
+    if (macIdController.text == "" ||
+        deviceIdController.text == "" ||
+        portNoController.text == "" ||
+        statusValueID == null) {
+      loadingForButton(false);
+      AppUtils.showErrorSnackBar("Fail", 'Data must not empty!');
+    } else {
+      RestApi.postInstallationData(readData.read(TOKEN), thirdMap)
+          .then((value) => {
+                if (value.status == 'Success')
+                  {
+                    loadingForButton(false),
+                    Get.offNamed(COMPLETE_CUSTOMER_PAGE)
+                  }
+                else
+                  {loadingForButton(false)}
+              });
+    }
   }
 }

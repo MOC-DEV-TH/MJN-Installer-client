@@ -200,14 +200,27 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
                 if(HomeController.to.installationCompleteCustomerList.length == 0)
                   {
                     return Center(
-                        child: Container(
-                          child: Text(
-                            'No data',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
-                          ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                margin: EdgeInsets.only(top: 50.0),
+                                color: Colors.transparent,
+                                child: Image(
+                                  image: AssetImage('assets/no_result_found.png'),
+                                  height: 200,
+                                  width: 200,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                                child: Text(
+                                  'Sorry! No data found :(',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold, color: Colors.black45),
+                                ))
+                          ],
                         ));
                   }
                 else
@@ -220,14 +233,28 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
                 if(HomeController.to.serviceTicketCompleteCustomerList.length == 0)
                 {
                   return Center(
-                      child: Container(
-                        child: Text(
-                          'No data',
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16),
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              margin: EdgeInsets.only(top: 50.0),
+                              color: Colors.transparent,
+                              child: Image(
+                                image: AssetImage('assets/no_result_found.png'),
+                                height: 200,
+                                width: 200,
+
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                              child: Text(
+                                'Sorry! No data found :(',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, color: Colors.black45),
+                              ))
+                        ],
                       ));
                 }
                 else

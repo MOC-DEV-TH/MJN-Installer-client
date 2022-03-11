@@ -26,7 +26,9 @@ class LabelTextComponent extends StatelessWidget {
               fontSize: 14,
               color:color,
               decoration: TextDecoration.none),
-          maxLines: 3,
+          overflow: TextOverflow.fade,
+          maxLines: 1,
+          softWrap: false,
         ),
       ),
     );

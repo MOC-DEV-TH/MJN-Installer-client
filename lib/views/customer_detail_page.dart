@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mjn_installer_app/res/colors.dart';
 import 'package:mjn_installer_app/utils/app_utils.dart';
-import 'package:mjn_installer_app/widgets/build_customer_info_label.dart';
+import 'package:mjn_installer_app/widgets/build_customer_detail_info.dart';
 import 'package:get/get.dart';
 
 class CustomerDetailPage extends StatelessWidget {
@@ -31,7 +31,7 @@ class CustomerDetailPage extends StatelessWidget {
         SizedBox(
           height: 20.0,
         ),
-        BuildCustomerInfoLabel(
+        BuildCustomerDetailInfo(
             Get.arguments.toString()),
 
       ],

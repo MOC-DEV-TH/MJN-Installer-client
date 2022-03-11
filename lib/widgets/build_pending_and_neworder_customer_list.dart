@@ -148,9 +148,8 @@ class _BuildPendingAndNewOrderCustomerListState
                 controller: controller.customerNameTextController,
                 icon: Icons.search,
                 onPressIcon: () {
-
-
-                  if (PageArgumentController.to.getArgumentData() == SERVICE_TICKET) {
+                  if (PageArgumentController.to.getArgumentData() ==
+                      SERVICE_TICKET) {
                     if (PageArgumentController.to.getStatus() == NEW_ORDER) {
                       HomeController.to.fetchServiceTicketListsByStatus(
                           'newOrder',
@@ -158,7 +157,8 @@ class _BuildPendingAndNewOrderCustomerListState
                           USERNAME_PARAM +
                               HomeController
                                   .to.customerNameTextController.value.text);
-                    } else if (PageArgumentController.to.getStatus() == PENDING) {
+                    } else if (PageArgumentController.to.getStatus() ==
+                        PENDING) {
                       HomeController.to.fetchServiceTicketListsByStatus(
                           'pending',
                           context,
@@ -166,9 +166,7 @@ class _BuildPendingAndNewOrderCustomerListState
                               HomeController
                                   .to.customerNameTextController.value.text);
                     }
-                  }
-
-                  else if (PageArgumentController.to.getArgumentData() ==
+                  } else if (PageArgumentController.to.getArgumentData() ==
                       INSTALLATION) {
                     if (PageArgumentController.to.getStatus() == NEW_ORDER) {
                       HomeController.to.fetchInstallationListsByStatus(
@@ -177,7 +175,8 @@ class _BuildPendingAndNewOrderCustomerListState
                           USERNAME_PARAM +
                               HomeController
                                   .to.customerNameTextController.value.text);
-                    } else if (PageArgumentController.to.getStatus() == PENDING) {
+                    } else if (PageArgumentController.to.getStatus() ==
+                        PENDING) {
                       HomeController.to.fetchInstallationListsByStatus(
                           'pending',
                           context,
@@ -186,8 +185,6 @@ class _BuildPendingAndNewOrderCustomerListState
                                   .to.customerNameTextController.value.text);
                     }
                   }
-
-
                 },
               )),
             ),
@@ -206,36 +203,35 @@ class _BuildPendingAndNewOrderCustomerListState
                 onChangedData: (TownshipDatum value) {
                   debugPrint('DropdownValue${value.key}');
 
-
-                  if (PageArgumentController.to.getArgumentData() == SERVICE_TICKET) {
+                  if (PageArgumentController.to.getArgumentData() ==
+                      SERVICE_TICKET) {
                     if (PageArgumentController.to.getStatus() == NEW_ORDER) {
                       HomeController.to.fetchServiceTicketListsByStatus(
                           'newOrder',
                           context,
                           TOWNSHIP_PARAM + value.id.toString());
-                    } else if (PageArgumentController.to.getStatus() == PENDING) {
+                    } else if (PageArgumentController.to.getStatus() ==
+                        PENDING) {
                       HomeController.to.fetchServiceTicketListsByStatus(
                           'pending',
                           context,
                           TOWNSHIP_PARAM + value.id.toString());
                     }
-                  }
-
-                  else if (PageArgumentController.to.getArgumentData() ==
+                  } else if (PageArgumentController.to.getArgumentData() ==
                       INSTALLATION) {
                     if (PageArgumentController.to.getStatus() == NEW_ORDER) {
                       HomeController.to.fetchInstallationListsByStatus(
                           'newOrder',
                           context,
                           TOWNSHIP_PARAM + value.id.toString());
-                    } else if (PageArgumentController.to.getStatus() == PENDING) {
+                    } else if (PageArgumentController.to.getStatus() ==
+                        PENDING) {
                       HomeController.to.fetchInstallationListsByStatus(
                           'pending',
                           context,
                           TOWNSHIP_PARAM + value.id.toString());
                     }
                   }
-
                 },
                 hintText: '--Select Township--',
               ),
@@ -262,45 +258,46 @@ class _BuildPendingAndNewOrderCustomerListState
                       controller: HomeController.to.customerDateController,
                       icon: Icons.search,
                       onPressIcon: () {
-
-                          if (PageArgumentController.to.getArgumentData() == SERVICE_TICKET) {
-                            if (PageArgumentController.to.getStatus() == NEW_ORDER) {
-                              HomeController.to.fetchServiceTicketListsByStatus(
-                                  'newOrder',
-                                  context,
-                                  ASSIGNED_DATE_PARAM +
-                                      HomeController
-                                          .to.customerDateController.value.text);
-                            } else if (PageArgumentController.to.getStatus() == PENDING) {
-                              HomeController.to.fetchServiceTicketListsByStatus(
-                                  'pending',
-                                  context,
-                                  ASSIGNED_DATE_PARAM +
-                                      HomeController
-                                          .to.customerDateController.value.text);
-                            }
+                        if (PageArgumentController.to.getArgumentData() ==
+                            SERVICE_TICKET) {
+                          if (PageArgumentController.to.getStatus() ==
+                              NEW_ORDER) {
+                            HomeController.to.fetchServiceTicketListsByStatus(
+                                'newOrder',
+                                context,
+                                ASSIGNED_DATE_PARAM +
+                                    HomeController
+                                        .to.customerDateController.value.text);
+                          } else if (PageArgumentController.to.getStatus() ==
+                              PENDING) {
+                            HomeController.to.fetchServiceTicketListsByStatus(
+                                'pending',
+                                context,
+                                ASSIGNED_DATE_PARAM +
+                                    HomeController
+                                        .to.customerDateController.value.text);
                           }
-
-                          else if (PageArgumentController.to.getArgumentData() ==
-                              INSTALLATION) {
-                            if (PageArgumentController.to.getStatus() == NEW_ORDER) {
-                              HomeController.to.fetchInstallationListsByStatus(
-                                  'newOrder',
-                                  context,
-                                  ASSIGNED_DATE_PARAM +
-                                      HomeController
-                                          .to.customerDateController.value.text);
-                            } else if (PageArgumentController.to.getStatus() == PENDING) {
-                              HomeController.to.fetchInstallationListsByStatus(
-                                  'pending',
-                                  context,
-                                  ASSIGNED_DATE_PARAM +
-                                      HomeController
-                                          .to.customerDateController.value.text);
-                            }
+                        } else if (PageArgumentController.to
+                                .getArgumentData() ==
+                            INSTALLATION) {
+                          if (PageArgumentController.to.getStatus() ==
+                              NEW_ORDER) {
+                            HomeController.to.fetchInstallationListsByStatus(
+                                'newOrder',
+                                context,
+                                ASSIGNED_DATE_PARAM +
+                                    HomeController
+                                        .to.customerDateController.value.text);
+                          } else if (PageArgumentController.to.getStatus() ==
+                              PENDING) {
+                            HomeController.to.fetchInstallationListsByStatus(
+                                'pending',
+                                context,
+                                ASSIGNED_DATE_PARAM +
+                                    HomeController
+                                        .to.customerDateController.value.text);
                           }
-
-
+                        }
                       },
                     )))
           ],
@@ -313,43 +310,63 @@ class _BuildPendingAndNewOrderCustomerListState
               );
             } else if (PageArgumentController.to.getArgumentData() ==
                 INSTALLATION) {
-              if(HomeController.to.installationPendingCustomerList.length == 0)
-              {
+              if (HomeController.to.installationPendingCustomerList.length ==
+                  0) {
                 return Center(
-                    child: Container(
-                      child: Text(
-                        'No data',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16),
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.only(top: 50.0),
+                        color: Colors.transparent,
+                        child: Image(
+                          image: AssetImage('assets/no_result_found.png'),
+                          height: 200,
+                          width: 200,
+                        ),
                       ),
-                    ));
-              }
-              else
+                    ),
+                    Expanded(
+                        child: Text(
+                          'Sorry! No data found :(',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black45),
+                    ))
+                  ],
+                ));
+              } else
                 return _buildListView();
-            }
-
-            else if (PageArgumentController.to.getArgumentData() ==
+            } else if (PageArgumentController.to.getArgumentData() ==
                 SERVICE_TICKET) {
-              if(HomeController.to.serviceTicketPendingCustomerList.length == 0)
-              {
+              if (HomeController.to.serviceTicketPendingCustomerList.length ==
+                  0) {
                 return Center(
-                    child: Container(
-                      child: Text(
-                        'No data',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16),
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.only(top: 50.0),
+                            color: Colors.transparent,
+                            child: Image(
+                              image: AssetImage('assets/no_result_found.png'),
+                              height: 200,
+                              width: 200,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                            child: Text(
+                              'Sorry! No data found :(',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, color: Colors.black45),
+                            ))
+                      ],
                     ));
-              }
-              else
+              } else
                 return _buildListView();
-            }
-
-            else
+            } else
               return _buildListView();
           }),
         )
@@ -357,80 +374,63 @@ class _BuildPendingAndNewOrderCustomerListState
     );
   }
 
-  _buildListView(){
+  _buildListView() {
     return GetBuilder<HomeController>(
         builder: (controller) => ListView.builder(
-          shrinkWrap: true,
-          physics: ScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          itemBuilder: (ctx, index) {
-            return controller.getArgumentData() == INSTALLATION
-                ? CustomerStatusListItems(
-              controller
-                  .installationPendingCustomerList[index]
-                  .firstname,
-              controller
-                  .installationPendingCustomerList[index]
-                  .township,
-              controller
-                  .installationPendingCustomerList[index]
-                  .phone1,
-              controller
-                  .installationPendingCustomerList[index]
-                  .profileId,
-              pageStatus:
-              PageArgumentController.to.getStatus() ==
-                  NEW_ORDER
-                  ? NEW_ORDER
-                  : PENDING,
-              township: controller
-                  .installationPendingCustomerList[index]
-                  .township,
-              customerUID: controller
-                  .installationPendingCustomerList[index]
-                  .uid,
-              status: controller
-                  .installationPendingCustomerList[index]
-                  .status,
-              installationDetail: controller
-                  .installationPendingCustomerList[index],
-            )
-                : CustomerStatusListItems(
-              controller
-                  .serviceTicketPendingCustomerList[index]
-                  .firstname,
-              controller
-                  .serviceTicketPendingCustomerList[index]
-                  .township,
-              controller
-                  .serviceTicketPendingCustomerList[index]
-                  .phone1,
-              controller
-                  .serviceTicketPendingCustomerList[index]
-                  .profileId,
-              ticketId: controller
-                  .serviceTicketPendingCustomerList[index]
-                  .ticketId,
-              pageStatus:
-              PageArgumentController.to.getStatus() ==
-                  NEW_ORDER
-                  ? NEW_ORDER
-                  : PENDING,
-              township: controller
-                  .serviceTicketPendingCustomerList[index]
-                  .township,
-              status: controller
-                  .serviceTicketPendingCustomerList[index]
-                  .status,
-              serviceTicketDetail: controller
-                  .serviceTicketPendingCustomerList[index],
-            );
-          },
-          itemCount: controller.getArgumentData() == INSTALLATION
-              ? controller.installationPendingCustomerList.length
-              : controller
-              .serviceTicketPendingCustomerList.length,
-        ));
+              shrinkWrap: true,
+              physics: ScrollPhysics(),
+              scrollDirection: Axis.vertical,
+              itemBuilder: (ctx, index) {
+                return controller.getArgumentData() == INSTALLATION
+                    ? CustomerStatusListItems(
+                        controller
+                            .installationPendingCustomerList[index].firstname,
+                        controller
+                            .installationPendingCustomerList[index].township,
+                        controller
+                            .installationPendingCustomerList[index].phone1,
+                        controller
+                            .installationPendingCustomerList[index].profileId,
+                        pageStatus:
+                            PageArgumentController.to.getStatus() == NEW_ORDER
+                                ? NEW_ORDER
+                                : PENDING,
+                        township: controller
+                            .installationPendingCustomerList[index].township,
+                        customerUID: controller
+                            .installationPendingCustomerList[index].uid,
+                        status: controller
+                            .installationPendingCustomerList[index].status,
+                        installationDetail:
+                            controller.installationPendingCustomerList[index],
+                      )
+                    : CustomerStatusListItems(
+                        controller
+                            .serviceTicketPendingCustomerList[index].firstname,
+                        controller
+                            .serviceTicketPendingCustomerList[index].township,
+                        controller
+                            .serviceTicketPendingCustomerList[index].phone1,
+                        controller
+                            .serviceTicketPendingCustomerList[index].profileId,
+                        ticketId: controller
+                            .serviceTicketPendingCustomerList[index].ticketId,
+                        pageStatus:
+                            PageArgumentController.to.getStatus() == NEW_ORDER
+                                ? NEW_ORDER
+                                : PENDING,
+                        township: controller
+                            .serviceTicketPendingCustomerList[index].township,
+                        status: controller
+                            .serviceTicketPendingCustomerList[index].status,
+                        serviceTicketDetail:
+                            controller.serviceTicketPendingCustomerList[index],
+                      );
+              },
+              itemCount: controller.getArgumentData() == INSTALLATION
+                  ? controller.installationPendingCustomerList.length
+                  : controller.serviceTicketPendingCustomerList.length,
+            ));
   }
 
   void firstTimeFetchDataFromNetwork() {
