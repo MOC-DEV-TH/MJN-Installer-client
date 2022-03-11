@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:baseflow_plugin_template/baseflow_plugin_template.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ Future  main() async{
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-
+  HttpOverrides.global = MyHttpOverrides();
   runApp( MyApp());
 }
 
@@ -42,6 +43,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
        getPages: Routers.route,
       home: readData.read(TOKEN) == null ? NewLoginPage() : HomePage());
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..maxConnectionsPerHost = 5;
   }
 }
 

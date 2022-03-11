@@ -203,33 +203,38 @@ class _BuildPendingAndNewOrderCustomerListState
                 onChangedData: (TownshipDatum value) {
                   debugPrint('DropdownValue${value.key}');
 
-                  if (PageArgumentController.to.getArgumentData() ==
-                      SERVICE_TICKET) {
-                    if (PageArgumentController.to.getStatus() == NEW_ORDER) {
-                      HomeController.to.fetchServiceTicketListsByStatus(
-                          'newOrder',
-                          context,
-                          TOWNSHIP_PARAM + value.id.toString());
-                    } else if (PageArgumentController.to.getStatus() ==
-                        PENDING) {
-                      HomeController.to.fetchServiceTicketListsByStatus(
-                          'pending',
-                          context,
-                          TOWNSHIP_PARAM + value.id.toString());
-                    }
-                  } else if (PageArgumentController.to.getArgumentData() ==
-                      INSTALLATION) {
-                    if (PageArgumentController.to.getStatus() == NEW_ORDER) {
-                      HomeController.to.fetchInstallationListsByStatus(
-                          'newOrder',
-                          context,
-                          TOWNSHIP_PARAM + value.id.toString());
-                    } else if (PageArgumentController.to.getStatus() ==
-                        PENDING) {
-                      HomeController.to.fetchInstallationListsByStatus(
-                          'pending',
-                          context,
-                          TOWNSHIP_PARAM + value.id.toString());
+                  if(value.name == "Select Township"){
+                    firstTimeFetchDataFromNetwork();
+                  }
+                  else{
+                    if (PageArgumentController.to.getArgumentData() ==
+                        SERVICE_TICKET) {
+                      if (PageArgumentController.to.getStatus() == NEW_ORDER) {
+                        HomeController.to.fetchServiceTicketListsByStatus(
+                            'newOrder',
+                            context,
+                            TOWNSHIP_PARAM + value.id.toString());
+                      } else if (PageArgumentController.to.getStatus() ==
+                          PENDING) {
+                        HomeController.to.fetchServiceTicketListsByStatus(
+                            'pending',
+                            context,
+                            TOWNSHIP_PARAM + value.id.toString());
+                      }
+                    } else if (PageArgumentController.to.getArgumentData() ==
+                        INSTALLATION) {
+                      if (PageArgumentController.to.getStatus() == NEW_ORDER) {
+                        HomeController.to.fetchInstallationListsByStatus(
+                            'newOrder',
+                            context,
+                            TOWNSHIP_PARAM + value.id.toString());
+                      } else if (PageArgumentController.to.getStatus() ==
+                          PENDING) {
+                        HomeController.to.fetchInstallationListsByStatus(
+                            'pending',
+                            context,
+                            TOWNSHIP_PARAM + value.id.toString());
+                      }
                     }
                   }
                 },
