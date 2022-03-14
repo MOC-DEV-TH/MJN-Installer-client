@@ -57,7 +57,7 @@ class NewLoginPage extends StatelessWidget {
                   children: [
                 Flexible(
                   child: Text(
-                    'User ID:',
+                    'User Name:',
                     style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,

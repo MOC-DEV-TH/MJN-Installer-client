@@ -228,8 +228,7 @@ class _BuildCustomerDetailInfoState extends State<BuildCustomerDetailInfo> {
     // Get.offNamed(CUSTOMER_ISSUE_PAGE, arguments:
     //   widget.profileIdOrTicketID
     // );
-    writeData.write(SAVE_TIME, DateTime.now().minute);
-    Get.offNamed(MY_LOCATION_PAGE);
+    Get.offNamed(CUSTOMER_ISSUE_PAGE);
   }
   final customerLabel = Column(
     crossAxisAlignment: CrossAxisAlignment.start,

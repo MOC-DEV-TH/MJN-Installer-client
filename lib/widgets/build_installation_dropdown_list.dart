@@ -47,69 +47,77 @@ class _BuildInstallationDropdownListState
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                customerLabel,
-                middleLabel,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    LabelTextComponent(
-                        text: installationController
-                            .installationDetail.value.user_name ??
-                            "xx xxx xxx xxx xxx",
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: installationController
-                            .installationDetail.value.odb_name ??
-                            "xx xxx xxx xxx xxx",
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: installationController.installationDetail.value
-                            .latitude == null
-                            && installationController.installationDetail.value
-                                .longitude == null ? "xx xxx xxx xxx xxx" :
-                        installationController.installationDetail.value
-                            .latitude!+","+installationController.installationDetail.value
-                            .longitude!,
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: installationController
-                            .installationDetail.value.gateway_ip == "" ?
-                            "xx xxx xxx xxx xxx" : installationController
-                            .installationDetail.value.gateway_ip! ,
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: installationController
-                            .installationDetail.value.customer_ip==""?
-                            "xx xxx xxx xxx xxx":installationController
-                            .installationDetail.value.customer_ip!,
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: installationController
-                            .installationDetail.value.network_address=="" ?
-                            "xx xxx xxx xxx xxx":installationController
-                        .installationDetail.value.network_address!,
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: installationController
-                            .installationDetail.value.user_cvlan == ""?
-                            "xx xxx xxx xxx xxx":installationController
-                            .installationDetail.value.user_cvlan!,
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: installationController
-                            .installationDetail.value.user_svlan == ""?
-                            "xx xxx xxx xxx xxx":installationController
-                            .installationDetail.value.user_svlan!,
-                        color: Colors.black,
-                        padding: 8.0),
-                  ],
+                Flexible(child: customerLabel),
+                Flexible(child: middleLabel),
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      LabelTextComponent(
+                          text: installationController
+                              .installationDetail.value.user_name ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: installationController
+                              .installationDetail.value.odb_name ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: installationController.installationDetail.value
+                              .latitude == null
+                              && installationController.installationDetail.value
+                                  .longitude == null ? "xx xxx xxx xxx xxx" :
+                          installationController.installationDetail.value
+                              .latitude!+","+installationController.installationDetail.value
+                              .longitude!,
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: (installationController
+                              .installationDetail.value.gateway_ip == null || installationController
+                              .installationDetail.value.gateway_ip == "") ?
+                              "xx xxx xxx xxx xxx" : installationController
+                              .installationDetail.value.gateway_ip! ,
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: (installationController
+                              .installationDetail.value.customer_ip=="" || installationController
+                              .installationDetail.value.customer_ip==null)?
+                              "xx xxx xxx xxx xxx":installationController
+                              .installationDetail.value.customer_ip!,
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text:(installationController
+                              .installationDetail.value.network_address=="" ||
+                              installationController
+                                  .installationDetail.value.network_address==null)  ?
+                              "xx xxx xxx xxx xxx":installationController
+                          .installationDetail.value.network_address!,
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text:(installationController
+                              .installationDetail.value.user_cvlan == "" ||installationController
+                              .installationDetail.value.user_cvlan == null) ?
+                              "xx xxx xxx xxx xxx":installationController
+                              .installationDetail.value.user_cvlan!,
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text:(installationController
+                              .installationDetail.value.user_svlan == "" || installationController
+                              .installationDetail.value.user_svlan == null) ?
+                              "xx xxx xxx xxx xxx":installationController
+                              .installationDetail.value.user_svlan!,
+                          color: Colors.black,
+                          padding: 8.0),
+                    ],
+                  ),
                 )
               ],
             ),

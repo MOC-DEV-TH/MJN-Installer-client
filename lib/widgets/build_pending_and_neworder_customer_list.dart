@@ -63,7 +63,8 @@ class _BuildPendingAndNewOrderCustomerListState
             });
           }
         });
-      } else {
+      }
+      else {
         WidgetsBinding.instance!.addPostFrameCallback((_) {
           if (this.mounted) {
             setState(() {

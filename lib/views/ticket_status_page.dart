@@ -27,7 +27,6 @@ class _TicketStatusPageState extends State<TicketStatusPage>  with WidgetsBindin
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addObserver(this);
-    HomeController.to.onUIReady(context);
   }
 
   @override
@@ -47,7 +46,7 @@ class _TicketStatusPageState extends State<TicketStatusPage>  with WidgetsBindin
 
   @override
   Widget build(BuildContext context) {
-
+    HomeController.to.onUIReady(context);
     resumeSub = EventBusUtils.getInstance().on().listen((event) {
       if (event.toString() == 'resume') {
         HomeController.to.onUIReady(context);
@@ -55,34 +54,40 @@ class _TicketStatusPageState extends State<TicketStatusPage>  with WidgetsBindin
 
     });
 
-    return Scaffold(
-        appBar: AppUtils.customAppBar(),
-        backgroundColor: Color(int.parse(MJNColors.bgColor)),
-        body: Container(
-          height: MediaQuery.of(context).size.height,
-          padding: EdgeInsets.only(left: 30, right: 30, bottom: 30),
-          child: _buildWidget(),
-        ),
-        bottomNavigationBar: GetBuilder<TicketStatusController>(
-            init: TicketStatusController(),
-            initState: (_) {
-              WidgetsBinding.instance!.addPostFrameCallback((_) {
-                ticketStatusController.updateArgumentData(
-                    PageArgumentController.to.getArgumentData());
-              });
-            },
-            builder: (controller) => BottomNavigationBarComponent(
-                  argumentData: controller.argumentData,
-                  onChangedData: (val) {
-                    controller.updateArgumentData(val);
-                    PageArgumentController.to.updateArgumentData(val);
-                    if (val == INSTALLATION) {
-                      controller.fetchInstallationData();
-                    } else {
-                      controller.fetchServiceTicketData();
-                    }
-                  },
-                )));
+    return WillPopScope(
+      onWillPop: (){
+        Get.offAllNamed(HOME);
+        return Future.value(true);
+      },
+      child: Scaffold(
+          appBar: AppUtils.customAppBar(),
+          backgroundColor: Color(int.parse(MJNColors.bgColor)),
+          body: Container(
+            height: MediaQuery.of(context).size.height,
+            padding: EdgeInsets.only(left: 30, right: 30, bottom: 30),
+            child: _buildWidget(),
+          ),
+          bottomNavigationBar: GetBuilder<TicketStatusController>(
+              init: TicketStatusController(),
+              initState: (_) {
+                WidgetsBinding.instance!.addPostFrameCallback((_) {
+                  ticketStatusController.updateArgumentData(
+                      PageArgumentController.to.getArgumentData());
+                });
+              },
+              builder: (controller) => BottomNavigationBarComponent(
+                    argumentData: controller.argumentData,
+                    onChangedData: (val) {
+                      controller.updateArgumentData(val);
+                      PageArgumentController.to.updateArgumentData(val);
+                      if (val == INSTALLATION) {
+                        controller.fetchInstallationData();
+                      } else {
+                        controller.fetchServiceTicketData();
+                      }
+                    },
+                  ))),
+    );
   }
 
   _buildWidget() {

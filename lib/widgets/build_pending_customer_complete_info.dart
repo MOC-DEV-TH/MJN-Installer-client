@@ -42,68 +42,70 @@ class _BuildPendingCustomerCompleteInfoState
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                customerLabel,
-                middleLabel,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                Flexible(child: customerLabel),
+                Flexible(child: middleLabel),
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
 
-                    LabelTextComponent(
-                        text:  (customerDetailController
-                            .serviceTicketDetail.value.userName == null || customerDetailController
-                            .serviceTicketDetail.value.userName == "") ?
-                        "xx xxx xxx xxx xxx" : customerDetailController
-                            .serviceTicketDetail.value.userName!,
-                        color: Colors.black,
-                        padding: 8.0),
+                      LabelTextComponent(
+                          text:  (customerDetailController
+                              .serviceTicketDetail.value.userName == null || customerDetailController
+                              .serviceTicketDetail.value.userName == "") ?
+                          "xx xxx xxx xxx xxx" : customerDetailController
+                              .serviceTicketDetail.value.userName!,
+                          color: Colors.black,
+                          padding: 8.0),
 
-                    LabelTextComponent(
-                        text: customerDetailController
-                                .serviceTicketDetail.value.firstname ??
-                            "xx xxx xxx xxx xxx",
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: customerDetailController
-                                .serviceTicketDetail.value.phone1 ??
-                            "xx xxx xxx xxx xxx",
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: customerDetailController
-                                .serviceTicketDetail.value.address ??
-                            "xx xxx xxx xxx xxx",
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: customerDetailController
-                                .serviceTicketDetail.value.latitude ??
-                            "xx xxx xxx xxx xxx",
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: customerDetailController
-                                .serviceTicketDetail.value.longitude ??
-                            "xx xxx xxx xxx xxx",
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: customerDetailController
-                                .serviceTicketDetail.value.type ??
-                            "xx xxx xxx xxx xxx",
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: 'xx xxx xxx xxx xxx',
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: customerDetailController
-                                .serviceTicketDetail.value.subconAssignedDate ??
-                            "xx xxx xxx xxx xxx",
-                        color: Colors.black,
-                        padding: 8.0),
-                  ],
+                      LabelTextComponent(
+                          text: customerDetailController
+                                  .serviceTicketDetail.value.firstname ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: customerDetailController
+                                  .serviceTicketDetail.value.phone1 ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: customerDetailController
+                                  .serviceTicketDetail.value.address ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: customerDetailController
+                                  .serviceTicketDetail.value.latitude ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: customerDetailController
+                                  .serviceTicketDetail.value.longitude ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: customerDetailController
+                                  .serviceTicketDetail.value.type ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: 'xx xxx xxx xxx xxx',
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: customerDetailController
+                                  .serviceTicketDetail.value.subconAssignedDate ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                    ],
+                  ),
                 )
               ],
             ),

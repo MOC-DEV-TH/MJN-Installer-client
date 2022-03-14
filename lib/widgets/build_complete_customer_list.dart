@@ -23,8 +23,9 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
   void initState() {
     super.initState();
     firstTimeFetchDataFromNetwork();
-    EventBusUtils.getInstance().fire('resume');
+    EventBusUtils.getInstance().fire(PENDING);
   }
+
 
   @override
   Widget build(BuildContext context) {

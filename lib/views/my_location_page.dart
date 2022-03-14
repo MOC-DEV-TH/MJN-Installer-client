@@ -235,15 +235,16 @@ class _MyLocationPageState extends State<MyLocationPage> {
 
         Map<String, String> map = {
           'uid': readData.read(UID),
-          'customer_profile_id': HomeController.to.customerProfileID,
+          'customer_profile_id': HomeController.to.profileID,
           'lat': _currentPosition!.latitude.toString(),
           'long': _currentPosition!.longitude.toString(),
           'app_version': app_version,
           "isArrived":"0"
         };
-        RestApi.postInstallerLatitudeAndLongitude(map, readData.read(TOKEN)).then((value) =>
-        firstTime == 'true' ? firstTimeSendSmSToServer() : null
-        );
+        RestApi.postInstallerLatitudeAndLongitude(map, readData.read(TOKEN));
+        // RestApi.postInstallerLatitudeAndLongitude(map, readData.read(TOKEN)).then((value) =>
+        // firstTime == 'true' ? firstTimeSendSmSToServer() : null
+        // );
         saveTime = DateTime.now().add(Duration(minutes: 3)).minute;
       }
     }
@@ -269,7 +270,7 @@ class _MyLocationPageState extends State<MyLocationPage> {
   onPressArrive() {
     Map<String, String> map = {
       'uid': readData.read(UID),
-      'customer_profile_id': HomeController.to.customerProfileID,
+      'customer_profile_id': HomeController.to.profileID,
       'lat': _currentPosition!.latitude.toString(),
       'long': _currentPosition!.longitude.toString(),
       'app_version': app_version,

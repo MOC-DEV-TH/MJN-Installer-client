@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:mjn_installer_app/components/button_component.dart';
 import 'package:mjn_installer_app/components/label_text_component.dart';
 import 'package:mjn_installer_app/controllers/home_controller.dart';
@@ -6,6 +7,7 @@ import 'package:mjn_installer_app/controllers/login_controller.dart';
 import 'package:mjn_installer_app/controllers/new_order_customer_controller.dart';
 import 'package:mjn_installer_app/models/allDropDownListVO.dart';
 import 'package:mjn_installer_app/res/colors.dart';
+import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'package:mjn_installer_app/utils/app_utils.dart';
 import 'package:get/get.dart';
 
@@ -22,6 +24,7 @@ class _NewOrderCustomerPageState extends State<NewOrderCustomerPage> {
 
   var isShowView = true.obs;
   static var township = "".obs;
+  final writeData = GetStorage();
 
   @override
   void initState() {
@@ -117,6 +120,7 @@ class _NewOrderCustomerPageState extends State<NewOrderCustomerPage> {
                               padding: 10,
                               color: Color(int.parse(MJNColors.buttonColor)),
                               onPress: () => {
+                              writeData.write(SAVE_TIME, DateTime.now().minute),
                                 controller.onTapAcceptNow(
                                     HomeController.to.ticketID,
                                     HomeController.to.profileID,
