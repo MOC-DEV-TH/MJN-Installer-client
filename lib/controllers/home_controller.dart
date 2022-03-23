@@ -36,6 +36,7 @@ class HomeController extends GetxController {
   var isLoading = false.obs;
   var homeLoading = false.obs;
 
+
   String argumentData = '';
 
   //user data for location page

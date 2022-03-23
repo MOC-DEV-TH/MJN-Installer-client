@@ -25,8 +25,8 @@ class DropDownButtonComponent<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return ConstrainedBox(
       constraints: BoxConstraints(
-        maxHeight: 35,
         maxWidth: MediaQuery.of(context).size.width,
+        maxHeight: 40
       ),
       child: SafeArea(
         child: DropdownButtonFormField2<dynamic>(

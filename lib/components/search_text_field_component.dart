@@ -28,7 +28,6 @@ class SearchTextFieldComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      height: 38,
       margin: EdgeInsets.only(bottom: size.height * 0.1-60, ),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -40,12 +39,12 @@ class SearchTextFieldComponent extends StatelessWidget {
            onTextDataChange!(value);
         },
         onTap: onTap,
-        maxLines: maxLines,
+        maxLines: null,
         textInputAction: TextInputAction.next,
-        keyboardType: textInputType,
+        keyboardType: TextInputType.multiline,
         controller: controller,
         obscureText: isVisible,
-        style: TextStyle(fontSize: 12),
+        style: TextStyle(fontSize: 10),
         decoration: InputDecoration(
           suffixIconConstraints: BoxConstraints(
               minHeight: 5,

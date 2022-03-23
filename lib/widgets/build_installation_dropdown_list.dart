@@ -23,7 +23,7 @@ class BuildInstallationDropdownList extends StatefulWidget {
 class _BuildInstallationDropdownListState
     extends State<BuildInstallationDropdownList> {
   final InstallationController installationController =
-  Get.put(InstallationController());
+      Get.put(InstallationController());
   List<InstallationStatus>? installationStatusLists;
 
   @override
@@ -55,65 +55,89 @@ class _BuildInstallationDropdownListState
                     children: [
                       LabelTextComponent(
                           text: installationController
-                              .installationDetail.value.user_name ??
+                                  .installationDetail.value.user_name ??
                               "xx xxx xxx xxx xxx",
                           color: Colors.black,
                           padding: 8.0),
                       LabelTextComponent(
                           text: installationController
-                              .installationDetail.value.odb_name ??
+                                  .installationDetail.value.odb_name ??
                               "xx xxx xxx xxx xxx",
                           color: Colors.black,
                           padding: 8.0),
                       LabelTextComponent(
-                          text: installationController.installationDetail.value
-                              .latitude == null
-                              && installationController.installationDetail.value
-                                  .longitude == null ? "xx xxx xxx xxx xxx" :
-                          installationController.installationDetail.value
-                              .latitude!+","+installationController.installationDetail.value
-                              .longitude!,
+                          text: installationController
+                                          .installationDetail.value.latitude ==
+                                      null &&
+                                  installationController
+                                          .installationDetail.value.longitude ==
+                                      null
+                              ? "xx xxx xxx xxx xxx"
+                              : installationController
+                                      .installationDetail.value.latitude! +
+                                  "," +
+                                  installationController
+                                      .installationDetail.value.longitude!,
                           color: Colors.black,
                           padding: 8.0),
                       LabelTextComponent(
-                          text: (installationController
-                              .installationDetail.value.gateway_ip == null || installationController
-                              .installationDetail.value.gateway_ip == "") ?
-                              "xx xxx xxx xxx xxx" : installationController
-                              .installationDetail.value.gateway_ip! ,
+                          text: (installationController.installationDetail.value
+                                          .gateway_ip ==
+                                      null ||
+                                  installationController.installationDetail
+                                          .value.gateway_ip ==
+                                      "")
+                              ? "xx xxx xxx xxx xxx"
+                              : installationController
+                                  .installationDetail.value.gateway_ip!,
                           color: Colors.black,
                           padding: 8.0),
                       LabelTextComponent(
-                          text: (installationController
-                              .installationDetail.value.customer_ip=="" || installationController
-                              .installationDetail.value.customer_ip==null)?
-                              "xx xxx xxx xxx xxx":installationController
-                              .installationDetail.value.customer_ip!,
+                          text: (installationController.installationDetail.value
+                                          .customer_ip ==
+                                      "" ||
+                                  installationController.installationDetail
+                                          .value.customer_ip ==
+                                      null)
+                              ? "xx xxx xxx xxx xxx"
+                              : installationController
+                                  .installationDetail.value.customer_ip!,
                           color: Colors.black,
                           padding: 8.0),
                       LabelTextComponent(
-                          text:(installationController
-                              .installationDetail.value.network_address=="" ||
-                              installationController
-                                  .installationDetail.value.network_address==null)  ?
-                              "xx xxx xxx xxx xxx":installationController
-                          .installationDetail.value.network_address!,
+                          text: (installationController.installationDetail.value
+                                          .network_address ==
+                                      "" ||
+                                  installationController.installationDetail
+                                          .value.network_address ==
+                                      null)
+                              ? "xx xxx xxx xxx xxx"
+                              : installationController
+                                  .installationDetail.value.network_address!,
                           color: Colors.black,
                           padding: 8.0),
                       LabelTextComponent(
-                          text:(installationController
-                              .installationDetail.value.user_cvlan == "" ||installationController
-                              .installationDetail.value.user_cvlan == null) ?
-                              "xx xxx xxx xxx xxx":installationController
-                              .installationDetail.value.user_cvlan!,
+                          text: (installationController.installationDetail.value
+                                          .user_cvlan ==
+                                      "" ||
+                                  installationController.installationDetail
+                                          .value.user_cvlan ==
+                                      null)
+                              ? "xx xxx xxx xxx xxx"
+                              : installationController
+                                  .installationDetail.value.user_cvlan!,
                           color: Colors.black,
                           padding: 8.0),
                       LabelTextComponent(
-                          text:(installationController
-                              .installationDetail.value.user_svlan == "" || installationController
-                              .installationDetail.value.user_svlan == null) ?
-                              "xx xxx xxx xxx xxx":installationController
-                              .installationDetail.value.user_svlan!,
+                          text: (installationController.installationDetail.value
+                                          .user_svlan ==
+                                      "" ||
+                                  installationController.installationDetail
+                                          .value.user_svlan ==
+                                      null)
+                              ? "xx xxx xxx xxx xxx"
+                              : installationController
+                                  .installationDetail.value.user_svlan!,
                           color: Colors.black,
                           padding: 8.0),
                     ],
@@ -141,14 +165,13 @@ class _BuildInstallationDropdownListState
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text('Remote Login Function'),
-               GetBuilder<InstallationController>(builder: (controller)=>
-                 Checkbox(
-                   value: controller.checkBoxValue,
-                   onChanged: (value) =>
-                       controller.updateCheckBoxValue(value!)
-                   ,//  <-- leading Checkbox
-                 ),
-               )
+                GetBuilder<InstallationController>(
+                  builder: (controller) => Checkbox(
+                    value: controller.checkBoxValue,
+                    onChanged: (value) => controller
+                        .updateCheckBoxValue(value!), //  <-- leading Checkbox
+                  ),
+                )
               ],
             ),
             SizedBox(
@@ -174,7 +197,6 @@ class _BuildInstallationDropdownListState
     });
   }
 
-
   final choosePhotoListsWidget = Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
@@ -186,23 +208,21 @@ class _BuildInstallationDropdownListState
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GetBuilder<InstallationController>(
-            builder: (controller) =>
-                PhotoPickerComponent(
-                  imagePath: controller.image_onu_front_side,
-                  text: 'Front Side',
-                  onPress: () => {controller.onTapONUFrontSide()},
-                ),
+            builder: (controller) => PhotoPickerComponent(
+              imagePath: controller.image_onu_front_side,
+              text: 'Front Side',
+              onPress: () => {controller.onTapONUFrontSide()},
+            ),
           ),
           SizedBox(
             width: 20,
           ),
           GetBuilder<InstallationController>(
-            builder: (controller) =>
-                PhotoPickerComponent(
-                  imagePath: controller.image_onu_back_side,
-                  text: 'Back Side',
-                  onPress: () => {controller.onTapONUBackSide()},
-                ),
+            builder: (controller) => PhotoPickerComponent(
+              imagePath: controller.image_onu_back_side,
+              text: 'Back Side',
+              onPress: () => {controller.onTapONUBackSide()},
+            ),
           ),
         ],
       ),
@@ -217,23 +237,21 @@ class _BuildInstallationDropdownListState
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GetBuilder<InstallationController>(
-            builder: (controller) =>
-                PhotoPickerComponent(
-                  imagePath: controller.image_odb_before,
-                  text: 'Before ODB Photo',
-                  onPress: () => {controller.onTapODBBefore()},
-                ),
+            builder: (controller) => PhotoPickerComponent(
+              imagePath: controller.image_odb_before,
+              text: 'Before ODB Photo',
+              onPress: () => {controller.onTapODBBefore()},
+            ),
           ),
           SizedBox(
             width: 20,
           ),
           GetBuilder<InstallationController>(
-            builder: (controller) =>
-                PhotoPickerComponent(
-                  imagePath: controller.image_odb_after,
-                  text: 'After ODB Photo',
-                  onPress: () => {controller.onTapODBAfter()},
-                ),
+            builder: (controller) => PhotoPickerComponent(
+              imagePath: controller.image_odb_after,
+              text: 'After ODB Photo',
+              onPress: () => {controller.onTapODBAfter()},
+            ),
           ),
         ],
       ),
@@ -248,23 +266,21 @@ class _BuildInstallationDropdownListState
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           GetBuilder<InstallationController>(
-            builder: (controller) =>
-                PhotoPickerComponent(
-                  imagePath: controller.image_spliter_before,
-                  text: 'Before Spliter Photo',
-                  onPress: () => {controller.onTapSpliterBefore()},
-                ),
+            builder: (controller) => PhotoPickerComponent(
+              imagePath: controller.image_spliter_before,
+              text: 'Before Spliter Photo',
+              onPress: () => {controller.onTapSpliterBefore()},
+            ),
           ),
           SizedBox(
             width: 20,
           ),
           GetBuilder<InstallationController>(
-            builder: (controller) =>
-                PhotoPickerComponent(
-                  imagePath: controller.image_spliter_after,
-                  text: 'After Spliter Photo',
-                  onPress: () => {controller.onTapSpliterAfter()},
-                ),
+            builder: (controller) => PhotoPickerComponent(
+              imagePath: controller.image_spliter_after,
+              text: 'After Spliter Photo',
+              onPress: () => {controller.onTapSpliterAfter()},
+            ),
           ),
         ],
       ),
@@ -273,12 +289,11 @@ class _BuildInstallationDropdownListState
       ),
       Text('Service Acceptance Form'),
       GetBuilder<InstallationController>(
-        builder: (controller) =>
-            PhotoPickerComponent(
-              imagePath: controller.imageAcceptForm,
-              text: '',
-              onPress: () => {controller.onTapAcceptForm()},
-            ),
+        builder: (controller) => PhotoPickerComponent(
+          imagePath: controller.imageAcceptForm,
+          text: '',
+          onPress: () => {controller.onTapAcceptForm()},
+        ),
       ),
     ],
   );
@@ -321,452 +336,462 @@ class _BuildInstallationDropdownListState
       children: [
         Expanded(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                        child: LabelTextComponent(
-                            text: 'Sr No.', color: Colors.black, padding: 8.0)),
-                    Flexible(
-                      flex: 2,
-                      child: GetBuilder<InstallationController>(
-                        init: InstallationController(),
-                        builder: (controller) =>
-                            TextFieldBoxDecorationComponent(
-                              controller: controller.macIdController,
-                              errorText: '',
-                              hintText: '',
-                            ),
-                      ),
+                Expanded(
+                    child: LabelTextComponent(
+                        text: 'Sr No.', color: Colors.black, padding: 8.0)),
+                Flexible(
+                  flex: 2,
+                  child: GetBuilder<InstallationController>(
+                    init: InstallationController(),
+                    builder: (controller) => TextFieldBoxDecorationComponent(
+                      controller: controller.macIdController,
+                      errorText: '',
+                      hintText: '',
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                        child: LabelTextComponent(
-                            text: 'Spliter No.',
-                            color: Colors.black,
-                            padding: 8.0)),
-                    Flexible(
-                      flex: 2,
-                      child: GetBuilder<InstallationController>(
-                        init: InstallationController(),
-                        builder: (controller) =>
-                            TextFieldBoxDecorationComponent(
-                              controller: controller.deviceIdController,
-                              errorText: '',
-                              hintText: '',
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                        child: LabelTextComponent(
-                            text: 'Port No.',
-                            color: Colors.black,
-                            padding: 8.0)),
-                    Flexible(
-                      flex: 2,
-                      child: GetBuilder<InstallationController>(
-                        init: InstallationController(),
-                        builder: (controller) =>
-                            TextFieldBoxDecorationComponent(
-                              controller: controller.portNoController,
-                              errorText: '',
-                              hintText: '',
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    LabelTextComponent(
-                        text: 'Status', color: Colors.black, padding: 8.0),
-                    SizedBox(
-                      width: 50,
-                    ),
-                    Expanded(
-                      child: DropDownButtonComponent(
-                        itemsList: installationStatusLists,
-                        onChangedData: (InstallationStatus value) {
-                          debugPrint('DropdownValue${value.id}');
-                          installationController.updateStatusValueID(value.id!);
-                        },
-                        hintText: '--Select Status--',
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                        child: LabelTextComponent(
-                            text: 'Cable Type',
-                            color: Colors.black,
-                            padding: 8.0)),
-                    Flexible(
-                      flex: 2,
-                      child: Container(
-                        width: Get.width,
-                        padding: EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            border: Border.all(color: Colors.black38),
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(2.0))),
-                        child: ExpandableNotifier(
-                          // <-- Provides ExpandableController to its children
-                            child: _buildInstallationUsages(
-                                '--Select Cable Type--',
-                                installationController.b2bInstallationUsages
-                                    .value
-                                    .details!.cableType)),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                        child: LabelTextComponent(
-                            text: 'Joint Closure',
-                            color: Colors.black,
-                            padding: 8.0)),
-                    Flexible(
-                      flex: 2,
-                      child: Container(
-                        width: Get.width,
-                        padding: EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            border: Border.all(color: Colors.black38),
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(2.0))),
-                        child: ExpandableNotifier(
-                          // <-- Provides ExpandableController to its children
-                          child: _buildInstallationUsages(
-                              '--Select Joint Closure--',
-                              installationController.b2bInstallationUsages.value
-                                  .details!.jointClosure),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                        child: LabelTextComponent(
-                            text: 'ODB', color: Colors.black, padding: 8.0)),
-                    Flexible(
-                      flex: 2,
-                      child: Container(
-                        width: Get.width,
-                        padding: EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            border: Border.all(color: Colors.black38),
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(2.0))),
-                        child: ExpandableNotifier(
-                          // <-- Provides ExpandableController to its children
-                          child: _buildInstallationUsages(
-                              '--Select ODB--',
-                              installationController
-                                  .b2bInstallationUsages.value.details!.oDB),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                        child: LabelTextComponent(
-                            text: 'ONU', color: Colors.black, padding: 8.0)),
-                    Flexible(
-                      flex: 2,
-                      child: Container(
-                        width: Get.width,
-                        padding: EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            border: Border.all(color: Colors.black38),
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(2.0))),
-                        child: ExpandableNotifier(
-                          // <-- Provides ExpandableController to its children
-                          child: _buildInstallationUsages(
-                              '--Select ONU--',
-                              installationController
-                                  .b2bInstallationUsages.value.details!.oNU),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                        child: LabelTextComponent(
-                            text: 'Cat6 Cable',
-                            color: Colors.black,
-                            padding: 8.0)),
-                    Flexible(
-                      flex: 2,
-                      child: Container(
-                        width: Get.width,
-                        padding: EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            border: Border.all(color: Colors.black38),
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(2.0))),
-                        child: ExpandableNotifier(
-                          // <-- Provides ExpandableController to its children
-                          child: _buildInstallationUsages(
-                              '--Select Cat6 Cable--',
-                              installationController
-                                  .b2bInstallationUsages.value.details!
-                                  .cat6Cable),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                        child: LabelTextComponent(
-                            text: 'RJ-45 Connector',
-                            color: Colors.black,
-                            padding: 8.0)),
-                    Flexible(
-                      flex: 2,
-                      child: Container(
-                        width: Get.width,
-                        padding: EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            border: Border.all(color: Colors.black38),
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(2.0))),
-                        child: ExpandableNotifier(
-                          // <-- Provides ExpandableController to its children
-                          child: _buildInstallationUsages(
-                              '--Select RJ-45 Connector--',
-                              installationController.b2bInstallationUsages.value
-                                  .details!.rJ45Connector),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                        child: LabelTextComponent(
-                            text: 'Patch Cord',
-                            color: Colors.black,
-                            padding: 8.0)),
-                    Flexible(
-                      flex: 2,
-                      child: Container(
-                        width: Get.width,
-                        padding: EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            border: Border.all(color: Colors.black38),
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(2.0))),
-                        child: ExpandableNotifier(
-                          // <-- Provides ExpandableController to its children
-                          child: _buildInstallationUsages(
-                              '--Select Patch Cord--',
-                              installationController
-                                  .b2bInstallationUsages.value.details!
-                                  .patchCord),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                        child: LabelTextComponent(
-                            text: 'Media Converter',
-                            color: Colors.black,
-                            padding: 8.0)),
-                    Flexible(
-                      flex: 2,
-                      child: Container(
-                        width: Get.width,
-                        padding: EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            border: Border.all(color: Colors.black38),
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(2.0))),
-                        child: ExpandableNotifier(
-                          // <-- Provides ExpandableController to its children
-                          child: _buildInstallationUsages(
-                              '--Select Media Converter--',
-                              installationController.b2bInstallationUsages.value
-                                  .details!.mediaConverter),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                        child: LabelTextComponent(
-                            text: 'SPF Module',
-                            color: Colors.black,
-                            padding: 8.0)),
-                    Flexible(
-                      flex: 2,
-                      child: Container(
-                        width: Get.width,
-                        padding: EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            border: Border.all(color: Colors.black38),
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(2.0))),
-                        child: ExpandableNotifier(
-                          // <-- Provides ExpandableController to its children
-                          child: _buildInstallationUsages(
-                              '--Select SPF Module--',
-                              installationController
-                                  .b2bInstallationUsages.value.details!
-                                  .sPFModule),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                        child: LabelTextComponent(
-                            text: 'SC Connector',
-                            color: Colors.black,
-                            padding: 8.0)),
-                    Flexible(
-                      flex: 2,
-                      child: Container(
-                        width: Get.width,
-                        padding: EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            border: Border.all(color: Colors.black38),
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(2.0))),
-                        child: ExpandableNotifier(
-                          // <-- Provides ExpandableController to its children
-                          child: _buildInstallationUsages(
-                              '--Select SC Connector--',
-                              installationController.b2bInstallationUsages.value
-                                  .details!.sCConnector),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                        child: LabelTextComponent(
-                            text: 'Router', color: Colors.black, padding: 8.0)),
-                    Flexible(
-                      flex: 2,
-                      child: Container(
-                        width: Get.width,
-                        padding: EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            border: Border.all(color: Colors.black38),
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(2.0))),
-                        child: ExpandableNotifier(
-                          // <-- Provides ExpandableController to its children
-                          child: _buildInstallationUsages(
-                              '--Select Router--',
-                              installationController
-                                  .b2bInstallationUsages.value.details!.router),
-                        ),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ],
-            ))
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: LabelTextComponent(
+                        text: 'Spliter No.',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Flexible(
+                  flex: 2,
+                  child: GetBuilder<InstallationController>(
+                    init: InstallationController(),
+                    builder: (controller) => TextFieldBoxDecorationComponent(
+                      controller: controller.deviceIdController,
+                      errorText: '',
+                      hintText: '',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: LabelTextComponent(
+                        text: 'Port No.', color: Colors.black, padding: 8.0)),
+                Flexible(
+                  flex: 2,
+                  child: GetBuilder<InstallationController>(
+                    init: InstallationController(),
+                    builder: (controller) => TextFieldBoxDecorationComponent(
+                      controller: controller.portNoController,
+                      errorText: '',
+                      hintText: '',
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                LabelTextComponent(
+                    text: 'Status', color: Colors.black, padding: 8.0),
+                SizedBox(
+                  width: 50,
+                ),
+                Expanded(
+                  child: DropDownButtonComponent(
+                    itemsList: installationStatusLists,
+                    onChangedData: (InstallationStatus value) {
+                      debugPrint('DropdownValue${value.id}');
+                      installationController.updateStatusValueID(value.id!);
+
+                      if (value.id == 3 || value.id == 6) {
+                        installationController.selectDate(context);
+                        }
+                    },
+                    hintText: '--Select Status--',
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Obx((){
+              if(installationController.isShowNoteTextFormField.value){
+                return
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(children: [
+                        Expanded(
+                            child: LabelTextComponent(
+                                text: 'Note', color: Colors.black, padding: 8.0)),
+                        Flexible(
+                          flex: 2,
+                          child: GetBuilder<InstallationController>(
+                            init: InstallationController(),
+                            builder: (controller) => TextFieldBoxDecorationComponent(
+                              controller: controller.statusCancelAndIncompleteTextController,
+                              errorText: '',
+                              hintText: '',
+                            ),
+                          ),
+                        ),
+                      ],),
+
+                      SizedBox(
+                        height: 10,
+                      ),
+
+                    ],
+                  );
+              }
+              else{
+                return Container();
+              }
+            }),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: LabelTextComponent(
+                        text: 'Cable Type', color: Colors.black, padding: 8.0)),
+                Flexible(
+                  flex: 2,
+                  child: Container(
+                    width: Get.width,
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(color: Colors.black38),
+                        borderRadius: BorderRadius.all(Radius.circular(2.0))),
+                    child: ExpandableNotifier(
+                        // <-- Provides ExpandableController to its children
+                        child: _buildInstallationUsages(
+                            '--Select Cable Type--',
+                            installationController.b2bInstallationUsages.value
+                                .details!.cableType)),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: LabelTextComponent(
+                        text: 'Joint Closure',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Flexible(
+                  flex: 2,
+                  child: Container(
+                    width: Get.width,
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(color: Colors.black38),
+                        borderRadius: BorderRadius.all(Radius.circular(2.0))),
+                    child: ExpandableNotifier(
+                      // <-- Provides ExpandableController to its children
+                      child: _buildInstallationUsages(
+                          '--Select Joint Closure--',
+                          installationController.b2bInstallationUsages.value
+                              .details!.jointClosure),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: LabelTextComponent(
+                        text: 'ODB', color: Colors.black, padding: 8.0)),
+                Flexible(
+                  flex: 2,
+                  child: Container(
+                    width: Get.width,
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(color: Colors.black38),
+                        borderRadius: BorderRadius.all(Radius.circular(2.0))),
+                    child: ExpandableNotifier(
+                      // <-- Provides ExpandableController to its children
+                      child: _buildInstallationUsages(
+                          '--Select ODB--',
+                          installationController
+                              .b2bInstallationUsages.value.details!.oDB),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: LabelTextComponent(
+                        text: 'ONU', color: Colors.black, padding: 8.0)),
+                Flexible(
+                  flex: 2,
+                  child: Container(
+                    width: Get.width,
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(color: Colors.black38),
+                        borderRadius: BorderRadius.all(Radius.circular(2.0))),
+                    child: ExpandableNotifier(
+                      // <-- Provides ExpandableController to its children
+                      child: _buildInstallationUsages(
+                          '--Select ONU--',
+                          installationController
+                              .b2bInstallationUsages.value.details!.oNU),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: LabelTextComponent(
+                        text: 'Cat6 Cable', color: Colors.black, padding: 8.0)),
+                Flexible(
+                  flex: 2,
+                  child: Container(
+                    width: Get.width,
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(color: Colors.black38),
+                        borderRadius: BorderRadius.all(Radius.circular(2.0))),
+                    child: ExpandableNotifier(
+                      // <-- Provides ExpandableController to its children
+                      child: _buildInstallationUsages(
+                          '--Select Cat6 Cable--',
+                          installationController
+                              .b2bInstallationUsages.value.details!.cat6Cable),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: LabelTextComponent(
+                        text: 'RJ-45 Connector',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Flexible(
+                  flex: 2,
+                  child: Container(
+                    width: Get.width,
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(color: Colors.black38),
+                        borderRadius: BorderRadius.all(Radius.circular(2.0))),
+                    child: ExpandableNotifier(
+                      // <-- Provides ExpandableController to its children
+                      child: _buildInstallationUsages(
+                          '--Select RJ-45 Connector--',
+                          installationController.b2bInstallationUsages.value
+                              .details!.rJ45Connector),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: LabelTextComponent(
+                        text: 'Patch Cord', color: Colors.black, padding: 8.0)),
+                Flexible(
+                  flex: 2,
+                  child: Container(
+                    width: Get.width,
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(color: Colors.black38),
+                        borderRadius: BorderRadius.all(Radius.circular(2.0))),
+                    child: ExpandableNotifier(
+                      // <-- Provides ExpandableController to its children
+                      child: _buildInstallationUsages(
+                          '--Select Patch Cord--',
+                          installationController
+                              .b2bInstallationUsages.value.details!.patchCord),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: LabelTextComponent(
+                        text: 'Media Converter',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Flexible(
+                  flex: 2,
+                  child: Container(
+                    width: Get.width,
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(color: Colors.black38),
+                        borderRadius: BorderRadius.all(Radius.circular(2.0))),
+                    child: ExpandableNotifier(
+                      // <-- Provides ExpandableController to its children
+                      child: _buildInstallationUsages(
+                          '--Select Media Converter--',
+                          installationController.b2bInstallationUsages.value
+                              .details!.mediaConverter),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: LabelTextComponent(
+                        text: 'SPF Module', color: Colors.black, padding: 8.0)),
+                Flexible(
+                  flex: 2,
+                  child: Container(
+                    width: Get.width,
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(color: Colors.black38),
+                        borderRadius: BorderRadius.all(Radius.circular(2.0))),
+                    child: ExpandableNotifier(
+                      // <-- Provides ExpandableController to its children
+                      child: _buildInstallationUsages(
+                          '--Select SPF Module--',
+                          installationController
+                              .b2bInstallationUsages.value.details!.sPFModule),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: LabelTextComponent(
+                        text: 'SC Connector',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Flexible(
+                  flex: 2,
+                  child: Container(
+                    width: Get.width,
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(color: Colors.black38),
+                        borderRadius: BorderRadius.all(Radius.circular(2.0))),
+                    child: ExpandableNotifier(
+                      // <-- Provides ExpandableController to its children
+                      child: _buildInstallationUsages(
+                          '--Select SC Connector--',
+                          installationController.b2bInstallationUsages.value
+                              .details!.sCConnector),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: LabelTextComponent(
+                        text: 'Router', color: Colors.black, padding: 8.0)),
+                Flexible(
+                  flex: 2,
+                  child: Container(
+                    width: Get.width,
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(color: Colors.black38),
+                        borderRadius: BorderRadius.all(Radius.circular(2.0))),
+                    child: ExpandableNotifier(
+                      // <-- Provides ExpandableController to its children
+                      child: _buildInstallationUsages(
+                          '--Select Router--',
+                          installationController
+                              .b2bInstallationUsages.value.details!.router),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ))
       ],
     );
   }
@@ -787,12 +812,11 @@ class _BuildInstallationDropdownListState
                     flex: 2,
                     child: GetBuilder<InstallationController>(
                       init: InstallationController(),
-                      builder: (controller) =>
-                          TextFieldBoxDecorationComponent(
-                            controller: controller.macIdController,
-                            errorText: '',
-                            hintText: '',
-                          ),
+                      builder: (controller) => TextFieldBoxDecorationComponent(
+                        controller: controller.macIdController,
+                        errorText: '',
+                        hintText: '',
+                      ),
                     ),
                   ),
                 ],
@@ -812,12 +836,11 @@ class _BuildInstallationDropdownListState
                     flex: 2,
                     child: GetBuilder<InstallationController>(
                       init: InstallationController(),
-                      builder: (controller) =>
-                          TextFieldBoxDecorationComponent(
-                            controller: controller.deviceIdController,
-                            errorText: '',
-                            hintText: '',
-                          ),
+                      builder: (controller) => TextFieldBoxDecorationComponent(
+                        controller: controller.deviceIdController,
+                        errorText: '',
+                        hintText: '',
+                      ),
                     ),
                   ),
                 ],
@@ -835,12 +858,11 @@ class _BuildInstallationDropdownListState
                     flex: 2,
                     child: GetBuilder<InstallationController>(
                       init: InstallationController(),
-                      builder: (controller) =>
-                          TextFieldBoxDecorationComponent(
-                            controller: controller.portNoController,
-                            errorText: '',
-                            hintText: '',
-                          ),
+                      builder: (controller) => TextFieldBoxDecorationComponent(
+                        controller: controller.portNoController,
+                        errorText: '',
+                        hintText: '',
+                      ),
                     ),
                   ),
                 ],
@@ -848,7 +870,6 @@ class _BuildInstallationDropdownListState
               SizedBox(
                 height: 10,
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -862,7 +883,11 @@ class _BuildInstallationDropdownListState
                       itemsList: installationStatusLists,
                       onChangedData: (InstallationStatus value) {
                         debugPrint('DropdownValue${value.id}');
+
                         installationController.updateStatusValueID(value.id!);
+                        if (value.id == 3 || value.id == 6) {
+                          installationController.selectDate(context);
+                        }
                       },
                       hintText: '--Select Status--',
                     ),
@@ -872,6 +897,41 @@ class _BuildInstallationDropdownListState
               SizedBox(
                 height: 10,
               ),
+
+             Obx((){
+               if(installationController.isShowNoteTextFormField.value){
+                 return
+                   Column(
+                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                     children: [
+                       Row(children: [
+                         Expanded(
+                             child: LabelTextComponent(
+                                 text: 'Note', color: Colors.black, padding: 8.0)),
+                         Flexible(
+                           flex: 2,
+                           child: GetBuilder<InstallationController>(
+                             init: InstallationController(),
+                             builder: (controller) => TextFieldBoxDecorationComponent(
+                               controller: controller.statusCancelAndIncompleteTextController,
+                               errorText: '',
+                               hintText: '',
+                             ),
+                           ),
+                         ),
+                       ],),
+
+                       SizedBox(
+                         height: 10,
+                       ),
+
+                     ],
+                   );
+               }
+               else{
+                 return Container();
+               }
+             }),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -891,7 +951,7 @@ class _BuildInstallationDropdownListState
                           border: Border.all(color: Colors.black38),
                           borderRadius: BorderRadius.all(Radius.circular(2.0))),
                       child: ExpandableNotifier(
-                        // <-- Provides ExpandableController to its children
+                          // <-- Provides ExpandableController to its children
                           child: _buildInstallationUsages(
                               '--Select Cable Type--',
                               installationController.b2bInstallationUsages.value
@@ -1037,13 +1097,12 @@ class _BuildInstallationDropdownListState
 
     Map.fromIterable(itemsList!,
         key: (e) => e.name,
-        value: (e) =>
-        {
-          textEditingController = new TextEditingController(),
-          textEditingControllers.putIfAbsent(
-              e.name, () => textEditingController),
-          field_name.add(e.name)
-        });
+        value: (e) => {
+              textEditingController = new TextEditingController(),
+              textEditingControllers.putIfAbsent(
+                  e.name, () => textEditingController),
+              field_name.add(e.name)
+            });
 
     field_list = field_name;
     textEditingControllers_list = textEditingControllers;
@@ -1095,16 +1154,16 @@ class _BuildInstallationDropdownListState
                     children: <Widget>[
                       Expanded(
                           child: GetBuilder<InstallationController>(
-                            init: InstallationController(),
-                            builder: (controller) =>
-                                TextFieldWithLabelBoxDecorationComponent(
-                                  labelText: i,
-                                  controller: installationController
-                                      .textEditingControllers_list[i]!,
-                                  errorText: '',
-                                  hintText: '',
-                                ),
-                          )),
+                        init: InstallationController(),
+                        builder: (controller) =>
+                            TextFieldWithLabelBoxDecorationComponent(
+                          labelText: i,
+                          controller: installationController
+                              .textEditingControllers_list[i]!,
+                          errorText: '',
+                          hintText: '',
+                        ),
+                      )),
                     ],
                   ),
               ],

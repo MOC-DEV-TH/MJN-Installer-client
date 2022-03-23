@@ -21,7 +21,9 @@ class BuildPendingAndNewOrderCustomerList extends StatefulWidget {
 class _BuildPendingAndNewOrderCustomerListState
     extends State<BuildPendingAndNewOrderCustomerList>
     with WidgetsBindingObserver {
-  List<TownshipDatum>? townshipLists;
+  List<TownshipDatum>? townshipList;
+  List<InstallationFilterStatus>? installationFilterStatusList;
+  List<ServiceTicketFilterStatus>? serviceTicketFilterStatusList;
   var customerStatusTitle = ''.obs;
   late StreamSubscription titleSub;
 
@@ -63,8 +65,7 @@ class _BuildPendingAndNewOrderCustomerListState
             });
           }
         });
-      }
-      else {
+      } else {
         WidgetsBinding.instance!.addPostFrameCallback((_) {
           if (this.mounted) {
             setState(() {
@@ -76,8 +77,12 @@ class _BuildPendingAndNewOrderCustomerListState
     });
 
     debugPrint('Status Title ${PageArgumentController.to.getStatusTitle()}');
-    townshipLists =
+    townshipList =
         LoginController.to.maintenanceDropDownListsData.details!.townshipData;
+    installationFilterStatusList =
+        LoginController.to.maintenanceDropDownListsData.details!.installationFilterStatus;
+    serviceTicketFilterStatusList =
+        LoginController.to.maintenanceDropDownListsData.details!.serviceTicketFilterStatus;
     return Container(
       child: _buildWidget(context),
     );
@@ -115,6 +120,14 @@ class _BuildPendingAndNewOrderCustomerListState
             ),
             Text(
               'Township',
+              style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 12,
+                  color: Colors.black,
+                  decoration: TextDecoration.none),
+            ),
+            Text(
+              'Status',
               style: TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 12,
@@ -194,20 +207,19 @@ class _BuildPendingAndNewOrderCustomerListState
             ),
             Container(
               height: 38,
-              width: 115,
+              width: 100,
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(4))),
               margin: EdgeInsets.only(bottom: 24),
               child: DropDownButtonComponent(
-                itemsList: townshipLists,
+                itemsList: townshipList,
                 onChangedData: (TownshipDatum value) {
                   debugPrint('DropdownValue${value.key}');
 
-                  if(value.name == "Select Township"){
+                  if (value.name == "Select Township") {
                     firstTimeFetchDataFromNetwork();
-                  }
-                  else{
+                  } else {
                     if (PageArgumentController.to.getArgumentData() ==
                         SERVICE_TICKET) {
                       if (PageArgumentController.to.getStatus() == NEW_ORDER) {
@@ -242,6 +254,120 @@ class _BuildPendingAndNewOrderCustomerListState
                 hintText: '--Select Township--',
               ),
             ),
+            SizedBox(
+              width: 10.0,
+            ),
+
+
+          Obx((){
+            if(!PageArgumentController.to.isShowStatus.value)
+              {
+                return
+                  Container(
+                    height: 38,
+                    width: 90,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(4))),
+                    margin: EdgeInsets.only(bottom: 24),
+                    child: DropDownButtonComponent(
+                      itemsList: installationFilterStatusList,
+                      onChangedData: (InstallationFilterStatus value) {
+                        debugPrint('DropdownValue${value.key}');
+
+                        if (value.name == "Select Status") {
+                          firstTimeFetchDataFromNetwork();
+                        } else {
+                          if (PageArgumentController.to.getArgumentData() ==
+                              SERVICE_TICKET) {
+                            if (PageArgumentController.to.getStatus() == NEW_ORDER) {
+                              HomeController.to.fetchServiceTicketListsByStatus(
+                                  'newOrder',
+                                  context,
+                                  FILTER_STATUS + value.id.toString());
+                            } else if (PageArgumentController.to.getStatus() ==
+                                PENDING) {
+                              HomeController.to.fetchServiceTicketListsByStatus(
+                                  'pending',
+                                  context,
+                                  FILTER_STATUS + value.id.toString());
+                            }
+                          } else if (PageArgumentController.to.getArgumentData() ==
+                              INSTALLATION) {
+                            if (PageArgumentController.to.getStatus() == NEW_ORDER) {
+                              HomeController.to.fetchInstallationListsByStatus(
+                                  'newOrder',
+                                  context,
+                                  FILTER_STATUS + value.id.toString());
+                            } else if (PageArgumentController.to.getStatus() ==
+                                PENDING) {
+                              HomeController.to.fetchInstallationListsByStatus(
+                                  'pending',
+                                  context,
+                                  FILTER_STATUS + value.id.toString());
+                            }
+                          }
+                        }
+                      },
+                      hintText: '--Select Status--',
+                    ),
+                  );
+              }
+            else {
+              return
+                Container(
+                  height: 38,
+                  width: 90,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(4))),
+                  margin: EdgeInsets.only(bottom: 24),
+                  child: DropDownButtonComponent(
+                    itemsList: serviceTicketFilterStatusList,
+                    onChangedData: (ServiceTicketFilterStatus value) {
+                      debugPrint('DropdownValue${value.key}');
+
+                      if (value.name == "Select Status") {
+                        firstTimeFetchDataFromNetwork();
+                      } else {
+                        if (PageArgumentController.to.getArgumentData() ==
+                            SERVICE_TICKET) {
+                          if (PageArgumentController.to.getStatus() == NEW_ORDER) {
+                            HomeController.to.fetchServiceTicketListsByStatus(
+                                'newOrder',
+                                context,
+                                FILTER_STATUS + value.id.toString());
+                          } else if (PageArgumentController.to.getStatus() ==
+                              PENDING) {
+                            HomeController.to.fetchServiceTicketListsByStatus(
+                                'pending',
+                                context,
+                                FILTER_STATUS + value.id.toString());
+                          }
+                        } else if (PageArgumentController.to.getArgumentData() ==
+                            INSTALLATION) {
+                          if (PageArgumentController.to.getStatus() == NEW_ORDER) {
+                            HomeController.to.fetchInstallationListsByStatus(
+                                'newOrder',
+                                context,
+                                FILTER_STATUS + value.id.toString());
+                          } else if (PageArgumentController.to.getStatus() ==
+                              PENDING) {
+                            HomeController.to.fetchInstallationListsByStatus(
+                                'pending',
+                                context,
+                                FILTER_STATUS + value.id.toString());
+                          }
+                        }
+                      }
+                    },
+                    hintText: '--Select Status--',
+                  ),
+                );
+            }
+          })  ,
+
+
             SizedBox(
               width: 10.0,
             ),
@@ -335,7 +461,7 @@ class _BuildPendingAndNewOrderCustomerListState
                     ),
                     Expanded(
                         child: Text(
-                          'Sorry! No data found :(',
+                      'Sorry! No data found :(',
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.black45),
                     ))
@@ -349,27 +475,27 @@ class _BuildPendingAndNewOrderCustomerListState
                   0) {
                 return Center(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            margin: EdgeInsets.only(top: 50.0),
-                            color: Colors.transparent,
-                            child: Image(
-                              image: AssetImage('assets/no_result_found.png'),
-                              height: 200,
-                              width: 200,
-                            ),
-                          ),
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Container(
+                        margin: EdgeInsets.only(top: 50.0),
+                        color: Colors.transparent,
+                        child: Image(
+                          image: AssetImage('assets/no_result_found.png'),
+                          height: 200,
+                          width: 200,
                         ),
-                        Expanded(
-                            child: Text(
-                              'Sorry! No data found :(',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, color: Colors.black45),
-                            ))
-                      ],
-                    ));
+                      ),
+                    ),
+                    Expanded(
+                        child: Text(
+                      'Sorry! No data found :(',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black45),
+                    ))
+                  ],
+                ));
               } else
                 return _buildListView();
             } else
@@ -409,6 +535,8 @@ class _BuildPendingAndNewOrderCustomerListState
                             .installationPendingCustomerList[index].status,
                         installationDetail:
                             controller.installationPendingCustomerList[index],
+                        status_txt: controller
+                            .installationPendingCustomerList[index].status_txt,
                       )
                     : CustomerStatusListItems(
                         controller
@@ -429,6 +557,8 @@ class _BuildPendingAndNewOrderCustomerListState
                             .serviceTicketPendingCustomerList[index].township,
                         status: controller
                             .serviceTicketPendingCustomerList[index].status,
+                        status_txt: controller
+                            .serviceTicketPendingCustomerList[index].status_txt,
                         serviceTicketDetail:
                             controller.serviceTicketPendingCustomerList[index],
                       );

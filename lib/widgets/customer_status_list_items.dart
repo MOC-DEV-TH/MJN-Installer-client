@@ -18,6 +18,7 @@ class CustomerStatusListItems extends StatelessWidget {
   final String? township;
   final String? customerUID;
   final String? status;
+  final String? status_txt;
 
   InstallationDetail? installationDetail;
   ServiceTicketDetail? serviceTicketDetail;
@@ -32,6 +33,7 @@ class CustomerStatusListItems extends StatelessWidget {
       @required this.township,
       @required this.ticketId,
       @required this.customerUID,
+        @required this.status_txt,
       @required this.status});
 
   @override
@@ -51,7 +53,7 @@ class CustomerStatusListItems extends StatelessWidget {
     return Container(
         child: Container(
       margin: EdgeInsets.only(bottom: 10),
-      height: 90,
+
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(8.0))),
@@ -100,6 +102,18 @@ class CustomerStatusListItems extends StatelessWidget {
                             decoration: TextDecoration.none),
                       );
                     })),
+
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text(
+                    status_txt!,
+                    style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                        fontSize: 12,
+                        color: Colors.black,
+                        decoration: TextDecoration.none),
+                  ),
+                ),
               ],
             ),
             verticalDivider,
@@ -237,6 +251,17 @@ class CustomerStatusListItems extends StatelessWidget {
               decoration: TextDecoration.none),
         ),
       ),
+      Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: Text(
+          'Status',
+          style: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 12,
+              color: Colors.black,
+              decoration: TextDecoration.none),
+        ),
+      ),
     ],
   );
 
@@ -244,6 +269,17 @@ class CustomerStatusListItems extends StatelessWidget {
     mainAxisAlignment: MainAxisAlignment.center,
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
+      Padding(
+        padding: const EdgeInsets.all(2.0),
+        child: Text(
+          '-',
+          style: TextStyle(
+              fontWeight: FontWeight.normal,
+              fontSize: 12,
+              color: Colors.black,
+              decoration: TextDecoration.none),
+        ),
+      ),
       Padding(
         padding: const EdgeInsets.all(2.0),
         child: Text(

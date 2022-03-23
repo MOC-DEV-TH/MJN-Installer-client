@@ -49,6 +49,7 @@ const TICKET_ID_PARAM = '&ticket_id=';
 const TOWNSHIP_PARAM = '&township=';
 const ASSIGNED_DATE_PARAM = '&assigned_date=';
 const USERNAME_PARAM = '&username=';
+const FILTER_STATUS = '&filter_status=';
 
 const API_URL = BASE_URL+'api/';
 const SUPPORT_LOGIN_URL = API_URL+"support_login";

@@ -1,4 +1,4 @@
-com/moc/mjninstaller/BuildConfig.java
- com.moc.mjninstaller.BuildConfig
 io/flutter/plugins/GeneratedPluginRegistrant.java
  io.flutter.plugins.GeneratedPluginRegistrant
+com/moc/mjninstaller/BuildConfig.java
+ com.moc.mjninstaller.BuildConfig

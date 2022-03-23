@@ -1,4 +1,8 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:mjn_installer_app/controllers/home_controller.dart';
 import 'package:mjn_installer_app/models/b2bAndb2cUsagesVO.dart';
 
@@ -18,6 +22,9 @@ class ServiceTicketController extends GetxController {
   var technicalResolutionValueId;
   var statusValueId;
 
+  var source = ImageSource.camera;
+  var imagePicker;
+
   Map<String, TextEditingController> textEditingControllers_list = {};
   List<String> field_list = [];
 
@@ -26,7 +33,44 @@ class ServiceTicketController extends GetxController {
   var deviceIdController = TextEditingController();
   var portNoController = TextEditingController();
 
+  //manual note text form controller
+  var technicalIssueNoteController = TextEditingController();
+  var technicalResolutionNoteController = TextEditingController();
+
+  var isShowTechnicalIssueNote = false.obs;
+  var isShowTechnicalResolutionNote = false.obs;
+
   var b2bInstallationUsages = B2BAndB2CUsagesVo().obs;
+
+  @override
+  void onInit() {
+    imagePicker = new ImagePicker();
+    super.onInit();
+  }
+
+  //
+  String? str_image_onu_front_side = null;
+  String? str_image_onu_back_side = null;
+
+  String? str_image_odb_before = null;
+  String? str_image_odb_after = null;
+
+  String? str_image_spliter_before = null;
+  String? str_image_spliter_after = null;
+
+  String? str_imageAcceptForm = null;
+
+//
+  File? image_onu_front_side;
+  File? image_onu_back_side;
+
+  File? image_odb_before;
+  File? image_odb_after;
+
+  File? image_spliter_before;
+  File? image_spliter_after;
+
+  File? imageAcceptForm;
 
   void updateTechnicalIssueValueID(int id) {
     technicalResolutionValueId = id;
@@ -45,6 +89,84 @@ class ServiceTicketController extends GetxController {
 
   void onUIReady(String ticketID) {
     fetchServiceTicketDetail(ticketID);
+  }
+
+  void onTapONUFrontSide() {
+    imageFromGallery('onu_front');
+  }
+
+  void onTapONUBackSide() {
+    imageFromGallery('onu_back');
+  }
+
+  void onTapODBBefore() {
+    imageFromGallery("odb_before");
+  }
+
+  void onTapODBAfter() {
+    imageFromGallery("odb_after");
+  }
+
+  void onTapSpliterBefore() {
+    imageFromGallery("spliter_before");
+  }
+
+  void onTapSpliterAfter() {
+    imageFromGallery("spliter_after");
+  }
+
+  void onTapAcceptForm() {
+    imageFromGallery("accept");
+  }
+
+  void imageFromGallery(String tapStatus) async {
+    XFile? image = await imagePicker.pickImage(
+        source: ImageSource.gallery,
+        imageQuality: 50,
+        preferredCameraDevice: CameraDevice.front);
+
+    //ONU IMAGE
+    if (tapStatus == 'onu_front') {
+      image_onu_front_side = File(image!.path);
+      str_image_onu_front_side =
+          base64Encode(File(image.path).readAsBytesSync());
+      debugPrint('onuFront::${str_image_onu_front_side}');
+      update();
+    } else if (tapStatus == 'onu_back') {
+      image_onu_back_side = File(image!.path);
+      str_image_onu_back_side =
+          base64Encode(File(image.path).readAsBytesSync());
+      debugPrint('onuBack::${str_image_onu_back_side}');
+      update();
+    }
+    //ODB IMAGE
+    else if (tapStatus == 'odb_before') {
+      image_odb_before = File(image!.path);
+      str_image_odb_before = base64Encode(File(image.path).readAsBytesSync());
+      update();
+    } else if (tapStatus == 'odb_after') {
+      image_odb_after = File(image!.path);
+      str_image_odb_after = base64Encode(File(image.path).readAsBytesSync());
+      update();
+    }
+
+    // Spliter Image
+
+    else if (tapStatus == 'spliter_before') {
+      image_spliter_before = File(image!.path);
+      str_image_spliter_before =
+          base64Encode(File(image.path).readAsBytesSync());
+      update();
+    } else if (tapStatus == 'spliter_after') {
+      image_spliter_after = File(image!.path);
+      str_image_spliter_after =
+          base64Encode(File(image.path).readAsBytesSync());
+      update();
+    } else {
+      imageAcceptForm = File(image!.path);
+      str_imageAcceptForm = base64Encode(File(image.path).readAsBytesSync());
+      update();
+    }
   }
 
   void appendNewTextEditingController(
@@ -87,8 +209,23 @@ class ServiceTicketController extends GetxController {
       'spliter_no': deviceIdController.value.text.toString(),
       'port_no': portNoController.value.text.toString(),
       'status': statusValueId.toString(),
-      'technical_issue': technicalIssueValueId.toString(),
-      'technical_resolution': technicalResolutionValueId.toString(),
+      'technical_issue': technicalIssueValueId ?? 0,
+      'technical_issue_other':
+          technicalIssueNoteController.text.toString() == ""
+              ? "null"
+              : technicalIssueNoteController.text.toString(),
+      'technical_resolution': technicalResolutionValueId ?? 0,
+      'technical_resolution_other':
+          technicalResolutionNoteController.text.toString() == ""
+              ? "null"
+              : technicalResolutionNoteController.text.toString(),
+      'front_onu_img': str_image_onu_front_side ?? null,
+      'back_onu_img': str_image_onu_back_side ?? null,
+      'before_odb_img': str_image_odb_before ?? null,
+      'after_odb_img': str_image_odb_after ?? null,
+      'before_spliter_img': str_image_spliter_before ?? null,
+      'after_spliter_img': str_image_spliter_after ?? null,
+      'service_acceptance_img': str_imageAcceptForm ?? null,
     };
 
     var secondMap = {
@@ -104,13 +241,21 @@ class ServiceTicketController extends GetxController {
 
     debugPrint("Usage map collection::${thirdMap}", wrapWidth: 1024);
 
-    if (macIdController.text == "" ||
-        deviceIdController.text == "" ||
-        portNoController.text == "" ||
-        statusValueId == null) {
+    if (str_image_onu_front_side == null ||
+        str_image_onu_back_side == null ||
+        str_image_odb_before == null ||
+        str_image_odb_after == null ||
+        str_image_spliter_before == null ||
+        str_image_spliter_after == null ||
+        str_imageAcceptForm == null) {
       loadingForButton(false);
-      AppUtils.showErrorSnackBar('Fail', 'Data must not empty!');
-    } else {
+      AppUtils.showErrorSnackBar("Fail", 'Please select a photo!');
+    }
+    else if(statusValueId == null){
+      loadingForButton(false);
+      AppUtils.showErrorSnackBar("Fail", 'Please select a status!');
+    }
+    else {
       RestApi.postServiceTicketData(thirdMap, readData.read(TOKEN))
           .then((value) => {
                 if (value.status == 'Success')

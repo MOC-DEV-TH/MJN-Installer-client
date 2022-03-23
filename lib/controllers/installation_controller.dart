@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mjn_installer_app/controllers/home_controller.dart';
 import 'package:mjn_installer_app/models/b2bAndb2cUsagesVO.dart';
 import 'package:mjn_installer_app/models/installationDetailVO.dart';
@@ -15,6 +16,9 @@ class InstallationController extends GetxController {
   var macIdController = TextEditingController();
   var deviceIdController = TextEditingController();
   var portNoController = TextEditingController();
+
+  var statusCancelAndIncompleteTextController = TextEditingController();
+  var statusCancelAndIncompleteDateController = TextEditingController();
 
   bool checkBoxValue = false;
 
@@ -54,12 +58,13 @@ class InstallationController extends GetxController {
 
   var isLoading = false.obs;
   var loadingForButton = false.obs;
+  var isShowNoteTextFormField= false.obs;
   var statusValueID;
 
   Map<String, String> map_from_usage = {};
   Map<String, String> map = {};
 
-  void updateCheckBoxValue(bool cbValue){
+  void updateCheckBoxValue(bool cbValue) {
     debugPrint(cbValue.toString());
     checkBoxValue = cbValue;
     update();
@@ -67,7 +72,25 @@ class InstallationController extends GetxController {
 
   void onUIReady() {
     fetchInstallationDetail(HomeController.to.installationProfileID);
+
   }
+
+  void selectDate(BuildContext context) async {
+    final DateTime? selected = await showDatePicker(
+      initialDate: DateTime.now(),
+      context: context,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
+
+    if (selected != null) {
+      String dtFormat = DateFormat('dd/MM/yyyy').format(selected);
+      debugPrint("DateTimeFormat${dtFormat}");
+      statusCancelAndIncompleteDateController.text = dtFormat.toString();
+      isShowNoteTextFormField(true);
+    }
+  }
+
 
   void appendNewTextEditingController(
       Map<String, TextEditingController> textEditingController,
@@ -147,6 +170,8 @@ class InstallationController extends GetxController {
 
   void updateStatusValueID(int id) {
     statusValueID = id;
+    isShowNoteTextFormField(false);
+    statusCancelAndIncompleteDateController.text = '';
     update();
   }
 
@@ -237,23 +262,35 @@ class InstallationController extends GetxController {
 
     debugPrint("Usage status::${statusValueID}");
 
-    if (macIdController.text == "" ||
-        deviceIdController.text == "" ||
-        portNoController.text == "" ||
-        statusValueID == null) {
+    if (str_image_onu_front_side == null ||
+        str_image_onu_back_side == null ||
+        str_image_odb_before == null ||
+        str_image_odb_after == null ||
+        str_image_spliter_before == null ||
+        str_image_spliter_after == null ||
+        str_imageAcceptForm == null) {
       loadingForButton(false);
-      AppUtils.showErrorSnackBar("Fail", 'Data must not empty!');
+      AppUtils.showErrorSnackBar("Fail", 'Please select a photo!');
     } else {
-      RestApi.postInstallationData(readData.read(TOKEN), thirdMap)
-          .then((value) => {
-                if (value.status == 'Success')
-                  {
-                    loadingForButton(false),
-                    Get.offNamed(COMPLETE_CUSTOMER_PAGE)
-                  }
-                else
-                  {loadingForButton(false)}
-              });
+      if (checkBoxValue == false) {
+        loadingForButton(false);
+        AppUtils.showErrorSnackBar(
+            "Fail", 'Please accept remote login function to proceed!');
+      } else if (statusValueID == null) {
+        loadingForButton(false);
+        AppUtils.showErrorSnackBar("Fail", 'Please select a status!');
+      } else {
+        RestApi.postInstallationData(readData.read(TOKEN), thirdMap)
+            .then((value) => {
+                  if (value.status == 'Success')
+                    {
+                      loadingForButton(false),
+                      Get.offNamed(COMPLETE_CUSTOMER_PAGE)
+                    }
+                  else
+                    {loadingForButton(false)}
+                });
+      }
     }
   }
 }

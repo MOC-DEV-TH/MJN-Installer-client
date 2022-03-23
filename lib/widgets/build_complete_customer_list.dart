@@ -17,7 +17,9 @@ class BuildCompleteCustomerList extends StatefulWidget {
 }
 
 class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
-  List<TownshipDatum>? townshipLists;
+  List<TownshipDatum>? townshipList;
+  List<InstallationFilterStatus>? installationFilterStatusList;
+  List<ServiceTicketFilterStatus>? serviceTicketFilterStatusList;
 
   @override
   void initState() {
@@ -25,7 +27,6 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
     firstTimeFetchDataFromNetwork();
     EventBusUtils.getInstance().fire(PENDING);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +36,12 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
   }
 
   Widget _buildWidget(BuildContext context) {
-    townshipLists =
+    townshipList =
         LoginController.to.maintenanceDropDownListsData.details!.townshipData;
+    installationFilterStatusList = LoginController
+        .to.maintenanceDropDownListsData.details!.installationFilterStatus;
+    serviceTicketFilterStatusList = LoginController
+        .to.maintenanceDropDownListsData.details!.serviceTicketFilterStatus;
     return Column(
       children: [
         SizedBox(
@@ -66,6 +71,14 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
             ),
             Text(
               'Township',
+              style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 12,
+                  color: Colors.black,
+                  decoration: TextDecoration.none),
+            ),
+            Text(
+              'Status',
               style: TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 12,
@@ -120,33 +133,100 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
             ),
             Container(
               height: 38,
-              width: 115,
+              width: 100,
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.all(Radius.circular(4))),
               margin: EdgeInsets.only(bottom: 24),
               child: DropDownButtonComponent(
-                itemsList: townshipLists,
+                itemsList: townshipList,
                 onChangedData: (TownshipDatum value) {
                   debugPrint('DropdownValue${value.key}');
-                   if(value.name == "Select Township"){
-                     firstTimeFetchDataFromNetwork();
-                   }
-                   else{
-                     PageArgumentController.to.getArgumentData() == SERVICE_TICKET
-                         ? HomeController.to.fetchServiceTicketListsByStatus(
-                         'completed',
-                         context,
-                         TOWNSHIP_PARAM + value.id.toString())
-                         : HomeController.to.fetchInstallationListsByStatus(
-                         'completed',
-                         context,
-                         TOWNSHIP_PARAM + value.id.toString());
-                   }
+                  if (value.name == "Select Township") {
+                    firstTimeFetchDataFromNetwork();
+                  } else {
+                    PageArgumentController.to.getArgumentData() ==
+                            SERVICE_TICKET
+                        ? HomeController.to.fetchServiceTicketListsByStatus(
+                            'completed',
+                            context,
+                            TOWNSHIP_PARAM + value.id.toString())
+                        : HomeController.to.fetchInstallationListsByStatus(
+                            'completed',
+                            context,
+                            TOWNSHIP_PARAM + value.id.toString());
+                  }
                 },
                 hintText: '--Select Township--',
               ),
             ),
+            SizedBox(
+              width: 10.0,
+            ),
+            Obx(() {
+              if (!PageArgumentController.to.isShowStatus.value) {
+                return Container(
+                  height: 38,
+                  width: 90,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(4))),
+                  margin: EdgeInsets.only(bottom: 24),
+                  child: DropDownButtonComponent(
+                    itemsList: installationFilterStatusList,
+                    onChangedData: (InstallationFilterStatus value) {
+                      debugPrint('DropdownValue${value.key}');
+
+                      if (value.name == "Select Status") {
+                        firstTimeFetchDataFromNetwork();
+                      } else {
+                        PageArgumentController.to.getArgumentData() ==
+                                SERVICE_TICKET
+                            ? HomeController.to.fetchServiceTicketListsByStatus(
+                                'completed',
+                                context,
+                                FILTER_STATUS + value.id.toString())
+                            : HomeController.to.fetchInstallationListsByStatus(
+                                'completed',
+                                context,
+                                FILTER_STATUS + value.id.toString());
+                      }
+                    },
+                    hintText: '--Select Status--',
+                  ),
+                );
+              } else {
+                return Container(
+                  height: 38,
+                  width: 90,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(4))),
+                  margin: EdgeInsets.only(bottom: 24),
+                  child: DropDownButtonComponent(
+                    itemsList: serviceTicketFilterStatusList,
+                    onChangedData: (ServiceTicketFilterStatus value) {
+                      debugPrint('DropdownValue${value.key}');
+                      if (value.name == "Select Status") {
+                        firstTimeFetchDataFromNetwork();
+                      } else {
+                        PageArgumentController.to.getArgumentData() ==
+                            SERVICE_TICKET
+                            ? HomeController.to.fetchServiceTicketListsByStatus(
+                            'completed',
+                            context,
+                            FILTER_STATUS + value.id.toString())
+                            : HomeController.to.fetchInstallationListsByStatus(
+                            'completed',
+                            context,
+                            FILTER_STATUS + value.id.toString());
+                      }
+                    },
+                    hintText: '--Select Status--',
+                  ),
+                );
+              }
+            }),
             SizedBox(
               width: 10.0,
             ),
@@ -286,6 +366,8 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
                 HomeController
                     .to.installationCompleteCustomerList[index].profileId,
                 pageStatus: 'complete',
+                status_txt: HomeController
+                    .to.installationCompleteCustomerList[index].status_txt,
               )
             : CustomerStatusListItems(
                 HomeController
@@ -298,6 +380,8 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
                     .to.serviceTicketCompleteCustomerList[index].profileId,
                 ticketId: HomeController
                     .to.serviceTicketCompleteCustomerList[index].ticketId,
+                status_txt: HomeController
+                    .to.serviceTicketCompleteCustomerList[index].status_txt,
                 pageStatus: 'complete',
               );
       },

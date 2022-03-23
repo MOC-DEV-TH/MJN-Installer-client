@@ -4,6 +4,7 @@ import 'package:flutter/rendering.dart';
 import 'package:mjn_installer_app/components/button_component.dart';
 import 'package:mjn_installer_app/components/drop_down_button_component.dart';
 import 'package:mjn_installer_app/components/label_text_component.dart';
+import 'package:mjn_installer_app/components/photo_picker_component.dart';
 import 'package:mjn_installer_app/components/text_field_box_decoration_component.dart';
 import 'package:mjn_installer_app/components/text_field_with_label_box_decoration_component.dart';
 import 'package:mjn_installer_app/controllers/home_controller.dart';
@@ -128,6 +129,16 @@ class _BuildMaintenanceDropdownListState
                 child: HomeController.to.serviceCustomerType == 'b2b'
                     ? _buildB2BUsage()
                     : _buildB2CUsage()),
+
+            Container(
+              margin: EdgeInsets.only(left: 24.0, right: 24.0, top: 24.0),
+              child: Row(
+                children: [
+                  Expanded(child: choosePhotoListsWidget),
+                ],
+              ),
+            ),
+
             SizedBox(
               height: 40.0,
             ),
@@ -195,6 +206,114 @@ class _BuildMaintenanceDropdownListState
       LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
       LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
       LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+    ],
+  );
+
+  final choosePhotoListsWidget = Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      Text('ONU Image'),
+      SizedBox(
+        height: 10,
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GetBuilder<ServiceTicketController>(
+            builder: (controller) =>
+                PhotoPickerComponent(
+                  imagePath: controller.image_onu_front_side,
+                  text: 'Front Side',
+                  onPress: () => {controller.onTapONUFrontSide()},
+                ),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          GetBuilder<ServiceTicketController>(
+            builder: (controller) =>
+                PhotoPickerComponent(
+                  imagePath: controller.image_onu_back_side,
+                  text: 'Back Side',
+                  onPress: () => {controller.onTapONUBackSide()},
+                ),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 20,
+      ),
+      Text('ODB Image'),
+      SizedBox(
+        height: 10,
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GetBuilder<ServiceTicketController>(
+            builder: (controller) =>
+                PhotoPickerComponent(
+                  imagePath: controller.image_odb_before,
+                  text: 'Before ODB Photo',
+                  onPress: () => {controller.onTapODBBefore()},
+                ),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          GetBuilder<ServiceTicketController>(
+            builder: (controller) =>
+                PhotoPickerComponent(
+                  imagePath: controller.image_odb_after,
+                  text: 'After ODB Photo',
+                  onPress: () => {controller.onTapODBAfter()},
+                ),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 20,
+      ),
+      Text('Spliter Image'),
+      SizedBox(
+        height: 10,
+      ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          GetBuilder<ServiceTicketController>(
+            builder: (controller) =>
+                PhotoPickerComponent(
+                  imagePath: controller.image_spliter_before,
+                  text: 'Before Spliter Photo',
+                  onPress: () => {controller.onTapSpliterBefore()},
+                ),
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          GetBuilder<ServiceTicketController>(
+            builder: (controller) =>
+                PhotoPickerComponent(
+                  imagePath: controller.image_spliter_after,
+                  text: 'After Spliter Photo',
+                  onPress: () => {controller.onTapSpliterAfter()},
+                ),
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 20,
+      ),
+      Text('Service Acceptance Form'),
+      GetBuilder<ServiceTicketController>(
+        builder: (controller) =>
+            PhotoPickerComponent(
+              imagePath: controller.imageAcceptForm,
+              text: '',
+              onPress: () => {controller.onTapAcceptForm()},
+            ),
+      ),
     ],
   );
 
@@ -289,6 +408,12 @@ class _BuildMaintenanceDropdownListState
                       debugPrint('DropdownValue${value.id}');
                       serviceTicketController
                           .updateTechnicalIssueValueID(value.id!);
+                      if(value.name == 'Other'){
+                        serviceTicketController.isShowTechnicalIssueNote(true);
+                      }
+                      else{
+                        serviceTicketController.isShowTechnicalIssueNote(false);
+                      }
                     },
                     hintText: '--Select Issue--',
                   ),
@@ -298,6 +423,44 @@ class _BuildMaintenanceDropdownListState
             SizedBox(
               height: 10,
             ),
+
+
+            Obx((){
+              if(serviceTicketController.isShowTechnicalIssueNote.value){
+                return
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(children: [
+                        Expanded(
+                            child: LabelTextComponent(
+                                text: 'Note', color: Colors.black, padding: 8.0)),
+                        Flexible(
+                          flex: 2,
+                          child: GetBuilder<ServiceTicketController>(
+                            init: ServiceTicketController(),
+                            builder: (controller) => TextFieldBoxDecorationComponent(
+                              controller: controller.technicalIssueNoteController,
+                              errorText: '',
+                              hintText: '',
+                            ),
+                          ),
+                        ),
+                      ],),
+
+                      SizedBox(
+                        height: 10,
+                      ),
+
+                    ],
+                  );
+              }
+              else{
+                return Container();
+              }
+            }),
+
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -314,6 +477,14 @@ class _BuildMaintenanceDropdownListState
                       debugPrint('DropdownValue${value.id}');
                       serviceTicketController
                           .updateTechnicalResolutionValueID(value.id!);
+
+                      if(value.name == "Other"){
+                        serviceTicketController.isShowTechnicalResolutionNote(true);
+                      }
+                      else{
+                        serviceTicketController.isShowTechnicalResolutionNote(false);
+                      }
+
                     },
                     hintText: '--Select Resolution--',
                   ),
@@ -323,6 +494,42 @@ class _BuildMaintenanceDropdownListState
             SizedBox(
               height: 10,
             ),
+
+            Obx((){
+              if(serviceTicketController.isShowTechnicalResolutionNote.value){
+                return
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(children: [
+                        Expanded(
+                            child: LabelTextComponent(
+                                text: 'Note', color: Colors.black, padding: 8.0)),
+                        Flexible(
+                          flex: 2,
+                          child: GetBuilder<ServiceTicketController>(
+                            init: ServiceTicketController(),
+                            builder: (controller) => TextFieldBoxDecorationComponent(
+                              controller: controller.technicalResolutionNoteController,
+                              errorText: '',
+                              hintText: '',
+                            ),
+                          ),
+                        ),
+                      ],),
+
+                      SizedBox(
+                        height: 10,
+                      ),
+
+                    ],
+                  );
+              }
+              else{
+                return Container();
+              }
+            }),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -766,6 +973,12 @@ class _BuildMaintenanceDropdownListState
                         debugPrint('DropdownValue${value.id}');
                         serviceTicketController
                             .updateTechnicalIssueValueID(value.id!);
+                        if(value.name == "Other"){
+                          serviceTicketController.isShowTechnicalIssueNote(true);
+                        }
+                        else{
+                          serviceTicketController.isShowTechnicalIssueNote(false);
+                        }
                       },
                       hintText: '--Select Issue--',
                     ),
@@ -774,8 +987,43 @@ class _BuildMaintenanceDropdownListState
               ),
 
               SizedBox(
-                height: 5,
+                height: 10,
               ),
+
+              Obx((){
+                if(serviceTicketController.isShowTechnicalIssueNote.value){
+                  return
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(children: [
+                          Expanded(
+                              child: LabelTextComponent(
+                                  text: 'Note', color: Colors.black, padding: 8.0)),
+                          Flexible(
+                            flex: 2,
+                            child: GetBuilder<ServiceTicketController>(
+                              init: ServiceTicketController(),
+                              builder: (controller) => TextFieldBoxDecorationComponent(
+                                controller: controller.technicalIssueNoteController,
+                                errorText: '',
+                                hintText: '',
+                              ),
+                            ),
+                          ),
+                        ],),
+
+                        SizedBox(
+                          height: 10,
+                        ),
+
+                      ],
+                    );
+                }
+                else{
+                  return Container();
+                }
+              }),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -795,6 +1043,12 @@ class _BuildMaintenanceDropdownListState
                         debugPrint('DropdownValue${value.id}');
                         serviceTicketController
                             .updateTechnicalResolutionValueID(value.id!);
+                        if(value.name == "Other"){
+                          serviceTicketController.isShowTechnicalResolutionNote(true);
+                        }
+                        else{
+                          serviceTicketController.isShowTechnicalResolutionNote(false);
+                        }
                       },
                       hintText: '--Select Resolution--',
                     ),
@@ -803,8 +1057,43 @@ class _BuildMaintenanceDropdownListState
               ),
 
               SizedBox(
-                height: 5,
+                height: 10,
               ),
+
+              Obx((){
+                if(serviceTicketController.isShowTechnicalResolutionNote.value){
+                  return
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(children: [
+                          Expanded(
+                              child: LabelTextComponent(
+                                  text: 'Note', color: Colors.black, padding: 8.0)),
+                          Flexible(
+                            flex: 2,
+                            child: GetBuilder<ServiceTicketController>(
+                              init: ServiceTicketController(),
+                              builder: (controller) => TextFieldBoxDecorationComponent(
+                                controller: controller.technicalResolutionNoteController,
+                                errorText: '',
+                                hintText: '',
+                              ),
+                            ),
+                          ),
+                        ],),
+
+                        SizedBox(
+                          height: 10,
+                        ),
+
+                      ],
+                    );
+                }
+                else{
+                  return Container();
+                }
+              }),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,15 +1,22 @@
 import 'package:get/get.dart';
+import 'package:mjn_installer_app/utils/app_constants.dart';
 
 class PageArgumentController extends GetxController{
   String argumentData = '';
   String d_status = '';
   String c_status_title = '';
-
+  var isShowStatus = false.obs;
 
   static PageArgumentController get to => Get.find();
 
   void updateArgumentData(String argument){
     argumentData = argument;
+    if(argument == INSTALLATION){
+      isShowStatus(false);
+    }
+    else{
+      isShowStatus(true);
+    }
     update();
   }
 

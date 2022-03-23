@@ -25,18 +25,20 @@ class TextFieldBoxDecorationComponent extends StatelessWidget {
 
     return ConstrainedBox(
       constraints: BoxConstraints(
-        maxHeight: 35,
         maxWidth: MediaQuery.of(context).size.width,
       ),
       child: TextFormField(
-        maxLines: maxLines,
+        maxLines: null,
         textInputAction: TextInputAction.next,
         keyboardType: textInputType,
         controller: controller,
+
         obscureText: isVisible,
+        style: TextStyle(fontSize: 12),
         decoration: InputDecoration(
             hintText: '',
-            contentPadding: EdgeInsets.all(10),
+            isDense: true,
+            contentPadding: EdgeInsets.fromLTRB(10, 25, 10, 0),
             border:
             OutlineInputBorder(borderRadius: BorderRadius.circular(4.0))),
         validator: (value) => value!.trim().isEmpty ? errorText : null,
