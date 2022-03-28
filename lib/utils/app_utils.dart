@@ -41,14 +41,16 @@ class AppUtils {
             width: 200,
             height: 100,
           ),
-        ));
+        ),);
   }
+
 
   static Future<void> removeDataFromGetStorage() async {
     final box = GetStorage();
     box.remove(TOKEN);
     box.remove(UID);
     box.remove(ALL_DROP_DOWN_LISTS);
+    box.remove(SAVE_TIME);
   }
 
   static void showSessionExpireDialog(
