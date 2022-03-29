@@ -58,7 +58,7 @@ class InstallationController extends GetxController {
 
   var isLoading = false.obs;
   var loadingForButton = false.obs;
-  var isShowNoteTextFormField= false.obs;
+  var isShowNoteTextFormField = false.obs;
   var statusValueID;
 
   Map<String, String> map_from_usage = {};
@@ -72,25 +72,24 @@ class InstallationController extends GetxController {
 
   void onUIReady() {
     fetchInstallationDetail(HomeController.to.installationProfileID);
-
   }
 
   void selectDate(BuildContext context) async {
-    final DateTime? selected = await showDatePicker(
-      initialDate: DateTime.now(),
-      context: context,
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2100),
-    );
-
-    if (selected != null) {
-      String dtFormat = DateFormat('dd/MM/yyyy').format(selected);
-      debugPrint("DateTimeFormat${dtFormat}");
-      statusCancelAndIncompleteDateController.text = dtFormat.toString();
-      isShowNoteTextFormField(true);
-    }
+    isShowNoteTextFormField(true);
+    // final DateTime? selected = await showDatePicker(
+    //   initialDate: DateTime.now(),
+    //   context: context,
+    //   firstDate: DateTime(2000),
+    //   lastDate: DateTime(2100),
+    // );
+    //
+    // if (selected != null) {
+    //   String dtFormat = DateFormat('dd/MM/yyyy').format(selected);
+    //   debugPrint("DateTimeFormat${dtFormat}");
+    //   statusCancelAndIncompleteDateController.text = dtFormat.toString();
+    //   isShowNoteTextFormField(true);
+    // }
   }
-
 
   void appendNewTextEditingController(
       Map<String, TextEditingController> textEditingController,
@@ -238,6 +237,12 @@ class InstallationController extends GetxController {
       'spliter_no': deviceIdController.value.text.toString(),
       'port_no': portNoController.value.text.toString(),
       'status': statusValueID.toString(),
+      'route_cancel_notes': statusValueID.toString() == '3'
+          ? statusCancelAndIncompleteTextController.text.toString()
+          : "null",
+      'incomplete_notes' : statusValueID.toString() == '6'
+          ? statusCancelAndIncompleteTextController.text.toString()
+          : "null",
       'front_onu_img': str_image_onu_front_side ?? null,
       'back_onu_img': str_image_onu_back_side ?? null,
       'before_odb_img': str_image_odb_before ?? null,
