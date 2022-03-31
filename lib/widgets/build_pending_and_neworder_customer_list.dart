@@ -58,6 +58,7 @@ class _BuildPendingAndNewOrderCustomerListState
   Widget build(BuildContext context) {
     titleSub = EventBusUtils.getInstance().on().listen((event) {
       if (event.toString() == PENDING) {
+        firstTimeFetchDataFromNetwork();
         WidgetsBinding.instance!.addPostFrameCallback((_) {
           if (this.mounted) {
             setState(() {

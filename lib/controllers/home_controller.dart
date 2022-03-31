@@ -58,6 +58,7 @@ class HomeController extends GetxController {
   var serviceCustomerType;
   var serviceCustomerUid;
 
+
   //installation
   var installationProfileID;
   var installationCustomerType;
@@ -73,6 +74,11 @@ class HomeController extends GetxController {
 
   void onUIReady(BuildContext context) {
     fetchAllCountsForServiceTicketAndInstallation(context);
+  }
+
+  void updateProfileID (String cProfileID){
+    profileID = cProfileID;
+    update();
   }
 
   void clearTextFieldData() {

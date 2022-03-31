@@ -26,6 +26,7 @@ const SERVICE_TICKET = 'service_ticket';
 const PENDING = 'Pending';
 const COMPLETE = 'Complete';
 const NEW_ORDER = 'New Order';
+const ORDER_ACCEPTED = 'Order Accepted';
 
 //app_version
 const APP_VERSION = '&app_version=';

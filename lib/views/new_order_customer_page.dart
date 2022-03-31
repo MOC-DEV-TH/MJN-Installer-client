@@ -91,7 +91,7 @@ class _NewOrderCustomerPageState extends State<NewOrderCustomerPage> {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [customerLabel, middleLabel, customerData],
+                      children: [customerLabel, middleLabel, Flexible(child: customerData)],
                     ),
                     SizedBox(
                       height: 20.0,

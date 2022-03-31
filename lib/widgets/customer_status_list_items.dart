@@ -119,6 +119,9 @@ class CustomerStatusListItems extends StatelessWidget {
             verticalDivider,
             InkWell(
                 onTap: () {
+
+                  PageArgumentController.to.updateCustomerStatus(status_txt!);
+
                   if (pageStatus == NEW_ORDER) {
                     HomeController.to.updateNewOrderData(
                         customerName ?? '',
@@ -197,6 +200,9 @@ class CustomerStatusListItems extends StatelessWidget {
                               ? status == '2'
                                   ? Get.toNamed(CUSTOMER_DETAIL_PAGE,
                                       arguments: profileId)
+                                  : status == '8'
+                                   ? Get.toNamed(CUSTOMER_DETAIL_PAGE,
+                      arguments: profileId)
                                   : Get.offNamed(CUSTOMER_ISSUE_PAGE,
                                       arguments: profileId)
 
@@ -204,6 +210,9 @@ class CustomerStatusListItems extends StatelessWidget {
                               : status == '2'
                                   ? Get.toNamed(CUSTOMER_DETAIL_PAGE,
                                       arguments: ticketId)
+                                  : status == '3'
+                                  ? Get.toNamed(CUSTOMER_DETAIL_PAGE,
+                      arguments: ticketId)
                                   : Get.offNamed(CUSTOMER_ISSUE_PAGE,
                                       arguments: ticketId);
                 },

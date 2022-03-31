@@ -57,66 +57,64 @@ class _BuildMaintenanceDropdownListState
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                     Flexible(child: customerLabel),
+                     customerLabel,
                      Flexible(child: middleLabel),
-                Flexible(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      LabelTextComponent(
-                          text: (serviceTicketController
-                                      .serviceTicketDetail.value.userName ==
-                                  null || serviceTicketController
-                              .serviceTicketDetail.value.userName == "")
-                              ? "xx xxx xxx xxx xxx"
-                              : serviceTicketController
-                                  .serviceTicketDetail.value.userName!,
-                          color: Colors.black,
-                          padding: 8.0),
-                      LabelTextComponent(
-                          text: serviceTicketController
-                                  .serviceTicketDetail.value.phone1 ??
-                              "xx xxx xxx xxx xxx",
-                          color: Colors.black,
-                          padding: 8.0),
-                      LabelTextComponent(
-                          text: serviceTicketController
-                                  .serviceTicketDetail.value.address ??
-                              "xx xxx xxx xxx xxx",
-                          color: Colors.black,
-                          padding: 8.0),
-                      LabelTextComponent(
-                          text: serviceTicketController
-                                  .serviceTicketDetail.value.latitude ??
-                              "xx xxx xxx xxx xxx",
-                          color: Colors.black,
-                          padding: 8.0),
-                      LabelTextComponent(
-                          text: serviceTicketController
-                                  .serviceTicketDetail.value.longitude ??
-                              "xx xxx xxx xxx xxx",
-                          color: Colors.black,
-                          padding: 8.0),
-                      LabelTextComponent(
-                          text: serviceTicketController
-                                  .serviceTicketDetail.value.type ??
-                              "xx xxx xxx xxx xxx",
-                          color: Colors.black,
-                          padding: 8.0),
-                      LabelTextComponent(
-                          text: serviceTicketController
-                              .serviceTicketDetail.value.topic ??
-                              "xx xxx xxx xxx xxx",
-                          color: Colors.black,
-                          padding: 8.0),
-                      LabelTextComponent(
-                          text: serviceTicketController
-                                  .serviceTicketDetail.value.subconAssignedDate ??
-                              "xx xxx xxx xxx xxx",
-                          color: Colors.black,
-                          padding: 8.0),
-                    ],
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    LabelTextComponent(
+                        text: (serviceTicketController
+                                    .serviceTicketDetail.value.userName ==
+                                null || serviceTicketController
+                            .serviceTicketDetail.value.userName == "")
+                            ? "xx xxx xxx xxx xxx"
+                            : serviceTicketController
+                                .serviceTicketDetail.value.userName!,
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: serviceTicketController
+                                .serviceTicketDetail.value.phone1 ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: serviceTicketController
+                                .serviceTicketDetail.value.address ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: serviceTicketController
+                                .serviceTicketDetail.value.latitude ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: serviceTicketController
+                                .serviceTicketDetail.value.longitude ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: serviceTicketController
+                                .serviceTicketDetail.value.type ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: serviceTicketController
+                            .serviceTicketDetail.value.topic ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: serviceTicketController
+                                .serviceTicketDetail.value.subconAssignedDate ??
+                            "xx xxx xxx xxx xxx",
+                        color: Colors.black,
+                        padding: 8.0),
+                  ],
                 )
               ],
             ),

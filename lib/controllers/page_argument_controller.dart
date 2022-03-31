@@ -5,6 +5,7 @@ class PageArgumentController extends GetxController{
   String argumentData = '';
   String d_status = '';
   String c_status_title = '';
+  String customer_status = '';
   var isShowStatus = false.obs;
 
   static PageArgumentController get to => Get.find();
@@ -20,6 +21,14 @@ class PageArgumentController extends GetxController{
     update();
   }
 
+  String getCustomerStatus(){
+    return customer_status;
+  }
+
+  void updateCustomerStatus(String status){
+    customer_status = status;
+    update();
+  }
 
   void updateStatus(String status){
     d_status = status;
