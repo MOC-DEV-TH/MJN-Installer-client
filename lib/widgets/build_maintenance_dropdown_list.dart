@@ -58,63 +58,65 @@ class _BuildMaintenanceDropdownListState
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                      customerLabel,
-                     Flexible(child: middleLabel),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    LabelTextComponent(
-                        text: (serviceTicketController
-                                    .serviceTicketDetail.value.userName ==
-                                null || serviceTicketController
-                            .serviceTicketDetail.value.userName == "")
-                            ? "xx xxx xxx xxx xxx"
-                            : serviceTicketController
-                                .serviceTicketDetail.value.userName!,
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: serviceTicketController
-                                .serviceTicketDetail.value.phone1 ??
-                            "xx xxx xxx xxx xxx",
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: serviceTicketController
-                                .serviceTicketDetail.value.address ??
-                            "xx xxx xxx xxx xxx",
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: serviceTicketController
-                                .serviceTicketDetail.value.latitude ??
-                            "xx xxx xxx xxx xxx",
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: serviceTicketController
-                                .serviceTicketDetail.value.longitude ??
-                            "xx xxx xxx xxx xxx",
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: serviceTicketController
-                                .serviceTicketDetail.value.type ??
-                            "xx xxx xxx xxx xxx",
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: serviceTicketController
-                            .serviceTicketDetail.value.topic ??
-                            "xx xxx xxx xxx xxx",
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: serviceTicketController
-                                .serviceTicketDetail.value.subconAssignedDate ??
-                            "xx xxx xxx xxx xxx",
-                        color: Colors.black,
-                        padding: 8.0),
-                  ],
+                     middleLabel,
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      LabelTextComponent(
+                          text: (serviceTicketController
+                                      .serviceTicketDetail.value.userName ==
+                                  null || serviceTicketController
+                              .serviceTicketDetail.value.userName == "")
+                              ? "xx xxx xxx xxx xxx"
+                              : serviceTicketController
+                                  .serviceTicketDetail.value.userName!,
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: serviceTicketController
+                                  .serviceTicketDetail.value.phone1 ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: serviceTicketController
+                                  .serviceTicketDetail.value.address ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: serviceTicketController
+                                  .serviceTicketDetail.value.latitude ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: serviceTicketController
+                                  .serviceTicketDetail.value.longitude ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: serviceTicketController
+                                  .serviceTicketDetail.value.type ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: serviceTicketController
+                              .serviceTicketDetail.value.topic ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                      LabelTextComponent(
+                          text: serviceTicketController
+                                  .serviceTicketDetail.value.subconAssignedDate ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                    ],
+                  ),
                 )
               ],
             ),
@@ -128,12 +130,14 @@ class _BuildMaintenanceDropdownListState
                     ? _buildB2BUsage()
                     : _buildB2CUsage()),
 
-            Container(
-              margin: EdgeInsets.only(left: 24.0, right: 24.0, top: 24.0),
-              child: Row(
-                children: [
-                  Expanded(child: choosePhotoListsWidget),
-                ],
+            FittedBox(
+              child: Container(
+                margin: EdgeInsets.only(left: 24.0, right: 24.0, top: 24.0),
+                child: Row(
+                  children: [
+                    choosePhotoListsWidget,
+                  ],
+                ),
               ),
             ),
 
@@ -214,29 +218,31 @@ class _BuildMaintenanceDropdownListState
       SizedBox(
         height: 10,
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GetBuilder<ServiceTicketController>(
-            builder: (controller) =>
-                PhotoPickerComponent(
-                  imagePath: controller.image_onu_front_side,
-                  text: 'Front Side',
-                  onPress: () => {controller.onTapONUFrontSide()},
-                ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          GetBuilder<ServiceTicketController>(
-            builder: (controller) =>
-                PhotoPickerComponent(
-                  imagePath: controller.image_onu_back_side,
-                  text: 'Back Side',
-                  onPress: () => {controller.onTapONUBackSide()},
-                ),
-          ),
-        ],
+      FittedBox(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GetBuilder<ServiceTicketController>(
+              builder: (controller) =>
+                  PhotoPickerComponent(
+                    imagePath: controller.image_onu_front_side,
+                    text: 'Front Side',
+                    onPress: () => {controller.onTapONUFrontSide()},
+                  ),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            GetBuilder<ServiceTicketController>(
+              builder: (controller) =>
+                  PhotoPickerComponent(
+                    imagePath: controller.image_onu_back_side,
+                    text: 'Back Side',
+                    onPress: () => {controller.onTapONUBackSide()},
+                  ),
+            ),
+          ],
+        ),
       ),
       SizedBox(
         height: 20,
@@ -245,29 +251,31 @@ class _BuildMaintenanceDropdownListState
       SizedBox(
         height: 10,
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GetBuilder<ServiceTicketController>(
-            builder: (controller) =>
-                PhotoPickerComponent(
-                  imagePath: controller.image_odb_before,
-                  text: 'Before ODB Photo',
-                  onPress: () => {controller.onTapODBBefore()},
-                ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          GetBuilder<ServiceTicketController>(
-            builder: (controller) =>
-                PhotoPickerComponent(
-                  imagePath: controller.image_odb_after,
-                  text: 'After ODB Photo',
-                  onPress: () => {controller.onTapODBAfter()},
-                ),
-          ),
-        ],
+      FittedBox(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GetBuilder<ServiceTicketController>(
+              builder: (controller) =>
+                  PhotoPickerComponent(
+                    imagePath: controller.image_odb_before,
+                    text: 'Before ODB Photo',
+                    onPress: () => {controller.onTapODBBefore()},
+                  ),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            GetBuilder<ServiceTicketController>(
+              builder: (controller) =>
+                  PhotoPickerComponent(
+                    imagePath: controller.image_odb_after,
+                    text: 'After ODB Photo',
+                    onPress: () => {controller.onTapODBAfter()},
+                  ),
+            ),
+          ],
+        ),
       ),
       SizedBox(
         height: 20,
@@ -276,29 +284,31 @@ class _BuildMaintenanceDropdownListState
       SizedBox(
         height: 10,
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GetBuilder<ServiceTicketController>(
-            builder: (controller) =>
-                PhotoPickerComponent(
-                  imagePath: controller.image_spliter_before,
-                  text: 'Before Spliter Photo',
-                  onPress: () => {controller.onTapSpliterBefore()},
-                ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          GetBuilder<ServiceTicketController>(
-            builder: (controller) =>
-                PhotoPickerComponent(
-                  imagePath: controller.image_spliter_after,
-                  text: 'After Spliter Photo',
-                  onPress: () => {controller.onTapSpliterAfter()},
-                ),
-          ),
-        ],
+      FittedBox(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GetBuilder<ServiceTicketController>(
+              builder: (controller) =>
+                  PhotoPickerComponent(
+                    imagePath: controller.image_spliter_before,
+                    text: 'Before Spliter Photo',
+                    onPress: () => {controller.onTapSpliterBefore()},
+                  ),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            GetBuilder<ServiceTicketController>(
+              builder: (controller) =>
+                  PhotoPickerComponent(
+                    imagePath: controller.image_spliter_after,
+                    text: 'After Spliter Photo',
+                    onPress: () => {controller.onTapSpliterAfter()},
+                  ),
+            ),
+          ],
+        ),
       ),
       SizedBox(
         height: 20,

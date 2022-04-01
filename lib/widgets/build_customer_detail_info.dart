@@ -32,6 +32,7 @@ class _BuildCustomerDetailInfoState extends State<BuildCustomerDetailInfo> {
 
   @override
   void initState() {
+    debugPrint("Customer Phone Number${HomeController.to.customerPhoneNo}");
     Future.delayed(Duration.zero, () {
       if (PageArgumentController.to.getArgumentData() == INSTALLATION) {
         customerDetailController.fetchInstallationDetail(
@@ -358,6 +359,7 @@ class _BuildCustomerDetailInfoState extends State<BuildCustomerDetailInfo> {
       'phone': HomeController.to.customerPhoneNo,
       'profile_id': HomeController.to.installationProfileID,
       'app_version': app_version,
+      'message_type' : 'installation',
     };
     RestApi.firstTimeSendSMSToServer(map, readData.read(TOKEN)).then((value) =>
     {
@@ -463,6 +465,7 @@ class _BuildCustomerDetailInfoState extends State<BuildCustomerDetailInfo> {
       'phone': HomeController.to.customerPhoneNo,
       'profile_id': HomeController.to.serviceProfileID,
       'app_version': app_version,
+      'message_type' : 'serviceTicket',
     };
     RestApi.firstTimeSendSMSToServer(map, readData.read(TOKEN)).then((value) =>
     {

@@ -203,6 +203,7 @@ class NewOrderCustomerController extends GetxController {
       'phone': HomeController.to.customerPhNo,
       'profile_id': HomeController.to.profileID,
       'app_version': app_version,
+      'message_type' : PageArgumentController.to.getArgumentData() == INSTALLATION ? 'installation' : 'serviceTicket',
     };
     RestApi.firstTimeSendSMSToServer(map, readData.read(TOKEN)).then((value) =>
     {

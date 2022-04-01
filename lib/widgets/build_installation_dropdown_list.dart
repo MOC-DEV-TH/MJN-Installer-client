@@ -48,7 +48,7 @@ class _BuildInstallationDropdownListState
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 customerLabel,
-                Flexible(child: middleLabel),
+                middleLabel,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -150,12 +150,14 @@ class _BuildInstallationDropdownListState
                   ? _buildB2BUsage()
                   : _buildB2CUsage(),
             ),
-            Container(
-              margin: EdgeInsets.only(left: 24.0, right: 24.0, top: 24.0),
-              child: Row(
-                children: [
-                  Expanded(child: choosePhotoListsWidget),
-                ],
+            FittedBox(
+              child: Container(
+                margin: EdgeInsets.only(left: 24.0, right: 24.0, top: 24.0),
+                child: Row(
+                  children: [
+                    choosePhotoListsWidget,
+                  ],
+                ),
               ),
             ),
             Row(
