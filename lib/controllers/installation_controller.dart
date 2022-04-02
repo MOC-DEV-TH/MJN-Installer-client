@@ -61,6 +61,7 @@ class InstallationController extends GetxController {
   var isShowNoteTextFormField = false.obs;
   var statusValueID;
 
+
   Map<String, String> map_from_usage = {};
   Map<String, String> map = {};
 
@@ -139,32 +140,39 @@ class InstallationController extends GetxController {
     super.onClose();
   }
 
-  void onTapONUFrontSide() {
-    imageFromGallery('onu_front');
+  void onTapONUFrontSide(BuildContext context) {
+
+    _showChoiceDialog(context, 'onu_front');
   }
 
-  void onTapONUBackSide() {
-    imageFromGallery('onu_back');
+  void onTapONUBackSide(BuildContext context) {
+
+    _showChoiceDialog(context, 'onu_back');
   }
 
-  void onTapODBBefore() {
-    imageFromGallery("odb_before");
+  void onTapODBBefore(BuildContext context) {
+
+    _showChoiceDialog(context, 'odb_before');
   }
 
-  void onTapODBAfter() {
-    imageFromGallery("odb_after");
+  void onTapODBAfter(BuildContext context) {
+
+    _showChoiceDialog(context, 'odb_after');
   }
 
-  void onTapSpliterBefore() {
-    imageFromGallery("spliter_before");
+  void onTapSpliterBefore(BuildContext context) {
+
+    _showChoiceDialog(context, 'spliter_before');
   }
 
-  void onTapSpliterAfter() {
-    imageFromGallery("spliter_after");
+  void onTapSpliterAfter(BuildContext context) {
+
+    _showChoiceDialog(context, 'spliter_after');
   }
 
-  void onTapAcceptForm() {
-    imageFromGallery("accept");
+  void onTapAcceptForm(BuildContext context) {
+
+    _showChoiceDialog(context, 'accept');
   }
 
   void updateStatusValueID(int id) {
@@ -172,6 +180,56 @@ class InstallationController extends GetxController {
     isShowNoteTextFormField(false);
     statusCancelAndIncompleteDateController.text = '';
     update();
+  }
+
+  void imageFromCamera(String tapStatus) async {
+    XFile? image = await imagePicker.pickImage(
+        source: ImageSource.camera,
+        imageQuality: 50,
+        preferredCameraDevice: CameraDevice.front);
+
+    //ONU IMAGE
+    if (tapStatus == 'onu_front') {
+      image_onu_front_side = File(image!.path);
+      str_image_onu_front_side =
+          base64Encode(File(image.path).readAsBytesSync());
+      debugPrint('onuFront::${str_image_onu_front_side}');
+      update();
+    } else if (tapStatus == 'onu_back') {
+      image_onu_back_side = File(image!.path);
+      str_image_onu_back_side =
+          base64Encode(File(image.path).readAsBytesSync());
+      debugPrint('onuBack::${str_image_onu_back_side}');
+      update();
+    }
+    //ODB IMAGE
+    else if (tapStatus == 'odb_before') {
+      image_odb_before = File(image!.path);
+      str_image_odb_before = base64Encode(File(image.path).readAsBytesSync());
+      update();
+    } else if (tapStatus == 'odb_after') {
+      image_odb_after = File(image!.path);
+      str_image_odb_after = base64Encode(File(image.path).readAsBytesSync());
+      update();
+    }
+
+    // Spliter Image
+
+    else if (tapStatus == 'spliter_before') {
+      image_spliter_before = File(image!.path);
+      str_image_spliter_before =
+          base64Encode(File(image.path).readAsBytesSync());
+      update();
+    } else if (tapStatus == 'spliter_after') {
+      image_spliter_after = File(image!.path);
+      str_image_spliter_after =
+          base64Encode(File(image.path).readAsBytesSync());
+      update();
+    } else {
+      imageAcceptForm = File(image!.path);
+      str_imageAcceptForm = base64Encode(File(image.path).readAsBytesSync());
+      update();
+    }
   }
 
   void imageFromGallery(String tapStatus) async {
@@ -224,8 +282,18 @@ class InstallationController extends GetxController {
     }
   }
 
-  void postInstallationDataOnServer() {
+  void postInstallationDataOnServer() async{
     loadingForButton(true);
+
+    // for (var item in field_list){
+    //   if(textEditingControllers_list[item]?.text == ''){
+    //     updateUsageEmptyData(false);
+    //     break;
+    //   }
+    //   else {
+    //     updateUsageEmptyData(true);
+    //   }
+    // }
 
     var firstMap = {
       'uid': readData.read(UID),
@@ -260,10 +328,11 @@ class InstallationController extends GetxController {
 
     var thirdMap = {};
 
-    thirdMap.addAll(firstMap);
-    thirdMap.addAll(secondMap);
-
-    debugPrint("Usage map collection::${thirdMap}", wrapWidth: 1024);
+   // if(isEmptyUsageData) {
+      thirdMap.addAll(firstMap);
+      thirdMap.addAll(secondMap);
+      debugPrint("Usage map collection::${thirdMap}", wrapWidth: 1024);
+   // }
 
     debugPrint("Usage status::${statusValueID}");
 
@@ -284,18 +353,66 @@ class InstallationController extends GetxController {
       } else if (statusValueID == null) {
         loadingForButton(false);
         AppUtils.showErrorSnackBar("Fail", 'Please select a status!');
-      } else {
-        RestApi.postInstallationData(readData.read(TOKEN), thirdMap)
-            .then((value) => {
-                  if (value.status == 'Success')
-                    {
-                      loadingForButton(false),
-                      Get.offNamed(COMPLETE_CUSTOMER_PAGE)
-                    }
-                  else
-                    {loadingForButton(false)}
-                });
+      }
+
+      else {
+
+        var list = field_list.where((element) => textEditingControllers_list[element]!.text.isEmpty).toList();
+
+
+        if(list.isNotEmpty)
+          {
+            loadingForButton(false);
+            AppUtils.showErrorSnackBar("Fail", 'Please enter all usages data!');
+          }else {
+          await RestApi.postInstallationData(readData.read(TOKEN), thirdMap)
+              .then((value) =>
+          {
+            if (value?.status == 'Success')
+              {
+                loadingForButton(false),
+                Get.offNamed(COMPLETE_CUSTOMER_PAGE)
+              }
+            else
+              {loadingForButton(false)}
+          });
+        }
+
       }
     }
   }
+
+
+  Future<void> _showChoiceDialog(BuildContext context, String status) {
+    return showDialog(context: context, builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Choose option", style: TextStyle(color: Colors.blue),),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: [
+              Divider(height: 1, color: Colors.blue,),
+              ListTile(
+                onTap: () {
+                  imageFromGallery(status);
+                  Navigator.pop(context);
+                },
+                title: Text("Gallery"),
+                leading: Icon(Icons.account_box, color: Colors.blue,),
+              ),
+
+              Divider(height: 1, color: Colors.blue,),
+              ListTile(
+                onTap: () {
+                  imageFromCamera(status);
+                  Navigator.pop(context);
+                },
+                title: Text("Camera"),
+                leading: Icon(Icons.camera, color: Colors.blue,),
+              ),
+            ],
+          ),
+        ),);
+    });
+  }
+
 }

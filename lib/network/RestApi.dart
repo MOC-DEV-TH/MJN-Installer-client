@@ -225,10 +225,11 @@ class RestApi {
     }
   }
 
-  static Future<NetworkResultVO> postInstallationData(
+  static Future<NetworkResultVO?> postInstallationData(
       String token,
       Map<dynamic, dynamic> params
       ) async {
+    debugPrint("Post Installation Data::${params.toString()}");
     var response = await client.post(
       Uri.parse(POST_INSTALLATION_DATA_URL),
       body: json.encode(params),
@@ -240,7 +241,8 @@ class RestApi {
       return networkResultVoFromJson(response.body);
     } else {
       print(response.statusCode);
-      throw Exception('Failed to post installation data');
+      return null;
+     // throw Exception('Failed to post installation data');
     }
     // var stream = new http.ByteStream(DelegatingStream.typed(imageFile.openRead()));
     // var length = await imageFile.length();
@@ -278,7 +280,7 @@ class RestApi {
 
   static Future<NetworkResultVO> postServiceTicketData(
       Map<dynamic, dynamic> params, String token) async {
-    debugPrint(params.toString());
+    debugPrint("Post ServiceTicket Data${params.toString()}");
     var response = await client.post(
       Uri.parse(POST_SERVICE_TICKET_DATA_URL),
       body: json.encode(params),

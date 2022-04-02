@@ -74,9 +74,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                         blurBackgroundColor: Color(int.parse(MJNColors.bgColor)).withOpacity(0.5),
                         openWithTap: true,
                         menuItems: [
-                          FocusedMenuItem(
-                              title: Text('Account Setting'),
-                              onPressed: (){}),
+
                           FocusedMenuItem(
                               title: Text('Logout'),
                               onPressed: (){

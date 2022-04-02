@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mjn_installer_app/controllers/home_controller.dart';
 import 'package:mjn_installer_app/models/b2bAndb2cUsagesVO.dart';
@@ -25,6 +26,8 @@ class ServiceTicketController extends GetxController {
   var source = ImageSource.camera;
   var imagePicker;
 
+
+
   Map<String, TextEditingController> textEditingControllers_list = {};
   List<String> field_list = [];
 
@@ -47,6 +50,7 @@ class ServiceTicketController extends GetxController {
     imagePicker = new ImagePicker();
     super.onInit();
   }
+
 
   //
   String? str_image_onu_front_side = null;
@@ -72,6 +76,7 @@ class ServiceTicketController extends GetxController {
 
   File? imageAcceptForm;
 
+
   void updateTechnicalIssueValueID(int id) {
     technicalResolutionValueId = id;
     update();
@@ -91,37 +96,94 @@ class ServiceTicketController extends GetxController {
     fetchServiceTicketDetail(ticketID);
   }
 
-  void onTapONUFrontSide() {
-    imageFromGallery('onu_front');
+  void onTapONUFrontSide(BuildContext context) {
+
+    _showChoiceDialog(context, 'onu_front');
   }
 
-  void onTapONUBackSide() {
-    imageFromGallery('onu_back');
+  void onTapONUBackSide(BuildContext context) {
+
+    _showChoiceDialog(context, 'onu_back');
   }
 
-  void onTapODBBefore() {
-    imageFromGallery("odb_before");
+  void onTapODBBefore(BuildContext context) {
+
+    _showChoiceDialog(context, 'odb_before');
   }
 
-  void onTapODBAfter() {
-    imageFromGallery("odb_after");
+  void onTapODBAfter(BuildContext context) {
+
+    _showChoiceDialog(context, 'odb_after');
   }
 
-  void onTapSpliterBefore() {
-    imageFromGallery("spliter_before");
+  void onTapSpliterBefore(BuildContext context) {
+
+    _showChoiceDialog(context, 'spliter_before');
   }
 
-  void onTapSpliterAfter() {
-    imageFromGallery("spliter_after");
+  void onTapSpliterAfter(BuildContext context) {
+
+    _showChoiceDialog(context, 'spliter_after');
   }
 
-  void onTapAcceptForm() {
-    imageFromGallery("accept");
+  void onTapAcceptForm(BuildContext context) {
+
+    _showChoiceDialog(context, 'accept');
   }
 
   void imageFromGallery(String tapStatus) async {
     XFile? image = await imagePicker.pickImage(
         source: ImageSource.gallery,
+        imageQuality: 50,
+        preferredCameraDevice: CameraDevice.front);
+
+    //ONU IMAGE
+    if (tapStatus == 'onu_front') {
+      image_onu_front_side = File(image!.path);
+      str_image_onu_front_side =
+          base64Encode(File(image.path).readAsBytesSync());
+      debugPrint('onuFront::${str_image_onu_front_side}');
+      update();
+    } else if (tapStatus == 'onu_back') {
+      image_onu_back_side = File(image!.path);
+      str_image_onu_back_side =
+          base64Encode(File(image.path).readAsBytesSync());
+      debugPrint('onuBack::${str_image_onu_back_side}');
+      update();
+    }
+    //ODB IMAGE
+    else if (tapStatus == 'odb_before') {
+      image_odb_before = File(image!.path);
+      str_image_odb_before = base64Encode(File(image.path).readAsBytesSync());
+      update();
+    } else if (tapStatus == 'odb_after') {
+      image_odb_after = File(image!.path);
+      str_image_odb_after = base64Encode(File(image.path).readAsBytesSync());
+      update();
+    }
+
+    // Spliter Image
+
+    else if (tapStatus == 'spliter_before') {
+      image_spliter_before = File(image!.path);
+      str_image_spliter_before =
+          base64Encode(File(image.path).readAsBytesSync());
+      update();
+    } else if (tapStatus == 'spliter_after') {
+      image_spliter_after = File(image!.path);
+      str_image_spliter_after =
+          base64Encode(File(image.path).readAsBytesSync());
+      update();
+    } else {
+      imageAcceptForm = File(image!.path);
+      str_imageAcceptForm = base64Encode(File(image.path).readAsBytesSync());
+      update();
+    }
+  }
+
+  void imageFromCamera(String tapStatus) async {
+    XFile? image = await imagePicker.pickImage(
+        source: ImageSource.camera,
         imageQuality: 50,
         preferredCameraDevice: CameraDevice.front);
 
@@ -179,23 +241,23 @@ class ServiceTicketController extends GetxController {
   void fetchServiceTicketDetail(String ticketID) {
     isLoading(true);
     RestApi.getServiceTicketDetail(
-            readData.read(TOKEN), readData.read(UID), ticketID)
+        readData.read(TOKEN), readData.read(UID), ticketID)
         .then((value) {
       if (value.status == 'Success') {
         serviceTicketDetail.value = value.details!;
         RestApi.fetchInstallationUsages(
-                readData.read(TOKEN),
-                readData.read(UID),
-                HomeController.to.serviceCustomerType == 'b2b' ? 'b2b' : 'b2c')
+            readData.read(TOKEN),
+            readData.read(UID),
+            HomeController.to.serviceCustomerType == 'b2b' ? 'b2b' : 'b2c')
             .then((value) =>
-                {b2bInstallationUsages.value = value, isLoading(false)});
+        {b2bInstallationUsages.value = value, isLoading(false)});
       } else {
         isLoading(false);
       }
     });
   }
 
-  void postServiceTicketDataOnServer(String ticketID, String profileID) {
+  Future<void> postServiceTicketDataOnServer(String ticketID, String profileID) async {
     loadingForButton(true);
 
     var firstMap = {
@@ -211,14 +273,14 @@ class ServiceTicketController extends GetxController {
       'status': statusValueId.toString(),
       'technical_issue': technicalIssueValueId ?? 0,
       'technical_issue_other':
-          technicalIssueNoteController.text.toString() == ""
-              ? "null"
-              : technicalIssueNoteController.text.toString(),
+      technicalIssueNoteController.text.toString() == ""
+          ? "null"
+          : technicalIssueNoteController.text.toString(),
       'technical_resolution': technicalResolutionValueId ?? 0,
       'technical_resolution_other':
-          technicalResolutionNoteController.text.toString() == ""
-              ? "null"
-              : technicalResolutionNoteController.text.toString(),
+      technicalResolutionNoteController.text.toString() == ""
+          ? "null"
+          : technicalResolutionNoteController.text.toString(),
       'front_onu_img': str_image_onu_front_side ?? null,
       'back_onu_img': str_image_onu_back_side ?? null,
       'before_odb_img': str_image_odb_before ?? null,
@@ -231,7 +293,9 @@ class ServiceTicketController extends GetxController {
     var secondMap = {
       for (var item in field_list)
         '$item':
-            '${textEditingControllers_list[item]?.text == '' ? '0' : textEditingControllers_list[item]?.text}'
+        '${textEditingControllers_list[item]?.text == ''
+            ? '0'
+            : textEditingControllers_list[item]?.text}'
     };
 
     var thirdMap = {};
@@ -250,23 +314,72 @@ class ServiceTicketController extends GetxController {
         str_imageAcceptForm == null) {
       loadingForButton(false);
       AppUtils.showErrorSnackBar("Fail", 'Please select a photo!');
+
     }
-    else if(statusValueId == null){
+
+
+    else if (statusValueId == null) {
       loadingForButton(false);
       AppUtils.showErrorSnackBar("Fail", 'Please select a status!');
     }
+
     else {
-      RestApi.postServiceTicketData(thirdMap, readData.read(TOKEN))
-          .then((value) => {
-                if (value.status == 'Success')
-                  {
-                    loadingForButton(false),
-                    Get.offNamed(PENDING_CUSTOMER_COMPLETE_PAGE,
-                        arguments: ticketID)
-                  }
-                else
-                  {loadingForButton(false)}
-              });
+
+      var list = field_list.where((element) => textEditingControllers_list[element]!.text.isEmpty).toList();
+
+      if(list.isNotEmpty)
+      {
+        loadingForButton(false);
+        AppUtils.showErrorSnackBar("Fail", 'Please enter all usages data!');
+      }else {
+        RestApi.postServiceTicketData(thirdMap, readData.read(TOKEN))
+            .then((value) =>
+        {
+          if (value.status == 'Success')
+            {
+              loadingForButton(false),
+              Get.offNamed(PENDING_CUSTOMER_COMPLETE_PAGE,
+                  arguments: ticketID)
+            }
+          else
+            {loadingForButton(false)}
+        });
+      }
+
     }
   }
+
+
+  Future<void> _showChoiceDialog(BuildContext context, String status) {
+    return showDialog(context: context, builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Choose option", style: TextStyle(color: Colors.blue),),
+        content: SingleChildScrollView(
+          child: ListBody(
+            children: [
+              Divider(height: 1, color: Colors.blue,),
+              ListTile(
+                onTap: () {
+                 imageFromGallery(status);
+                 Navigator.pop(context);
+                },
+                title: Text("Gallery"),
+                leading: Icon(Icons.account_box, color: Colors.blue,),
+              ),
+
+              Divider(height: 1, color: Colors.blue,),
+              ListTile(
+                onTap: () {
+                 imageFromCamera(status);
+                 Navigator.pop(context);
+                },
+                title: Text("Camera"),
+                leading: Icon(Icons.camera, color: Colors.blue,),
+              ),
+            ],
+          ),
+        ),);
+    });
+  }
+
 }

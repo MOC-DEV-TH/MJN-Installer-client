@@ -77,14 +77,14 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
                   color: Colors.black,
                   decoration: TextDecoration.none),
             ),
-            Text(
-              'Status',
-              style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 12,
-                  color: Colors.black,
-                  decoration: TextDecoration.none),
-            ),
+            // Text(
+            //   'Status',
+            //   style: TextStyle(
+            //       fontWeight: FontWeight.normal,
+            //       fontSize: 12,
+            //       color: Colors.black,
+            //       decoration: TextDecoration.none),
+            // ),
             Text(
               'Assigned Date',
               style: TextStyle(
@@ -163,73 +163,73 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
             SizedBox(
               width: 10.0,
             ),
-            Obx(() {
-              if (!PageArgumentController.to.isShowStatus.value) {
-                return Container(
-                  height: 38,
-                  width: 90,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(4))),
-                  margin: EdgeInsets.only(bottom: 24),
-                  child: DropDownButtonComponent(
-                    itemsList: installationFilterStatusList,
-                    onChangedData: (InstallationFilterStatus value) {
-                      debugPrint('DropdownValue${value.key}');
-
-                      if (value.name == "Select Status") {
-                        firstTimeFetchDataFromNetwork();
-                      } else {
-                        PageArgumentController.to.getArgumentData() ==
-                                SERVICE_TICKET
-                            ? HomeController.to.fetchServiceTicketListsByStatus(
-                                'completed',
-                                context,
-                                FILTER_STATUS + value.id.toString())
-                            : HomeController.to.fetchInstallationListsByStatus(
-                                'completed',
-                                context,
-                                FILTER_STATUS + value.id.toString());
-                      }
-                    },
-                    hintText: '--Select Status--',
-                  ),
-                );
-              } else {
-                return Container(
-                  height: 38,
-                  width: 90,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(4))),
-                  margin: EdgeInsets.only(bottom: 24),
-                  child: DropDownButtonComponent(
-                    itemsList: serviceTicketFilterStatusList,
-                    onChangedData: (ServiceTicketFilterStatus value) {
-                      debugPrint('DropdownValue${value.key}');
-                      if (value.name == "Select Status") {
-                        firstTimeFetchDataFromNetwork();
-                      } else {
-                        PageArgumentController.to.getArgumentData() ==
-                            SERVICE_TICKET
-                            ? HomeController.to.fetchServiceTicketListsByStatus(
-                            'completed',
-                            context,
-                            FILTER_STATUS + value.id.toString())
-                            : HomeController.to.fetchInstallationListsByStatus(
-                            'completed',
-                            context,
-                            FILTER_STATUS + value.id.toString());
-                      }
-                    },
-                    hintText: '--Select Status--',
-                  ),
-                );
-              }
-            }),
-            SizedBox(
-              width: 10.0,
-            ),
+            // Obx(() {
+            //   if (!PageArgumentController.to.isShowStatus.value) {
+            //     return Container(
+            //       height: 38,
+            //       width: 90,
+            //       decoration: BoxDecoration(
+            //           color: Colors.white,
+            //           borderRadius: BorderRadius.all(Radius.circular(4))),
+            //       margin: EdgeInsets.only(bottom: 24),
+            //       child: DropDownButtonComponent(
+            //         itemsList: installationFilterStatusList,
+            //         onChangedData: (InstallationFilterStatus value) {
+            //           debugPrint('DropdownValue${value.key}');
+            //
+            //           if (value.name == "Select Status") {
+            //             firstTimeFetchDataFromNetwork();
+            //           } else {
+            //             PageArgumentController.to.getArgumentData() ==
+            //                     SERVICE_TICKET
+            //                 ? HomeController.to.fetchServiceTicketListsByStatus(
+            //                     'completed',
+            //                     context,
+            //                     FILTER_STATUS + value.id.toString())
+            //                 : HomeController.to.fetchInstallationListsByStatus(
+            //                     'completed',
+            //                     context,
+            //                     FILTER_STATUS + value.id.toString());
+            //           }
+            //         },
+            //         hintText: '--Select Status--',
+            //       ),
+            //     );
+            //   } else {
+            //     return Container(
+            //       height: 38,
+            //       width: 90,
+            //       decoration: BoxDecoration(
+            //           color: Colors.white,
+            //           borderRadius: BorderRadius.all(Radius.circular(4))),
+            //       margin: EdgeInsets.only(bottom: 24),
+            //       child: DropDownButtonComponent(
+            //         itemsList: serviceTicketFilterStatusList,
+            //         onChangedData: (ServiceTicketFilterStatus value) {
+            //           debugPrint('DropdownValue${value.key}');
+            //           if (value.name == "Select Status") {
+            //             firstTimeFetchDataFromNetwork();
+            //           } else {
+            //             PageArgumentController.to.getArgumentData() ==
+            //                 SERVICE_TICKET
+            //                 ? HomeController.to.fetchServiceTicketListsByStatus(
+            //                 'completed',
+            //                 context,
+            //                 FILTER_STATUS + value.id.toString())
+            //                 : HomeController.to.fetchInstallationListsByStatus(
+            //                 'completed',
+            //                 context,
+            //                 FILTER_STATUS + value.id.toString());
+            //           }
+            //         },
+            //         hintText: '--Select Status--',
+            //       ),
+            //     );
+            //   }
+            // }),
+            // SizedBox(
+            //   width: 10.0,
+            // ),
             Expanded(
                 child: InkWell(
               onTap: () {

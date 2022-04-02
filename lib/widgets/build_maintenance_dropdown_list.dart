@@ -135,7 +135,7 @@ class _BuildMaintenanceDropdownListState
                 margin: EdgeInsets.only(left: 24.0, right: 24.0, top: 24.0),
                 child: Row(
                   children: [
-                    choosePhotoListsWidget,
+                    choosePhotoListsWidget(context),
                   ],
                 ),
               ),
@@ -211,119 +211,121 @@ class _BuildMaintenanceDropdownListState
     ],
   );
 
-  final choosePhotoListsWidget = Column(
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-      Text('ONU Image'),
-      SizedBox(
-        height: 10,
-      ),
-      FittedBox(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GetBuilder<ServiceTicketController>(
-              builder: (controller) =>
-                  PhotoPickerComponent(
-                    imagePath: controller.image_onu_front_side,
-                    text: 'Front Side',
-                    onPress: () => {controller.onTapONUFrontSide()},
-                  ),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            GetBuilder<ServiceTicketController>(
-              builder: (controller) =>
-                  PhotoPickerComponent(
-                    imagePath: controller.image_onu_back_side,
-                    text: 'Back Side',
-                    onPress: () => {controller.onTapONUBackSide()},
-                  ),
-            ),
-          ],
+  Widget choosePhotoListsWidget(BuildContext context) {
+   return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text('ONU Image'),
+        SizedBox(
+          height: 10,
         ),
-      ),
-      SizedBox(
-        height: 20,
-      ),
-      Text('ODB Image'),
-      SizedBox(
-        height: 10,
-      ),
-      FittedBox(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GetBuilder<ServiceTicketController>(
-              builder: (controller) =>
-                  PhotoPickerComponent(
-                    imagePath: controller.image_odb_before,
-                    text: 'Before ODB Photo',
-                    onPress: () => {controller.onTapODBBefore()},
-                  ),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            GetBuilder<ServiceTicketController>(
-              builder: (controller) =>
-                  PhotoPickerComponent(
-                    imagePath: controller.image_odb_after,
-                    text: 'After ODB Photo',
-                    onPress: () => {controller.onTapODBAfter()},
-                  ),
-            ),
-          ],
+        FittedBox(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GetBuilder<ServiceTicketController>(
+                builder: (controller) =>
+                    PhotoPickerComponent(
+                      imagePath: controller.image_onu_front_side,
+                      text: 'Front Side',
+                      onPress: () => {controller.onTapONUFrontSide(context)},
+                    ),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              GetBuilder<ServiceTicketController>(
+                builder: (controller) =>
+                    PhotoPickerComponent(
+                      imagePath: controller.image_onu_back_side,
+                      text: 'Back Side',
+                      onPress: () => {controller.onTapONUBackSide(context)},
+                    ),
+              ),
+            ],
+          ),
         ),
-      ),
-      SizedBox(
-        height: 20,
-      ),
-      Text('Spliter Image'),
-      SizedBox(
-        height: 10,
-      ),
-      FittedBox(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            GetBuilder<ServiceTicketController>(
-              builder: (controller) =>
-                  PhotoPickerComponent(
-                    imagePath: controller.image_spliter_before,
-                    text: 'Before Spliter Photo',
-                    onPress: () => {controller.onTapSpliterBefore()},
-                  ),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            GetBuilder<ServiceTicketController>(
-              builder: (controller) =>
-                  PhotoPickerComponent(
-                    imagePath: controller.image_spliter_after,
-                    text: 'After Spliter Photo',
-                    onPress: () => {controller.onTapSpliterAfter()},
-                  ),
-            ),
-          ],
+        SizedBox(
+          height: 20,
         ),
-      ),
-      SizedBox(
-        height: 20,
-      ),
-      Text('Service Acceptance Form'),
-      GetBuilder<ServiceTicketController>(
-        builder: (controller) =>
-            PhotoPickerComponent(
-              imagePath: controller.imageAcceptForm,
-              text: '',
-              onPress: () => {controller.onTapAcceptForm()},
-            ),
-      ),
-    ],
-  );
+        Text('ODB Image'),
+        SizedBox(
+          height: 10,
+        ),
+        FittedBox(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GetBuilder<ServiceTicketController>(
+                builder: (controller) =>
+                    PhotoPickerComponent(
+                      imagePath: controller.image_odb_before,
+                      text: 'Before ODB Photo',
+                      onPress: () => {controller.onTapODBBefore(context)},
+                    ),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              GetBuilder<ServiceTicketController>(
+                builder: (controller) =>
+                    PhotoPickerComponent(
+                      imagePath: controller.image_odb_after,
+                      text: 'After ODB Photo',
+                      onPress: () => {controller.onTapODBAfter(context)},
+                    ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Text('Spliter Image'),
+        SizedBox(
+          height: 10,
+        ),
+        FittedBox(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GetBuilder<ServiceTicketController>(
+                builder: (controller) =>
+                    PhotoPickerComponent(
+                      imagePath: controller.image_spliter_before,
+                      text: 'Before Spliter Photo',
+                      onPress: () => {controller.onTapSpliterBefore(context)},
+                    ),
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              GetBuilder<ServiceTicketController>(
+                builder: (controller) =>
+                    PhotoPickerComponent(
+                      imagePath: controller.image_spliter_after,
+                      text: 'After Spliter Photo',
+                      onPress: () => {controller.onTapSpliterAfter(context)},
+                    ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Text('Service Acceptance Form'),
+        GetBuilder<ServiceTicketController>(
+          builder: (controller) =>
+              PhotoPickerComponent(
+                imagePath: controller.imageAcceptForm,
+                text: '',
+                onPress: () => {controller.onTapAcceptForm(context)},
+              ),
+        ),
+      ],
+    );
+  }
 
   _buildB2BUsage() {
     return Row(
@@ -1318,6 +1320,7 @@ class _BuildMaintenanceDropdownListState
 
     Map<String, TextEditingController> textEditingControllers = {};
     var textEditingController = TextEditingController();
+
     List<String> field_name = [];
 
     Map.fromIterable(itemsList!,
@@ -1386,7 +1389,7 @@ class _BuildMaintenanceDropdownListState
                           controller: serviceTicketController
                               .textEditingControllers_list[i]!,
                           errorText: '',
-                          hintText: '',
+                          hintText: 'N/A',
                         ),
                       )),
                     ],

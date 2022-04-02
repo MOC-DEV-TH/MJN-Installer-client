@@ -155,7 +155,7 @@ class _BuildInstallationDropdownListState
                 margin: EdgeInsets.only(left: 24.0, right: 24.0, top: 24.0),
                 child: Row(
                   children: [
-                    choosePhotoListsWidget,
+                    choosePhotoListsWidget(context),
                   ],
                 ),
               ),
@@ -197,7 +197,9 @@ class _BuildInstallationDropdownListState
     });
   }
 
-  final choosePhotoListsWidget = Column(
+  Widget choosePhotoListsWidget(BuildContext context) {
+    return
+    Column(
     crossAxisAlignment: CrossAxisAlignment.center,
     children: [
       Text('ONU Image'),
@@ -211,7 +213,7 @@ class _BuildInstallationDropdownListState
             builder: (controller) => PhotoPickerComponent(
               imagePath: controller.image_onu_front_side,
               text: 'Front Side',
-              onPress: () => {controller.onTapONUFrontSide()},
+              onPress: () => {controller.onTapONUFrontSide(context)},
             ),
           ),
           SizedBox(
@@ -221,7 +223,7 @@ class _BuildInstallationDropdownListState
             builder: (controller) => PhotoPickerComponent(
               imagePath: controller.image_onu_back_side,
               text: 'Back Side',
-              onPress: () => {controller.onTapONUBackSide()},
+              onPress: () => {controller.onTapONUBackSide(context)},
             ),
           ),
         ],
@@ -240,7 +242,7 @@ class _BuildInstallationDropdownListState
             builder: (controller) => PhotoPickerComponent(
               imagePath: controller.image_odb_before,
               text: 'Before ODB Photo',
-              onPress: () => {controller.onTapODBBefore()},
+              onPress: () => {controller.onTapODBBefore(context)},
             ),
           ),
           SizedBox(
@@ -250,7 +252,7 @@ class _BuildInstallationDropdownListState
             builder: (controller) => PhotoPickerComponent(
               imagePath: controller.image_odb_after,
               text: 'After ODB Photo',
-              onPress: () => {controller.onTapODBAfter()},
+              onPress: () => {controller.onTapODBAfter(context)},
             ),
           ),
         ],
@@ -269,7 +271,7 @@ class _BuildInstallationDropdownListState
             builder: (controller) => PhotoPickerComponent(
               imagePath: controller.image_spliter_before,
               text: 'Before Spliter Photo',
-              onPress: () => {controller.onTapSpliterBefore()},
+              onPress: () => {controller.onTapSpliterBefore(context)},
             ),
           ),
           SizedBox(
@@ -279,7 +281,7 @@ class _BuildInstallationDropdownListState
             builder: (controller) => PhotoPickerComponent(
               imagePath: controller.image_spliter_after,
               text: 'After Spliter Photo',
-              onPress: () => {controller.onTapSpliterAfter()},
+              onPress: () => {controller.onTapSpliterAfter(context)},
             ),
           ),
         ],
@@ -292,11 +294,12 @@ class _BuildInstallationDropdownListState
         builder: (controller) => PhotoPickerComponent(
           imagePath: controller.imageAcceptForm,
           text: '',
-          onPress: () => {controller.onTapAcceptForm()},
+          onPress: () => {controller.onTapAcceptForm(context)},
         ),
       ),
     ],
   );
+    }
 
   final customerLabel = Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -1161,7 +1164,7 @@ class _BuildInstallationDropdownListState
                           controller: installationController
                               .textEditingControllers_list[i]!,
                           errorText: '',
-                          hintText: '',
+                          hintText: 'N/A',
                         ),
                       )),
                     ],

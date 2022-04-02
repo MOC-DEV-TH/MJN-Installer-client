@@ -44,7 +44,8 @@ class TextFieldWithLabelBoxDecorationComponent extends StatelessWidget {
                 controller: controller,
                 obscureText: isVisible,
                 decoration: InputDecoration(
-                    hintText: '',
+                    hintText: hintText,
+                    hintStyle: TextStyle(fontSize: 12),
                     contentPadding: EdgeInsets.all(10),
                     border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(4.0))),
