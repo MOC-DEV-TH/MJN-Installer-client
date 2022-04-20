@@ -139,6 +139,42 @@ class _BuildInstallationDropdownListState
                                 .installationDetail.value.user_svlan!,
                         color: Colors.black,
                         padding: 8.0),
+                    LabelTextComponent(
+                        text: (installationController.installationDetail.value
+                            .latitude ==
+                            "" ||
+                            installationController.installationDetail
+                                .value.latitude ==
+                                null)
+                            ? "xx xxx xxx xxx xxx"
+                            : installationController
+                            .installationDetail.value.latitude!,
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: (installationController.installationDetail.value
+                            .longitude ==
+                            "" ||
+                            installationController.installationDetail
+                                .value.longitude ==
+                                null)
+                            ? "xx xxx xxx xxx xxx"
+                            : installationController
+                            .installationDetail.value.longitude!,
+                        color: Colors.black,
+                        padding: 8.0),
+                    LabelTextComponent(
+                        text: (installationController.installationDetail.value
+                            .address ==
+                            "" ||
+                            installationController.installationDetail
+                                .value.address ==
+                                null)
+                            ? "xx xxx xxx xxx xxx"
+                            : installationController
+                            .installationDetail.value.address!,
+                        color: Colors.black,
+                        padding: 8.0),
                   ],
                 )
               ],
@@ -317,12 +353,22 @@ class _BuildInstallationDropdownListState
           text: 'User C.VIan', color: Colors.black, padding: 8.0),
       LabelTextComponent(
           text: 'User S.VIan', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Lat', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Long', color: Colors.black, padding: 8.0),
+      LabelTextComponent(
+          text: 'Address', color: Colors.black, padding: 8.0),
+
     ],
   );
 
   final middleLabel = Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
       LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
       LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
       LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
@@ -759,6 +805,36 @@ class _BuildInstallationDropdownListState
                           '--Select SC Connector--',
                           installationController.b2bInstallationUsages.value
                               .details!.sCConnector),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: LabelTextComponent(
+                        text: 'Sleeve', color: Colors.black, padding: 8.0)),
+                Flexible(
+                  flex: 2,
+                  child: Container(
+                    width: Get.width,
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(color: Colors.black38),
+                        borderRadius: BorderRadius.all(Radius.circular(2.0))),
+                    child: ExpandableNotifier(
+                      // <-- Provides ExpandableController to its children
+                      child: _buildInstallationUsages(
+                          '--Select Sleeve--',
+                          installationController
+                              .b2bInstallationUsages.value.details!.sleeves),
                     ),
                   ),
                 ),

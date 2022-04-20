@@ -336,35 +336,58 @@ class InstallationController extends GetxController {
 
     debugPrint("Usage status::${statusValueID}");
 
-    if (str_image_onu_front_side == null ||
-        str_image_onu_back_side == null ||
-        str_image_odb_before == null ||
-        str_image_odb_after == null ||
-        str_image_spliter_before == null ||
-        str_image_spliter_after == null ||
-        str_imageAcceptForm == null) {
-      loadingForButton(false);
-      AppUtils.showErrorSnackBar("Fail", 'Please select a photo!');
-    } else {
-      if (checkBoxValue == false) {
-        loadingForButton(false);
-        AppUtils.showErrorSnackBar(
-            "Fail", 'Please accept remote login function to proceed!');
-      } else if (statusValueID == null) {
-        loadingForButton(false);
-        AppUtils.showErrorSnackBar("Fail", 'Please select a status!');
-      }
+    if(statusValueID != null){
+      if(statusValueID == 5)
+        {
+          if (str_image_onu_front_side == null ||
+              str_image_onu_back_side == null ||
+              str_image_odb_before == null ||
+              str_image_odb_after == null ||
+              str_image_spliter_before == null ||
+              str_image_spliter_after == null ||
+              str_imageAcceptForm == null) {
+            loadingForButton(false);
+            AppUtils.showErrorSnackBar("Fail", 'Please select a photo!');
+          } else {
+            if (checkBoxValue == false) {
+              loadingForButton(false);
+              AppUtils.showErrorSnackBar(
+                  "Fail", 'Please accept remote login function to proceed!');
+            }
+            else {
+
+              var list = field_list.where((element) => textEditingControllers_list[element]!.text.isEmpty).toList();
+
+
+              if(list.isNotEmpty)
+              {
+                loadingForButton(false);
+                AppUtils.showErrorSnackBar("Fail", 'Please enter all usages data!');
+              }else {
+                await RestApi.postInstallationData(readData.read(TOKEN), thirdMap)
+                    .then((value) =>
+                {
+                  if (value?.status == 'Success')
+                    {
+                      loadingForButton(false),
+                      Get.offNamed(COMPLETE_CUSTOMER_PAGE)
+                    }
+                  else
+                    {loadingForButton(false)}
+                });
+              }
+
+            }
+          }
+        }
 
       else {
-
         var list = field_list.where((element) => textEditingControllers_list[element]!.text.isEmpty).toList();
-
-
         if(list.isNotEmpty)
-          {
-            loadingForButton(false);
-            AppUtils.showErrorSnackBar("Fail", 'Please enter all usages data!');
-          }else {
+        {
+          loadingForButton(false);
+          AppUtils.showErrorSnackBar("Fail", 'Please enter all usages data!');
+        }else {
           await RestApi.postInstallationData(readData.read(TOKEN), thirdMap)
               .then((value) =>
           {
@@ -377,9 +400,15 @@ class InstallationController extends GetxController {
               {loadingForButton(false)}
           });
         }
-
       }
+
     }
+
+    else{
+      loadingForButton(false);
+      AppUtils.showErrorSnackBar("Fail", 'Please select a status!');
+    }
+
   }
 
 

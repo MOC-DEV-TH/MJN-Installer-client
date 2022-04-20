@@ -864,6 +864,35 @@ class _BuildMaintenanceDropdownListState
               children: [
                 Expanded(
                     child: LabelTextComponent(
+                        text: 'Sleeve', color: Colors.black, padding: 8.0)),
+                Flexible(
+                  flex: 2,
+                  child: Container(
+                    width: Get.width,
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(color: Colors.black38),
+                        borderRadius: BorderRadius.all(Radius.circular(2.0))),
+                    child: ExpandableNotifier(
+                      // <-- Provides ExpandableController to its children
+                      child: _buildInstallationUsages(
+                          '--Select Sleeve--',
+                          serviceTicketController
+                              .b2bInstallationUsages.value.details!.sleeves),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                    child: LabelTextComponent(
                         text: 'Router', color: Colors.black, padding: 8.0)),
                 Flexible(
                   flex: 2,
