@@ -12,7 +12,7 @@ class PageArgumentController extends GetxController{
 
   void updateArgumentData(String argument){
     argumentData = argument;
-    if(argument == INSTALLATION){
+    if(argument == INSTALLATION || argument == RELOCATION_JOBS){
       isShowStatus(false);
     }
     else{

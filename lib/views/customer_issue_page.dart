@@ -47,7 +47,8 @@ class CustomerIssuePage extends StatelessWidget {
             height: 20.0,
           ),
           //BuildCustomerInfoLabel(),
-          PageArgumentController.to.getArgumentData() == INSTALLATION
+          (PageArgumentController.to.getArgumentData() == INSTALLATION ||
+              PageArgumentController.to.getArgumentData() == RELOCATION_JOBS)
               ? BuildInstallationDropdownList()
               : BuildMaintenanceDropdownList(),
         ],

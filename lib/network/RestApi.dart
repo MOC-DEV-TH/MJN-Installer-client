@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:mjn_installer_app/models/allDropDownListVO.dart';
 import 'package:mjn_installer_app/models/b2bAndb2cUsagesVO.dart';
+import 'package:mjn_installer_app/models/devicePickupDetailVO.dart';
+import 'package:mjn_installer_app/models/devicePickupVO.dart';
 import 'package:mjn_installer_app/models/installationVO.dart';
 import 'package:mjn_installer_app/models/installationDetailVO.dart';
 import 'package:mjn_installer_app/models/networkResultVO.dart';
@@ -134,7 +136,7 @@ class RestApi {
   }
 
   static Future<InstallationVo> fetchInstallationPendingLists(
-      String token, String uid, String status) async {
+      String token, String uid, String status,String isRelocation) async {
     var response = await client.get(
       Uri.parse(INSTALLATION_LIST_URL +
           UID_PARAM +
@@ -142,7 +144,8 @@ class RestApi {
           STATUS_PARAM +
           status +
           APP_VERSION +
-          app_version),
+          app_version +
+          IS_RELOCATION + isRelocation),
       headers: {'content-type': 'application/json', 'token': token},
     );
     if (response.statusCode == 200) {
@@ -347,7 +350,7 @@ class RestApi {
   }
 
   static Future<InstallationVo> fetchInstallationListsByStatus(
-      String token, String uid, String status, String paramAndStatus) async {
+      String token, String uid, String status, String paramAndStatus,String isRelocation) async {
     debugPrint(
         "InstallationListByStatus${SERVICE_TICKET_LIST_URL + UID_PARAM + uid + APP_VERSION + app_version + STATUS_PARAM + status + paramAndStatus}");
     var response = await client.get(
@@ -358,7 +361,8 @@ class RestApi {
           app_version +
           STATUS_PARAM +
           status +
-          paramAndStatus),
+          paramAndStatus +
+      'is_relocation' + isRelocation),
       headers: {'content-type': 'application/json', 'token': token},
     );
     if (response.statusCode == 200) {
@@ -431,4 +435,75 @@ class RestApi {
       throw Exception('Failed to get all installation usages');
     }
   }
+
+  static Future<DevicePickupVo> fetchDevicePickUpLists(
+      String token, String uid,String ticketStatus) async {
+    var response = await client.get(
+      Uri.parse(GET_ALL_DEVICE_PICKUP +
+          UID_PARAM +
+          uid +
+          APP_VERSION +
+          app_version +
+          STATUS_PARAM +
+          ticketStatus ),
+      headers: {'content-type': 'application/json', 'token': token},
+    );
+    if (response.statusCode == 200) {
+      debugPrint(response.body);
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      return devicePickupVoFromJson(response.body);
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      print(response.statusCode);
+      throw Exception('Failed to get device pickup  lists');
+    }
+  }
+
+
+  static Future<DevicePickupDetailVo> fetchDevicePickupDetailById(
+      String token, String uid,String cid,) async {
+    var response = await client.get(
+      Uri.parse(GET_DEVICE_PICKUP_DETAIL +
+          UID_PARAM +
+          uid +
+          APP_VERSION +
+          app_version +
+          CID_PARAM +
+          cid),
+      headers: {'content-type': 'application/json', 'token': token},
+    );
+    if (response.statusCode == 200) {
+      debugPrint(response.body);
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      return devicePickupDetailVoFromJson(response.body);
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      print(response.statusCode);
+      throw Exception('Failed to get device pickup  lists');
+    }
+  }
+  static Future<NetworkResultVO> postDevicePickupData(
+      Map<dynamic, dynamic> params, String token) async {
+
+    var response = await client.post(
+      Uri.parse(POST_DEVICE_PICKUP_DATA_URL),
+      body: json.encode(params),
+      headers: {'content-type': 'application/json', 'token': token},
+    );
+
+    if (response.statusCode == 200) {
+      debugPrint(response.body);
+      return networkResultVoFromJson(response.body);
+    } else {
+      print(response.statusCode);
+      throw Exception('Failed to post service ticket data');
+    }
+  }
+
+
+
 }

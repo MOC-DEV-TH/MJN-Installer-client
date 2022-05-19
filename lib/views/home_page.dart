@@ -117,32 +117,67 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                 SizedBox(
                   height: 60.0,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    FlowAndStatusComponent(
-                      status: 'Installation',
-                      routeName: TICKET_STATUS_PAGE,
-                      argumentData: INSTALLATION,
-                      count: homeController.serviceTicketAndInstallationCounts
-                          .value.allInstallationCounts
-                          .toString(),
-                      assertImage: 'assets/installation_img.png',
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    FlowAndStatusComponent(
-                      status: 'Service Ticket',
-                      routeName: TICKET_STATUS_PAGE,
-                      argumentData: SERVICE_TICKET,
-                      count: homeController.serviceTicketAndInstallationCounts
-                          .value.allServiceTicketsCounts
-                          .toString(),
-                      assertImage: 'assets/service_ticket_img.png',
-                    ),
-                  ],
-                ),
+
+
+                Column(children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      FlowAndStatusComponent(
+                        status: 'Installation',
+                        routeName: TICKET_STATUS_PAGE,
+                        argumentData: INSTALLATION,
+                        count: homeController.serviceTicketAndInstallationCounts
+                            .value.allInstallationCounts
+                            .toString(),
+                        assertImage: 'assets/installation_img.png',
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      FlowAndStatusComponent(
+                        status: 'Service Ticket',
+                        routeName: TICKET_STATUS_PAGE,
+                        argumentData: SERVICE_TICKET,
+                        count: homeController.serviceTicketAndInstallationCounts
+                            .value.allServiceTicketsCounts
+                            .toString(),
+                        assertImage: 'assets/service_ticket_img.png',
+                      ),
+                    ],
+                  ),
+
+                  SizedBox(height: 20,),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      FlowAndStatusComponent(
+                        status: 'Relocation Jobs',
+                        routeName: TICKET_STATUS_PAGE,
+                        argumentData: RELOCATION_JOBS,
+                        count: homeController.serviceTicketAndInstallationCounts
+                            .value.all_relocation_counts
+                            .toString(),
+                        assertImage: 'assets/installation_img.png',
+                      ),
+                      SizedBox(
+                        width: 15,
+                      ),
+                      FlowAndStatusComponent(
+                        status: 'Device PickUp',
+                        routeName: TICKET_STATUS_PAGE,
+                        argumentData: DEVICE_PICKUP,
+                        count: homeController.serviceTicketAndInstallationCounts
+                            .value.all_device_pickup_counts
+                            .toString(),
+                        assertImage: 'assets/service_ticket_img.png',
+                      ),
+                    ],
+                  ),
+                ],),
+
+
                 SizedBox(
                   height: 80,
                 ),

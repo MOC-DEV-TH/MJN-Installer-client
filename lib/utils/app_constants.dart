@@ -12,6 +12,7 @@ const TICKET_STATUS_PAGE = '/ticket_status';
 const CUSTOMER_STATUS_PAGE = '/customer_status';
 const HOME = '/home';
 const CUSTOMER_DETAIL_PAGE = '/customer_detail';
+const DEVICE_PICKUP_DETAIL_PAGE = '/device_pickup_detail';
 const CUSTOMER_ISSUE_PAGE = '/customer_issue';
 const PENDING_CUSTOMER_COMPLETE_PAGE = '/pending_complete_customer';
 const COMPLETE_CUSTOMER_PAGE = '/complete_complete_list';
@@ -22,6 +23,8 @@ const MY_LOCATION_PAGE = '/my_location_page';
 
 
 const INSTALLATION = 'installation';
+const RELOCATION_JOBS = 'relocation jobs';
+const DEVICE_PICKUP = 'device_pickup';
 const SERVICE_TICKET = 'service_ticket';
 const PENDING = 'Pending';
 const COMPLETE = 'Complete';
@@ -51,6 +54,8 @@ const TOWNSHIP_PARAM = '&township=';
 const ASSIGNED_DATE_PARAM = '&assigned_date=';
 const USERNAME_PARAM = '&username=';
 const FILTER_STATUS = '&filter_status=';
+const IS_RELOCATION = '&is_relocation=';
+const CID_PARAM = '&cid=';
 
 const API_URL = BASE_URL+'api/';
 const SUPPORT_LOGIN_URL = API_URL+"support_login";
@@ -68,4 +73,9 @@ const INSTALLATION_ORDER_ACCEPT_URL = API_URL+"installation_order_accept";
 const GET_INSTALLATION_USAGES_URL = API_URL+"get_usages?";
 const POST_INSTALLER_LAT_LONG_URL = API_URL+"post_installer_lat_long";
 const SEND_SMS_BRIX_URL = API_URL+"send_sms_brix";
+const GET_ALL_DEVICE_PICKUP = API_URL+"get_device_pickup_lists?";
+const GET_DEVICE_PICKUP_DETAIL = API_URL+"get_device_pickup_details?";
+const POST_DEVICE_PICKUP_DATA_URL = API_URL+"post_device_pickup_data";
+
+
 

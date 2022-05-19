@@ -37,7 +37,12 @@ class _BuildCustomerDetailInfoState extends State<BuildCustomerDetailInfo> {
       if (PageArgumentController.to.getArgumentData() == INSTALLATION) {
         customerDetailController.fetchInstallationDetail(
             widget.profileIdOrTicketID, context);
-      } else {
+      }
+      else if (PageArgumentController.to.getArgumentData() == RELOCATION_JOBS) {
+        customerDetailController.fetchInstallationDetail(
+            widget.profileIdOrTicketID, context);
+      }
+      else {
         customerDetailController.fetchServiceTicketDetail(
             widget.profileIdOrTicketID, context);
       }
@@ -54,7 +59,9 @@ class _BuildCustomerDetailInfoState extends State<BuildCustomerDetailInfo> {
           child: CircularProgressIndicator(),
         );
       } else
-        return PageArgumentController.to.getArgumentData() == INSTALLATION
+        return ((PageArgumentController.to.getArgumentData() == INSTALLATION)
+                                  ||
+            (PageArgumentController.to.getArgumentData() == RELOCATION_JOBS))
             ? Flexible(
           child: Column(
             children: [

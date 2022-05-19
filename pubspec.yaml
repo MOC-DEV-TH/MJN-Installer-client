@@ -65,6 +65,7 @@ dependencies:
   auto_size_text: ^3.0.0
   focused_menu: ^1.0.5
   expandable: ^5.0.1
+  group_radio_button: ^1.2.0
   flutter_neumorphic:
     git:
       url: "https://github.com/alionour/Flutter-Neumorphic"

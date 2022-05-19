@@ -3,6 +3,7 @@ import 'package:mjn_installer_app/controllers/home_controller.dart';
 import 'package:mjn_installer_app/controllers/login_controller.dart';
 import 'package:mjn_installer_app/controllers/page_argument_controller.dart';
 import 'package:mjn_installer_app/models/allDropDownListVO.dart';
+import 'package:mjn_installer_app/models/devicePickupVO.dart';
 import 'package:mjn_installer_app/models/installationVO.dart';
 import 'package:mjn_installer_app/models/serviceTicketVO.dart';
 import 'package:mjn_installer_app/utils/app_constants.dart';
@@ -22,6 +23,7 @@ class CustomerStatusListItems extends StatelessWidget {
 
   InstallationDetail? installationDetail;
   ServiceTicketDetail? serviceTicketDetail;
+  DevicePickupDetail? devicePickupDetail;
   List<TownshipDatum>? townshipLists;
   var townshipName = "".obs;
 
@@ -29,11 +31,12 @@ class CustomerStatusListItems extends StatelessWidget {
       this.customerPhNo, this.profileId,
       {@required this.installationDetail,
       @required this.serviceTicketDetail,
+      @required this.devicePickupDetail,
       @required this.pageStatus,
       @required this.township,
       @required this.ticketId,
       @required this.customerUID,
-        @required this.status_txt,
+      @required this.status_txt,
       @required this.status});
 
   @override
@@ -53,7 +56,6 @@ class CustomerStatusListItems extends StatelessWidget {
     return Container(
         child: Container(
       margin: EdgeInsets.only(bottom: 10),
-
       decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(8.0))),
@@ -102,7 +104,6 @@ class CustomerStatusListItems extends StatelessWidget {
                             decoration: TextDecoration.none),
                       );
                     })),
-
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Text(
@@ -116,10 +117,11 @@ class CustomerStatusListItems extends StatelessWidget {
                 ),
               ],
             ),
-            verticalDivider,
+            (PageArgumentController.to.getArgumentData() == DEVICE_PICKUP && pageStatus == 'complete')
+                ? Container()
+                : verticalDivider,
             InkWell(
                 onTap: () {
-
                   PageArgumentController.to.updateCustomerStatus(status_txt!);
 
                   if (pageStatus == NEW_ORDER) {
@@ -139,7 +141,15 @@ class CustomerStatusListItems extends StatelessWidget {
                           installationDetail!.plan!,
                           installationDetail!.uid!,
                           installationDetail!.phone1!);
-                    } else {
+                    } else if (PageArgumentController.to.getArgumentData() ==
+                        RELOCATION_JOBS) {
+                      HomeController.to.updateInstallationData(
+                          installationDetail!.profileId!,
+                          installationDetail!.plan!,
+                          installationDetail!.uid!,
+                          installationDetail!.phone1!);
+                    } else if (PageArgumentController.to.getArgumentData() ==
+                        SERVICE_TICKET) {
                       HomeController.to.updateServiceTicketData(
                           serviceTicketDetail!.ticketId!,
                           serviceTicketDetail!.profileId!,
@@ -149,74 +159,122 @@ class CustomerStatusListItems extends StatelessWidget {
                     }
                   }
 
+                  /**
+                       * Go to complete customer page
+                       */
                   pageStatus == 'complete'
                       ? Get.toNamed(COMPLETE_CUSTOMER_DETAIL_PAGE,
-                          arguments:
-                              PageArgumentController.to.getArgumentData() ==
-                                      INSTALLATION
+                          arguments: PageArgumentController.to.getArgumentData() ==
+                                  INSTALLATION
+                              ? profileId
+                              : PageArgumentController.to.getArgumentData() ==
+                                      RELOCATION_JOBS
                                   ? profileId
                                   : ticketId)
+                      /**
+                       * Go to New Order page
+                       */
                       : pageStatus == NEW_ORDER
-                          ? Get.toNamed(NEW_ORDER_CUSTOMER_PAGE)!.then(
-                              (value) => Future.delayed(Duration.zero, () {
-                                    if (PageArgumentController.to
-                                            .getArgumentData() ==
-                                        INSTALLATION) {
-                                      if (PageArgumentController.to
-                                              .getStatus() ==
-                                          NEW_ORDER) {
-                                        HomeController.to
-                                            .fetchInstallationPendingCustomer(
-                                                'newOrder', context);
-                                      } else if (PageArgumentController.to
-                                              .getStatus() ==
-                                          PENDING) {
-                                        HomeController.to
-                                            .fetchInstallationPendingCustomer(
-                                                'pending', context);
-                                      }
-                                    } else if (PageArgumentController.to
-                                            .getArgumentData() ==
-                                        SERVICE_TICKET) {
-                                      if (PageArgumentController.to
-                                              .getStatus() ==
-                                          NEW_ORDER) {
-                                        HomeController.to
-                                            .fetchServiceTicketPendingCustomer(
-                                                'newOrder', context);
-                                      } else if (PageArgumentController.to
-                                              .getStatus() ==
-                                          PENDING) {
-                                        HomeController.to
-                                            .fetchServiceTicketPendingCustomer(
-                                                'pending', context);
-                                      }
-                                    }
-                                  }))
-                          // pending ticket flow
-                          //installation flow
-                          : PageArgumentController.to.getArgumentData() ==
-                                  INSTALLATION
+                          ? Get.toNamed(NEW_ORDER_CUSTOMER_PAGE)!.then((value) =>
+                              Future.delayed(Duration.zero, () {
+                                /**
+                             * Installation New Order
+                             */
+                                if (PageArgumentController.to
+                                        .getArgumentData() ==
+                                    INSTALLATION) {
+                                  if (PageArgumentController.to.getStatus() ==
+                                      NEW_ORDER) {
+                                    HomeController.to
+                                        .fetchInstallationPendingCustomer(
+                                            'newOrder', context);
+                                  } else if (PageArgumentController.to
+                                          .getStatus() ==
+                                      PENDING) {
+                                    HomeController.to
+                                        .fetchInstallationPendingCustomer(
+                                            'pending', context);
+                                  }
+                                }
+                                /**
+                             * Relocation New Order
+                             */
+                                else if (PageArgumentController.to
+                                        .getArgumentData() ==
+                                    RELOCATION_JOBS) {
+                                  if (PageArgumentController.to.getStatus() ==
+                                      NEW_ORDER) {
+                                    HomeController.to
+                                        .fetchRelocationPendingCustomer(
+                                            'newOrder', '1', context);
+                                  } else if (PageArgumentController.to
+                                          .getStatus() ==
+                                      PENDING) {
+                                    HomeController.to
+                                        .fetchRelocationPendingCustomer(
+                                            'pending', '1', context);
+                                  }
+                                }
+
+                                /**
+                             * Service Ticket New Order
+                             */
+                                else if (PageArgumentController.to
+                                        .getArgumentData() ==
+                                    SERVICE_TICKET) {
+                                  if (PageArgumentController.to.getStatus() ==
+                                      NEW_ORDER) {
+                                    HomeController.to
+                                        .fetchServiceTicketPendingCustomer(
+                                            'newOrder', context);
+                                  } else if (PageArgumentController.to
+                                          .getStatus() ==
+                                      PENDING) {
+                                    HomeController.to
+                                        .fetchServiceTicketPendingCustomer(
+                                            'pending', context);
+                                  }
+                                }
+                              }))
+                          /**
+                       * Go To Customer Detail Page and Customer Issue Page
+                       */
+                          : (PageArgumentController.to.getArgumentData() ==
+                                      INSTALLATION) ||
+                                  (PageArgumentController.to.getArgumentData() ==
+                                      RELOCATION_JOBS)
                               ? status == '2'
                                   ? Get.toNamed(CUSTOMER_DETAIL_PAGE,
                                       arguments: profileId)
                                   : status == '8'
-                                   ? Get.toNamed(CUSTOMER_DETAIL_PAGE,
-                      arguments: profileId)
-                                  : Get.offNamed(CUSTOMER_ISSUE_PAGE,
-                                      arguments: profileId)
+                                      ? Get.toNamed(CUSTOMER_DETAIL_PAGE,
+                                          arguments: profileId)
+                                      : Get.offNamed(CUSTOMER_ISSUE_PAGE,
+                                          arguments: profileId)
+                              /**
+                       * Go to device pickup detail page
+                       */
+                              : PageArgumentController.to.getArgumentData() ==
+                                      DEVICE_PICKUP
+                                  ? Get.toNamed(DEVICE_PICKUP_DETAIL_PAGE, arguments: [
+                                      devicePickupDetail!.cid.toString(),
+                                      devicePickupDetail!.ticketId.toString()
+                                    ])
 
-                              // service ticket flow
-                              : status == '2'
-                                  ? Get.toNamed(CUSTOMER_DETAIL_PAGE,
-                                      arguments: ticketId)
-                                  : status == '3'
-                                  ? Get.toNamed(CUSTOMER_DETAIL_PAGE,
-                      arguments: ticketId)
-                                  : Get.offNamed(CUSTOMER_ISSUE_PAGE,
-                                      arguments: ticketId);
+                                  /**
+                       * Service Ticket Flow
+                       */
+                                  : status == '2'
+                                      ? Get.toNamed(CUSTOMER_DETAIL_PAGE,
+                                          arguments: ticketId)
+                                      : status == '3'
+                                          ? Get.toNamed(CUSTOMER_DETAIL_PAGE, arguments: ticketId)
+                                          : Get.offNamed(CUSTOMER_ISSUE_PAGE, arguments: ticketId);
                 },
-                child: labelView)
+                child:
+                (PageArgumentController.to.getArgumentData() == DEVICE_PICKUP && pageStatus == 'complete')
+                        ? Container()
+                        : labelView)
           ],
         ),
       ),

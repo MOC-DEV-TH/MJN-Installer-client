@@ -20,6 +20,13 @@ class ServiceTicketAdnInstallationCountsVO {
     this.newOrderCount,
     this.pendingCount,
     this.completedCount,
+    this.all_relocation_counts,
+    this.pending_relocation_count,
+    this.completed_relocation_count,
+    this.new_relocation_count,
+    this.all_device_pickup_counts,
+    this.pending_device_pickup_counts,
+    this.complete_device_pickup_counts,
   });
 
   String? status;
@@ -36,6 +43,13 @@ class ServiceTicketAdnInstallationCountsVO {
   int? newOrderCount;
   int? pendingCount;
   int? completedCount;
+  int? all_relocation_counts;
+  int? new_relocation_count;
+  int? pending_relocation_count;
+  int? completed_relocation_count;
+  int? all_device_pickup_counts;
+  int? pending_device_pickup_counts;
+  int? complete_device_pickup_counts;
 
   factory ServiceTicketAdnInstallationCountsVO.fromJson(Map<String, dynamic> json) => ServiceTicketAdnInstallationCountsVO(
     status: json["status"],
@@ -52,6 +66,15 @@ class ServiceTicketAdnInstallationCountsVO {
     newOrderCount: json["new_order_count"],
     pendingCount: json["pending_count"],
     completedCount: json["completed_count"],
+
+    all_relocation_counts: json["all_relocation_counts"],
+    new_relocation_count: json["new_relocation_count"],
+    pending_relocation_count: json["pending_relocation_count"],
+    completed_relocation_count: json["completed_relocation_count"],
+
+    all_device_pickup_counts: json["all_device_pickup_counts"],
+    pending_device_pickup_counts: json["pending_device_pickup_counts"],
+    complete_device_pickup_counts: json["complete_device_pickup_counts"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -69,5 +92,14 @@ class ServiceTicketAdnInstallationCountsVO {
     "new_order_count": newOrderCount,
     "pending_count": pendingCount,
     "completed_count": completedCount,
+
+    "all_relocation_counts" : all_relocation_counts,
+    "new_relocation_count" : new_relocation_count,
+    "pending_relocation_count" : pending_relocation_count,
+    "completed_relocation_count" : completed_relocation_count,
+
+    "all_device_pickup_counts" : all_device_pickup_counts,
+    "pending_device_pickup_counts" : pending_device_pickup_counts,
+    "complete_device_pickup_counts" : complete_device_pickup_counts,
   };
 }

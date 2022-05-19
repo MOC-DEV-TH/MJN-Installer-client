@@ -35,7 +35,7 @@ class TicketStatusComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => {
-        PageArgumentController.to.updateArgumentData(argumentData!),
+        //PageArgumentController.to.updateArgumentData(argumentData!),
         status == NEW_ORDER
             ? PageArgumentController.to.updateStatus(NEW_ORDER)
             : PageArgumentController.to.updateStatus(PENDING),

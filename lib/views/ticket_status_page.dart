@@ -17,7 +17,8 @@ class TicketStatusPage extends StatefulWidget {
   State<TicketStatusPage> createState() => _TicketStatusPageState();
 }
 
-class _TicketStatusPageState extends State<TicketStatusPage>  with WidgetsBindingObserver{
+class _TicketStatusPageState extends State<TicketStatusPage>
+    with WidgetsBindingObserver {
   final TicketStatusController ticketStatusController =
       Get.put(TicketStatusController());
 
@@ -25,6 +26,10 @@ class _TicketStatusPageState extends State<TicketStatusPage>  with WidgetsBindin
 
   @override
   void initState() {
+    Future.delayed(Duration.zero,(){
+      ticketStatusController
+          .updateArgumentData(PageArgumentController.to.getArgumentData());
+    });
     super.initState();
     WidgetsBinding.instance!.addObserver(this);
   }
@@ -33,7 +38,7 @@ class _TicketStatusPageState extends State<TicketStatusPage>  with WidgetsBindin
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
     debugPrint(state.toString());
-    if(state == AppLifecycleState.resumed){
+    if (state == AppLifecycleState.resumed) {
       debugPrint('onResumeState');
     }
   }
@@ -51,42 +56,42 @@ class _TicketStatusPageState extends State<TicketStatusPage>  with WidgetsBindin
       if (event.toString() == 'resume') {
         HomeController.to.onUIReady(context);
       }
-
     });
 
     return WillPopScope(
-      onWillPop: (){
+      onWillPop: () {
         Get.offAllNamed(HOME);
         return Future.value(true);
       },
       child: Scaffold(
-          appBar: AppUtils.customAppBar(),
-          backgroundColor: Color(int.parse(MJNColors.bgColor)),
-          body: Container(
-            height: MediaQuery.of(context).size.height,
-            padding: EdgeInsets.only(left: 30, right: 30, bottom: 30),
-            child: _buildWidget(),
-          ),
-          bottomNavigationBar: GetBuilder<TicketStatusController>(
-              init: TicketStatusController(),
-              initState: (_) {
-                WidgetsBinding.instance!.addPostFrameCallback((_) {
-                  ticketStatusController.updateArgumentData(
-                      PageArgumentController.to.getArgumentData());
-                });
-              },
-              builder: (controller) => BottomNavigationBarComponent(
-                    argumentData: controller.argumentData,
-                    onChangedData: (val) {
-                      controller.updateArgumentData(val);
-                      PageArgumentController.to.updateArgumentData(val);
-                      if (val == INSTALLATION) {
-                        controller.fetchInstallationData();
-                      } else {
-                        controller.fetchServiceTicketData();
-                      }
-                    },
-                  ))),
+        appBar: AppUtils.customAppBar(),
+        backgroundColor: Color(int.parse(MJNColors.bgColor)),
+        body: Container(
+          height: MediaQuery.of(context).size.height,
+          padding: EdgeInsets.only(left: 30, right: 30, bottom: 30),
+          child: _buildWidget(),
+        ),
+        // bottomNavigationBar: GetBuilder<TicketStatusController>(
+        //     init: TicketStatusController(),
+        //     initState: (_) {
+        //       WidgetsBinding.instance!.addPostFrameCallback((_) {
+        //         ticketStatusController.updateArgumentData(
+        //             PageArgumentController.to.getArgumentData());
+        //       });
+        //     },
+        //     builder: (controller) => BottomNavigationBarComponent(
+        //           argumentData: controller.argumentData,
+        //           onChangedData: (val) {
+        //             controller.updateArgumentData(val);
+        //             PageArgumentController.to.updateArgumentData(val);
+        //             if (val == INSTALLATION) {
+        //               controller.fetchInstallationData();
+        //             } else {
+        //               controller.fetchServiceTicketData();
+        //             }
+        //           },
+        //         ))
+      ),
     );
   }
 
@@ -105,9 +110,16 @@ class _TicketStatusPageState extends State<TicketStatusPage>  with WidgetsBindin
               ),
               GetBuilder<TicketStatusController>(
                 builder: (controller) => Text(
+                  // ticketStatusController.getArgumentData() == INSTALLATION
                   ticketStatusController.getArgumentData() == INSTALLATION
                       ? "Total - ${HomeController.to.serviceTicketAndInstallationCounts.value.allInstallationCounts.toString()}"
-                      : "Total - ${HomeController.to.serviceTicketAndInstallationCounts.value.allServiceTicketsCounts.toString()}",
+                      : ticketStatusController.getArgumentData() ==
+                              SERVICE_TICKET
+                          ? "Total - ${HomeController.to.serviceTicketAndInstallationCounts.value.allServiceTicketsCounts.toString()}"
+                          : ticketStatusController.getArgumentData() ==
+                                  RELOCATION_JOBS
+                              ? "Total - ${HomeController.to.serviceTicketAndInstallationCounts.value.all_relocation_counts.toString()}"
+                              : "Total - ${HomeController.to.serviceTicketAndInstallationCounts.value.all_device_pickup_counts.toString()}",
                   style: TextStyle(
                       fontWeight: FontWeight.normal,
                       fontSize: 20,
@@ -118,57 +130,72 @@ class _TicketStatusPageState extends State<TicketStatusPage>  with WidgetsBindin
               SizedBox(
                 height: 60.0,
               ),
-
+              PageArgumentController.to.getArgumentData() != DEVICE_PICKUP ?
               GetBuilder<TicketStatusController>(
                   builder: (controller) => TicketStatusComponent(
                       argumentData: controller.getArgumentData(),
                       status: NEW_ORDER,
                       routeName: CUSTOMER_STATUS_PAGE,
                       count: ticketStatusController.getArgumentData() ==
-                          INSTALLATION
-                          ? HomeController
-                          .to
-                          .serviceTicketAndInstallationCounts
-                          .value
-                          .newInstallationCount
-                          .toString()
-                          : HomeController
-                          .to
-                          .serviceTicketAndInstallationCounts
-                          .value
-                          .newOrderCount
-                          .toString(),
-                      assertImage: 'assets/installation_img.png')),
+                              INSTALLATION
+                          ? HomeController.to.serviceTicketAndInstallationCounts
+                              .value.newInstallationCount
+                              .toString()
+                          : ticketStatusController.getArgumentData() ==
+                                  SERVICE_TICKET
+                              ? HomeController
+                                  .to
+                                  .serviceTicketAndInstallationCounts
+                                  .value
+                                  .newOrderCount
+                                  .toString()
+                              : HomeController
+                                  .to
+                                  .serviceTicketAndInstallationCounts
+                                  .value
+                                  .new_relocation_count
+                                  .toString(),
+                      assertImage: 'assets/installation_img.png'))
+              : Container(),
               SizedBox(
                 height: 20,
               ),
-
               GetBuilder<TicketStatusController>(
                   builder: (controller) => TicketStatusComponent(
-                      argumentData:
-                          ticketStatusController.getArgumentData(),
+                      argumentData: ticketStatusController.getArgumentData(),
                       status: PENDING,
                       routeName: CUSTOMER_STATUS_PAGE,
                       count: ticketStatusController.getArgumentData() ==
                               INSTALLATION
-                          ? HomeController
-                              .to
-                              .serviceTicketAndInstallationCounts
-                              .value
-                              .pendingInstallationCount
+                          ? HomeController.to.serviceTicketAndInstallationCounts
+                              .value.pendingInstallationCount
                               .toString()
-                          : HomeController
-                              .to
-                              .serviceTicketAndInstallationCounts
-                              .value
-                              .pendingCount
-                              .toString(),
+                          : ticketStatusController.getArgumentData() ==
+                                  SERVICE_TICKET
+                              ? HomeController
+                                  .to
+                                  .serviceTicketAndInstallationCounts
+                                  .value
+                                  .pendingCount
+                                  .toString()
+                              : ticketStatusController.getArgumentData() ==
+                                      RELOCATION_JOBS
+                                  ? HomeController
+                                      .to
+                                      .serviceTicketAndInstallationCounts
+                                      .value
+                                      .pending_relocation_count
+                                      .toString()
+                                  : HomeController
+                                      .to
+                                      .serviceTicketAndInstallationCounts
+                                      .value
+                                      .pending_device_pickup_counts
+                                      .toString(),
                       assertImage: 'assets/pending_img.png')),
-
               SizedBox(
                 height: 20.0,
               ),
-
               GetBuilder<TicketStatusController>(
                 builder: (controller) => TicketStatusComponent(
                     argumentData: controller.getArgumentData(),
@@ -182,12 +209,28 @@ class _TicketStatusPageState extends State<TicketStatusPage>  with WidgetsBindin
                                 .value
                                 .completedInstallationCount
                                 .toString()
-                            : HomeController
-                                .to
-                                .serviceTicketAndInstallationCounts
-                                .value
-                                .completedCount
-                                .toString(),
+                            : ticketStatusController.getArgumentData() ==
+                                    SERVICE_TICKET
+                                ? HomeController
+                                    .to
+                                    .serviceTicketAndInstallationCounts
+                                    .value
+                                    .completedCount
+                                    .toString()
+                                : ticketStatusController.getArgumentData() ==
+                                        RELOCATION_JOBS
+                                    ? HomeController
+                                        .to
+                                        .serviceTicketAndInstallationCounts
+                                        .value
+                                        .completed_relocation_count
+                                        .toString()
+                                    : HomeController
+                                        .to
+                                        .serviceTicketAndInstallationCounts
+                                        .value
+                                        .complete_device_pickup_counts
+                                        .toString(),
                     assertImage: 'assets/complete_img.png'),
               )
             ],

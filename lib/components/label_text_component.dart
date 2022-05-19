@@ -6,12 +6,14 @@ class LabelTextComponent extends StatelessWidget {
     required this.text,
     required this.color,
     required this.padding,
-    this.containerWidth
+    this.containerWidth,
+    this.textAlign,
   }) : super(key: key);
 
   final String text;
   final Color color;
   final double padding;
+  TextAlign? textAlign;
   double? containerWidth;
   @override
   Widget build(BuildContext context) {
@@ -21,13 +23,14 @@ class LabelTextComponent extends StatelessWidget {
         width: containerWidth,
         child: AutoSizeText(
           text,
+          textAlign: textAlign,
           style: TextStyle(
               fontWeight: FontWeight.normal,
               fontSize: 14,
               color:color,
               decoration: TextDecoration.none),
           overflow: TextOverflow.fade,
-          maxLines: null,
+          maxLines: 4,
           softWrap: true,
         ),
       ),
