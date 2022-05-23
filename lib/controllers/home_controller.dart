@@ -188,30 +188,7 @@ class HomeController extends GetxController {
     });
   }
 
-  void fetchDeviceTicketPendingCustomer(BuildContext context,String ticketStatus) {
-    clearTextFieldData();
-    Future.delayed(Duration.zero, () {
-      isLoading(true);
-      RestApi.fetchDevicePickUpLists(
-          readData.read(TOKEN), readData.read(UID),ticketStatus)
-          .then((value) => {
-        if (value.status == 'Success')
-          {
-            debugPrint("DeviceTicketLists ${value.details}"),
-            devicePickupPendingCustomerList.value = value.details!,
-            isLoading(false)
-          }
-        else if (value.responseCode == '005')
-          {
-            isLoading(false),
-            AppUtils.showSessionExpireDialog(
-                'Fail', 'Session Expired', context)
-          }
-        else
-          {isLoading(false)}
-      });
-    });
-  }
+
 
   void fetchInstallationPendingCustomer(String status, BuildContext context) {
     clearTextFieldData();
@@ -471,6 +448,58 @@ class HomeController extends GetxController {
                 installationPendingCustomerList.value = value.details!,
                 isLoading(false)
               }
+          }
+        else if (value.responseCode == '005')
+          {
+            isLoading(false),
+            AppUtils.showSessionExpireDialog(
+                'Fail', 'Session Expired', context)
+          }
+        else
+          {isLoading(false)}
+      });
+    });
+  }
+
+  void fetchDeviceTicketPendingCustomer(BuildContext context,String ticketStatus) {
+   clearTextFieldData();
+    Future.delayed(Duration.zero, () {
+      isLoading(true);
+      RestApi.fetchDevicePickUpLists(
+          readData.read(TOKEN), readData.read(UID),ticketStatus)
+          .then((value) => {
+        if (value.status == 'Success')
+          {
+            //debugPrint("DeviceTicketLists ${value.details}"),
+            devicePickupPendingCustomerList.value = value.details!,
+            isLoading(false)
+          }
+        else if (value.responseCode == '005')
+          {
+            isLoading(false),
+            AppUtils.showSessionExpireDialog(
+                'Fail', 'Session Expired', context)
+          }
+        else
+          {isLoading(false)}
+      });
+    });
+  }
+
+  void fetchDevicePickupListByStatus(
+      String status, BuildContext context, String paramAndStatus) {
+    debugPrint('ParamStatus ::$paramAndStatus');
+    Future.delayed(Duration.zero, () {
+      isLoading(true);
+      RestApi.fetchDevicePickupListByStatus(
+          readData.read(TOKEN), readData.read(UID), status, paramAndStatus)
+          .then((value) => {
+        if (value.status == 'Success')
+          {
+            debugPrint("DevicePickUpLists ${value.details}"),
+
+                devicePickupPendingCustomerList.value = value.details!,
+                isLoading(false)
           }
         else if (value.responseCode == '005')
           {

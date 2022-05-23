@@ -53,6 +53,7 @@ const TICKET_ID_PARAM = '&ticket_id=';
 const TOWNSHIP_PARAM = '&township=';
 const ASSIGNED_DATE_PARAM = '&assigned_date=';
 const USERNAME_PARAM = '&username=';
+const CUSTOMER_NAME_PARAM = '&customer_name=';
 const FILTER_STATUS = '&filter_status=';
 const IS_RELOCATION = '&is_relocation=';
 const CID_PARAM = '&cid=';

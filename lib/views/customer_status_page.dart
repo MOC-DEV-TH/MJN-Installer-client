@@ -19,27 +19,27 @@ class _CustomerStatusPageState extends State<CustomerStatusPage> {
 
   @override
   void initState() {
-    if(PageArgumentController.to.getArgumentData() == INSTALLATION){
-      if (PageArgumentController.to.getStatus() == NEW_ORDER) {
-        customerController.fetchInstallationPendingCustomer('newOrder', context);
-      } else if (PageArgumentController.to.getStatus() == PENDING) {
-        customerController.fetchInstallationPendingCustomer('pending', context);
-      }
-    }
-    else if(PageArgumentController.to.getArgumentData() == SERVICE_TICKET){
-      if (PageArgumentController.to.getStatus() == NEW_ORDER) {
-        customerController.fetchServiceTicketPendingCustomer('newOrder', context);
-      } else if (PageArgumentController.to.getStatus() == PENDING) {
-        customerController.fetchServiceTicketPendingCustomer('pending', context);
-      }
-    }
-    else if(PageArgumentController.to.getArgumentData() == RELOCATION_JOBS) {
-      if (PageArgumentController.to.getStatus() == NEW_ORDER) {
-        customerController.fetchRelocationPendingCustomer('newOrder','1', context);
-      } else if (PageArgumentController.to.getStatus() == PENDING) {
-        customerController.fetchRelocationPendingCustomer('pending','1', context);
-      }
-    }
+    // if(PageArgumentController.to.getArgumentData() == INSTALLATION){
+    //   if (PageArgumentController.to.getStatus() == NEW_ORDER) {
+    //     customerController.fetchInstallationPendingCustomer('newOrder', context);
+    //   } else if (PageArgumentController.to.getStatus() == PENDING) {
+    //     customerController.fetchInstallationPendingCustomer('pending', context);
+    //   }
+    // }
+    // else if(PageArgumentController.to.getArgumentData() == SERVICE_TICKET){
+    //   if (PageArgumentController.to.getStatus() == NEW_ORDER) {
+    //     customerController.fetchServiceTicketPendingCustomer('newOrder', context);
+    //   } else if (PageArgumentController.to.getStatus() == PENDING) {
+    //     customerController.fetchServiceTicketPendingCustomer('pending', context);
+    //   }
+    // }
+    // else if(PageArgumentController.to.getArgumentData() == RELOCATION_JOBS) {
+    //   if (PageArgumentController.to.getStatus() == NEW_ORDER) {
+    //     customerController.fetchRelocationPendingCustomer('newOrder','1', context);
+    //   } else if (PageArgumentController.to.getStatus() == PENDING) {
+    //     customerController.fetchRelocationPendingCustomer('pending','1', context);
+    //   }
+    // }
 
     super.initState();
   }

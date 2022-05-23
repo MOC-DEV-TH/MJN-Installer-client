@@ -77,7 +77,7 @@ class _BuildPendingAndNewOrderCustomerListState
       }
     });
 
-    debugPrint('Status Title ${PageArgumentController.to.getStatusTitle()}');
+    //debugPrint('Status Title ${PageArgumentController.to.getStatusTitle()}');
     townshipList =
         LoginController.to.maintenanceDropDownListsData.details!.townshipData;
     installationFilterStatusList = LoginController
@@ -146,12 +146,32 @@ class _BuildPendingAndNewOrderCustomerListState
                   ),
                 ],
               )
-            : Container(),
+            : Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              'Customer Name',
+              style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 12,
+                  color: Colors.black,
+                  decoration: TextDecoration.none),
+            ),
+            Text(
+              'Township',
+              style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 12,
+                  color: Colors.black,
+                  decoration: TextDecoration.none),
+            ),
+          ],
+        ),
         SizedBox(
           height: 10.0,
         ),
-        PageArgumentController.to.getArgumentData() != DEVICE_PICKUP
-            ? Row(
+        PageArgumentController.to.getArgumentData() != DEVICE_PICKUP ?
+        Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GetBuilder<HomeController>(
@@ -255,7 +275,7 @@ class _BuildPendingAndNewOrderCustomerListState
                     child: DropDownButtonComponent(
                       itemsList: townshipList,
                       onChangedData: (TownshipDatum value) {
-                        debugPrint('DropdownValue${value.key}');
+                        //debugPrint('DropdownValue${value.key}');
 
                         if (value.name == "Select Township") {
                           firstTimeFetchDataFromNetwork();
@@ -342,7 +362,7 @@ class _BuildPendingAndNewOrderCustomerListState
                         child: DropDownButtonComponent(
                           itemsList: installationFilterStatusList,
                           onChangedData: (InstallationFilterStatus value) {
-                            debugPrint('DropdownValue${value.key}');
+                            //debugPrint('DropdownValue${value.key}');
 
                             if (value.name == "Select Status") {
                               firstTimeFetchDataFromNetwork();
@@ -649,8 +669,218 @@ class _BuildPendingAndNewOrderCustomerListState
                             },
                           )))
                 ],
-              )
-            : Container(),
+              ) :
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            GetBuilder<HomeController>(
+              builder: (controller) => Flexible(
+                flex: 1,
+                  child: SearchTextFieldComponent(
+                    onTextDataChange: (String value) {
+                      if (value == '') {
+                        debugPrint('Empty text');
+                        firstTimeFetchDataFromNetwork();
+                      }
+                    },
+                    controller: controller.customerNameTextController,
+                    icon: Icons.search,
+                    onPressIcon: () {
+                      /**
+                       * Service Ticket filter with name
+                       */
+                      if (PageArgumentController.to.getArgumentData() ==
+                          SERVICE_TICKET) {
+                        if (PageArgumentController.to.getStatus() ==
+                            NEW_ORDER) {
+                          HomeController.to.fetchServiceTicketListsByStatus(
+                              'newOrder',
+                              context,
+                              USERNAME_PARAM +
+                                  HomeController.to.customerNameTextController
+                                      .value.text);
+                        } else if (PageArgumentController.to.getStatus() ==
+                            PENDING) {
+                          HomeController.to.fetchServiceTicketListsByStatus(
+                              'pending',
+                              context,
+                              USERNAME_PARAM +
+                                  HomeController.to.customerNameTextController
+                                      .value.text);
+                        }
+                      }
+                      /**
+                       * DevicePickup filter with name
+                       */
+                     else if (PageArgumentController.to.getArgumentData() ==
+                          DEVICE_PICKUP) {
+                        if (PageArgumentController.to.getStatus() ==
+                            PENDING) {
+                          HomeController.to.fetchDevicePickupListByStatus(
+                              'pending',
+                              context,
+                              CUSTOMER_NAME_PARAM +
+                                  HomeController.to.customerNameTextController
+                                      .value.text);
+                        }
+                      }
+                      /**
+                       * Installation filter with name
+                       */
+                      else if (PageArgumentController.to.getArgumentData() ==
+                          INSTALLATION) {
+                        if (PageArgumentController.to.getStatus() ==
+                            NEW_ORDER) {
+                          HomeController.to.fetchInstallationListsByStatus(
+                              'newOrder',
+                              context,
+                              USERNAME_PARAM +
+                                  HomeController.to.customerNameTextController
+                                      .value.text);
+                        } else if (PageArgumentController.to.getStatus() ==
+                            PENDING) {
+                          HomeController.to.fetchInstallationListsByStatus(
+                              'pending',
+                              context,
+                              USERNAME_PARAM +
+                                  HomeController.to.customerNameTextController
+                                      .value.text);
+                        }
+                      }
+
+                      /**
+                       * Relocation filter with name
+                       */
+
+                      else if (PageArgumentController.to.getArgumentData() ==
+                          RELOCATION_JOBS) {
+                        if (PageArgumentController.to.getStatus() ==
+                            NEW_ORDER) {
+                          HomeController.to.fetchRelocationListsByStatus(
+                              'newOrder',
+                              '1',
+                              context,
+                              USERNAME_PARAM +
+                                  HomeController.to.customerNameTextController
+                                      .value.text);
+                        } else if (PageArgumentController.to.getStatus() ==
+                            PENDING) {
+                          HomeController.to.fetchRelocationListsByStatus(
+                              'pending',
+                              '1',
+                              context,
+                              USERNAME_PARAM +
+                                  HomeController.to.customerNameTextController
+                                      .value.text);
+                        }
+                      }
+                    },
+                  )),
+            ),
+            SizedBox(
+              width: 10.0,
+            ),
+            Flexible(
+              flex: 1,
+              child: Container(
+                height: 38,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(4))),
+                margin: EdgeInsets.only(bottom: 24),
+                child: DropDownButtonComponent(
+                  itemsList: townshipList,
+                  onChangedData: (TownshipDatum value) {
+                    //debugPrint('DropdownValue${value.key}');
+
+                    if (value.name == "Select Township") {
+                      firstTimeFetchDataFromNetwork();
+                    } else {
+                      /**
+                       * Service Ticket filter with townShipName
+                       */
+                      if (PageArgumentController.to.getArgumentData() ==
+                          SERVICE_TICKET) {
+                        if (PageArgumentController.to.getStatus() ==
+                            NEW_ORDER) {
+                          HomeController.to.fetchServiceTicketListsByStatus(
+                              'newOrder',
+                              context,
+                              TOWNSHIP_PARAM + value.id.toString());
+                        } else if (PageArgumentController.to.getStatus() ==
+                            PENDING) {
+                          HomeController.to.fetchServiceTicketListsByStatus(
+                              'pending',
+                              context,
+                              TOWNSHIP_PARAM + value.id.toString());
+                        }
+                      }
+                      /**
+                       * DevicePickup filter with townshipName
+                       */
+                      else if (PageArgumentController.to.getArgumentData() ==
+                          DEVICE_PICKUP) {
+                        if (PageArgumentController.to.getStatus() ==
+                            PENDING) {
+                          HomeController.to.fetchDevicePickupListByStatus(
+                              'pending',
+                              context,
+                              TOWNSHIP_PARAM +
+                                  value.id.toString());
+                        }
+                      }
+                      /**
+                       * Installation filter with townShipName
+                       */
+                      else if (PageArgumentController.to
+                          .getArgumentData() ==
+                          INSTALLATION) {
+                        if (PageArgumentController.to.getStatus() ==
+                            NEW_ORDER) {
+                          HomeController.to.fetchInstallationListsByStatus(
+                              'newOrder',
+                              context,
+                              TOWNSHIP_PARAM + value.id.toString());
+                        } else if (PageArgumentController.to.getStatus() ==
+                            PENDING) {
+                          HomeController.to.fetchInstallationListsByStatus(
+                              'pending',
+                              context,
+                              TOWNSHIP_PARAM + value.id.toString());
+                        }
+                      }
+
+                      /**
+                       * Relocation filter with townShipName
+                       */
+                      else if (PageArgumentController.to
+                          .getArgumentData() ==
+                          RELOCATION_JOBS) {
+                        if (PageArgumentController.to.getStatus() ==
+                            NEW_ORDER) {
+                          HomeController.to.fetchRelocationListsByStatus(
+                              'newOrder',
+                              '1',
+                              context,
+                              TOWNSHIP_PARAM + value.id.toString());
+                        } else if (PageArgumentController.to.getStatus() ==
+                            PENDING) {
+                          HomeController.to.fetchRelocationListsByStatus(
+                              'pending',
+                              '1',
+                              context,
+                              TOWNSHIP_PARAM + value.id.toString());
+                        }
+                      }
+                    }
+                  },
+                  hintText: '--Select Township--',
+                ),
+              ),
+            ),
+          ],
+        )
+        ,
         Flexible(
           child: Obx(() {
             if (HomeController.to.isLoading.value) {
@@ -722,6 +952,40 @@ class _BuildPendingAndNewOrderCustomerListState
                     ))
                   ],
                 ));
+              } else
+                return _buildListView();
+            }
+            /**
+             * DevicePickup Empty List
+             */
+
+            else if (PageArgumentController.to.getArgumentData() ==
+                DEVICE_PICKUP) {
+              if (HomeController.to.devicePickupPendingCustomerList.length ==
+                  0) {
+                return Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            margin: EdgeInsets.only(top: 50.0),
+                            color: Colors.transparent,
+                            child: Image(
+                              image: AssetImage('assets/no_result_found.png'),
+                              height: 200,
+                              width: 200,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                            child: Text(
+                              'Sorry! No data found :(',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, color: Colors.black45),
+                            ))
+                      ],
+                    ));
               } else
                 return _buildListView();
             }

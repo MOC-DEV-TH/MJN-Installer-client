@@ -219,7 +219,7 @@ class RestApi {
       },
     );
     if (response.statusCode == 200) {
-      debugPrint(response.body);
+      //debugPrint(response.body);
       writeData.write(ALL_DROP_DOWN_LISTS, json.encode(response.body));
       return allDropDownListVoFromJson(response.body);
     } else {
@@ -308,10 +308,10 @@ class RestApi {
     );
 
     if (response.statusCode == 200) {
-      debugPrint(response.body);
+      //debugPrint(response.body);
       json.decode(response.body).forEach((key, value){
-        print('key is $key');
-        print('value is $value ');
+        //print('key is $key');
+        //print('value is $value ');
       });
 
       return serviceTicketAdnInstallationCountsFromJson(response.body);
@@ -449,7 +449,7 @@ class RestApi {
       headers: {'content-type': 'application/json', 'token': token},
     );
     if (response.statusCode == 200) {
-      debugPrint(response.body);
+      //debugPrint(response.body);
       // If the server did return a 200 OK response,
       // then parse the JSON.
       return devicePickupVoFromJson(response.body);
@@ -501,6 +501,35 @@ class RestApi {
     } else {
       print(response.statusCode);
       throw Exception('Failed to post service ticket data');
+    }
+  }
+
+
+
+  static Future<DevicePickupVo> fetchDevicePickupListByStatus(
+      String token, String uid, String status, String paramAndStatus) async {
+    debugPrint(
+        "DevicePickupListByStatus${GET_ALL_DEVICE_PICKUP + UID_PARAM + uid + APP_VERSION + app_version + STATUS_PARAM + status + paramAndStatus}");
+    var response = await client.get(
+      Uri.parse(GET_ALL_DEVICE_PICKUP +
+          UID_PARAM +
+          uid +
+          APP_VERSION +
+          app_version +
+          STATUS_PARAM +
+          status+paramAndStatus),
+      headers: {'content-type': 'application/json', 'token': token},
+    );
+    if (response.statusCode == 200) {
+      debugPrint('DevicePickupListByStatusResponse${response.body}');
+      // If the server did return a 200 OK response,
+      // then parse the JSON.
+      return devicePickupVoFromJson(response.body);
+    } else {
+      // If the server did not return a 200 OK response,
+      // then throw an exception.
+      print(response.statusCode);
+      throw Exception('Failed to get pending  lists');
     }
   }
 

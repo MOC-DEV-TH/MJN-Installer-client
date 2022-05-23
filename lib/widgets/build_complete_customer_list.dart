@@ -96,7 +96,35 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
                   ),
                 ],
               )
-            : Container(),
+            : Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text(
+              'Customer Name',
+              style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 12,
+                  color: Colors.black,
+                  decoration: TextDecoration.none),
+            ),
+            Text(
+              'Township',
+              style: TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 12,
+                  color: Colors.black,
+                  decoration: TextDecoration.none),
+            ),
+            // Text(
+            //   'Status',
+            //   style: TextStyle(
+            //       fontWeight: FontWeight.normal,
+            //       fontSize: 12,
+            //       color: Colors.black,
+            //       decoration: TextDecoration.none),
+            // ),
+          ],
+        ),
         SizedBox(
           height: 10.0,
         ),
@@ -319,7 +347,74 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
                   )),
                 ],
               )
-            : Container(),
+            : Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Flexible(
+              flex: 1,
+              child: SearchTextFieldComponent(
+                onTextDataChange: (String value) {
+                  if (value == '') {
+                    debugPrint('Empty text');
+                    firstTimeFetchDataFromNetwork();
+                  }
+                },
+                controller: HomeController.to.customerNameTextController,
+                icon: Icons.search,
+                onPressIcon: () {
+                  /**
+                   * DevicePickup filter with name
+                   */
+
+                  if (PageArgumentController.to.getStatus() ==
+                  PENDING) {
+                  HomeController.to.fetchDevicePickupListByStatus(
+                  'completed',
+                  context,
+                  CUSTOMER_NAME_PARAM +
+                  HomeController.to.customerNameTextController
+                      .value.text);
+                  }
+
+                },
+              ),
+            ),
+
+            SizedBox(width: 10,),
+
+            Flexible(
+              flex: 1,
+              child: Container(
+                height: 38,
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(4))),
+                margin: EdgeInsets.only(bottom: 24),
+                child: DropDownButtonComponent(
+                  itemsList: townshipList,
+                  onChangedData: (TownshipDatum value) {
+                    debugPrint('DropdownValue${value.key}');
+                    if (value.name == "Select Township") {
+                      firstTimeFetchDataFromNetwork();
+                    } else {
+                      /**
+                       * DevicePickup filter with townshipName
+                       */
+                    HomeController.to.fetchDevicePickupListByStatus(
+                    'pending',
+                    context,
+                        TOWNSHIP_PARAM+
+                    HomeController.to.customerNameTextController
+                        .value.text);
+                    }
+                  },
+                  hintText: '--Select Township--',
+                ),
+              ),
+            ),
+          ],
+        ),
+
         Flexible(child: Obx(() {
           if (HomeController.to.isLoading.value) {
             return Center(
@@ -389,6 +484,40 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
                   ))
                 ],
               ));
+            } else
+              return _buildListView();
+          }
+
+          /**
+           * DevicePickup empty list
+           */
+          else if (PageArgumentController.to.getArgumentData() ==
+              DEVICE_PICKUP) {
+            if (HomeController.to.devicePickupPendingCustomerList.length ==
+                0) {
+              return Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.only(top: 50.0),
+                          color: Colors.transparent,
+                          child: Image(
+                            image: AssetImage('assets/no_result_found.png'),
+                            height: 200,
+                            width: 200,
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                          child: Text(
+                            'Sorry! No data found :(',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, color: Colors.black45),
+                          ))
+                    ],
+                  ));
             } else
               return _buildListView();
           }

@@ -81,8 +81,7 @@ class LoginController extends GetxController {
   void fetchAllDropDownListsAndSaveToSharePref() {
     RestApi.fetchAllDropDownLists().then((value) {
 
-        debugPrint(
-            "DDLLists${allDropDownListVoFromJson(json.decode(writeData.read(ALL_DROP_DOWN_LISTS))).details}");
+        //debugPrint("DDLLists${allDropDownListVoFromJson(json.decode(writeData.read(ALL_DROP_DOWN_LISTS))).details}");
         maintenanceDropDownListsData = allDropDownListVoFromJson(
             json.decode(writeData.read(ALL_DROP_DOWN_LISTS)));
         update();

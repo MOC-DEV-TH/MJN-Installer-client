@@ -42,7 +42,7 @@ class CustomerStatusListItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     debugPrint(status);
-
+    debugPrint(customerAddress);
     townshipLists =
         LoginController.to.maintenanceDropDownListsData.details!.townshipData;
 
