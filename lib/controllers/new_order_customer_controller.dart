@@ -30,7 +30,8 @@ class NewOrderCustomerController extends GetxController {
 
   void onTapAcceptNow(String ticketID, String profileID, String customerUID) {
     isLoading(true);
-    PageArgumentController.to.getArgumentData() == INSTALLATION
+    (PageArgumentController.to.getArgumentData() == INSTALLATION ||
+            PageArgumentController.to.getArgumentData() == RELOCATION_JOBS)
         ? installationOrderAccept(profileID, customerUID)
         : serviceTicketOrderAccept(ticketID, profileID);
   }
@@ -50,10 +51,7 @@ class NewOrderCustomerController extends GetxController {
       dateController.text = dtFormat.toString();
       selectTimePicker(
           context, profileID, ticketID, customerUID, selected.toString());
-    }
-    else {
-
-    }
+    } else {}
   }
 
   void selectTimePicker(BuildContext context, String profileID, String ticketID,
@@ -64,20 +62,17 @@ class NewOrderCustomerController extends GetxController {
         initialEntryMode: TimePickerEntryMode.dial,
         confirmText: "CONFIRM",
         cancelText: "NOT NOW",
-        helpText: "BOOKING TIME"
-    );
+        helpText: "BOOKING TIME");
     if (selectedTime != null) {
-      var dateAndTime = dateController.text +
-          ' ' + selectedTime.format(context);
+      var dateAndTime =
+          dateController.text + ' ' + selectedTime.format(context);
 
       debugPrint("DateAndTimeValue::$dateAndTime");
 
-      PageArgumentController.to.getArgumentData() ==
-          INSTALLATION
-          ? installationOrderLater(
-          profileID, customerUID, date)
-          : serviceTicketOrderLater(
-          ticketID, profileID, date);
+      (PageArgumentController.to.getArgumentData() == INSTALLATION ||
+              PageArgumentController.to.getArgumentData() == RELOCATION_JOBS)
+          ? installationOrderLater(profileID, customerUID, date)
+          : serviceTicketOrderLater(ticketID, profileID, date);
     }
   }
 
@@ -86,8 +81,8 @@ class NewOrderCustomerController extends GetxController {
     selectDate(context, profileID, ticketID, customerUID);
   }
 
-  void installationOrderLater(String profileID, String customerUID,
-      String dateTime) {
+  void installationOrderLater(
+      String profileID, String customerUID, String dateTime) {
     debugPrint('Installation later profileID${profileID}');
     Map<String, String> map = {
       'login_uid': readData.read(UID),
@@ -98,19 +93,18 @@ class NewOrderCustomerController extends GetxController {
       'est_start_date': dateTime,
     };
     RestApi.installationOrderAcceptAndLater(map, readData.read(TOKEN))
-        .then((value) =>
-    {
-      if (value.status == 'Success')
-        {
-          Future.delayed(Duration(seconds: 0), () {
-            PageArgumentController.to.updateStatus(PENDING);
-            EventBusUtils.getInstance().fire(PENDING);
-            Get.back();
-          })
-        }
-      else
-        {AppUtils.showErrorSnackBar('Fail', 'Something wrong')}
-    });
+        .then((value) => {
+              if (value.status == 'Success')
+                {
+                  Future.delayed(Duration(seconds: 0), () {
+                    PageArgumentController.to.updateStatus(PENDING);
+                    EventBusUtils.getInstance().fire(PENDING);
+                    Get.back();
+                  })
+                }
+              else
+                {AppUtils.showErrorSnackBar('Fail', 'Something wrong')}
+            });
   }
 
   void installationOrderAccept(String profileID, String customerUID) {
@@ -123,26 +117,25 @@ class NewOrderCustomerController extends GetxController {
       'status': 'accept',
     };
     RestApi.installationOrderAcceptAndLater(map, readData.read(TOKEN))
-        .then((value) =>
-    {
-      if (value.status == 'Success')
-        {
-          firstTimeSendSmSToServer(),
-          isLoading(false),
-          PageArgumentController.to.updateStatus(PENDING),
-          EventBusUtils.getInstance().fire(PENDING),
-          Get.offNamed(MY_LOCATION_PAGE)
-        }
-      else
-        {
-          isLoading(false),
-          AppUtils.showErrorSnackBar('Fail', 'Something wrong')
-        }
-    });
+        .then((value) => {
+              if (value.status == 'Success')
+                {
+                  firstTimeSendSmSToServer(),
+                  isLoading(false),
+                  PageArgumentController.to.updateStatus(PENDING),
+                  EventBusUtils.getInstance().fire(PENDING),
+                  Get.offNamed(MY_LOCATION_PAGE)
+                }
+              else
+                {
+                  isLoading(false),
+                  AppUtils.showErrorSnackBar('Fail', 'Something wrong')
+                }
+            });
   }
 
-  void serviceTicketOrderLater(String ticketID, String profileID,
-      String dateTime) {
+  void serviceTicketOrderLater(
+      String ticketID, String profileID, String dateTime) {
     Map<String, String> map = {
       'uid': readData.read(UID),
       'ticket_id': ticketID,
@@ -153,19 +146,18 @@ class NewOrderCustomerController extends GetxController {
     };
 
     RestApi.serviceTicketOrderAcceptAndLater(map, readData.read(TOKEN))
-        .then((value) =>
-    {
-      if (value.status == 'Success')
-        {
-          Future.delayed(Duration(seconds: 0), () {
-            PageArgumentController.to.updateStatus(PENDING);
-            EventBusUtils.getInstance().fire(PENDING);
-            Get.back();
-          })
-        }
-      else
-        {AppUtils.showErrorSnackBar('Fail', 'Something wrong')}
-    });
+        .then((value) => {
+              if (value.status == 'Success')
+                {
+                  Future.delayed(Duration(seconds: 0), () {
+                    PageArgumentController.to.updateStatus(PENDING);
+                    EventBusUtils.getInstance().fire(PENDING);
+                    Get.back();
+                  })
+                }
+              else
+                {AppUtils.showErrorSnackBar('Fail', 'Something wrong')}
+            });
   }
 
   void serviceTicketOrderAccept(String ticketID, String profileID) {
@@ -178,24 +170,22 @@ class NewOrderCustomerController extends GetxController {
     };
 
     RestApi.serviceTicketOrderAcceptAndLater(map, readData.read(TOKEN))
-        .then((value) =>
-    {
-      if (value.status == 'Success')
-        {
-          firstTimeSendSmSToServer(),
-          isLoading(false),
-          PageArgumentController.to.updateStatus(PENDING),
-          EventBusUtils.getInstance().fire(PENDING),
-          Get.offNamed(MY_LOCATION_PAGE)
-        }
-      else
-        {
-          isLoading(false),
-          AppUtils.showErrorSnackBar('Fail', 'Something Wrong')
-        }
-    });
+        .then((value) => {
+              if (value.status == 'Success')
+                {
+                  firstTimeSendSmSToServer(),
+                  isLoading(false),
+                  PageArgumentController.to.updateStatus(PENDING),
+                  EventBusUtils.getInstance().fire(PENDING),
+                  Get.offNamed(MY_LOCATION_PAGE)
+                }
+              else
+                {
+                  isLoading(false),
+                  AppUtils.showErrorSnackBar('Fail', 'Something Wrong')
+                }
+            });
   }
-
 
   void firstTimeSendSmSToServer() {
     Map<String, String> map = {
@@ -203,14 +193,14 @@ class NewOrderCustomerController extends GetxController {
       'phone': HomeController.to.customerPhNo,
       'profile_id': HomeController.to.profileID,
       'app_version': app_version,
-      'message_type' : PageArgumentController.to.getArgumentData() == INSTALLATION ? 'installation' : 'serviceTicket',
+      'message_type':
+          PageArgumentController.to.getArgumentData() == INSTALLATION
+              ? 'installation'
+              : 'serviceTicket',
     };
-    RestApi.firstTimeSendSMSToServer(map, readData.read(TOKEN)).then((value) =>
-    {
-      if(value.status == 'Success'){
-        debugPrint('Success Send SMS')
-      }
-    });
+    RestApi.firstTimeSendSMSToServer(map, readData.read(TOKEN))
+        .then((value) => {
+              if (value.status == 'Success') {debugPrint('Success Send SMS')}
+            });
   }
-
 }

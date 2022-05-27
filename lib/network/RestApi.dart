@@ -352,7 +352,7 @@ class RestApi {
   static Future<InstallationVo> fetchInstallationListsByStatus(
       String token, String uid, String status, String paramAndStatus,String isRelocation) async {
     debugPrint(
-        "InstallationListByStatus${SERVICE_TICKET_LIST_URL + UID_PARAM + uid + APP_VERSION + app_version + STATUS_PARAM + status + paramAndStatus}");
+        "InstallationListByStatus${INSTALLATION_LIST_URL + UID_PARAM + uid + APP_VERSION + app_version + STATUS_PARAM + status + paramAndStatus}");
     var response = await client.get(
       Uri.parse(INSTALLATION_LIST_URL +
           UID_PARAM +
@@ -362,7 +362,7 @@ class RestApi {
           STATUS_PARAM +
           status +
           paramAndStatus +
-      'is_relocation' + isRelocation),
+          IS_RELOCATION + isRelocation),
       headers: {'content-type': 'application/json', 'token': token},
     );
     if (response.statusCode == 200) {

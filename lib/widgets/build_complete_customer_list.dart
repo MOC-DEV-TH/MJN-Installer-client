@@ -401,11 +401,10 @@ class _BuildCompleteCustomerListState extends State<BuildCompleteCustomerList> {
                        * DevicePickup filter with townshipName
                        */
                     HomeController.to.fetchDevicePickupListByStatus(
-                    'pending',
+                    'completed',
                     context,
                         TOWNSHIP_PARAM+
-                    HomeController.to.customerNameTextController
-                        .value.text);
+                    value.id.toString());
                     }
                   },
                   hintText: '--Select Township--',
