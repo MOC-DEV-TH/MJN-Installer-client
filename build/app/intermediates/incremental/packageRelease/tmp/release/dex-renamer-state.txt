@@ -1,4 +1,4 @@
-#Tue Apr 26 09:51:26 MMT 2022
+#Mon May 30 15:46:56 MMT 2022
 base.0=/Users/admin/MJN_Installer/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
-path.0=classes.dex
 renamed.0=classes.dex
+path.0=classes.dex

@@ -10,9 +10,11 @@ import 'package:mjn_installer_app/components/text_field_with_label_box_decoratio
 import 'package:mjn_installer_app/controllers/home_controller.dart';
 import 'package:mjn_installer_app/controllers/installation_controller.dart';
 import 'package:mjn_installer_app/controllers/login_controller.dart';
+import 'package:mjn_installer_app/controllers/page_argument_controller.dart';
 import 'package:mjn_installer_app/models/allDropDownListVO.dart';
 import 'package:mjn_installer_app/res/colors.dart';
 import 'package:get/get.dart';
+import 'package:mjn_installer_app/utils/app_constants.dart';
 
 class BuildInstallationDropdownList extends StatefulWidget {
   @override
@@ -80,11 +82,11 @@ class _BuildInstallationDropdownListState
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
-                        text: (installationController.installationDetail.value
-                                        .gateway_ip ==
+                        text: (installationController
+                                        .installationDetail.value.gateway_ip ==
                                     null ||
-                                installationController.installationDetail
-                                        .value.gateway_ip ==
+                                installationController
+                                        .installationDetail.value.gateway_ip ==
                                     "")
                             ? "xx xxx xxx xxx xxx"
                             : installationController
@@ -92,11 +94,11 @@ class _BuildInstallationDropdownListState
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
-                        text: (installationController.installationDetail.value
-                                        .customer_ip ==
+                        text: (installationController
+                                        .installationDetail.value.customer_ip ==
                                     "" ||
-                                installationController.installationDetail
-                                        .value.customer_ip ==
+                                installationController
+                                        .installationDetail.value.customer_ip ==
                                     null)
                             ? "xx xxx xxx xxx xxx"
                             : installationController
@@ -107,8 +109,8 @@ class _BuildInstallationDropdownListState
                         text: (installationController.installationDetail.value
                                         .network_address ==
                                     "" ||
-                                installationController.installationDetail
-                                        .value.network_address ==
+                                installationController.installationDetail.value
+                                        .network_address ==
                                     null)
                             ? "xx xxx xxx xxx xxx"
                             : installationController
@@ -116,11 +118,11 @@ class _BuildInstallationDropdownListState
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
-                        text: (installationController.installationDetail.value
-                                        .user_cvlan ==
+                        text: (installationController
+                                        .installationDetail.value.user_cvlan ==
                                     "" ||
-                                installationController.installationDetail
-                                        .value.user_cvlan ==
+                                installationController
+                                        .installationDetail.value.user_cvlan ==
                                     null)
                             ? "xx xxx xxx xxx xxx"
                             : installationController
@@ -128,11 +130,11 @@ class _BuildInstallationDropdownListState
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
-                        text: (installationController.installationDetail.value
-                                        .user_svlan ==
+                        text: (installationController
+                                        .installationDetail.value.user_svlan ==
                                     "" ||
-                                installationController.installationDetail
-                                        .value.user_svlan ==
+                                installationController
+                                        .installationDetail.value.user_svlan ==
                                     null)
                             ? "xx xxx xxx xxx xxx"
                             : installationController
@@ -140,41 +142,61 @@ class _BuildInstallationDropdownListState
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
-                        text: (installationController.installationDetail.value
-                            .latitude ==
-                            "" ||
-                            installationController.installationDetail
-                                .value.latitude ==
-                                null)
+                        text: (installationController
+                                        .installationDetail.value.latitude ==
+                                    "" ||
+                                installationController
+                                        .installationDetail.value.latitude ==
+                                    null)
                             ? "xx xxx xxx xxx xxx"
                             : installationController
-                            .installationDetail.value.latitude!,
+                                .installationDetail.value.latitude!,
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
-                        text: (installationController.installationDetail.value
-                            .longitude ==
-                            "" ||
-                            installationController.installationDetail
-                                .value.longitude ==
-                                null)
+                        text: (installationController
+                                        .installationDetail.value.longitude ==
+                                    "" ||
+                                installationController
+                                        .installationDetail.value.longitude ==
+                                    null)
                             ? "xx xxx xxx xxx xxx"
                             : installationController
-                            .installationDetail.value.longitude!,
+                                .installationDetail.value.longitude!,
                         color: Colors.black,
                         padding: 8.0),
                     LabelTextComponent(
-                        text: (installationController.installationDetail.value
-                            .address ==
-                            "" ||
-                            installationController.installationDetail
-                                .value.address ==
-                                null)
+                        text: (installationController
+                                        .installationDetail.value.address ==
+                                    "" ||
+                                installationController
+                                        .installationDetail.value.address ==
+                                    null)
                             ? "xx xxx xxx xxx xxx"
                             : installationController
-                            .installationDetail.value.address!,
+                                .installationDetail.value.address!,
                         color: Colors.black,
                         padding: 8.0),
+
+                    PageArgumentController.to.getArgumentData() == RELOCATION_JOBS
+                        ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        LabelTextComponent(
+                            text:
+                            installationController.installationDetail.value.new_latitude ??
+                                "xx xxx xxx xxx xxx",
+                            color: Colors.black,
+                            padding: 8.0),
+                        LabelTextComponent(
+                            text:
+                            installationController.installationDetail.value.new_longitude ??
+                                "xx xxx xxx xxx xxx",
+                            color: Colors.black,
+                            padding: 8.0),
+                      ],
+                    )
+                        : Container()
                   ],
                 )
               ],
@@ -234,108 +256,107 @@ class _BuildInstallationDropdownListState
   }
 
   Widget choosePhotoListsWidget(BuildContext context) {
-    return
-    Column(
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: [
-      Text('ONU Image'),
-      SizedBox(
-        height: 10,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GetBuilder<InstallationController>(
-            builder: (controller) => PhotoPickerComponent(
-              imagePath: controller.image_onu_front_side,
-              text: 'Front Side',
-              onPress: () => {controller.onTapONUFrontSide(context)},
-            ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          GetBuilder<InstallationController>(
-            builder: (controller) => PhotoPickerComponent(
-              imagePath: controller.image_onu_back_side,
-              text: 'Back Side',
-              onPress: () => {controller.onTapONUBackSide(context)},
-            ),
-          ),
-        ],
-      ),
-      SizedBox(
-        height: 20,
-      ),
-      Text('ODB Image'),
-      SizedBox(
-        height: 10,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GetBuilder<InstallationController>(
-            builder: (controller) => PhotoPickerComponent(
-              imagePath: controller.image_odb_before,
-              text: 'Before ODB Photo',
-              onPress: () => {controller.onTapODBBefore(context)},
-            ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          GetBuilder<InstallationController>(
-            builder: (controller) => PhotoPickerComponent(
-              imagePath: controller.image_odb_after,
-              text: 'After ODB Photo',
-              onPress: () => {controller.onTapODBAfter(context)},
-            ),
-          ),
-        ],
-      ),
-      SizedBox(
-        height: 20,
-      ),
-      Text('Spliter Image'),
-      SizedBox(
-        height: 10,
-      ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GetBuilder<InstallationController>(
-            builder: (controller) => PhotoPickerComponent(
-              imagePath: controller.image_spliter_before,
-              text: 'Before Spliter Photo',
-              onPress: () => {controller.onTapSpliterBefore(context)},
-            ),
-          ),
-          SizedBox(
-            width: 20,
-          ),
-          GetBuilder<InstallationController>(
-            builder: (controller) => PhotoPickerComponent(
-              imagePath: controller.image_spliter_after,
-              text: 'After Spliter Photo',
-              onPress: () => {controller.onTapSpliterAfter(context)},
-            ),
-          ),
-        ],
-      ),
-      SizedBox(
-        height: 20,
-      ),
-      Text('Service Acceptance Form'),
-      GetBuilder<InstallationController>(
-        builder: (controller) => PhotoPickerComponent(
-          imagePath: controller.imageAcceptForm,
-          text: '',
-          onPress: () => {controller.onTapAcceptForm(context)},
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text('ONU Image'),
+        SizedBox(
+          height: 10,
         ),
-      ),
-    ],
-  );
-    }
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GetBuilder<InstallationController>(
+              builder: (controller) => PhotoPickerComponent(
+                imagePath: controller.image_onu_front_side,
+                text: 'Front Side',
+                onPress: () => {controller.onTapONUFrontSide(context)},
+              ),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            GetBuilder<InstallationController>(
+              builder: (controller) => PhotoPickerComponent(
+                imagePath: controller.image_onu_back_side,
+                text: 'Back Side',
+                onPress: () => {controller.onTapONUBackSide(context)},
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Text('ODB Image'),
+        SizedBox(
+          height: 10,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GetBuilder<InstallationController>(
+              builder: (controller) => PhotoPickerComponent(
+                imagePath: controller.image_odb_before,
+                text: 'Before ODB Photo',
+                onPress: () => {controller.onTapODBBefore(context)},
+              ),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            GetBuilder<InstallationController>(
+              builder: (controller) => PhotoPickerComponent(
+                imagePath: controller.image_odb_after,
+                text: 'After ODB Photo',
+                onPress: () => {controller.onTapODBAfter(context)},
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Text('Spliter Image'),
+        SizedBox(
+          height: 10,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GetBuilder<InstallationController>(
+              builder: (controller) => PhotoPickerComponent(
+                imagePath: controller.image_spliter_before,
+                text: 'Before Spliter Photo',
+                onPress: () => {controller.onTapSpliterBefore(context)},
+              ),
+            ),
+            SizedBox(
+              width: 20,
+            ),
+            GetBuilder<InstallationController>(
+              builder: (controller) => PhotoPickerComponent(
+                imagePath: controller.image_spliter_after,
+                text: 'After Spliter Photo',
+                onPress: () => {controller.onTapSpliterAfter(context)},
+              ),
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 20,
+        ),
+        Text('Service Acceptance Form'),
+        GetBuilder<InstallationController>(
+          builder: (controller) => PhotoPickerComponent(
+            imagePath: controller.imageAcceptForm,
+            text: '',
+            onPress: () => {controller.onTapAcceptForm(context)},
+          ),
+        ),
+      ],
+    );
+  }
 
   final customerLabel = Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -353,13 +374,19 @@ class _BuildInstallationDropdownListState
           text: 'User C.VIan', color: Colors.black, padding: 8.0),
       LabelTextComponent(
           text: 'User S.VIan', color: Colors.black, padding: 8.0),
-      LabelTextComponent(
-          text: 'Lat', color: Colors.black, padding: 8.0),
-      LabelTextComponent(
-          text: 'Long', color: Colors.black, padding: 8.0),
-      LabelTextComponent(
-          text: 'Address', color: Colors.black, padding: 8.0),
-
+      LabelTextComponent(text: 'Lat', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: 'Long', color: Colors.black, padding: 8.0),
+      LabelTextComponent(text: 'Address', color: Colors.black, padding: 8.0),
+      PageArgumentController.to.getArgumentData() == RELOCATION_JOBS
+          ? Column(
+              children: [
+                LabelTextComponent(
+                    text: 'New Lat', color: Colors.black, padding: 8.0),
+                LabelTextComponent(
+                    text: 'New Long', color: Colors.black, padding: 8.0),
+              ],
+            )
+          : Container()
     ],
   );
 
@@ -377,6 +404,15 @@ class _BuildInstallationDropdownListState
       LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
       LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
       LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+      PageArgumentController.to.getArgumentData() == RELOCATION_JOBS
+          ? Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+          LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
+        ],
+      )
+          : Container()
     ],
   );
 
@@ -472,7 +508,7 @@ class _BuildInstallationDropdownListState
 
                       if (value.id == 3 || value.id == 6) {
                         installationController.selectDate(context);
-                        }
+                      }
                     },
                     hintText: '--Select Status--',
                   ),
@@ -482,37 +518,39 @@ class _BuildInstallationDropdownListState
             SizedBox(
               height: 10,
             ),
-            Obx((){
-              if(installationController.isShowNoteTextFormField.value){
-                return
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(children: [
+            Obx(() {
+              if (installationController.isShowNoteTextFormField.value) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
                         Expanded(
                             child: LabelTextComponent(
-                                text: 'Note', color: Colors.black, padding: 8.0)),
+                                text: 'Note',
+                                color: Colors.black,
+                                padding: 8.0)),
                         Flexible(
                           flex: 2,
                           child: GetBuilder<InstallationController>(
                             init: InstallationController(),
-                            builder: (controller) => TextFieldBoxDecorationComponent(
-                              controller: controller.statusCancelAndIncompleteTextController,
+                            builder: (controller) =>
+                                TextFieldBoxDecorationComponent(
+                              controller: controller
+                                  .statusCancelAndIncompleteTextController,
                               errorText: '',
                               hintText: '',
                             ),
                           ),
                         ),
-                      ],),
-
-                      SizedBox(
-                        height: 10,
-                      ),
-
-                    ],
-                  );
-              }
-              else{
+                      ],
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                  ],
+                );
+              } else {
                 return Container();
               }
             }),
@@ -813,7 +851,6 @@ class _BuildInstallationDropdownListState
             SizedBox(
               height: 10,
             ),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -976,42 +1013,42 @@ class _BuildInstallationDropdownListState
               SizedBox(
                 height: 10,
               ),
-
-             Obx((){
-               if(installationController.isShowNoteTextFormField.value){
-                 return
-                   Column(
-                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                     children: [
-                       Row(children: [
-                         Expanded(
-                             child: LabelTextComponent(
-                                 text: 'Note', color: Colors.black, padding: 8.0)),
-                         Flexible(
-                           flex: 2,
-                           child: GetBuilder<InstallationController>(
-                             init: InstallationController(),
-                             builder: (controller) => TextFieldBoxDecorationComponent(
-                               controller: controller.statusCancelAndIncompleteTextController,
-                               errorText: '',
-                               hintText: '',
-                             ),
-                           ),
-                         ),
-                       ],),
-
-                       SizedBox(
-                         height: 10,
-                       ),
-
-                     ],
-                   );
-               }
-               else{
-                 return Container();
-               }
-             }),
-
+              Obx(() {
+                if (installationController.isShowNoteTextFormField.value) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                              child: LabelTextComponent(
+                                  text: 'Note',
+                                  color: Colors.black,
+                                  padding: 8.0)),
+                          Flexible(
+                            flex: 2,
+                            child: GetBuilder<InstallationController>(
+                              init: InstallationController(),
+                              builder: (controller) =>
+                                  TextFieldBoxDecorationComponent(
+                                controller: controller
+                                    .statusCancelAndIncompleteTextController,
+                                errorText: '',
+                                hintText: '',
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                    ],
+                  );
+                } else {
+                  return Container();
+                }
+              }),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -1256,4 +1293,5 @@ class _BuildInstallationDropdownListState
   void onPressComplete() {
     installationController.postInstallationDataOnServer();
   }
+
 }

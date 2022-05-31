@@ -71,6 +71,8 @@ class InstallationDetails {
     this.network_address,
     this.user_cvlan,
     this.user_svlan,
+    this.new_latitude,
+    this.new_longitude
   });
 
   String? firstname;
@@ -90,6 +92,9 @@ class InstallationDetails {
   String? before_spliter_img;
   String? after_spliter_img;
   String? service_acceptance_img;
+
+  String? new_latitude;
+  String? new_longitude;
 
   String? odb_name;
   String? odb_latitude;
@@ -127,6 +132,8 @@ class InstallationDetails {
     network_address: json["network_address"],
     user_cvlan: json["user_cvlan"],
     user_svlan: json["user_svlan"],
+    new_latitude: json["new_latitude"],
+    new_longitude: json["new_longitude"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -155,5 +162,7 @@ class InstallationDetails {
     "network_address": network_address,
     "user_cvlan": user_cvlan,
     "user_svlan": user_svlan,
+    "new_latitude": new_latitude,
+    "new_longitude": new_longitude,
   };
 }
