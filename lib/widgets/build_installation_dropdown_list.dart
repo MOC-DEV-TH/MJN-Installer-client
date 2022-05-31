@@ -46,161 +46,599 @@ class _BuildInstallationDropdownListState
       } else {
         return Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                customerLabel,
-                middleLabel,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    LabelTextComponent(
-                        text: installationController
-                                .installationDetail.value.user_name ??
-                            "xx xxx xxx xxx xxx",
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: installationController
-                                .installationDetail.value.odb_name ??
-                            "xx xxx xxx xxx xxx",
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: installationController
-                                        .installationDetail.value.latitude ==
-                                    null &&
-                                installationController
-                                        .installationDetail.value.longitude ==
-                                    null
-                            ? "xx xxx xxx xxx xxx"
-                            : installationController
-                                    .installationDetail.value.latitude! +
-                                "," +
-                                installationController
-                                    .installationDetail.value.longitude!,
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: (installationController
-                                        .installationDetail.value.gateway_ip ==
-                                    null ||
-                                installationController
-                                        .installationDetail.value.gateway_ip ==
-                                    "")
-                            ? "xx xxx xxx xxx xxx"
-                            : installationController
-                                .installationDetail.value.gateway_ip!,
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: (installationController
-                                        .installationDetail.value.customer_ip ==
-                                    "" ||
-                                installationController
-                                        .installationDetail.value.customer_ip ==
-                                    null)
-                            ? "xx xxx xxx xxx xxx"
-                            : installationController
-                                .installationDetail.value.customer_ip!,
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: (installationController.installationDetail.value
-                                        .network_address ==
-                                    "" ||
-                                installationController.installationDetail.value
-                                        .network_address ==
-                                    null)
-                            ? "xx xxx xxx xxx xxx"
-                            : installationController
-                                .installationDetail.value.network_address!,
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: (installationController
-                                        .installationDetail.value.user_cvlan ==
-                                    "" ||
-                                installationController
-                                        .installationDetail.value.user_cvlan ==
-                                    null)
-                            ? "xx xxx xxx xxx xxx"
-                            : installationController
-                                .installationDetail.value.user_cvlan!,
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: (installationController
-                                        .installationDetail.value.user_svlan ==
-                                    "" ||
-                                installationController
-                                        .installationDetail.value.user_svlan ==
-                                    null)
-                            ? "xx xxx xxx xxx xxx"
-                            : installationController
-                                .installationDetail.value.user_svlan!,
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: (installationController
-                                        .installationDetail.value.latitude ==
-                                    "" ||
-                                installationController
-                                        .installationDetail.value.latitude ==
-                                    null)
-                            ? "xx xxx xxx xxx xxx"
-                            : installationController
-                                .installationDetail.value.latitude!,
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: (installationController
-                                        .installationDetail.value.longitude ==
-                                    "" ||
-                                installationController
-                                        .installationDetail.value.longitude ==
-                                    null)
-                            ? "xx xxx xxx xxx xxx"
-                            : installationController
-                                .installationDetail.value.longitude!,
-                        color: Colors.black,
-                        padding: 8.0),
-                    LabelTextComponent(
-                        text: (installationController
-                                        .installationDetail.value.address ==
-                                    "" ||
-                                installationController
-                                        .installationDetail.value.address ==
-                                    null)
-                            ? "xx xxx xxx xxx xxx"
-                            : installationController
-                                .installationDetail.value.address!,
-                        color: Colors.black,
-                        padding: 8.0),
 
-                    PageArgumentController.to.getArgumentData() == RELOCATION_JOBS
-                        ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        LabelTextComponent(
-                            text:
-                            installationController.installationDetail.value.new_latitude ??
-                                "xx xxx xxx xxx xxx",
-                            color: Colors.black,
-                            padding: 8.0),
-                        LabelTextComponent(
-                            text:
-                            installationController.installationDetail.value.new_longitude ??
-                                "xx xxx xxx xxx xxx",
-                            color: Colors.black,
-                            padding: 8.0),
-                      ],
-                    )
-                        : Container()
-                  ],
-                )
+            Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'Customer Name',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child: LabelTextComponent(
+                      text: installationController
+                          .installationDetail.value.user_name ??
+                          "xx xxx xxx xxx xxx",
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
               ],
             ),
+            Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'OBD Name',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child: LabelTextComponent(
+                      text: installationController
+                          .installationDetail.value.odb_name ??
+                          "xx xxx xxx xxx xxx",
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'ODB Lat/Long',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child: LabelTextComponent(
+                      text: installationController
+                          .installationDetail.value.latitude ==
+                          null &&
+                          installationController
+                              .installationDetail.value.longitude ==
+                              null
+                          ? "xx xxx xxx xxx xxx"
+                          : installationController
+                          .installationDetail.value.latitude! +
+                          "," +
+                          installationController
+                              .installationDetail.value.longitude!,
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'Gateway IP',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child: LabelTextComponent(
+                      text: (installationController
+                          .installationDetail.value.gateway_ip ==
+                          null ||
+                          installationController
+                              .installationDetail.value.gateway_ip ==
+                              "")
+                          ? "xx xxx xxx xxx xxx"
+                          : installationController
+                          .installationDetail.value.gateway_ip!,
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'Customer IP',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child: LabelTextComponent(
+                      text: (installationController
+                          .installationDetail.value.customer_ip ==
+                          null ||
+                          installationController
+                              .installationDetail.value.customer_ip ==
+                              "")
+                          ? "xx xxx xxx xxx xxx"
+                          : installationController
+                          .installationDetail.value.customer_ip!,
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'Network Address',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child: LabelTextComponent(
+                      text: (installationController.installationDetail.value
+                          .network_address ==
+                          "" ||
+                          installationController.installationDetail.value
+                              .network_address ==
+                              null)
+                          ? "xx xxx xxx xxx xxx"
+                          : installationController
+                          .installationDetail.value.network_address!,
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'User C.VIan',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child: LabelTextComponent(
+                      text: (installationController
+                          .installationDetail.value.user_cvlan ==
+                          "" ||
+                          installationController
+                              .installationDetail.value.user_cvlan ==
+                              null)
+                          ? "xx xxx xxx xxx xxx"
+                          : installationController
+                          .installationDetail.value.user_cvlan!,
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'User S.VIan',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child: LabelTextComponent(
+                      text: (installationController
+                          .installationDetail.value.user_svlan ==
+                          "" ||
+                          installationController
+                              .installationDetail.value.user_svlan ==
+                              null)
+                          ? "xx xxx xxx xxx xxx"
+                          : installationController
+                          .installationDetail.value.user_svlan!,
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'Lat',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child:LabelTextComponent(
+                      text: (installationController
+                          .installationDetail.value.latitude ==
+                          "" ||
+                          installationController
+                              .installationDetail.value.latitude ==
+                              null)
+                          ? "xx xxx xxx xxx xxx"
+                          : installationController
+                          .installationDetail.value.latitude!,
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'Long',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child:LabelTextComponent(
+                      text: (installationController
+                          .installationDetail.value.longitude ==
+                          "" ||
+                          installationController
+                              .installationDetail.value.longitude ==
+                              null)
+                          ? "xx xxx xxx xxx xxx"
+                          : installationController
+                          .installationDetail.value.longitude!,
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'Address',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child:LabelTextComponent(
+                      text: (installationController
+                          .installationDetail.value.address ==
+                          "" ||
+                          installationController
+                              .installationDetail.value.address ==
+                              null)
+                          ? "xx xxx xxx xxx xxx"
+                          : installationController
+                          .installationDetail.value.address!,
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
+              ],
+            ),
+
+            PageArgumentController.to.getArgumentData() == RELOCATION_JOBS ? Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'New Lat',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child:LabelTextComponent(
+                      text:
+                      installationController.installationDetail.value.new_latitude ??
+                          "xx xxx xxx xxx xxx",
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
+              ],
+            ) : Container(),
+            PageArgumentController.to.getArgumentData() == RELOCATION_JOBS ? Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'New Long',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child: LabelTextComponent(
+                      text:
+                      installationController.installationDetail.value.new_longitude ??
+                          "xx xxx xxx xxx xxx",
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
+              ],
+            ) : Container(),
+            PageArgumentController.to.getArgumentData() == RELOCATION_JOBS ? Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'New Address',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child: LabelTextComponent(
+                      text:
+                      installationController.installationDetail.value.new_address ??
+                          "xx xxx xxx xxx xxx",
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
+              ],
+            ) : Container(),
+
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //   children: [
+            //     customerLabel,
+            //     middleLabel,
+            //     Column(
+            //       crossAxisAlignment: CrossAxisAlignment.start,
+            //       children: [
+            //         LabelTextComponent(
+            //             text: installationController
+            //                     .installationDetail.value.user_name ??
+            //                 "xx xxx xxx xxx xxx",
+            //             color: Colors.black,
+            //             padding: 8.0),
+            //         LabelTextComponent(
+            //             text: installationController
+            //                     .installationDetail.value.odb_name ??
+            //                 "xx xxx xxx xxx xxx",
+            //             color: Colors.black,
+            //             padding: 8.0),
+            //         LabelTextComponent(
+            //             text: installationController
+            //                             .installationDetail.value.latitude ==
+            //                         null &&
+            //                     installationController
+            //                             .installationDetail.value.longitude ==
+            //                         null
+            //                 ? "xx xxx xxx xxx xxx"
+            //                 : installationController
+            //                         .installationDetail.value.latitude! +
+            //                     "," +
+            //                     installationController
+            //                         .installationDetail.value.longitude!,
+            //             color: Colors.black,
+            //             padding: 8.0),
+            //         LabelTextComponent(
+            //             text: (installationController
+            //                             .installationDetail.value.gateway_ip ==
+            //                         null ||
+            //                     installationController
+            //                             .installationDetail.value.gateway_ip ==
+            //                         "")
+            //                 ? "xx xxx xxx xxx xxx"
+            //                 : installationController
+            //                     .installationDetail.value.gateway_ip!,
+            //             color: Colors.black,
+            //             padding: 8.0),
+            //         LabelTextComponent(
+            //             text: (installationController
+            //                             .installationDetail.value.customer_ip ==
+            //                         "" ||
+            //                     installationController
+            //                             .installationDetail.value.customer_ip ==
+            //                         null)
+            //                 ? "xx xxx xxx xxx xxx"
+            //                 : installationController
+            //                     .installationDetail.value.customer_ip!,
+            //             color: Colors.black,
+            //             padding: 8.0),
+            //         LabelTextComponent(
+            //             text: (installationController.installationDetail.value
+            //                             .network_address ==
+            //                         "" ||
+            //                     installationController.installationDetail.value
+            //                             .network_address ==
+            //                         null)
+            //                 ? "xx xxx xxx xxx xxx"
+            //                 : installationController
+            //                     .installationDetail.value.network_address!,
+            //             color: Colors.black,
+            //             padding: 8.0),
+            //         LabelTextComponent(
+            //             text: (installationController
+            //                             .installationDetail.value.user_cvlan ==
+            //                         "" ||
+            //                     installationController
+            //                             .installationDetail.value.user_cvlan ==
+            //                         null)
+            //                 ? "xx xxx xxx xxx xxx"
+            //                 : installationController
+            //                     .installationDetail.value.user_cvlan!,
+            //             color: Colors.black,
+            //             padding: 8.0),
+            //         LabelTextComponent(
+            //             text: (installationController
+            //                             .installationDetail.value.user_svlan ==
+            //                         "" ||
+            //                     installationController
+            //                             .installationDetail.value.user_svlan ==
+            //                         null)
+            //                 ? "xx xxx xxx xxx xxx"
+            //                 : installationController
+            //                     .installationDetail.value.user_svlan!,
+            //             color: Colors.black,
+            //             padding: 8.0),
+            //         LabelTextComponent(
+            //             text: (installationController
+            //                             .installationDetail.value.latitude ==
+            //                         "" ||
+            //                     installationController
+            //                             .installationDetail.value.latitude ==
+            //                         null)
+            //                 ? "xx xxx xxx xxx xxx"
+            //                 : installationController
+            //                     .installationDetail.value.latitude!,
+            //             color: Colors.black,
+            //             padding: 8.0),
+            //         LabelTextComponent(
+            //             text: (installationController
+            //                             .installationDetail.value.longitude ==
+            //                         "" ||
+            //                     installationController
+            //                             .installationDetail.value.longitude ==
+            //                         null)
+            //                 ? "xx xxx xxx xxx xxx"
+            //                 : installationController
+            //                     .installationDetail.value.longitude!,
+            //             color: Colors.black,
+            //             padding: 8.0),
+            //         LabelTextComponent(
+            //             text: (installationController
+            //                             .installationDetail.value.address ==
+            //                         "" ||
+            //                     installationController
+            //                             .installationDetail.value.address ==
+            //                         null)
+            //                 ? "xx xxx xxx xxx xxx"
+            //                 : installationController
+            //                     .installationDetail.value.address!,
+            //             color: Colors.black,
+            //             padding: 8.0),
+            //
+            //         PageArgumentController.to.getArgumentData() == RELOCATION_JOBS
+            //             ? Column(
+            //           crossAxisAlignment: CrossAxisAlignment.start,
+            //           children: [
+            //             LabelTextComponent(
+            //                 text:
+            //                 installationController.installationDetail.value.new_latitude ??
+            //                     "xx xxx xxx xxx xxx",
+            //                 color: Colors.black,
+            //                 padding: 8.0),
+            //             LabelTextComponent(
+            //                 text:
+            //                 installationController.installationDetail.value.new_longitude ??
+            //                     "xx xxx xxx xxx xxx",
+            //                 color: Colors.black,
+            //                 padding: 8.0),
+            //           ],
+            //         )
+            //             : Container()
+            //       ],
+            //     )
+            //   ],
+            // ),
             Container(
               width: Get.width,
               margin: EdgeInsets.only(left: 24.0, right: 24.0),
@@ -358,63 +796,8 @@ class _BuildInstallationDropdownListState
     );
   }
 
-  final customerLabel = Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      LabelTextComponent(text: 'User ID', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: 'ODB Name', color: Colors.black, padding: 8.0),
-      LabelTextComponent(
-          text: 'ODB Lat/Log', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: 'Gateway IP', color: Colors.black, padding: 8.0),
-      LabelTextComponent(
-          text: 'Customer IP', color: Colors.black, padding: 8.0),
-      LabelTextComponent(
-          text: 'Network Address', color: Colors.black, padding: 8.0),
-      LabelTextComponent(
-          text: 'User C.VIan', color: Colors.black, padding: 8.0),
-      LabelTextComponent(
-          text: 'User S.VIan', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: 'Lat', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: 'Long', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: 'Address', color: Colors.black, padding: 8.0),
-      PageArgumentController.to.getArgumentData() == RELOCATION_JOBS
-          ? Column(
-              children: [
-                LabelTextComponent(
-                    text: 'New Lat', color: Colors.black, padding: 8.0),
-                LabelTextComponent(
-                    text: 'New Long', color: Colors.black, padding: 8.0),
-              ],
-            )
-          : Container()
-    ],
-  );
 
-  final middleLabel = Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      PageArgumentController.to.getArgumentData() == RELOCATION_JOBS
-          ? Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-          LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-        ],
-      )
-          : Container()
-    ],
-  );
+
 
   _buildB2BUsage() {
     return Row(

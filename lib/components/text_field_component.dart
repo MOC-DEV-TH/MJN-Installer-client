@@ -9,6 +9,7 @@ class TextFieldComponent extends StatelessWidget {
     this.icon,
     this.isVisible = false,
    required this.controller,
+    required this.type,
     this.onPress,
   }) : super(key: key);
   final String hintText;
@@ -16,6 +17,7 @@ class TextFieldComponent extends StatelessWidget {
   final String errorText;
   final IconData? icon;
   final bool isVisible;
+  final String type;
   final Function()? onPress;
   final TextInputType textInputType;
   final TextEditingController controller;
@@ -24,14 +26,13 @@ class TextFieldComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      height: 50,
       // margin: EdgeInsets.only(bottom: size.height * 0.1-55, ),
       child: TextFormField(
-        maxLines: maxLines,
+        keyboardType: TextInputType.multiline,
+        maxLines: type  == 'Name' ? null : 1,
         textInputAction: TextInputAction.next,
-        keyboardType: textInputType,
         controller: controller,
-        obscureText: isVisible,
+        obscureText:type  == 'Name' ?  false : isVisible,
         decoration: InputDecoration(
           suffixIcon:icon!= null ? IconButton(icon: Icon(icon,size: 20,), onPressed:onPress,) : null,
           labelText:  hintText,

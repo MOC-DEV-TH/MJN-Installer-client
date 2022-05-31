@@ -72,7 +72,8 @@ class InstallationDetails {
     this.user_cvlan,
     this.user_svlan,
     this.new_latitude,
-    this.new_longitude
+    this.new_longitude,
+    this.new_address
   });
 
   String? firstname;
@@ -95,6 +96,7 @@ class InstallationDetails {
 
   String? new_latitude;
   String? new_longitude;
+  String? new_address;
 
   String? odb_name;
   String? odb_latitude;
@@ -134,6 +136,7 @@ class InstallationDetails {
     user_svlan: json["user_svlan"],
     new_latitude: json["new_latitude"],
     new_longitude: json["new_longitude"],
+    new_address: json["new_address"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -164,5 +167,6 @@ class InstallationDetails {
     "user_svlan": user_svlan,
     "new_latitude": new_latitude,
     "new_longitude": new_longitude,
+    "new_address": new_address,
   };
 }

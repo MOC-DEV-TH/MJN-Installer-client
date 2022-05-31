@@ -73,6 +73,7 @@ class NewLoginPage extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.only(bottom: 15.0),
                             child: TextFieldComponent(
+                              type : 'Name',
                               controller: controller.userIdController,
                               errorText: '',
                               hintText: '',
@@ -100,6 +101,7 @@ class NewLoginPage extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.only(bottom: 15.0),
                           child: TextFieldComponent(
+                            type: 'Password',
                             controller: controller.passwordController,
                             errorText: '',
                             hintText: '',
