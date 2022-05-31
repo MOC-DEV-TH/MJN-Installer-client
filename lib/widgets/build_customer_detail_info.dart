@@ -63,215 +63,772 @@ class _BuildCustomerDetailInfoState extends State<BuildCustomerDetailInfo> {
                                   ||
             (PageArgumentController.to.getArgumentData() == RELOCATION_JOBS))
             ? Flexible(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  customerLabel,
-                  middleLabel,
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        LabelTextComponent(
-                            text: customerDetailController
-                                .installationDetail
-                                .value
-                                .user_name ==
-                                null
-                                ? "xx xxx xxx xxx xxx"
-                                : customerDetailController
-                                .installationDetail.value.user_name!,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 15,right: 15),
+            child: Column(
+              children: [
+
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'User ID',
                             color: Colors.black,
-                            padding: 8.0),
-                        LabelTextComponent(
-                            text: customerDetailController
-                                .installationDetail
-                                .value
-                                .firstname ==
-                                null
-                                ? "xx xxx xxx xxx xxx"
-                                : customerDetailController
-                                .installationDetail.value.firstname!,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
                             color: Colors.black,
-                            padding: 8.0),
-                        LabelTextComponent(
-                            text: customerDetailController
-                                .installationDetail.value.phone1 ??
-                                "xx xxx xxx xxx xxx",
-                            color: Colors.black,
-                            padding: 8.0),
-                        LabelTextComponent(
-                            text: customerDetailController
-                                .installationDetail.value.address ??
-                                "xx xxx xxx xxx xxx",
-                            color: Colors.black,
-                            padding: 8.0),
-                        LabelTextComponent(
-                            text: customerDetailController
-                                .installationDetail.value.latitude ??
-                                "xx xxx xxx xxx xxx",
-                            color: Colors.black,
-                            padding: 8.0),
-                        LabelTextComponent(
-                            text: customerDetailController
-                                .installationDetail.value.longitude ??
-                                "xx xxx xxx xxx xxx",
-                            color: Colors.black,
-                            padding: 8.0),
-                        LabelTextComponent(
-                            text: customerDetailController
-                                .installationDetail.value.type ??
-                                "xx xxx xxx xxx xxx",
-                            color: Colors.black,
-                            padding: 8.0),
-                        LabelTextComponent(
-                            text: 'xx xxx xxx xxx xxx',
-                            color: Colors.black,
-                            padding: 8.0),
-                        LabelTextComponent(
-                            text: customerDetailController
-                                .installationDetail
-                                .value
-                                .subconAssignedDate ??
-                                "xx xxx xxx xxx xxx",
-                            color: Colors.black,
-                            padding: 8.0),
-                      ],
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child: LabelTextComponent(
+                          text: customerDetailController
+                              .installationDetail
+                              .value
+                              .user_name ==
+                              null
+                              ? "xx xxx xxx xxx xxx"
+                              : customerDetailController
+                              .installationDetail.value.user_name!,
+                          color: Colors.black,
+                          padding: 8.0),
                     ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 60,
-              ),
-              widget.status == 'complete'
-                  ? Container()
-                  : ButtonComponent(
-                text: PageArgumentController.to.getCustomerStatus() ==
-                  ORDER_ACCEPTED ? 'Dispatch Now'
-                  :'Installation Started',
-                padding: 10,
-                containerWidth
-                    : 140.0,
-                color: Color(int.parse(MJNColors.buttonColor)),
-                onPress: () => onPressInstallationStart(),
-              ),
-            ],
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'Customer Name',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child:  LabelTextComponent(
+                          text: customerDetailController
+                              .installationDetail
+                              .value
+                              .firstname ==
+                              null
+                              ? "xx xxx xxx xxx xxx"
+                              : customerDetailController
+                              .installationDetail.value.firstname!,
+                          color: Colors.black,
+                          padding: 8.0),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'Customer Phone',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child:  LabelTextComponent(
+                          text: customerDetailController
+                              .installationDetail.value.phone1 ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'Address',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child:   LabelTextComponent(
+                          text: customerDetailController
+                              .installationDetail.value.address ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'Lat',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child:    LabelTextComponent(
+                          text: customerDetailController
+                              .installationDetail.value.latitude ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'Long',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child:   LabelTextComponent(
+                          text: customerDetailController
+                              .installationDetail.value.longitude ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'Type',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child:   LabelTextComponent(
+                          text: customerDetailController
+                              .installationDetail.value.type ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'Topic',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child:   LabelTextComponent(
+                          text: 'xx xxx xxx xxx xxx',
+                          color: Colors.black,
+                          padding: 8.0),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'Assigned Date',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child:  LabelTextComponent(
+                          text: customerDetailController
+                              .installationDetail
+                              .value
+                              .subconAssignedDate ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                    ),
+                  ],
+                ),
+
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //   children: [
+                //     customerLabel,
+                //     middleLabel,
+                //     Flexible(
+                //       child: Column(
+                //         crossAxisAlignment: CrossAxisAlignment.start,
+                //         children: [
+                //           LabelTextComponent(
+                //               text: customerDetailController
+                //                   .installationDetail
+                //                   .value
+                //                   .user_name ==
+                //                   null
+                //                   ? "xx xxx xxx xxx xxx"
+                //                   : customerDetailController
+                //                   .installationDetail.value.user_name!,
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //           LabelTextComponent(
+                //               text: customerDetailController
+                //                   .installationDetail
+                //                   .value
+                //                   .firstname ==
+                //                   null
+                //                   ? "xx xxx xxx xxx xxx"
+                //                   : customerDetailController
+                //                   .installationDetail.value.firstname!,
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //           LabelTextComponent(
+                //               text: customerDetailController
+                //                   .installationDetail.value.phone1 ??
+                //                   "xx xxx xxx xxx xxx",
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //           LabelTextComponent(
+                //               text: customerDetailController
+                //                   .installationDetail.value.address ??
+                //                   "xx xxx xxx xxx xxx",
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //           LabelTextComponent(
+                //               text: customerDetailController
+                //                   .installationDetail.value.latitude ??
+                //                   "xx xxx xxx xxx xxx",
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //           LabelTextComponent(
+                //               text: customerDetailController
+                //                   .installationDetail.value.longitude ??
+                //                   "xx xxx xxx xxx xxx",
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //           LabelTextComponent(
+                //               text: customerDetailController
+                //                   .installationDetail.value.type ??
+                //                   "xx xxx xxx xxx xxx",
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //           LabelTextComponent(
+                //               text: 'xx xxx xxx xxx xxx',
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //           LabelTextComponent(
+                //               text: customerDetailController
+                //                   .installationDetail
+                //                   .value
+                //                   .subconAssignedDate ??
+                //                   "xx xxx xxx xxx xxx",
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //         ],
+                //       ),
+                //     )
+                //   ],
+                // ),
+                SizedBox(
+                  height: 60,
+                ),
+                widget.status == 'complete'
+                    ? Container()
+                    : ButtonComponent(
+                  text: PageArgumentController.to.getCustomerStatus() ==
+                    ORDER_ACCEPTED ? 'Dispatch Now'
+                    :'Installation Started',
+                  padding: 10,
+                  containerWidth
+                      : 140.0,
+                  color: Color(int.parse(MJNColors.buttonColor)),
+                  onPress: () => onPressInstallationStart(),
+                ),
+              ],
+            ),
           ),
         )
             : Flexible(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  customerLabel,
-                  middleLabel,
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        LabelTextComponent(
-                            text: (customerDetailController
-                                .serviceTicketDetail
-                                .value
-                                .userName ==
-                                null ||
-                                customerDetailController
-                                    .serviceTicketDetail
-                                    .value
-                                    .userName ==
-                                    "")
-                                ? "xx xxx xxx xxx xxx"
-                                : customerDetailController
-                                .serviceTicketDetail.value.userName!,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 15,right: 15),
+            child: Column(
+              children: [
+
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'User ID',
                             color: Colors.black,
-                            padding: 8.0),
-                        LabelTextComponent(
-                            text: customerDetailController
-                                .serviceTicketDetail
-                                .value
-                                .firstname ==
-                                null
-                                ? "xx xxx xxx xxx xxx"
-                                : customerDetailController
-                                .serviceTicketDetail.value.firstname!,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
                             color: Colors.black,
-                            padding: 8.0),
-                        LabelTextComponent(
-                            text: customerDetailController
-                                .serviceTicketDetail.value.phone1 ??
-                                "xx xxx xxx xxx xxx",
-                            color: Colors.black,
-                            padding: 8.0),
-                        LabelTextComponent(
-                            text: customerDetailController
-                                .serviceTicketDetail.value.address ??
-                                "xx xxx xxx xxx xxx",
-                            color: Colors.black,
-                            padding: 8.0),
-                        LabelTextComponent(
-                            text: customerDetailController
-                                .serviceTicketDetail.value.latitude ??
-                                "xx xxx xxx xxx xxx",
-                            color: Colors.black,
-                            padding: 8.0),
-                        LabelTextComponent(
-                            text: customerDetailController
-                                .serviceTicketDetail
-                                .value
-                                .longitude ??
-                                "xx xxx xxx xxx xxx",
-                            color: Colors.black,
-                            padding: 8.0),
-                        LabelTextComponent(
-                            text: customerDetailController
-                                .serviceTicketDetail.value.type ??
-                                "xx xxx xxx xxx xxx",
-                            color: Colors.black,
-                            padding: 8.0),
-                        LabelTextComponent(
-                            text: 'xx xxx xxx xxx xxx',
-                            color: Colors.black,
-                            padding: 8.0),
-                        LabelTextComponent(
-                            text: customerDetailController
-                                .serviceTicketDetail
-                                .value
-                                .subconAssignedDate ??
-                                "xx xxx xxx xxx xxx",
-                            color: Colors.black,
-                            padding: 8.0),
-                        LabelTextComponent(
-                            text: customerDetailController
-                                .serviceTicketDetail
-                                .value
-                                .message ??
-                                "xx xxx xxx xxx xxx",
-                            color: Colors.black,
-                            padding: 8.0),
-                      ],
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child: LabelTextComponent(
+                          text: (customerDetailController
+                              .serviceTicketDetail
+                              .value
+                              .userName ==
+                              null ||
+                              customerDetailController
+                                  .serviceTicketDetail
+                                  .value
+                                  .userName ==
+                                  "")
+                              ? "xx xxx xxx xxx xxx"
+                              : customerDetailController
+                              .serviceTicketDetail.value.userName!,
+                          color: Colors.black,
+                          padding: 8.0),
                     ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 60,
-              ),
-              widget.status == 'complete'
-                  ? Container()
-                  : ButtonComponent(
-                text: PageArgumentController.to.getCustomerStatus() ==
-                    ORDER_ACCEPTED ? 'Dispatch Now'
-                    : 'Action Started',
-                padding: 10,
-                containerWidth: 120.0,
-                color: Color(int.parse(MJNColors.buttonColor)),
-                onPress: () => onPressActionStart(),
-              ),
-            ],
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'Customer Name',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child: LabelTextComponent(
+                          text: customerDetailController
+                              .serviceTicketDetail
+                              .value
+                              .firstname ==
+                              null
+                              ? "xx xxx xxx xxx xxx"
+                              : customerDetailController
+                              .serviceTicketDetail.value.firstname!,
+                          color: Colors.black,
+                          padding: 8.0),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'Customer Phone',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child: LabelTextComponent(
+                          text: customerDetailController
+                              .serviceTicketDetail.value.phone1 ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'Address',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child:  LabelTextComponent(
+                          text: customerDetailController
+                              .serviceTicketDetail.value.address ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'Lat',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child:  LabelTextComponent(
+                          text: customerDetailController
+                              .serviceTicketDetail.value.latitude ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'Long',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child: LabelTextComponent(
+                          text: customerDetailController
+                              .serviceTicketDetail
+                              .value
+                              .longitude ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'Type',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child:LabelTextComponent(
+                          text: customerDetailController
+                              .serviceTicketDetail.value.type ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'Topic',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child:  LabelTextComponent(
+                          text: customerDetailController
+                              .serviceTicketDetail
+                              .value
+                              .topic ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'Assigned Date',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child:  LabelTextComponent(
+                          text: customerDetailController
+                              .serviceTicketDetail
+                              .value
+                              .subconAssignedDate ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'Note',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '- - -',
+                            color: Colors.black,
+                            padding: 8.0)),
+                    Expanded(
+                      flex: 1,
+                      child:  LabelTextComponent(
+                          text: customerDetailController
+                              .serviceTicketDetail
+                              .value
+                              .message ??
+                              "xx xxx xxx xxx xxx",
+                          color: Colors.black,
+                          padding: 8.0),
+                    ),
+                  ],
+                ),
+
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //   children: [
+                //     customerLabel,
+                //     middleLabel,
+                //     Flexible(
+                //       child: Column(
+                //         crossAxisAlignment: CrossAxisAlignment.start,
+                //         children: [
+                //           LabelTextComponent(
+                //               text: (customerDetailController
+                //                   .serviceTicketDetail
+                //                   .value
+                //                   .userName ==
+                //                   null ||
+                //                   customerDetailController
+                //                       .serviceTicketDetail
+                //                       .value
+                //                       .userName ==
+                //                       "")
+                //                   ? "xx xxx xxx xxx xxx"
+                //                   : customerDetailController
+                //                   .serviceTicketDetail.value.userName!,
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //           LabelTextComponent(
+                //               text: customerDetailController
+                //                   .serviceTicketDetail
+                //                   .value
+                //                   .firstname ==
+                //                   null
+                //                   ? "xx xxx xxx xxx xxx"
+                //                   : customerDetailController
+                //                   .serviceTicketDetail.value.firstname!,
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //           LabelTextComponent(
+                //               text: customerDetailController
+                //                   .serviceTicketDetail.value.phone1 ??
+                //                   "xx xxx xxx xxx xxx",
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //           LabelTextComponent(
+                //               text: customerDetailController
+                //                   .serviceTicketDetail.value.address ??
+                //                   "xx xxx xxx xxx xxx",
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //           LabelTextComponent(
+                //               text: customerDetailController
+                //                   .serviceTicketDetail.value.latitude ??
+                //                   "xx xxx xxx xxx xxx",
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //           LabelTextComponent(
+                //               text: customerDetailController
+                //                   .serviceTicketDetail
+                //                   .value
+                //                   .longitude ??
+                //                   "xx xxx xxx xxx xxx",
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //           LabelTextComponent(
+                //               text: customerDetailController
+                //                   .serviceTicketDetail.value.type ??
+                //                   "xx xxx xxx xxx xxx",
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //           LabelTextComponent(
+                //               text: 'xx xxx xxx xxx xxx',
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //           LabelTextComponent(
+                //               text: customerDetailController
+                //                   .serviceTicketDetail
+                //                   .value
+                //                   .subconAssignedDate ??
+                //                   "xx xxx xxx xxx xxx",
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //           LabelTextComponent(
+                //               text: customerDetailController
+                //                   .serviceTicketDetail
+                //                   .value
+                //                   .message ??
+                //                   "xx xxx xxx xxx xxx",
+                //               color: Colors.black,
+                //               padding: 8.0),
+                //         ],
+                //       ),
+                //     )
+                //   ],
+                // ),
+                SizedBox(
+                  height: 60,
+                ),
+                widget.status == 'complete'
+                    ? Container()
+                    : ButtonComponent(
+                  text: PageArgumentController.to.getCustomerStatus() ==
+                      ORDER_ACCEPTED ? 'Dispatch Now'
+                      : 'Action Started',
+                  padding: 10,
+                  containerWidth: 120.0,
+                  color: Color(int.parse(MJNColors.buttonColor)),
+                  onPress: () => onPressActionStart(),
+                ),
+              ],
+            ),
           ),
         );
     });
@@ -290,45 +847,6 @@ class _BuildCustomerDetailInfoState extends State<BuildCustomerDetailInfo> {
     PageArgumentController.to.getCustomerStatus() == ORDER_ACCEPTED ? serviceTicketOrderAccept()
         : serviceTicketActionStart();
   }
-
-  final customerLabel = Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      LabelTextComponent(text: 'User ID', color: Colors.black, padding: 8.0),
-      LabelTextComponent(
-          text: 'Customer Name', color: Colors.black, padding: 8.0),
-      LabelTextComponent(
-          text: 'Customer Phone', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: 'Address', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: 'Lat', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: 'Long', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: 'Type', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: 'Topic', color: Colors.black, padding: 8.0),
-      LabelTextComponent(
-          text: 'Assigned Date', color: Colors.black, padding: 8.0),
-      PageArgumentController.to.getArgumentData() == SERVICE_TICKET
-          ? LabelTextComponent(text: 'Note', color: Colors.black, padding: 8.0)
-          : SizedBox(),
-    ],
-  );
-
-  final middleLabel = Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0),
-      PageArgumentController.to.getArgumentData() == SERVICE_TICKET
-          ? LabelTextComponent(text: '- - -', color: Colors.black, padding: 8.0)
-          : SizedBox(),
-    ],
-  );
 
   void installationOrderAccept() {
     writeData.write(SAVE_TIME, DateTime.now().minute);

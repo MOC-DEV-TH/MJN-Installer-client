@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mjn_installer_app/components/label_text_component.dart';
 import 'package:mjn_installer_app/controllers/home_controller.dart';
 import 'package:mjn_installer_app/controllers/login_controller.dart';
 import 'package:mjn_installer_app/controllers/page_argument_controller.dart';
@@ -64,58 +65,164 @@ class CustomerStatusListItems extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+
+            // Row(
+            //   children: [
+            //     Expanded(
+            //         flex: 1,
+            //         child: LabelTextComponent(
+            //             textAlign: TextAlign.left,
+            //             text: 'Customer Name',
+            //             color: Colors.black,
+            //             padding: 8.0)),
+            //     Expanded(
+            //         flex: 1,
+            //         child: LabelTextComponent(
+            //             textAlign: TextAlign.center,
+            //             text: '-',
+            //             color: Colors.black,
+            //             padding: 8.0)),
+            //     Expanded(
+            //       flex: 1,
+            //       child: LabelTextComponent(
+            //           text: customerName!,
+            //           color: Colors.black,
+            //           padding: 8.0),
+            //     ),
+            //   ],
+            // ),
+            // Row(
+            //   children: [
+            //     Expanded(
+            //         flex: 1,
+            //         child: LabelTextComponent(
+            //             textAlign: TextAlign.left,
+            //             text: 'Customer Ph No.',
+            //             color: Colors.black,
+            //             padding: 8.0)),
+            //     Expanded(
+            //         flex: 1,
+            //         child: LabelTextComponent(
+            //             textAlign: TextAlign.center,
+            //             text: '-',
+            //             color: Colors.black,
+            //             padding: 8.0)),
+            //     Expanded(
+            //       flex: 1,
+            //       child: LabelTextComponent(
+            //           text: customerPhNo!,
+            //           color: Colors.black,
+            //           padding: 8.0),
+            //     ),
+            //   ],
+            // ),
+            // Row(
+            //   children: [
+            //     Expanded(
+            //         flex: 1,
+            //         child: LabelTextComponent(
+            //             textAlign: TextAlign.left,
+            //             text: 'Township',
+            //             color: Colors.black,
+            //             padding: 8.0)),
+            //     Expanded(
+            //         flex: 1,
+            //         child: LabelTextComponent(
+            //             textAlign: TextAlign.center,
+            //             text: '-',
+            //             color: Colors.black,
+            //             padding: 8.0)),
+            //     Expanded(
+            //       flex: 1,
+            //       child: Obx(() {
+            //         return LabelTextComponent(
+            //             text: townshipName.value,
+            //           textAlign: TextAlign.center, color: Colors.black, padding: 8.0,
+            //         );
+            //       })
+            //     ),
+            //   ],
+            // ),
+            // Row(
+            //   children: [
+            //     Expanded(
+            //         flex: 1,
+            //         child: LabelTextComponent(
+            //             textAlign: TextAlign.left,
+            //             text: 'Status',
+            //             color: Colors.black,
+            //             padding: 8.0)),
+            //     Expanded(
+            //         flex: 1,
+            //         child: LabelTextComponent(
+            //             textAlign: TextAlign.center,
+            //             text: '-',
+            //             color: Colors.black,
+            //             padding: 8.0)),
+            //     Expanded(
+            //       flex: 1,
+            //       child: LabelTextComponent(
+            //           text: customerPhNo!,
+            //           color: Colors.black,
+            //           padding: 8.0),
+            //     ),
+            //   ],
+            // ),
+            
             customerInfoLabel,
             middleLabel,
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: Text(
-                    customerName!,
-                    style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 12,
-                        color: Colors.black,
-                        decoration: TextDecoration.none),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: Text(
-                    customerPhNo!,
-                    style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 12,
-                        color: Colors.black,
-                        decoration: TextDecoration.none),
-                  ),
-                ),
-                Padding(
+            Flexible(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
                     padding: const EdgeInsets.all(2.0),
-                    child: Obx(() {
-                      return Text(
-                        townshipName.value,
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal,
-                            fontSize: 12,
-                            color: Colors.black,
-                            decoration: TextDecoration.none),
-                      );
-                    })),
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: Text(
-                    status_txt!,
-                    style: TextStyle(
-                        fontWeight: FontWeight.normal,
-                        fontSize: 12,
-                        color: Colors.black,
-                        decoration: TextDecoration.none),
+                    child: Text(
+                      customerName!,
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 12,
+                          color: Colors.black,
+                          decoration: TextDecoration.none),
+                    ),
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Text(
+                      customerPhNo!,
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 12,
+                          color: Colors.black,
+                          decoration: TextDecoration.none),
+                    ),
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.all(2.0),
+                      child: Obx(() {
+                        return Text(
+                          townshipName.value,
+                          style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: 12,
+                              color: Colors.black,
+                              decoration: TextDecoration.none),
+                        );
+                      })),
+                  Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Text(
+                      status_txt!,
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 12,
+                          color: Colors.black,
+                          decoration: TextDecoration.none),
+                    ),
+                  ),
+                ],
+              ),
             ),
             (PageArgumentController.to.getArgumentData() == DEVICE_PICKUP && pageStatus == 'complete')
                 ? Container()
