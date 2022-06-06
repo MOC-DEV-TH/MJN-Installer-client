@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
+import 'package:mjn_installer_app/controllers/page_argument_controller.dart';
 import 'package:mjn_installer_app/models/allDropDownListVO.dart';
 import 'package:mjn_installer_app/models/b2bAndb2cUsagesVO.dart';
 import 'package:mjn_installer_app/models/devicePickupDetailVO.dart';
@@ -138,6 +139,7 @@ class RestApi {
   static Future<InstallationVo> fetchInstallationPendingLists(
       String token, String uid, String status,String isRelocation) async {
     var response = await client.get(
+      PageArgumentController.to.getArgumentData() == RELOCATION_JOBS ?
       Uri.parse(INSTALLATION_LIST_URL +
           UID_PARAM +
           uid +
@@ -145,9 +147,20 @@ class RestApi {
           status +
           APP_VERSION +
           app_version +
-          IS_RELOCATION + isRelocation),
+          IS_RELOCATION + isRelocation) :
+
+      Uri.parse(INSTALLATION_LIST_URL +
+          UID_PARAM +
+          uid +
+          STATUS_PARAM +
+          status +
+          APP_VERSION +
+          app_version)
+      ,
       headers: {'content-type': 'application/json', 'token': token},
     );
+
+
     if (response.statusCode == 200) {
       debugPrint(response.body);
       // If the server did return a 200 OK response,
@@ -354,6 +367,7 @@ class RestApi {
     debugPrint(
         "InstallationListByStatus${INSTALLATION_LIST_URL + UID_PARAM + uid + APP_VERSION + app_version + STATUS_PARAM + status + paramAndStatus}");
     var response = await client.get(
+      PageArgumentController.to.argumentData == RELOCATION_JOBS ?
       Uri.parse(INSTALLATION_LIST_URL +
           UID_PARAM +
           uid +
@@ -362,7 +376,17 @@ class RestApi {
           STATUS_PARAM +
           status +
           paramAndStatus +
-          IS_RELOCATION + isRelocation),
+          IS_RELOCATION + isRelocation) :
+
+      Uri.parse(INSTALLATION_LIST_URL +
+          UID_PARAM +
+          uid +
+          APP_VERSION +
+          app_version +
+          STATUS_PARAM +
+          status +
+          paramAndStatus)
+      ,
       headers: {'content-type': 'application/json', 'token': token},
     );
     if (response.statusCode == 200) {

@@ -305,20 +305,19 @@ class ServiceTicketController extends GetxController {
 
     debugPrint("Usage map collection::${thirdMap}", wrapWidth: 1024);
 
-    if (str_image_onu_front_side == null ||
-        str_image_onu_back_side == null ||
-        str_image_odb_before == null ||
-        str_image_odb_after == null ||
-        str_image_spliter_before == null ||
-        str_image_spliter_after == null ||
-        str_imageAcceptForm == null) {
-      loadingForButton(false);
-      AppUtils.showErrorSnackBar("Fail", 'Please select a photo!');
+    // if (str_image_onu_front_side == null ||
+    //     str_image_onu_back_side == null ||
+    //     str_image_odb_before == null ||
+    //     str_image_odb_after == null ||
+    //     str_image_spliter_before == null ||
+    //     str_image_spliter_after == null ||
+    //     str_imageAcceptForm == null) {
+    //   loadingForButton(false);
+    //   AppUtils.showErrorSnackBar("Fail", 'Please select a photo!');
+    //
+    // }
 
-    }
-
-
-    else if (statusValueId == null) {
+     if (statusValueId == null) {
       loadingForButton(false);
       AppUtils.showErrorSnackBar("Fail", 'Please select a status!');
     }
