@@ -370,7 +370,7 @@ class InstallationController extends GetxController {
                   if (value?.status == 'Success')
                     {
                       loadingForButton(false),
-                      Get.offNamed(COMPLETE_CUSTOMER_PAGE)
+                      Get.offNamed(COMPLETE_CUSTOMER_TICKET_LIST_PAGE)
                     }
                   else
                     {loadingForButton(false)}
@@ -394,7 +394,7 @@ class InstallationController extends GetxController {
             if (value?.status == 'Success')
               {
                 loadingForButton(false),
-                Get.offNamed(COMPLETE_CUSTOMER_PAGE)
+                Get.offNamed(COMPLETE_CUSTOMER_TICKET_LIST_PAGE)
               }
             else
               {loadingForButton(false)}

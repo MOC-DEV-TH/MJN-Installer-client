@@ -47,16 +47,20 @@ class InstallationVo {
 }
 
 class InstallationDetail {
-  InstallationDetail(
-      {this.profileId,
-      this.firstname,
-      this.phone1,
-      this.township,
-      this.uid,
-      this.status,
-      this.subcon_assigned_date,
-        this.status_txt,
-      this.plan});
+  InstallationDetail({
+    this.profileId,
+    this.firstname,
+    this.phone1,
+    this.township,
+    this.uid,
+    this.status,
+    this.subcon_assigned_date,
+    this.status_txt,
+    this.plan,
+    this.lat,
+    this.long,
+    this.detailAddress,
+  });
 
   String? township;
   String? profileId;
@@ -67,6 +71,9 @@ class InstallationDetail {
   String? subcon_assigned_date;
   String? plan;
   String? status_txt;
+  String? lat;
+  String? long;
+  String? detailAddress;
 
   factory InstallationDetail.fromJson(Map<String, dynamic> json) =>
       InstallationDetail(
@@ -78,7 +85,10 @@ class InstallationDetail {
           status: json["status"],
           plan: json["plan"],
           status_txt: json["status_txt"],
-          subcon_assigned_date: json['subcon_assigned_date']);
+          subcon_assigned_date: json['subcon_assigned_date'],
+        lat: json["latitude"],
+        long: json["longitude"],
+        detailAddress: json["address"],);
 
   Map<String, dynamic> toJson() => {
         "profile_id": profileId,
@@ -88,7 +98,10 @@ class InstallationDetail {
         "uid": uid,
         "status": status,
         "subcon_assigned_date": subcon_assigned_date,
-        "plan" : plan,
-        "status_txt" : status_txt,
+        "plan": plan,
+        "status_txt": status_txt,
+        "latitude": lat,
+        "longitude": long,
+        "address": detailAddress,
       };
 }

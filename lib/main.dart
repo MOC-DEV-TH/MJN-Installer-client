@@ -9,8 +9,8 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'package:mjn_installer_app/utils/routers.dart';
-import 'package:mjn_installer_app/views/home_page.dart';
-import 'package:mjn_installer_app/views/new_login_page.dart';
+import 'package:mjn_installer_app/views/HomePage.dart';
+import 'package:mjn_installer_app/views/NewLoginPage.dart';
 
 /// Defines the main theme color.
 final MaterialColor themeMaterialColor =

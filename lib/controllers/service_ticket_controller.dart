@@ -281,13 +281,13 @@ class ServiceTicketController extends GetxController {
       technicalResolutionNoteController.text.toString() == ""
           ? "null"
           : technicalResolutionNoteController.text.toString(),
-      'front_onu_img': str_image_onu_front_side ?? null,
-      'back_onu_img': str_image_onu_back_side ?? null,
-      'before_odb_img': str_image_odb_before ?? null,
-      'after_odb_img': str_image_odb_after ?? null,
-      'before_spliter_img': str_image_spliter_before ?? null,
-      'after_spliter_img': str_image_spliter_after ?? null,
-      'service_acceptance_img': str_imageAcceptForm ?? null,
+      'front_onu_img': str_image_onu_front_side ?? "null",
+      'back_onu_img': str_image_onu_back_side ?? "null",
+      'before_odb_img': str_image_odb_before ?? "null",
+      'after_odb_img': str_image_odb_after ?? "null",
+      'before_spliter_img': str_image_spliter_before ?? "null",
+      'after_spliter_img': str_image_spliter_after ?? "null",
+      'service_acceptance_img': str_imageAcceptForm ?? "null",
     };
 
     var secondMap = {

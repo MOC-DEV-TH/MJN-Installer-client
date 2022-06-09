@@ -55,7 +55,10 @@ class ServiceTicketDetail {
     this.plan,
     this.subcon_assigned_date,
     this.uid,
-    this.status_txt
+    this.status_txt,
+    this.detailAddress,
+    this.lat,
+    this.long
   });
 
   String? firstname;
@@ -68,6 +71,9 @@ class ServiceTicketDetail {
   String? plan;
   String? uid;
   String? status_txt;
+  String? lat;
+  String? long;
+  String? detailAddress;
 
   factory ServiceTicketDetail.fromJson(Map<String, dynamic> json) => ServiceTicketDetail(
     firstname: json["firstname"],
@@ -80,6 +86,9 @@ class ServiceTicketDetail {
     plan: json["plan"],
     uid: json["uid"],
     status_txt: json["status_txt"],
+    lat: json["latitude"],
+    long: json["longitude"],
+    detailAddress: json["address"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -93,5 +102,8 @@ class ServiceTicketDetail {
     "plan": plan,
     "uid": uid,
     "status_txt": status_txt,
+    "latitude": lat,
+    "longitude": long,
+    "address": detailAddress,
   };
 }

@@ -10,14 +10,14 @@ const PROD_URL = 'http://mojoenet.com/';
 //Get page name
 const LOGIN = '/login';
 const TICKET_STATUS_PAGE = '/ticket_status';
-const CUSTOMER_STATUS_PAGE = '/customer_status';
+const PENDING_AND_NEW_ORDER_CUSTOMER_TICKET_LIST_PAGE = '/pending_newOrder_ticket_page';
 const HOME = '/home';
-const CUSTOMER_DETAIL_PAGE = '/customer_detail';
+const TICKET_DETAIL_PAGE = '/ticket_detail';
 const DEVICE_PICKUP_DETAIL_PAGE = '/device_pickup_detail';
-const CUSTOMER_ISSUE_PAGE = '/customer_issue';
+const EDIT_TICKET_PAGE = '/edit_ticket';
 const PENDING_CUSTOMER_COMPLETE_PAGE = '/pending_complete_customer';
-const COMPLETE_CUSTOMER_PAGE = '/complete_complete_list';
-const COMPLETE_CUSTOMER_DETAIL_PAGE = '/complete_complete_detail_page';
+const COMPLETE_CUSTOMER_TICKET_LIST_PAGE = '/complete_complete_list';
+const COMPLETE_TICKET_DETAIL_PAGE = '/complete_ticket_detail_page';
 const MY_APP = '/my_app';
 const NEW_ORDER_CUSTOMER_PAGE = '/new_order_customer_page';
 const MY_LOCATION_PAGE = '/my_location_page';
@@ -59,7 +59,7 @@ const FILTER_STATUS = '&filter_status=';
 const IS_RELOCATION = '&is_relocation=';
 const CID_PARAM = '&cid=';
 
-const API_URL = PROD_URL+'api/';
+const API_URL = BASE_URL+'api/';
 const SUPPORT_LOGIN_URL = API_URL+"support_login";
 const LATITUDE_LONGITUDE_URL = API_URL+"hit_support_lat_lon";
 const ALL_DDL_DATA = API_URL+"get_all_ddl_data";

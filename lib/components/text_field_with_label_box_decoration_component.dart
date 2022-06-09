@@ -40,7 +40,7 @@ class TextFieldWithLabelBoxDecorationComponent extends StatelessWidget {
               child: TextFormField(
                 maxLines: maxLines,
                 textInputAction: TextInputAction.next,
-                keyboardType: textInputType,
+                keyboardType: TextInputType.number,
                 controller: controller,
                 obscureText: isVisible,
                 decoration: InputDecoration(
