@@ -67,7 +67,7 @@ class _BuildInstallationDropdownListState
                   flex: 1,
                   child: LabelTextComponent(
                       text: installationController
-                          .installationDetail.value.user_name ??
+                          .installationDetail.value.firstname ??
                           "xx xxx xxx xxx xxx",
                       color: Colors.black,
                       padding: 8.0),

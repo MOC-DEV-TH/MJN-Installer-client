@@ -60,6 +60,7 @@ class InstallationDetail {
     this.lat,
     this.long,
     this.detailAddress,
+    this.userId
   });
 
   String? township;
@@ -74,6 +75,7 @@ class InstallationDetail {
   String? lat;
   String? long;
   String? detailAddress;
+  String? userId;
 
   factory InstallationDetail.fromJson(Map<String, dynamic> json) =>
       InstallationDetail(
@@ -88,6 +90,7 @@ class InstallationDetail {
           subcon_assigned_date: json['subcon_assigned_date'],
         lat: json["latitude"],
         long: json["longitude"],
+        userId: json["user_name"],
         detailAddress: json["address"],);
 
   Map<String, dynamic> toJson() => {
@@ -103,5 +106,6 @@ class InstallationDetail {
         "latitude": lat,
         "longitude": long,
         "address": detailAddress,
+        "user_name" : userId
       };
 }

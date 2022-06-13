@@ -59,7 +59,7 @@ const FILTER_STATUS = '&filter_status=';
 const IS_RELOCATION = '&is_relocation=';
 const CID_PARAM = '&cid=';
 
-const API_URL = BASE_URL+'api/';
+const API_URL = PROD_URL+'api/';
 const SUPPORT_LOGIN_URL = API_URL+"support_login";
 const LATITUDE_LONGITUDE_URL = API_URL+"hit_support_lat_lon";
 const ALL_DDL_DATA = API_URL+"get_all_ddl_data";

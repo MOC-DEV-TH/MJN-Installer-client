@@ -75,12 +75,12 @@ class _BuildMaintenanceDropdownListState
                   flex: 1,
                   child: LabelTextComponent(
                       text: (serviceTicketController
-                          .serviceTicketDetail.value.userName ==
+                          .serviceTicketDetail.value.firstname ==
                           null || serviceTicketController
-                          .serviceTicketDetail.value.userName == "")
+                          .serviceTicketDetail.value.firstname == "")
                           ? "xx xxx xxx xxx xxx"
                           : serviceTicketController
-                          .serviceTicketDetail.value.userName!,
+                          .serviceTicketDetail.value.firstname!,
                       color: Colors.black,
                       padding: 8.0),
                 ),

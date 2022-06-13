@@ -58,7 +58,9 @@ class ServiceTicketDetail {
     this.status_txt,
     this.detailAddress,
     this.lat,
-    this.long
+    this.long,
+    this.userId
+
   });
 
   String? firstname;
@@ -74,6 +76,7 @@ class ServiceTicketDetail {
   String? lat;
   String? long;
   String? detailAddress;
+  String? userId;
 
   factory ServiceTicketDetail.fromJson(Map<String, dynamic> json) => ServiceTicketDetail(
     firstname: json["firstname"],
@@ -89,10 +92,11 @@ class ServiceTicketDetail {
     lat: json["latitude"],
     long: json["longitude"],
     detailAddress: json["address"],
+    userId: json["user_name"],
   );
 
   Map<String, dynamic> toJson() => {
-    "user_name": firstname,
+    "firstname": firstname,
     "township": township,
     "ticket_id": ticketId,
     "phone_1": phone1,
@@ -105,5 +109,6 @@ class ServiceTicketDetail {
     "latitude": lat,
     "longitude": long,
     "address": detailAddress,
+    "user_name" : userId
   };
 }

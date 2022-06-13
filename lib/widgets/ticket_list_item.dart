@@ -21,6 +21,7 @@ class TicketListItem extends StatelessWidget {
   final String? customerUID;
   final String? status;
   final String? status_txt;
+  final String? userId;
 
   InstallationDetail? installationDetail;
   ServiceTicketDetail? serviceTicketDetail;
@@ -29,7 +30,7 @@ class TicketListItem extends StatelessWidget {
   var townshipName = "".obs;
 
   TicketListItem(this.customerName, this.customerAddress,
-      this.customerPhNo, this.profileId,
+      this.customerPhNo, this.profileId,this.userId,
       {@required this.installationDetail,
         @required this.serviceTicketDetail,
         @required this.devicePickupDetail,
@@ -87,6 +88,31 @@ class TicketListItem extends StatelessWidget {
                       flex: 2,
                       child: LabelTextComponent(
                           text: customerName!,
+                          color: Colors.black,
+                          padding: 0.0),
+                    ),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                        flex: 2,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.left,
+                            text: 'UserID',
+                            color: Colors.black,
+                            padding: 0.0)),
+                    Expanded(
+                        flex: 1,
+                        child: LabelTextComponent(
+                            textAlign: TextAlign.center,
+                            text: '-',
+                            color: Colors.black,
+                            padding: 0.0)),
+                    Expanded(
+                      flex: 2,
+                      child: LabelTextComponent(
+                          text: userId!,
                           color: Colors.black,
                           padding: 0.0),
                     ),
@@ -439,185 +465,6 @@ class TicketListItem extends StatelessWidget {
         ));
   }
 
-  final customerInfoLabel = Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Text(
-          'Customer Name',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Text(
-          'Customer Ph No.',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Text(
-          'Township',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Text(
-          'Status',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      PageArgumentController.to.getArgumentData() != DEVICE_PICKUP
-          ? Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Text(
-          'Lat',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      )
-          : SizedBox(),
-      PageArgumentController.to.getArgumentData() != DEVICE_PICKUP
-          ? Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Text(
-          'Long',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      )
-          : SizedBox(),
-      PageArgumentController.to.getArgumentData() != DEVICE_PICKUP
-          ? Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Text(
-          'Detail Address',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      )
-          : SizedBox()
-    ],
-  );
-
-  final middleLabel = Column(
-    mainAxisAlignment: MainAxisAlignment.center,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Text(
-          '-',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Text(
-          '-',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Text(
-          '-',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Text(
-          '-',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      ),
-      PageArgumentController.to.getArgumentData() != DEVICE_PICKUP
-          ? Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Text(
-          '-',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      )
-          : SizedBox(),
-      PageArgumentController.to.getArgumentData() != DEVICE_PICKUP
-          ? Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Text(
-          '-',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      )
-          : SizedBox(),
-      PageArgumentController.to.getArgumentData() != DEVICE_PICKUP
-          ? Padding(
-        padding: const EdgeInsets.all(2.0),
-        child: Text(
-          '-',
-          style: TextStyle(
-              fontWeight: FontWeight.normal,
-              fontSize: 12,
-              color: Colors.black,
-              decoration: TextDecoration.none),
-        ),
-      )
-          : SizedBox(),
-    ],
-  );
 
   final verticalDivider = Container(
     height: 40,

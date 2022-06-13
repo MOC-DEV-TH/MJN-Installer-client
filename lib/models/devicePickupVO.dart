@@ -54,6 +54,7 @@ class DevicePickupDetail {
     this.ticketId,
     this.terminationStatus,
     this.township,
+    this.userId
   });
 
   String? firstname;
@@ -63,6 +64,7 @@ class DevicePickupDetail {
   String? ticketId;
   String? terminationStatus;
   dynamic township;
+  String? userId;
 
   factory DevicePickupDetail.fromJson(Map<String, dynamic> json) => DevicePickupDetail(
     firstname: json["firstname"],
@@ -72,6 +74,7 @@ class DevicePickupDetail {
     ticketId: json["ticket_id"],
     terminationStatus: json["termination_status"],
     township: json["township"],
+    userId: json["user_name"]
   );
 
   Map<String, dynamic> toJson() => {
@@ -82,5 +85,6 @@ class DevicePickupDetail {
     "ticket_id": ticketId,
     "termination_status": terminationStatus,
     "township": township,
+    "user_name" : userId
   };
 }
