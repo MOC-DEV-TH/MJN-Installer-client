@@ -27,7 +27,8 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="MJN_Installer" >
+        android:label="MJN_Installer"
+        android:requestLegacyExternalStorage="true" >
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
@@ -78,6 +79,12 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
+        <service
+            android:name="com.baseflow.geolocator.GeolocatorLocationService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="location" />
+
         <provider
             android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
             android:authorities="com.moc.mjninstaller.flutter.image_provider"
@@ -93,11 +100,6 @@
             android:exported="false"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
-        <service
-            android:name="com.baseflow.geolocator.GeolocatorLocationService"
-            android:enabled="true"
-            android:exported="false"
-            android:foregroundServiceType="location" />
         <service
             android:name="com.lyokone.location.FlutterLocationService"
             android:enabled="true"

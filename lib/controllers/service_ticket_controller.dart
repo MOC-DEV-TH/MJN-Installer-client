@@ -185,7 +185,8 @@ class ServiceTicketController extends GetxController {
     XFile? image = await imagePicker.pickImage(
         source: ImageSource.camera,
         imageQuality: 50,
-        preferredCameraDevice: CameraDevice.front);
+        preferredCameraDevice: CameraDevice.front
+        );
 
     //ONU IMAGE
     if (tapStatus == 'onu_front') {
