@@ -269,6 +269,7 @@ class InstallationController extends GetxController {
       image_spliter_before = File(image!.path);
       str_image_spliter_before =
           base64Encode(File(image.path).readAsBytesSync());
+      debugPrint("Spliter Before ::${str_image_spliter_before}");
       update();
     } else if (tapStatus == 'spliter_after') {
       image_spliter_after = File(image!.path);
