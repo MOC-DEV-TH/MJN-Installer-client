@@ -57,7 +57,9 @@ class ServiceTicketDetails {
     this.topic,
     this.type,
     this.installerId,
-    this.message
+    this.message,
+    this.plan,
+    this.package
   });
 
   String? subconAssignedDate;
@@ -72,6 +74,8 @@ class ServiceTicketDetails {
   String? type;
   String? installerId;
   String? message;
+  String? plan;
+  String? package;
 
   factory ServiceTicketDetails.fromJson(Map<String, dynamic> json) => ServiceTicketDetails(
     subconAssignedDate: json["subcon_assigned_date"],
@@ -86,6 +90,8 @@ class ServiceTicketDetails {
     type: json["type"],
     installerId: json["installer_id"],
     message: json["message"],
+    plan: json["plan"],
+    package: json["package"]
   );
 
   Map<String, dynamic> toJson() => {
@@ -101,5 +107,7 @@ class ServiceTicketDetails {
     "type": type,
     "installer_id": installerId,
     "message": message,
+    "plan" : plan,
+    "package" : package
   };
 }

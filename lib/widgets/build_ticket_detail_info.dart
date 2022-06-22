@@ -299,6 +299,70 @@ class _BuildTicketDetailInfoState extends State<BuildTicketDetailInfo> {
                             flex: 1,
                             child: LabelTextComponent(
                                 textAlign: TextAlign.left,
+                                text: 'Product',
+                                color: Colors.black,
+                                padding: 8.0)),
+                        Expanded(
+                            flex: 1,
+                            child: LabelTextComponent(
+                                textAlign: TextAlign.center,
+                                text: '- - -',
+                                color: Colors.black,
+                                padding: 8.0)),
+                        Expanded(
+                          flex: 1,
+                          child: LabelTextComponent(
+                              text: customerDetailController
+                                  .installationDetail
+                                  .value
+                                  .plan ==
+                                  null
+                                  ? "xx xxx xxx xxx xxx"
+                                  : customerDetailController
+                                  .installationDetail.value.plan!,
+                              color: Colors.black,
+                              padding: 8.0),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                            flex: 1,
+                            child: LabelTextComponent(
+                                textAlign: TextAlign.left,
+                                text: 'Plan',
+                                color: Colors.black,
+                                padding: 8.0)),
+                        Expanded(
+                            flex: 1,
+                            child: LabelTextComponent(
+                                textAlign: TextAlign.center,
+                                text: '- - -',
+                                color: Colors.black,
+                                padding: 8.0)),
+                        Expanded(
+                          flex: 1,
+                          child: LabelTextComponent(
+                              text: customerDetailController
+                                  .installationDetail
+                                  .value
+                                  .package ==
+                                  null
+                                  ? "xx xxx xxx xxx xxx"
+                                  : customerDetailController
+                                  .installationDetail.value.package!,
+                              color: Colors.black,
+                              padding: 8.0),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                            flex: 1,
+                            child: LabelTextComponent(
+                                textAlign: TextAlign.left,
                                 text: 'Assigned Date',
                                 color: Colors.black,
                                 padding: 8.0)),
@@ -316,6 +380,35 @@ class _BuildTicketDetailInfoState extends State<BuildTicketDetailInfo> {
                                   .installationDetail
                                   .value
                                   .subconAssignedDate ??
+                                  "xx xxx xxx xxx xxx",
+                              color: Colors.black,
+                              padding: 8.0),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                            flex: 1,
+                            child: LabelTextComponent(
+                                textAlign: TextAlign.left,
+                                text: 'Installation Appointment Date',
+                                color: Colors.black,
+                                padding: 8.0)),
+                        Expanded(
+                            flex: 1,
+                            child: LabelTextComponent(
+                                textAlign: TextAlign.center,
+                                text: '- - -',
+                                color: Colors.black,
+                                padding: 8.0)),
+                        Expanded(
+                          flex: 1,
+                          child:  LabelTextComponent(
+                              text: customerDetailController
+                                  .installationDetail
+                                  .value
+                                  .installation_appointment_date ??
                                   "xx xxx xxx xxx xxx",
                               color: Colors.black,
                               padding: 8.0),
@@ -551,6 +644,60 @@ class _BuildTicketDetailInfoState extends State<BuildTicketDetailInfo> {
                               child:LabelTextComponent(
                                   text: customerDetailController
                                       .serviceTicketDetail.value.type ??
+                                      "xx xxx xxx xxx xxx",
+                                  color: Colors.black,
+                                  padding: 8.0),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                                flex: 1,
+                                child: LabelTextComponent(
+                                    textAlign: TextAlign.left,
+                                    text: 'Product',
+                                    color: Colors.black,
+                                    padding: 8.0)),
+                            Expanded(
+                                flex: 1,
+                                child: LabelTextComponent(
+                                    textAlign: TextAlign.center,
+                                    text: '- - -',
+                                    color: Colors.black,
+                                    padding: 8.0)),
+                            Expanded(
+                              flex: 1,
+                              child:LabelTextComponent(
+                                  text: customerDetailController
+                                      .serviceTicketDetail.value.plan ??
+                                      "xx xxx xxx xxx xxx",
+                                  color: Colors.black,
+                                  padding: 8.0),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                                flex: 1,
+                                child: LabelTextComponent(
+                                    textAlign: TextAlign.left,
+                                    text: 'Plan',
+                                    color: Colors.black,
+                                    padding: 8.0)),
+                            Expanded(
+                                flex: 1,
+                                child: LabelTextComponent(
+                                    textAlign: TextAlign.center,
+                                    text: '- - -',
+                                    color: Colors.black,
+                                    padding: 8.0)),
+                            Expanded(
+                              flex: 1,
+                              child:LabelTextComponent(
+                                  text: customerDetailController
+                                      .serviceTicketDetail.value.package ??
                                       "xx xxx xxx xxx xxx",
                                   color: Colors.black,
                                   padding: 8.0),

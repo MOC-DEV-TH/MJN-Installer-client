@@ -312,6 +312,9 @@ class InstallationController extends GetxController {
       'incomplete_notes' : statusValueID.toString() == '6'
           ? statusCancelAndIncompleteTextController.text.toString()
           : "null",
+      'complete_notes': statusValueID.toString() == '5'
+          ? statusCancelAndIncompleteTextController.text.toString()
+          : "null",
       'front_onu_img': str_image_onu_front_side ?? null,
       'back_onu_img': str_image_onu_back_side ?? null,
       'before_odb_img': str_image_odb_before ?? null,

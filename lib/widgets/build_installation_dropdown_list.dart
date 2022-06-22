@@ -888,10 +888,11 @@ class _BuildInstallationDropdownListState
                     onChangedData: (InstallationStatus value) {
                       debugPrint('DropdownValue${value.id}');
                       installationController.updateStatusValueID(value.id!);
+                      installationController.selectDate(context);
 
-                      if (value.id == 3 || value.id == 6) {
-                        installationController.selectDate(context);
-                      }
+                      // if (value.id == 3 || value.id == 6) {
+                      //   installationController.selectDate(context);
+                      // }
                     },
                     hintText: '--Select Status--',
                   ),
@@ -1384,9 +1385,10 @@ class _BuildInstallationDropdownListState
                         debugPrint('DropdownValue${value.id}');
 
                         installationController.updateStatusValueID(value.id!);
-                        if (value.id == 3 || value.id == 6) {
-                          installationController.selectDate(context);
-                        }
+                        installationController.selectDate(context);
+                        // if (value.id == 3 || value.id == 6) {
+                        //   installationController.selectDate(context);
+                        // }
                       },
                       hintText: '--Select Status--',
                     ),

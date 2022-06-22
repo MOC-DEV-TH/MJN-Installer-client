@@ -73,7 +73,10 @@ class InstallationDetails {
     this.user_svlan,
     this.new_latitude,
     this.new_longitude,
-    this.new_address
+    this.new_address,
+    this.installation_appointment_date,
+    this.plan,
+    this.package
   });
 
   String? firstname;
@@ -107,6 +110,10 @@ class InstallationDetails {
   String? user_cvlan;
   String? user_svlan;
 
+  String? installation_appointment_date;
+  String? plan;
+  String? package;
+
 
   factory InstallationDetails.fromJson(Map<String, dynamic> json) => InstallationDetails(
     firstname: json["firstname"],
@@ -137,6 +144,9 @@ class InstallationDetails {
     new_latitude: json["new_latitude"],
     new_longitude: json["new_longitude"],
     new_address: json["new_address"],
+    installation_appointment_date: json["installation"],
+    plan: json["plan"],
+    package: json["package"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -168,5 +178,8 @@ class InstallationDetails {
     "new_latitude": new_latitude,
     "new_longitude": new_longitude,
     "new_address": new_address,
+    "installation" : installation_appointment_date,
+    "plan" : plan,
+    "package" : package
   };
 }
