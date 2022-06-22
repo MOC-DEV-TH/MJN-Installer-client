@@ -401,6 +401,105 @@ class _BuildInstallationDropdownListState
                 ),
               ],
             ),
+            Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'Product',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child:LabelTextComponent(
+                      text: (installationController
+                          .installationDetail.value.plan ==
+                          "" ||
+                          installationController
+                              .installationDetail.value.plan ==
+                              null)
+                          ? "xx xxx xxx xxx xxx"
+                          : installationController
+                          .installationDetail.value.plan!,
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'Plan',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child:LabelTextComponent(
+                      text: (installationController
+                          .installationDetail.value.package ==
+                          "" ||
+                          installationController
+                              .installationDetail.value.package ==
+                              null)
+                          ? "xx xxx xxx xxx xxx"
+                          : installationController
+                          .installationDetail.value.package!,
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'Installation Appointment Date',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child:LabelTextComponent(
+                      text: (installationController
+                          .installationDetail.value.installation_appointment_date ==
+                          "" ||
+                          installationController
+                              .installationDetail.value.installation_appointment_date ==
+                              null)
+                          ? "xx xxx xxx xxx xxx"
+                          : installationController
+                          .installationDetail.value.installation_appointment_date!,
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
+              ],
+            ),
 
             PageArgumentController.to.getArgumentData() == RELOCATION_JOBS ? Row(
               children: [
@@ -795,8 +894,6 @@ class _BuildInstallationDropdownListState
       ],
     );
   }
-
-
 
 
   _buildB2BUsage() {

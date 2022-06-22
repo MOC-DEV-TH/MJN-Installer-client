@@ -221,6 +221,63 @@ class _BuildMaintenanceDropdownListState
                 ),
               ],
             ),
+
+            Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'Plan',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child: LabelTextComponent(
+                      text: serviceTicketController
+                          .serviceTicketDetail.value.package ??
+                          "xx xxx xxx xxx xxx",
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
+              ],
+            ),
+
+            Row(
+              children: [
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.left,
+                        text: 'Product',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                    flex: 1,
+                    child: LabelTextComponent(
+                        textAlign: TextAlign.center,
+                        text: '- - -',
+                        color: Colors.black,
+                        padding: 8.0)),
+                Expanded(
+                  flex: 1,
+                  child: LabelTextComponent(
+                      text: serviceTicketController
+                          .serviceTicketDetail.value.plan ??
+                          "xx xxx xxx xxx xxx",
+                      color: Colors.black,
+                      padding: 8.0),
+                ),
+              ],
+            ),
+
             Row(
               children: [
                 Expanded(
