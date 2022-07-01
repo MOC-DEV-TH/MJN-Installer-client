@@ -78,12 +78,12 @@ class ServiceTicketController extends GetxController {
 
 
   void updateTechnicalIssueValueID(int id) {
-    technicalResolutionValueId = id;
+    technicalIssueValueId = id;
     update();
   }
 
   void updateTechnicalResolutionValueID(int id) {
-    technicalIssueValueId = id;
+    technicalResolutionValueId = id;
     update();
   }
 
