@@ -298,7 +298,7 @@ class _BuildMaintenanceDropdownListState
                   flex: 1,
                   child: LabelTextComponent(
                       text: serviceTicketController
-                          .serviceTicketDetail.value.subconAssignedDate ??
+                          .serviceTicketDetail.value.topic ??
                           "xx xxx xxx xxx xxx",
                       color: Colors.black,
                       padding: 8.0),
