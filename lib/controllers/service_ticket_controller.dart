@@ -328,10 +328,7 @@ class ServiceTicketController extends GetxController {
       var list = field_list.where((element) => textEditingControllers_list[element]!.text.isEmpty).toList();
 
       if(list.isNotEmpty)
-      {
-        loadingForButton(false);
-        AppUtils.showErrorSnackBar("Fail", 'Please enter all usages data!');
-      }else {
+
         RestApi.postServiceTicketData(thirdMap, readData.read(TOKEN))
             .then((value) =>
         {
@@ -344,8 +341,6 @@ class ServiceTicketController extends GetxController {
           else
             {loadingForButton(false)}
         });
-      }
-
     }
   }
 
