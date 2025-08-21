@@ -1,21 +1,24 @@
+// Flutter web plugin registrant file.
 //
 // Generated file. Do not edit.
 //
 
-// ignore_for_file: directives_ordering
-// ignore_for_file: lines_longer_than_80_chars
+// @dart = 2.13
+// ignore_for_file: type=lint
 
+import 'package:flutter_native_splash/flutter_native_splash_web.dart';
 import 'package:google_maps_flutter_web/google_maps_flutter_web.dart';
 import 'package:image_picker_for_web/image_picker_for_web.dart';
 import 'package:location_web/location_web.dart';
-
+import 'package:permission_handler_html/permission_handler_html.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
-// ignore: public_member_api_docs
-void registerPlugins(Registrar registrar) {
+void registerPlugins([final Registrar? pluginRegistrar]) {
+  final Registrar registrar = pluginRegistrar ?? webPluginRegistrar;
+  FlutterNativeSplashWeb.registerWith(registrar);
   GoogleMapsPlugin.registerWith(registrar);
   ImagePickerPlugin.registerWith(registrar);
   LocationWebPlugin.registerWith(registrar);
-  //UrlLauncherPlugin.registerWith(registrar);
+  WebPermissionHandler.registerWith(registrar);
   registrar.registerMessageHandler();
 }

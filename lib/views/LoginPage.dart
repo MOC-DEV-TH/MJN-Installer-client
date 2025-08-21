@@ -64,39 +64,39 @@ class _LoginPageState extends State<LoginPage> {
       child: Container(
         child: ButtonTheme(
           height: 50,
-          child: RaisedButton(
-            child: Text('Login',
-                style: TextStyle(color: Colors.white, fontSize: 18)),
-            color: Colors.blue.withOpacity(0.8),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-            onPressed: ()  {
+          child: ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue.withOpacity(0.8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(50),
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12), // optional
+            ),
+            onPressed: () {
               debugPrint('click');
-              if (userIdController.text != '' || passwordController.text != '')
-                {
-                  Map<String, String> map = {
-                    'user_id': userIdController.value.text,
-                    'password': passwordController.value.text
-                  };
+              if (userIdController.text != '' || passwordController.text != '') {
+                Map<String, String> map = {
+                  'user_id': userIdController.text,
+                  'password': passwordController.text,
+                };
 
                 debugPrint('call api');
-                  RestApi.fetchSupportLogin(map).then((value) => {
-                    Future.delayed(Duration.zero,
-                        (){
-                          if (value.status == 'Success')
-                          {
-                            writeData.write(SAVE_TIME,DateTime.now().minute);
-
-                           // Get.off(() => MyLocationPage(value.token.toString()));
-                          }
-
-                          else {
-                            AppUtils.showErrorSnackBar("Fail", value.description ?? '' );
-                          }
-                        })
-                      });
-                }
+                RestApi.fetchSupportLogin(map).then((value) {
+                  Future.delayed(Duration.zero, () {
+                    if (value.status == 'Success') {
+                      writeData.write(SAVE_TIME, DateTime.now().minute);
+                      // Get.off(() => MyLocationPage(value.token.toString()));
+                    } else {
+                      AppUtils.showErrorSnackBar("Fail", value.description ?? '');
+                    }
+                  });
+                });
+              }
             },
+            child: Text(
+              'Login',
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            ),
           ),
         ),
       ),

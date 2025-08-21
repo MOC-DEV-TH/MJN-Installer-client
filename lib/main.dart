@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:baseflow_plugin_template/baseflow_plugin_template.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,10 +12,10 @@ import 'package:mjn_installer_app/views/HomePage.dart';
 import 'package:mjn_installer_app/views/NewLoginPage.dart';
 
 /// Defines the main theme color.
-final MaterialColor themeMaterialColor =
-BaseflowPluginExample.createMaterialColor(
-    const Color.fromRGBO(48, 49, 60, 1));
-final readData = GetStorage();
+// final MaterialColor themeMaterialColor =
+// BaseflowPluginExample.createMaterialColor(
+//     const Color.fromRGBO(48, 49, 60, 1));
+     final readData = GetStorage();
 
 
 Future  main() async{

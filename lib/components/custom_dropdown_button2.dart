@@ -1,138 +1,129 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+
 class CustomDropdownButton2<T> extends StatelessWidget {
   final List<T> dropdownItems;
   final String? hintText;
-  final T value;
+  final T? value;
   final void Function(T) onChangedData;
   final DropdownButtonBuilder? selectedItemBuilder;
   final Alignment? hintAlignment;
   final Alignment? valueAlignment;
-  final double? buttonHeight, buttonWidth;
-  final EdgeInsetsGeometry? buttonPadding;
-  final BoxDecoration? buttonDecoration;
-  final int? buttonElevation;
-  final Widget? icon;
-  final double? iconSize;
-  final Color? iconEnabledColor;
-  final Color? iconDisabledColor;
-  final double? itemHeight;
-  final EdgeInsetsGeometry? itemPadding;
-  final double? dropdownHeight, dropdownWidth;
-  final EdgeInsetsGeometry? dropdownPadding;
-  final BoxDecoration? dropdownDecoration;
-  final int? dropdownElevation;
+
+  // Style Data classes instead of individual params:
+  final ButtonStyleData? buttonStyleData;
+  final IconStyleData? iconStyleData;
+  final DropdownStyleData? dropdownStyleData;
+  final MenuItemStyleData? menuItemStyleData;
+
   final Radius? scrollbarRadius;
   final double? scrollbarThickness;
   final bool? scrollbarAlwaysShow;
   final Offset? offset;
 
   const CustomDropdownButton2({
+    Key? key,
     required this.dropdownItems,
-    required this.hintText,
+    this.hintText,
     required this.onChangedData,
     this.selectedItemBuilder,
     this.hintAlignment,
-    required this.value,
+    this.value,
     this.valueAlignment,
-    this.buttonHeight,
-    this.buttonWidth,
-    this.buttonPadding,
-    this.buttonDecoration,
-    this.buttonElevation,
-    this.icon,
-    this.iconSize,
-    this.iconEnabledColor,
-    this.iconDisabledColor,
-    this.itemHeight,
-    this.itemPadding,
-    this.dropdownHeight,
-    this.dropdownWidth,
-    this.dropdownPadding,
-    this.dropdownDecoration,
-    this.dropdownElevation,
+    this.buttonStyleData,
+    this.iconStyleData,
+    this.dropdownStyleData,
+    this.menuItemStyleData,
     this.scrollbarRadius,
     this.scrollbarThickness,
     this.scrollbarAlwaysShow,
     this.offset,
-    Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DropdownButtonHideUnderline(
       child: DropdownButton2<T>(
-        //To avoid long text overflowing.
         isExpanded: true,
-        hint: Container(
-          alignment: hintAlignment,
+        hint: hintText == null
+            ? null
+            : Container(
+          alignment: hintAlignment ?? Alignment.centerLeft,
           child: Text(
             hintText!,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,
             style: TextStyle(
-              fontSize: 10,
+              fontSize: 14,
               color: Theme.of(context).hintColor,
             ),
           ),
         ),
-       value: value,
         items: dropdownItems
-            .map((item) => DropdownMenuItem<T>(
-          value: item,
-          child: Container(
-            alignment: valueAlignment,
-            child: Text(
-              item.toString(),
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              style: const TextStyle(
-                fontSize: 10,
+            .map(
+              (item) => DropdownMenuItem<T>(
+            value: item,
+            child: Container(
+              alignment: valueAlignment ?? Alignment.centerLeft,
+              child: Text(
+                item.toString(),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+                style: const TextStyle(fontSize: 14),
               ),
             ),
           ),
-        ))
+        )
             .toList(),
-        onChanged: (value1) {
-          onChangedData(value1!);
+        value: value,
+        onChanged: (val) {
+          if (val != null) onChangedData(val);
         },
-
         selectedItemBuilder: selectedItemBuilder,
-        icon: icon ?? const Icon(Icons.arrow_forward_ios_outlined),
-        iconSize: iconSize ?? 12,
-        iconEnabledColor: iconEnabledColor,
-        iconDisabledColor: iconDisabledColor,
-        buttonHeight: buttonHeight ?? 40,
-        buttonWidth: buttonWidth ?? 140,
-        buttonPadding:
-        buttonPadding ?? const EdgeInsets.only(left: 14, right: 14),
-        buttonDecoration: buttonDecoration ??
-            BoxDecoration(
-              borderRadius: BorderRadius.circular(14),
-              border: Border.all(
-                color: Colors.black45,
+        buttonStyleData: buttonStyleData ??
+            ButtonStyleData(
+              height: 40,
+              width: 140,
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14),
+                border: Border.all(color: Colors.black45),
+              ),
+              elevation: 4,
+            ),
+        iconStyleData: iconStyleData ??
+            const IconStyleData(
+              icon: Icon(Icons.arrow_forward_ios_outlined),
+              iconSize: 14,
+              iconEnabledColor: Colors.black,
+              iconDisabledColor: Colors.grey,
+            ),
+        dropdownStyleData: dropdownStyleData ??
+            DropdownStyleData(
+              maxHeight: 200,
+              width: 140,
+              padding: null,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14),
+                color: Colors.white,
+              ),
+              elevation: 8,
+              offset: offset ?? Offset(0, 0),
+              scrollbarTheme: ScrollbarThemeData(
+                radius: scrollbarRadius ?? const Radius.circular(40),
+                thickness:
+                scrollbarThickness != null ? MaterialStateProperty.all(scrollbarThickness!) : null,
+                thumbVisibility:
+                scrollbarAlwaysShow != null ? MaterialStateProperty.all(scrollbarAlwaysShow!) : null,
               ),
             ),
-        buttonElevation: buttonElevation,
-        itemHeight: itemHeight ?? 40,
-        itemPadding: itemPadding ?? const EdgeInsets.only(left: 14, right: 14),
-        //Max height for the dropdown menu & becoming scrollable if there are more items. If you pass Null it will take max height possible for the items.
-        dropdownMaxHeight: dropdownHeight ?? 200,
-        dropdownWidth: dropdownWidth ?? 140,
-        dropdownPadding: dropdownPadding,
-        dropdownDecoration: dropdownDecoration ??
-            BoxDecoration(
-              borderRadius: BorderRadius.circular(14),
+        menuItemStyleData: menuItemStyleData ??
+            const MenuItemStyleData(
+              height: 40,
+              padding: EdgeInsets.symmetric(horizontal: 14),
             ),
-        dropdownElevation: dropdownElevation ?? 8,
-        scrollbarRadius: scrollbarRadius ?? const Radius.circular(40),
-        scrollbarThickness: scrollbarThickness,
-        scrollbarAlwaysShow: scrollbarAlwaysShow,
-        //Null or Offset(0, 0) will open just under the button. You can edit as you want.
-        offset: offset,
-        dropdownOverButton: false, //Default is false to show menu below button
+        //dropdownOverButton: false,
       ),
     );
   }
 }
-

@@ -3,7 +3,6 @@ import 'package:mjn_installer_app/res/colors.dart';
 import 'package:mjn_installer_app/utils/app_constants.dart';
 import 'package:mjn_installer_app/utils/app_utils.dart';
 import 'package:mjn_installer_app/widgets/build_complete_customer_ticket_list.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
 
 

@@ -101,20 +101,30 @@ class AppUtils {
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.5555,
                             height: MediaQuery.of(context).size.height * 0.0625,
-                            child: RaisedButton(
-                                color: Colors.white,
-                                child: Text(
-                                  'OK',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                foregroundColor: Colors.black, // for ripple effect and splash
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4), // Optional: match default button shape
                                 ),
-                                onPressed: () {
-                                  Get.back();
-                                  AppUtils.removeDataFromGetStorage().then(
-                                      (value) => {Get.offAllNamed(LOGIN)});
-                                }),
+                              ),
+                              onPressed: () {
+                                Get.back();
+                                AppUtils.removeDataFromGetStorage().then(
+                                      (value) => Get.offAllNamed(LOGIN),
+                                );
+                              },
+                              child: Text(
+                                'OK',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ),
+
                           ),
                         ),
                       ],
@@ -172,17 +182,27 @@ class AppUtils {
                         child: Container(
                           width: 100,
                           height: 40,
-                          child: RaisedButton(
-                              child: Text(
-                                'Ignore',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              foregroundColor: Colors.black,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4),
                               ),
-                              onPressed: () {
-                                Get.back();
-                              }),
+                            ),
+                            onPressed: () {
+                              Get.back();
+                            },
+                            child: Text(
+                              'Ignore',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+
                         ),
                       ),
                       SizedBox(
@@ -192,17 +212,30 @@ class AppUtils {
                         borderRadius: BorderRadius.circular(8),
                         child: Container(
                           height: 40,
-                          child: RaisedButton(
-                              child: Text(
-                                'Update Now',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.white,
+                              foregroundColor: Colors.black,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(4),
                               ),
-                              onPressed: () {
-                                StoreRedirect.redirect(androidAppId: 'com.moc.mjninstaller',iOSAppId: '');
-                              }),
+                            ),
+                            onPressed: () {
+                              StoreRedirect.redirect(
+                                androidAppId: 'com.moc.mjninstaller',
+                                iOSAppId: '', // You can add the App Store ID if available
+                              );
+                            },
+                            child: Text(
+                              'Update Now',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                              ),
+                            ),
+                          ),
+
                         ),
                       ),
                     ],
