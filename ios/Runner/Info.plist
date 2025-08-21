@@ -34,6 +34,14 @@
 	<string>Need to upload image</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Need to upload image</string>
+	<key>NSLocationAlwaysAndWhenInUsageDescription</key>
+    <string>App app want's to access your location to get address</string>
+    <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+    <string>App app want's to access your location to get address.</string>
+    <key>NSLocationAlwaysUsageDescription</key>
+    <string>App app want's to access your location to get address.</string>
+    <key>NSLocationWhenInUseUsageDescription</key>
+    <string>App want's to access your location to get address.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
